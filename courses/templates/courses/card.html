@@ -2,7 +2,11 @@
     a.card > img{height: 100px;}
     a.card > p{text-align: center; margin: 8px 4px}
 </style>
-<a href="#" class="card">
-    <img src="../../static/pic1.PNG" alt="">
-    <p>Learn HTML5 by Building Projects</p>
+
+{% for course in courses.all %}
+<a href="{{ course.url }}" class="card">
+    <!-- <img src="../../static/pic1.PNG" alt=""> -->
+    <img src="{{ course.image.url }}" alt="">
+    <p>{{ course.name }}</p>
 </a>
+{% endfor %}
