@@ -1,12 +1,16 @@
 <style>
-    a.card > img{height: 100px;}
-    a.card > p{text-align: center; margin: 8px 4px}
+    div.card {width: 220px;}
+    div.card > a {text-decoration: none;}
+    div.card > a > div{height:200px; border-radius: 0.25rem 0.25rem 0 0; background-repeat: no-repeat; background-size: cover; background-position: center;}
+    div.card > a > p{height:50px; color:white; text-align:center; margin: 8px 4px}
 </style>
 
 {% for course in courses.all %}
-<a href="{{ course.url }}" class="card">
-    <!-- <img src="../../static/pic1.PNG" alt=""> -->
-    <img src="{{ course.image.url }}" alt="">
-    <p>{{ course.name }}</p>
-</a>
+<div class="bg-secondary mx-2 card">
+    <a href="#">
+        <div style="background-image:url('{{ course.image.url }}');"></div>
+        <p>{{ course.name }}</p>
+
+    </a>
+</div>
 {% endfor %}
