@@ -1,22 +1,28 @@
 <style>
-    div.card {width: 220px; float: left;}
+    div.card {width: 220px; float: left; margin-bottom: 15px}
     div.card > a {text-decoration: none;}
     div.card > a > p {height:70px; color:white; text-align:center; margin: 8px 4px}
     div.card > a > div {height:150px; border-radius: 0.25rem 0.25rem 0 0; background-repeat: no-repeat; background-size: cover; background-position: center;}
-    div.card > a > div > img {width: 100%}
+    div.card > a > div > img.best-seller {height: 60px; position: absolute;}
+    div.card > a > div > img.expired {width: 100%}
 </style>
 
 {% load static %}
 
 {% for course in courses.all %}
-<div class="bg-secondary mx-2 card">
+<div class="bg-secondary mx-2 card flex-wrap">
     <a href="{{ course.url }}">
         <div style="background-image:url('{{ course.image.url }}');">
+            {% if course.best_seller %}
+            <img class="best-seller" src="{% static 'images/best_seller.png' %}">
+            {% endif %}
             {% if course.expired %}
-            <img src="{% static 'images/expired_406x250-1.png' %}">
+            <img class="expired" src="{% static 'images/expired_406x250-1.png' %}">
             {% endif %}
         </div>
         <p>{{ course.name }}</p>
+        <p>{{ course.rating }}</p>
+        
     </a>
 </div>
 {% endfor %}

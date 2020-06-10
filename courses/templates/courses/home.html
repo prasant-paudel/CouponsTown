@@ -1,14 +1,16 @@
 {% extends 'courses/base.html' %}
 {% block body %}
-    <style>body{background: aqua;}</style>
+
+    <style>body{background: #eeeeee;}</style>
 
     {% include 'courses/header.html' %}
 
     <center><h1>Online Course Coupons</h1></center>
 
-    <div class="container d-flex p-2 align-items-center bg-primary">
+    <div class="container d-flex p-2 align-items-center flex-wrap justify-content-center">
         {% include 'courses/card.html' %}
     </div>
-
+    
+    <!-- {% include 'courses/carousel.html' %} -->
 
 {% endblock %}

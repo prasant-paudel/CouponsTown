@@ -10,6 +10,7 @@ class Course(models.Model):
     platform = models.CharField(max_length=30, null=True)
     duration = models.DurationField(null=True)
     upload_date = models.DateTimeField(auto_now_add=True)
+    rating = models.CharField(default='0/0', max_length=5)
 
     def __str__(self):
         return self.name
