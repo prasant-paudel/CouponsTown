@@ -1,18 +1,19 @@
 <style>
-    div.card {width: 220px; float: left; margin-bottom: 15px}
+    div.card {width: 240px; float: left; margin-bottom: 15px; padding:10px; background-position: center; background-size: cover;}
     div.card > a {text-decoration: none;}
     div.card > a > p {height:70px; color:white; text-align:center; margin: 8px 4px}
-    div.card > a > div {height:150px; border-radius: 0.25rem 0.25rem 0 0; background-repeat: no-repeat; background-size: cover; background-position: center;}
+    div.card > a > div.course-image {height:218px; border-radius: 100%; background-repeat: no-repeat; background-size: cover; background-position: center; box-shadow:0px 10px 25px}
     div.card > a > div > img.best-seller {height: 60px; position: absolute;}
     div.card > a > div > img.expired {width: 100%}
+    
 </style>
 
 {% load static %}
 
 {% for course in courses.all %}
-<div class="bg-secondary mx-2 card flex-wrap">
+<div style="background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages7.alphacoders.com%2F359%2Fthumb-1920-359057.jpg&f=1&nofb=1')" class="mx-2 card flex-wrap">
     <a href="{{ course.url }}">
-        <div style="background-image:url('{{ course.image.url }}');">
+        <div class="course-image" style="background-image:url('{{ course.image.url }}');">
             {% if course.best_seller %}
             <img class="best-seller" src="{% static 'images/best_seller.png' %}">
             {% endif %}
@@ -21,7 +22,14 @@
             {% endif %}
         </div>
         <p>{{ course.name }}</p>
-        <p>{{ course.rating }}</p>
+        <div style="min-height: 40px; color:azure" class="bg-primary">
+            <div style="min-width: 60px" class="rating float-left d-flex align-items-center mt-1">
+                <img style="height: 30px;" class="float-left" src="{% static 'images/star.svg' %}">&nbsp;
+                <p class="my-0">4.5</p>
+            </div>
+            <div class="duration float-left">2 hours</div>
+            <div class="counter float-left">200</div>
+        </div>
     </a>
 </div>
 {% endfor %}
