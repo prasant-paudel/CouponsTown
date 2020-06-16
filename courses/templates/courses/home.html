@@ -1,17 +1,25 @@
 {% extends 'courses/base.html' %}
 {% block body %}
 
-    <style>body{background: #eeeeee;}</style>
+<style>
+    body {
+        background: #eeeeee;
+    }
+</style>
 
-    {% include 'courses/header.html' %}
+{% include 'courses/navbar.html' %}
 
-    <center><h1>Online Course Coupons</h1></center>
+<center>
+    <h1 class="text-center text-white d-none d-lg-block site-heading"><span
+            class="text-primary flash animated infinite site-heading-upper mb-3">FREE ENROLL, FREE&nbsp;
+            EDUCATION</span><span class="rubberBand animated infinite site-heading-lower">Free Course Coupons</span>
+    </h1>
+</center>
 
-    <div class="container d-flex p-2 align-items-center flex-wrap justify-content-center">
-        {% include 'courses/card.html' %}
-    </div>
-    
-    <!-- {% include 'courses/carousel.html' %} -->
+<div class="container d-flex p-2 align-items-center flex-wrap justify-content-center">
+    {% include 'courses/card.html' %}
+</div>
+
+<!-- {% include 'courses/carousel.html' %} -->
 
 {% endblock %}
-
