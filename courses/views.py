@@ -32,7 +32,7 @@ def search(request):
     template = 'courses/search.html'
     query = request.GET.get('search')
     query = query.strip("'").strip('"')
-    results = Course.objects.filter(Q(name__contains=query))
+    results = Course.objects.filter(Q(name__contains=query) | Q(category__contains=query))
     return render(request, 'courses/search.html', {'courses': results, 'query': query})
 
 

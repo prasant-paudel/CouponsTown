@@ -12,6 +12,16 @@ class Course(models.Model):
     upload_date = models.DateTimeField(auto_now_add=True)
     rating = models.CharField(max_length=5, blank=True)
 
+    category_coices = (
+        ('DEVELOPMENT', 'development'),
+        ('IT & SOFTWARE', 'it&software'),
+        ('OFFICE & PRODUCTIVITY', 'office&productivity'),
+        ('DESIGN & PHOTOGRAPHY', 'design&photography'),
+        ('MARKETING & BUSINESS', 'marketing&business'),
+        ('OTHERS', 'others'),
+    )
+    category = models.CharField(choices=category_coices, default='others', max_length=21)
+
     def __str__(self):
         return self.name
     
