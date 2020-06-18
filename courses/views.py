@@ -62,3 +62,27 @@ def subscribe(request):
 
     return render(request, 'courses/home.html', {'message': msg, 'courses': courses})
 
+def api(request):
+    # query = request.GET.get('query')
+    command = request.GET.get('command')
+    
+    # Check validation i.e. Course is expired or not
+    if command == "validate":
+        courses = Course.objects.all()
+        for course in courses:
+            obj = CourseInfo(course.url)
+            Course.objects.filter(id=course.id).update(expired=obj.is_expired())
+            print(f'Validated  {course.name}')
+        return HttpResponse('Course Validation Completed Successfully!')
+
+    # Get Rating for Courses
+    if command == 'update_ratings':
+        courses = Course.objects.all()
+        for course in courses:
+            obj = CourseInfo(course.url)
+            Course.objects.filter(id=course.id).update(rating=obj.get_rating())
+            print(f'Rating Updated for  {course.name},  {obj.get_rating()}')
+        return HttpResponse('Course Ratings Updated Successfully!')
+
+    return HttpResponse(f'Successful Ineraction!')
+

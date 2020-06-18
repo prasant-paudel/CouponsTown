@@ -28,7 +28,6 @@ class CourseInfo:
             if not os.path.exists(temp_img):
                 wget.download(remote_img_url, temp_img)
         return temp_img
-
     
     def get_platform(self):
         return self.url.strip('"').strip("'").split('//')[-1].split('/')[0].split('www.')[-1].split('.')[0].capitalize()
@@ -38,3 +37,38 @@ class CourseInfo:
             return True
         return False
 
+    def is_expired(self):
+        response = requests.get(self.url)
+        parsed_html = BeautifulSoup(response.text, features='lxml')
+
+        # Eduonix Pricing Div
+        if 'eduonix.com' in self.url:
+            pricing = parsed_html.findAll('div', {'id': 'scrollTp'})
+        
+        # Udemy Pricing Div
+        elif 'udemy.com' in self.url:
+            pricing = parsed_html.findAll('div', {'class': 'buy-box'})
+        
+        else:
+            pricing = 'not compatible platform'
+        
+        # Checking Price
+        if 'enroll now' in str(pricing).lower():
+            return False
+        return True
+
+    def get_rating(self):
+        # Rating Container for Udemy
+        if 'udemy.com' in self.url:
+            rating_container = self.parsed_html.findAll('span', {'class': 'tooltip-container'})
+
+        # Rating Container for Eduonix
+        elif 'eduonix.com' in self.url:
+            rating_container = self.parsed_html.findAll('span', {'class': 'rating-text ratingValues'})
+
+        else:
+            rating_container = "Nothing Appropriate!"
+
+        # Extracting Rating 
+        rating = re.findall('\w\.\w', str(rating_container))[0]
+        return rating
