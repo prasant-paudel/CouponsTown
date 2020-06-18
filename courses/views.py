@@ -50,9 +50,9 @@ def subscribe(request):
     
     if not Subscriber.objects.filter(email=email):
         Subscriber.objects.create(full_name=full_name, email=email)
-        msg = f"Thank you! {full_name} <br> You've successfully been subscribed as {email}"
+        msg = f"Thank you! {full_name} You've successfully been subscribed as {email}"
     else:
-        msg = "Sorry! The email alerady exists!"
+        msg = "The email alerady exists!"
 
     courses = Course.objects.order_by('upload_date').reverse()
 
