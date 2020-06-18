@@ -9,6 +9,10 @@ def home(request):
     courses = Course.objects.order_by('upload_date').reverse()
     for course in courses:
 
+        if not course.affiliate_url:
+            obj = CourseInfo(course.url)
+            Course.objects.filter(url=course.url).update(affiliate_url=obj.affiliate_url)
+
         if not course.name:
             obj = CourseInfo(course.url)
             Course.objects.filter(url=course.url).update(name=obj.get_name())

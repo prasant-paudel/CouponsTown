@@ -4,6 +4,7 @@ from django.db import models
 class Course(models.Model):    
     name = models.CharField(max_length=100, blank=True)
     url = models.CharField(max_length=200)
+    affiliate_url = models.CharField(max_length=256,blank=True)
     image = models.ImageField(upload_to='media/', blank=True)
     best_seller = models.BooleanField()
     expired = models.BooleanField(default=False)
