@@ -28,10 +28,10 @@ class Course(models.Model):
     # class Meta:
     #     ordering = ['upload_date']
 
+class Subscriber(models.Model):
+    email = models.CharField(max_length=100, primary_key=True)
+    full_name = models.CharField(max_length=250)
 
-def get_heading_from_url(url):    
-    response = requests.get(url)
-    parsed_html = BeautifulSoup(response.content)
-    return parsed_html.findAll('h1')[0].get_text()
+    def __str__(self):
+        return f"{self.full_name} ({self.email})"
 
-    

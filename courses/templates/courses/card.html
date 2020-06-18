@@ -5,7 +5,7 @@
     div.card > a > div.course-image {height:218px; border-radius: 100%; background-repeat: no-repeat; background-size: cover; background-position: center; box-shadow:0px 10px 25px}
     div.card > a > div.course-image > img.best-seller {height: 60px; position: absolute;}
     div.card > a > div.course-image > img.expired {width: 100%}
-    div.card > a > div.info {min-height: 40px; color:azure; text-align: center;}
+    div.card > a > div.info {min-height: 40px; color:azure; text-align: center; background-color: black !important}
     div.card > a > div.info > div {min-width: 60px; margin-left:8px;}
     div.card > a > div.info > div > img {height: 30px; float: left !important}
 </style>
@@ -24,7 +24,7 @@
             {% endif %}
         </div>
         <p>{{ course.name }}</p>
-        <div class="info bg-primary rounded">
+        <div class="info rounded">
             <div class="rating float-left d-flex align-items-center mt-1">
                 <img src="{% static 'images/star.svg' %}">&nbsp;
                 <p class="my-0">4.5</p>
