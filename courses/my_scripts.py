@@ -28,7 +28,6 @@ class CourseInfo:
             if not os.path.exists(temp_img):
                 wget.download(remote_img_url, temp_img)
         return temp_img
-
     
     def get_platform(self):
         return self.url.strip('"').strip("'").split('//')[-1].split('/')[0].split('www.')[-1].split('.')[0].capitalize()
@@ -37,4 +36,24 @@ class CourseInfo:
         if 'bestseller' in str(self.parsed_html).lower():
             return True
         return False
+
+    def is_expired(self):
+        response = requests.get(self.url)
+        parsed_html = BeautifulSoup(response.text, features='lxml')
+
+        # Eduonix Pricing Div
+        if 'eduonix.com' in self.url:
+            pricing = parsed_html.findAll('div', {'id': 'scrollTp'})
+        
+        # Udemy Pricing Div
+        elif 'udemy.com' in self.url:
+            pricing = parsed_html.findAll('div', {'class': 'buy-box'})
+        
+        else:
+            pricing = 'not compatible platform'
+        
+        # Checking Price
+        if 'enroll now' in str(pricing).lower():
+            return False
+        return True
 
