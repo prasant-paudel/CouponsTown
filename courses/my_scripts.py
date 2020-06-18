@@ -57,3 +57,18 @@ class CourseInfo:
             return False
         return True
 
+    def get_rating(self):
+        # Rating Container for Udemy
+        if 'udemy.com' in self.url:
+            rating_container = self.parsed_html.findAll('span', {'class': 'tooltip-container'})
+
+        # Rating Container for Eduonix
+        elif 'eduonix.com' in self.url:
+            rating_container = self.parsed_html.findAll('span', {'class': 'rating-text ratingValues'})
+
+        else:
+            rating_container = "Nothing Appropriate!"
+
+        # Extracting Rating 
+        rating = re.findall('\w\.\w', str(rating_container))[0]
+        return rating

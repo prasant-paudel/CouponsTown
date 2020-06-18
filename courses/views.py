@@ -75,5 +75,14 @@ def api(request):
             print(f'Validated  {course.name}')
         return HttpResponse('Course Validation Completed Successfully!')
 
+    # Get Rating for Courses
+    if command == 'update_ratings':
+        courses = Course.objects.all()
+        for course in courses:
+            obj = CourseInfo(course.url)
+            Course.objects.filter(id=course.id).update(rating=obj.get_rating())
+            print(f'Rating Updated for  {course.name},  {obj.get_rating()}')
+        return HttpResponse('Course Ratings Updated Successfully!')
+
     return HttpResponse(f'Successful Ineraction!')
 
