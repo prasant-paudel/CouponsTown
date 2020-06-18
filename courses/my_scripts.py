@@ -7,7 +7,7 @@ import wget
 class CourseInfo:
     def __init__(self, url):
         self.url = url
-        self.affiliate_url = 'http://sh.st/st/d6a5442052674a5a7a657d0688a75caa/' + url.strip('"').strip("'").split('//')[-1]
+        self.affiliate_url = 'http://adf.ly/23576813/' + url.strip('"').strip("'").split('//')[-1]
         self.platform = str(url).split('//')[-1].split('/')[0].lower()
 
         self.response = requests.get(url)

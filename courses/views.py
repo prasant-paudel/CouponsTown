@@ -84,5 +84,15 @@ def api(request):
             print(f'Rating Updated for  {course.name},  {obj.get_rating()}')
         return HttpResponse('Course Ratings Updated Successfully!')
 
+    # Update Affiliate URLs
+    if command == 'update_affiliate_urls':
+        courses = Course.objects.all()
+        for course in courses:
+            obj = CourseInfo(course.url)
+            Course.objects.filter(id=course.id).update(affiliate_url=obj.affiliate_url)
+            print(f'Affiliate URLs Updated for {course.url}')
+        return HttpResponse('Affiliate URLs Updated Successfully!')
+
+
     return HttpResponse(f'Successful Ineraction!')
 
