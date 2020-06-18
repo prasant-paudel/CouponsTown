@@ -94,16 +94,16 @@ def api(request):
         return HttpResponse('Affiliate URLs Updated Successfully!')
 
     # Update Images
-        if command == 'update_images':
-            courses = Course.objects.all()
-            for course in courses:
-                if 'udemy' in str(course.url).lower():
-                    obj = CourseInfo(course.url)
-                    Course.objects.filter(id=course.id).update(image=obj.get_image())
-                    print(f'Affiliate URLs Updated for {course.name}')
-                else:
-                    print(f'\n\nNot Udemy{course.image.url}')
-            return HttpResponse('Affiliate URLs Updated Successfully!')
+    if command == 'update_images':
+        courses = Course.objects.all()
+        for course in courses:
+            if 'udemy' in str(course.url).lower():
+                obj = CourseInfo(course.url)
+                Course.objects.filter(id=course.id).update(image=obj.get_image())
+                print(f'Image Updated for {course.name}')
+            else:
+                print(f'\n\nNot Udemy{course.image.url}')
+        return HttpResponse('Images Updated Successfully!')
 
     return HttpResponse(f'Successful Ineraction!')
 
