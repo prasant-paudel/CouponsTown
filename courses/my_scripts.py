@@ -20,15 +20,16 @@ class CourseInfo:
         return re.findall('(?:.*>)(\d\.\d)', self.response.text)[0]
     
     def get_image(self):
-        if 'udemy' in self.platform:
+        if 'udemy' in str(self.platform).lower():
             remote_img_url = self.parsed_html.findAll('img')[1].attrs['src']
             temp_img = f".temp/{remote_img_url.split('/')[-1]}"
             if not os.path.exists('.temp'):
                 os.mkdir('.temp')
             if not os.path.exists(temp_img):
                 wget.download(remote_img_url, temp_img)
-        return temp_img
-    
+            return temp_img
+        return 'courses/static/images/no-image.svg'
+
     def get_platform(self):
         return self.url.strip('"').strip("'").split('//')[-1].split('/')[0].split('www.')[-1].split('.')[0].capitalize()
 
