@@ -14,7 +14,7 @@ class CourseInfo:
         self.parsed_html = BeautifulSoup(self.response.content)
 
     def get_name(self):
-        return self.parsed_html.findAll('h1')[0].get_text()
+        return self.parsed_html.findAll('h1')[0].get_text().strip()
 
     def get_rating(self):
         return re.findall('(?:.*>)(\d\.\d)', self.response.text)[0]
@@ -22,9 +22,9 @@ class CourseInfo:
     def get_image(self):
         if 'udemy' in str(self.platform).lower():
             remote_img_url = self.parsed_html.findAll('img')[1].attrs['src']
-            temp_img = f".temp/{remote_img_url.split('/')[-1]}"
-            if not os.path.exists('.temp'):
-                os.mkdir('.temp')
+            temp_img = f"media/{self.get_name()}.{remote_img_url.split('.')[-1]}"
+            if not os.path.exists('media'):
+                os.mkdir('media')
             if not os.path.exists(temp_img):
                 wget.download(remote_img_url, temp_img)
             return temp_img
