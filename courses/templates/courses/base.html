@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %} Online Course Coupons {% endblock %}
+    </title>
+    <link rel="shortcut icon" href="../../static/images/programmer-.ico" type="image/x-icon">
+    <!-- Booststrap CSS -->
+    <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"> -->
+    <!-- FontAwsome CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i">
+    <link rel="stylesheet" href="{% static 'css/amimate.min.css' %}">
+
+    <style>
+        body {
+    background: linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), url("{% static 'images/background.jpg' %}") !important;background-repeat: no-repeat;background-size: cover;height: 100vh;background-position: center;
+}
+    </style>
+
+</head>
+
+<body>
+    {% block body %} {% endblock %}
+
+    <section class="page-section clearfix">
+        <div class="container">
+            <div class="intro"></div>
+        </div>
+    </section>
+
+    <!-- Jquery JS, Bootstrap JS -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/header.min.js' %}"></script>
+
+    <!-- SHORTE.ST SCRIPT -->
+    <script src="{% static 'js/shorte.st.js' %}"></script>
+
+    <!-- SYNCHRONIZE COURSES -->
+    <script src="{% static 'js/sync.js' %}"></script>
+
+</body>
+
+</html>
