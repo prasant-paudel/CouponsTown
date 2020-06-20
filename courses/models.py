@@ -10,7 +10,7 @@ class Course(models.Model):
     best_seller = models.BooleanField()
     expired = models.BooleanField(default=False)
     platform = models.CharField(max_length=30, blank=True)
-    duration = models.DurationField(blank=True, default=0, null=True)
+    duration = models.CharField(blank=True, max_length=10)
     upload_date = models.DateTimeField(auto_now_add=True)
     rating = models.CharField(max_length=5, blank=True)
 

@@ -6,6 +6,10 @@ import wget
 import os
 
 def home(request):
+
+    from django.http import HttpRequest
+    print('\n\n', HttpRequest.headers, '\n\n')
+
     courses = Course.objects.order_by('upload_date').reverse()
     for course in courses:
 
@@ -28,6 +32,10 @@ def home(request):
         if not course.image:
             obj = CourseInfo(course.url)
             Course.objects.filter(url=course.url).update(image=obj.get_image())
+        
+        if not course.duration:
+            obj = CourseInfo(course.url)
+            Course.objects.filter(url=course.url).update(duration=obj.get_duration())
 
     return render(request, 'courses/home.html', {'courses': courses})
 
@@ -104,6 +112,21 @@ def api(request):
             else:
                 print(f'\n\nNot Udemy{course.image.url}')
         return HttpResponse('Images Updated Successfully!')
+
+    if command == 'update_durations':
+        courses = Course.objects.all()
+        for course in courses:
+            if 'udemy' in str(course.url).lower():
+                print(f'Fetching Duration for {course.name}')
+                obj = CourseInfo(course.url)
+                Course.objects.filter(id=course.id).update(duration=obj.get_duration())
+                
+            if 'eduonix' in str(course.url).lower():
+                print(f'Fetching Duration for {course.name}')
+                obj = CourseInfo(course.url)
+                Course.objects.filter(id=course.id).update(duration=obj.get_duration())
+            
+        return HttpResponse('\nDuration Updated Successfully!')
 
     return HttpResponse(f'Successful Ineraction!')
 

@@ -14,7 +14,7 @@
 
 {% for course in courses.all %}
 <div style="background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages7.alphacoders.com%2F359%2Fthumb-1920-359057.jpg&f=1&nofb=1')" class="mx-2 card flex-wrap">
-    <a href="{{ course.affiliate_url }}">
+    <a href="{{ course.url }}" target="blank">
         <div class="course-image" style="background-image:url('{{ course.image.url }}');">
             {% if course.best_seller %}
             <img class="best-seller" src="{% static 'images/best_seller.png' %}">
@@ -31,7 +31,7 @@
             </div>
             <div class="rating float-left d-flex align-items-center mt-1">
                 <img style="background:white; border-radius: 100%;" src="{% static 'images/time.svg' %}">&nbsp;
-                <p class="my-0">2 hr</p>
+                <p class="my-0">{{ course.duration }}</p>
             </div>
             <div class="rating float-left d-flex align-items-center mt-1">
                 <img src="{% static 'images/group.svg' %}">&nbsp;

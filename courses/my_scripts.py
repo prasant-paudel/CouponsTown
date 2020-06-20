@@ -11,7 +11,7 @@ class CourseInfo:
         self.platform = str(url).split('//')[-1].split('/')[0].lower()
 
         self.response = requests.get(url)
-        self.parsed_html = BeautifulSoup(self.response.content)
+        self.parsed_html = BeautifulSoup(self.response.content, features="lxml")
 
     def get_name(self):
         return self.parsed_html.findAll('h1')[0].get_text().strip()
@@ -73,3 +73,31 @@ class CourseInfo:
         # Extracting Rating 
         rating = re.findall('\w\.\w', str(rating_container))[0]
         return rating
+
+    def get_duration(self):
+        # For exuonix
+        if 'eduonix.com' in str(self.url).lower():
+            try:
+                info_div = self.parsed_html.findAll('div', {'class': 'col-md-12 mt-2'})[0]
+                duration = re.findall('(?:</i> )(.*hours?)', str(info_div))[0].strip()
+                return duration
+            except:
+                pass
+        # For Udemy
+        elif 'udemy.com' in str(self.url).lower():
+            try:
+                info_div = self.parsed_html.findAll('span', {'data-purpose': 'video-content-length'})[0].get_text()
+                if 'mins' in str(info_div):
+                    duration = re.findall(".*mins", str(info_div))[0]
+                    return duration
+                try:
+                    duration = re.findall(".*hours", str(info_div))[0]
+                except:
+                    duration = re.findall(".*hour", str(info_div))[0]
+                return duration
+            except Exception as msg:
+                print(f"Udemy exception while updating duration \n{msg}\n")
+                pass
+        return 'N/A'
+
+
