@@ -4,6 +4,7 @@ from django.db.models import Q
 from .my_scripts import CourseInfo
 import wget
 import os
+from .coupon_extractor import CouponExtractor
 
 def home(request):
 
@@ -13,29 +14,29 @@ def home(request):
     courses = Course.objects.order_by('upload_date').reverse()
     for course in courses:
 
-        if not course.affiliate_url:
-            obj = CourseInfo(course.url)
-            Course.objects.filter(url=course.url).update(affiliate_url=obj.affiliate_url)
+        # if not course.affiliate_url:
+        #     obj = CourseInfo(course.url)
+        #     Course.objects.filter(url=course.url).update(affiliate_url=obj.affiliate_url)
 
         if not course.name:
             obj = CourseInfo(course.url)
             Course.objects.filter(url=course.url).update(name=obj.get_name())
 
-        if not course.rating:
-            obj = CourseInfo(course.url)
-            Course.objects.filter(url=course.url).update(rating=obj.get_rating())
+        # if not course.rating:
+        #     obj = CourseInfo(course.url)
+        #     Course.objects.filter(url=course.url).update(rating=obj.get_rating())
 
-        if not course.platform:
-            obj = CourseInfo(course.url)
-            Course.objects.filter(url=course.url).update(platform=obj.get_platform())
+        # if not course.platform:
+        #     obj = CourseInfo(course.url)
+        #     Course.objects.filter(url=course.url).update(platform=obj.get_platform())
 
         if not course.image:
             obj = CourseInfo(course.url)
             Course.objects.filter(url=course.url).update(image=obj.get_image())
         
-        if not course.duration:
-            obj = CourseInfo(course.url)
-            Course.objects.filter(url=course.url).update(duration=obj.get_duration())
+        # if not course.duration:
+        #     obj = CourseInfo(course.url)
+        #     Course.objects.filter(url=course.url).update(duration=obj.get_duration())
 
     return render(request, 'courses/home.html', {'courses': courses})
 
@@ -125,8 +126,31 @@ def api(request):
                 print(f'Fetching Duration for {course.name}')
                 obj = CourseInfo(course.url)
                 Course.objects.filter(id=course.id).update(duration=obj.get_duration())
-            
-        return HttpResponse('\nDuration Updated Successfully!')
+
+        return HttpResponse('Duration Updated Successfully!')
+
+    if command == 'fetch_offers':
+        obj =  CouponExtractor(target_url='http://real.discount', target_pattern='/offer/')
+        obj.crawl()
+        obj.extract_coupons()
+        return HttpResponse('Coupons Fetched Successfully!')
+
+    if command == 'validate_offers':
+        obj =  CouponExtractor(target_url='http://real.discount', target_pattern='/offer/')
+        obj.extract_coupons()
+        return HttpResponse('Coupons Fetched Successfully!')
+
+    if command == 'deploy_coupons':
+        # If coupons are fetched 
+        if os.path.exists('coupons.txt'):
+            with open('coupons.txt', 'r') as coupons_list:
+                for coupon in coupons_list:
+                    # if coupon url does not exists in database
+                    if not Course.objects.filter(url=coupon).exists():
+                        Course.objects.create(url=coupon, category='not_set')
+                        
+            return HttpResponse('Coupons Deployed Successfully!')
+        return HttpResponse('Coupons Not Found!')
 
     return HttpResponse(f'Successful Ineraction!')
 

@@ -7,7 +7,7 @@ class Course(models.Model):
     url = models.CharField(max_length=200)
     affiliate_url = models.CharField(max_length=256,blank=True)
     image = models.ImageField(upload_to='media/', blank=True, )
-    best_seller = models.BooleanField()
+    best_seller = models.BooleanField(null=True)
     expired = models.BooleanField(default=False)
     platform = models.CharField(max_length=30, blank=True)
     duration = models.CharField(blank=True, max_length=10)
@@ -15,6 +15,7 @@ class Course(models.Model):
     rating = models.CharField(max_length=5, blank=True)
 
     category_coices = (
+        ('NOT SET', 'not_set'),
         ('DEVELOPMENT', 'development'),
         ('IT & SOFTWARE', 'it&software'),
         ('OFFICE & PRODUCTIVITY', 'office&productivity'),
@@ -22,7 +23,7 @@ class Course(models.Model):
         ('MARKETING & BUSINESS', 'marketing&business'),
         ('OTHERS', 'others'),
     )
-    category = models.CharField(choices=category_coices, default='others', max_length=21)
+    category = models.CharField(choices=category_coices, default='not_set', max_length=21)
 
     def __str__(self):
         return self.name
