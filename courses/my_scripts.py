@@ -8,7 +8,7 @@ class CourseInfo:
     def __init__(self, url):
         self.url = url
         self.affiliate_url = 'http://adf.ly/23576813/' + url.strip('"').strip("'").split('//')[-1]
-        self.platform = str(url).split('//')[-1].split('/')[0].lower()
+        self.platform = self.url.split('//')[-1].split('/')[0].split('www.')[-1].split('.')[0].capitalize()
 
         self.response = requests.get(url)
         self.parsed_html = BeautifulSoup(self.response.content, features="lxml")
@@ -20,15 +20,21 @@ class CourseInfo:
         return re.findall('(?:.*>)(\d\.\d)', self.response.text)[0]
     
     def get_image(self):
-        if 'udemy' in str(self.platform).lower():
+        if self.platform == 'Udemy':
             remote_img_url = self.parsed_html.findAll('img')[1].attrs['src']
-            temp_img = f"media/{self.get_name()}.{remote_img_url.split('.')[-1]}"
+
+            img_name = self.get_name()
+            # Filtering Name
+            img_name = img_name.strip().replace(' ', '_')
+
+            temp_img = f"media/{img_name}.jpg"
             if not os.path.exists('media'):
                 os.mkdir('media')
             if not os.path.exists(temp_img):
                 wget.download(remote_img_url, temp_img)
             return temp_img
-        return 'courses/static/images/no-image.svg'
+        print('[-] Image Not Found!')
+        return ''
 
     def get_platform(self):
         return self.url.strip('"').strip("'").split('//')[-1].split('/')[0].split('www.')[-1].split('.')[0].capitalize()

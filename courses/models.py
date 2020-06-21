@@ -6,7 +6,7 @@ class Course(models.Model):
     name = models.CharField(max_length=100, blank=True)
     url = models.CharField(max_length=200)
     affiliate_url = models.CharField(max_length=256,blank=True)
-    image = models.ImageField(upload_to='media/', blank=True, )
+    image = models.ImageField(upload_to='media/', blank=True)
     best_seller = models.BooleanField(null=True)
     expired = models.BooleanField(default=False)
     platform = models.CharField(max_length=30, blank=True)
@@ -26,10 +26,10 @@ class Course(models.Model):
     category = models.CharField(choices=category_coices, default='not_set', max_length=21)
 
     def __str__(self):
-        return self.name
+        return self.name + ' | ' + self.platform
     
-    # class Meta:
-    #     ordering = ['upload_date']
+    class Meta:
+        ordering = ['platform']
 
 class Subscriber(models.Model):
     email = models.CharField(max_length=100, primary_key=True)
