@@ -77,8 +77,11 @@ class CourseInfo:
             rating_container = "Nothing Appropriate!"
 
         # Extracting Rating 
-        rating = re.findall('\w\.\w', str(rating_container))[0]
-        return rating
+        try:
+            rating = re.findall('\w\.\w', str(rating_container))[0]
+            return rating
+        except:
+            return 'N/A'
 
     def get_duration(self):
         # For exuonix

@@ -7,30 +7,23 @@ import os
 from .coupon_extractor import CouponExtractor
 
 def home(request):
-
-    from django.http import HttpRequest
-    print('\n\n', HttpRequest.headers, '\n\n')
-
     courses = Course.objects.order_by('upload_date').reverse()
     for course in courses:
-
+        # obj = CourseInfo(course.url)
         # if not course.affiliate_url:
-        #     obj = CourseInfo(course.url)
         #     Course.objects.filter(url=course.url).update(affiliate_url=obj.affiliate_url)
 
         # Update Course Name
-        if not course.name:
-            obj = CourseInfo(course.url)
-            Course.objects.filter(url=course.url).update(name=obj.get_name())
+        # if not course.name:
+            # Course.objects.filter(url=course.url).update(name=obj.get_name())
 
-        # # Update Course Image
-        # if 'udemy' in str(course.url).lower():
+
+        # Update Course Image
+        # if 'udemy' in str(course.url).lower() and not course.image:
         #     print(f'[+] Updating Image for {course.name}')
         #     obj = CourseInfo(course.url)
-        #     Course.objects.filter(id=course.id).update(image=obj.get_image())                
-        # else:
-        #     print(f'\n\nNot Udemy{course.image.url}')
-
+        #     Course.objects.filter(id=course.id).update(image=obj.get_image())
+        
         # if not course.rating:
         #     obj = CourseInfo(course.url)
         #     Course.objects.filter(url=course.url).update(rating=obj.get_rating())
@@ -42,7 +35,7 @@ def home(request):
         # if not course.duration:
         #     obj = CourseInfo(course.url)
         #     Course.objects.filter(url=course.url).update(duration=obj.get_duration())
-
+        pass
     return render(request, 'courses/home.html', {'courses': courses})
 
 
@@ -108,15 +101,38 @@ def api(request):
         return HttpResponse('Affiliate URLs Updated Successfully!')
 
     # Update Images
-    if command == 'fetch_new_course_images':
+    if command == 'deploy_new_courses_from_db':
         courses = Course.objects.all()
         for course in courses:
-            if course.platform == 'Udemy' and not course.image:
-                print(f'[+] Updating Image for {course.name}')
-                obj = CourseInfo(course.url)
-                Course.objects.filter(id=course.id).update(image=obj.get_image())             
-        print('\n[+] Images Updated Successfully!\n')
-        return HttpResponse('Images Updated Successfully!')
+            obj = CourseInfo(course.url)
+
+            # Fetch Name
+            if not course.name:
+                print(f'[+] Fetching Name for {course.name}')
+                Course.objects.filter(id=course.id).update(name=obj.get_name())
+            
+            # Fetch Platform
+            if not course.platform:
+                print(f'[+] Fetching Platform for {course.name}')
+                Course.objects.filter(id=course.id).update(platform=obj.platform)
+
+            # Fetch Rating 
+            if not course.rating:
+                print(f'[+] Fetching Rating for {course.name}')
+                Course.objects.filter(id=course.id).update(rating=obj.get_rating())
+            
+            # Fetch Duration
+            if not course.duration:
+                print(f'[+] Fetching Duration for {course.name}')
+                Course.objects.filter(id=course.id).update(duration=obj.get_duration())
+            
+            # Fetch Image
+            if 'udemy' in course.url.lower() and not course.image:
+                print(f'[+] Fetching Image for {course.name}')
+                Course.objects.filter(id=course.id).update(image=obj.get_image())
+
+        print('\n[+] New Courses Deployed Successfully!\n')
+        return HttpResponse('New Courses Deployed Successfully!')
 
     if command == 'update_durations':
         courses = Course.objects.all()
@@ -135,16 +151,18 @@ def api(request):
 
     if command == 'fetch_offers':
         obj =  CouponExtractor(target_url='http://real.discount', target_pattern='/offer/')
+        print('\n[+] Crawling website for offer links')
         obj.crawl()
-        obj.extract_coupons()
-        return HttpResponse('Coupons Fetched Successfully!')
-
-    if command == 'validate_offers':
+        return HttpResponse('Offers Fetched Successfully!')
+    
+    if command == 'extract_coupons':
         obj =  CouponExtractor(target_url='http://real.discount', target_pattern='/offer/')
+        print('\n[+] Extracting Coupons from offers')
         obj.extract_coupons()
-        return HttpResponse('Coupons Fetched Successfully!')
+        return HttpResponse('Coupons Extracted Successfully!')
 
     if command == 'deploy_coupons':
+        print('\n[+] Deploying Coupons to the server')
         # If coupons are fetched 
         if os.path.exists('coupons.txt'):
             with open('coupons.txt', 'r') as coupons_list:
@@ -156,7 +174,8 @@ def api(request):
                     # if coupon url does not exists in database
                     if not Course.objects.filter(url=coupon).exists():
                         Course.objects.create(url=coupon, category='not_set')
-                        
+                        print('-->', coupon)
+            print('[+] Coupons Deployed Successfully!')
             return HttpResponse('Coupons Deployed Successfully!')
         return HttpResponse('Coupons Not Found!')
 

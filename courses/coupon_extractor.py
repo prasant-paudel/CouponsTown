@@ -54,10 +54,13 @@ class CouponExtractor:
         self.extract_links()
         try:
             for link in self.links_list:
-                print(f'\nScanning {link}')
+                print(f'[+] Scanning {link}')
                 self.extract_links(link)
         except KeyboardInterrupt:
-            pass
+            print('\n[-] Stopping Crawler')
+        except requests.exceptions.ConnectionError:
+            print['\n[-] Connection Error!']
+
 
     def course_url_from(self, offer_page_url):
         page_source = self.request(offer_page_url).content
@@ -82,9 +85,9 @@ class CouponExtractor:
                             # Write valid coupon to a file
                             with open(self.coupons_file, 'a') as outfile:
                                 outfile.write(coupon + '\n')
-                                print(coupon)
+                                print('-->', coupon)
         except KeyboardInterrupt:
-            pass
+            print('\n[-] Keyboard Interrupt Occurred while extracting coupons!')
 
     def expired(self, course_url):
         response = self.request(course_url)

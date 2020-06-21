@@ -1,6 +1,8 @@
 var req = new XMLHttpRequest()
 
-req.open('GET', '/api/?command=fetch_new_course_images')
+req.open('GET', '/api/?command=deploy_coupons')
+req.send()
+req.open('GET', '/api/?command=deploy_new_courses_from_db')
 req.send()
 
 function midnight() {
