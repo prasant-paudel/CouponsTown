@@ -76,12 +76,10 @@ class CourseInfo:
         else:
             rating_container = "Nothing Appropriate!"
 
-        # Extracting Rating
-        try:
-            rating = re.findall('\w\.\w', str(rating_container))[0]
-            return rating
-        except IndexError:
-            return 0.0
+        # Extracting Rating 
+        rating = re.findall('\w\.\w', str(rating_container))[0]
+        return rating
+
     def get_duration(self):
         # For exuonix
         if 'eduonix.com' in str(self.url).lower():
