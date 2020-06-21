@@ -11,7 +11,7 @@ class CourseInfo:
         self.platform = self.url.split('//')[-1].split('/')[0].split('www.')[-1].split('.')[0].capitalize()
 
         self.response = requests.get(url)
-        self.parsed_html = BeautifulSoup(self.response.content, features="lxml")
+        self.parsed_html = BeautifulSoup(self.response.content)
 
     def get_name(self):
         return self.parsed_html.findAll('h1')[0].get_text().strip()

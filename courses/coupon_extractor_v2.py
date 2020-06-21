@@ -10,8 +10,6 @@ class CouponExtractor:
         self.target_url = target_url
         self.target_pattern = target_pattern
         self.links_list = []
-        self.offers_links_file = 'extracted_links.txt'
-        self.coupons_file = 'coupons.txt'
 
     def request(self, url):
         url = url.strip()
@@ -42,26 +40,31 @@ class CouponExtractor:
                     if not link in self.links_list:
                         self.links_list.append(link)
                         if self.target_pattern in link:  # link == offer
-                            # Extract Course URL from offer
-                            coupon = self.course_url_from(link)
-                            # Validate Coupon
-                            if not self.expired(coupon):            
-                                # Write valid coupon to a file
-                                with open(self.coupons_file, 'a') as outfile:
-                                    outfile.write(coupon + '\n')
-                                    print('-->', coupon)
-                            
+                            # If Offer does not exist in database
+                            if not RealDiscount.objects.filter(offer=link).exists():
+                                # Store offer link in database
+                                RealDiscount.objects.create(offer=link)
+                                # Extract Coupon from offer link
+                                coupon = self.course_url_from(link)
+                                # Filter Coupon and store in databse
+                                coupon = 'http://' + coupon.split('//')[-1]
+                                RealDiscount.objects.filter(offer=link).update(coupon=coupon)
+                                # Validate Coupon
+                                if not self.expired(coupon):
+                                    RealDiscount.objects.filter(offer=link).update(valid=True)
+                                else:
+                                    RealDiscount.objects.filter(offer=link).update(valid=True)
+                                # Update Platform
+                                platform = coupon.split('//')[-1].split('www.')[-1].split('.')[0].capitalize()
+                                RealDiscount.objects.filter(offer=link).update(platform=platform)
+                                print('[+]', link)
 
             except KeyError:
                 pass
         return self.links_list
 
     # Crawling each of the links for more links recursively
-    def crawl(self):
-        # Delete Offer Links File if exists
-        if os.path.exists(self.offers_links_file):
-            os.remove(self.offers_links_file)
-
+    def extract_coupons(self):
         # Create Initial Set of Links to Crawl
         self.extract_links()
         
@@ -103,5 +106,4 @@ class CouponExtractor:
 
 if __name__ == '__main__':
     ob = CouponExtractor(target_url='http://real.discount', target_pattern='/offer/')
-    ob.crawl()
     ob.extract_coupons()

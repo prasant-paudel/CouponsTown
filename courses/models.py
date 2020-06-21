@@ -31,10 +31,27 @@ class Course(models.Model):
     class Meta:
         ordering = ['platform']
 
+
 class Subscriber(models.Model):
     email = models.CharField(max_length=100, primary_key=True)
     full_name = models.CharField(max_length=250)
 
     def __str__(self):
         return f"{self.full_name} ({self.email})"
+
+
+class RealDiscount(models.Model):
+    id = models.AutoField(primary_key=True)
+    # title = models.CharField(max_length=200)
+    offer = models.CharField(max_length=200)
+    coupon = models.CharField(max_length=200, blank=True)
+    platform = models.CharField(max_length=30, blank=True)
+    valid = models.BooleanField(default=True)
+
+    def __str__(self):
+        if self.valid:
+            validity = 'Valid'
+        else:
+            validity = 'Invalid'
+        return self.coupon + ' | ' + validity
 
