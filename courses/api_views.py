@@ -3,7 +3,7 @@ from .models import Course, RealDiscount
 from .my_scripts import CourseInfo
 import wget
 import os
-from .coupon_extractor_v2 import CouponExtractor
+from .coupon_extractor import CouponExtractor
 
 def api(request):
     # query = request.GET.get('query')
