@@ -47,7 +47,12 @@
     <script src="{% static 'js/shorte.st.js' %}"></script>
 
     <!-- SYNCHRONIZE COURSES -->
-    <script src="{% static 'js/sync.js' %}"></script>
+    <!-- <script src="{% static 'js/sync.js' %}"></script> -->
+    <script>
+        var req = new XMLHttpRequest()
+        req.open('GET', '/api/?command=fetch_course_info_from_url')
+        req.send()
+    </script>
 
 </body>
 
