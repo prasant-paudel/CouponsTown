@@ -14,7 +14,10 @@ class CourseInfo:
         self.parsed_html = BeautifulSoup(self.response.content)
 
     def get_name(self):
-        return self.parsed_html.findAll('h1')[0].get_text().strip()
+        try:
+            return self.parsed_html.findAll('h1')[0].get_text().strip()
+        except:
+            return ''
 
     def get_rating(self):
         return re.findall('(?:.*>)(\d\.\d)', self.response.text)[0]
@@ -26,6 +29,7 @@ class CourseInfo:
             img_name = self.get_name()
             # Filtering Name
             img_name = img_name.strip().replace(' ', '_')
+            img_name = img_name.replace('/', '-')
 
             temp_img = f"media/{img_name}.jpg"
             if not os.path.exists('media'):
