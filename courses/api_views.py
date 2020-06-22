@@ -63,7 +63,7 @@ def api(request):
                 Course.objects.filter(id=course.id).update(duration=obj.get_duration())
             
             # Fetch Image
-            if 'udemy' in course.url.lower() and not course.image:
+            if 'udemy' in course.url.lower():
                 print(f'[+] Fetching Image for {course.name}')
                 Course.objects.filter(id=course.id).update(image=obj.get_image())
 

@@ -1,45 +1,290 @@
-{% extends 'courses/base.html' %}
-{% block body %}
+{% load staic %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Coupon</title>
+    <link rel="stylesheet" href="{% url 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% url 'css/card-style.css' %}">
+    <link rel="stylesheet" href="{% url 'css/my_style.css' %}">
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="{% url 'js/scripts.js' %}"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+</head>
 
-<style>
-    body {
-        background: #eeeeee;
-    }
-</style>
+<body>
+    <div class="d-flex justify-content flex-wrap"  style="width: 100%; " style=" display: flex; flex-wrap: wrap;">
 
-<!-- THE HEADER -->
-<center>
-    <h1 class="text-center text-white d-none d-lg-block site-heading"><span
-            class="text-primary flash animated infinite site-heading-upper mb-3">FREE ENROLL! &nbsp; FREE EDUCATION! &nbsp;
-            </span><span class="rubberBand animated infinite site-heading-lower">Free Course Coupons</span>
-    </h1>
-</center>
+        <div class="p-2 flex-fill bd-highlight" id="scroll-navbar" style="width: 100%; height: 70px;position: fixed; background:red; z-index: 2;transition: top 0.9s; top: -70px;">
+        
+            <div class="navbar navbar-expand-md " style="font-size: 1rem;   font-weight: bolder; color: black; ">
+                <a class="navbar-brand" href="#" style="width: auto; background: none !important;"><img src="coursehub.png" alt="" style="width: 100px; line-height: 50px;"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle-navigation">
+                    <span class="navbar-toggler-icon" style="color: black;"></span>
+                  </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item" style="background: none !important;">
+                            <div class="dropdown" >
+                                <a><button class="dropbtn" >Category</button></a>
+                                <div class="dropdown-content" >
+                                <a class="dropdown-item" href="#">Development</a>
+                                <a class="dropdown-item" href="#">IT & Software</a>
+                                <a class="dropdown-item" href="#">Office Productivity</a>
+                                <a class="dropdown-item" href="#">Design & Photography</a>
+                                <a class="dropdown-item" href="#">Health & Fitness</a>
+                                <a class="dropdown-item" href="#">Music</a>
+                                <a class="dropdown-item" href="#">Business & Marketing</a>
+                                  
+                                </div>
+                            </div>
+                        </li>
+                          
+        
+                        <li class="nav-item" style="width: auto; ">
+                            <a class="nav-link " style="font-size: 1rem; background: none !important;line-height:0px ; color: black !important; letter-spacing: 0; margin-left: 10px;" href="#">Dodwnload Books</a>
+                        </li>
+        
+                        <li class="nav-item" style="width: auto;">
+                            <a class="nav-link" style="font-size: 1rem;line-height:0px; background: none !important; color: black !important; letter-spacing: 0; margin-left: 10px;" href="#">Download Courses</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-<!-- NAVIGATION BAR -->
-{% include 'courses/navbar.html' %}
+        </div>
+        
+        <div class="p-2 flex-fill bd-highlight" style="width: 100%; height: 450px; background:linear-gradient(blue,white,blue)">
+        
+        </div>
+        
+        
+        <div class="p-2 flex-fill bd-highlight" style="width: 40px; ">
+        
+        </div>
+        
+<!-- ========================================================================================         -->
+        <div class="p-2 flex-fill bd-highlight"style="width: 908px;">
+            
+                
+                    
+            <div class="container d-flex justify-content-center" style="width: 100%;">
+        
+        
+        
+                <!-- --------------Startin008 of coupon--------- -->
+                <div class="card" style="width: 18rem; color: white; background: #050801; margin: 10px;">
+                    
+                    <div class="main-card-body" style="width: 270px;">
+                            <div class="course-title" style="width: 18rem; height: 80px; font-weight: 800; font-size: 1.3rem; text-align: center; justify-content: center; font-family: cursive; ">
+                                 The Complete SQL Bootcamp 2020: Go from Zero to  The Complete Course
+                            </div>
+                            <div class="card-body" style="width: 100%; height: 340px; ">
+                                <div class="imagebox"  data-text="UDEMY" style="background:url(llol.jpg) ; background-position: center; background-repeat: no-repeat;">
+                                </div>  
+                                <div class="get-coupon" style="width: 100%; height: 40px;  ">
+                                    <a href="second_page.htm" style="text-decoration: none; color: #03e9f4;"> 
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                            Enroll Now
+                                    </a>
+                                </div>
+                                                
+                                                
+                                <div class="content" style=" width: 100%; height: 200px;margin-top: 15%;">
+                                                    
+                                    <div class="content" >
+                                                        
+                                        <div class="course-info" style="width: 100%;height: 100px; background: url(bg.png);background-size: cover; color: white; font-weight: bolder; font-size: 18px;">
+                                            <div class="rating  d-flex align-items-center mt-1" style="width:40%; height: 45px;float: left;" >
+                                                <img src="star.svg" width="70%" height="70%" style="margin-top: -6px;">
+                                                <p class="my-0">4.7</p>
+                                            </div>
+                                            <div class="rating floa-left d-flex align-items-center mt-1" style="width: 60%; height: 45px;">
+                                                <img src="time.svg" width="50%" height="70%" style="margin-top: -12px;">
+                                                <p class="my-0" >99.5hr</p>
+                                            </div>
+                                                       
+                                            <div class="rating floa-left d-flex align-items-center mt-1" style="width: 50%; height: 45px;float: left; ">
+                                                <img src="group.svg" height="70%" width="70%">
+                                                <p class="my-0">1000</p>
+                                            </div>
+                                            <div class="rating floa-left d-flex align-items-center mt-1" style="width: 50%; height: 45px; float: left; ">
+                                                <img src="group.svg" height="70%" width="70%">
+                                                <p class="my-0">1000</p>
+                                            </div>
+                                            <div class="rating floa-left d-flex align-items-center mt-1" style="width: 100%; height: 45px; float: left; ">
+                                                <img src="udemy.svg" height="70%" width="100%">
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ads" style="width: 100%; height: 70px; margin-top: 300px; text-align: center;">
+                                        Place Your AD
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+
+                <!-- ----------------------------------end of coupon--------------------------------- -->
+                <div class="card" style="width: 18rem; color: white; background: #050801; margin: 10px;">
+                    
+                    <div class="main-card-body" style="width: 270px;">
+                            <div class="course-title" style="width: 18rem; height: 80px; font-weight: 800; font-size: 1.3rem; text-align: center; justify-content: center; font-family: cursive; ">
+                                 The Complete SQL Bootcamp 2020: Go from Zero to  The Complete Course
+                            </div>
+                            <div class="card-body" style="width: 100%; height: 340px; ">
+                                <div class="imagebox"  data-text="UDEMY" style="background:url(llol.jpg) ; background-position: center; background-repeat: no-repeat;">
+                                </div>  
+                                <div class="get-coupon" style="width: 100%; height: 40px;  ">
+                                    <a href="second_page.htm" style="text-decoration: none; color: #03e9f4;"> 
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                            Enroll Now
+                                    </a>
+                                </div>
+                                                
+                                                
+                                <div class="content" style=" width: 100%; height: 200px;margin-top: 15%;">
+                                                    
+                                    <div class="content" >
+                                                        
+                                        <div class="course-info" style="width: 100%;height: 100px; background: url(bg.png);background-size: cover; color: white; font-weight: bolder; font-size: 18px;">
+                                            <div class="rating  d-flex align-items-center mt-1" style="width:40%; height: 45px;float: left;" >
+                                                <img src="star.svg" width="70%" height="70%" style="margin-top: -6px;">
+                                                <p class="my-0">4.7</p>
+                                            </div>
+                                            <div class="rating floa-left d-flex align-items-center mt-1" style="width: 60%; height: 45px;">
+                                                <img src="time.svg" width="50%" height="70%" style="margin-top: -12px;">
+                                                <p class="my-0" >99.5hr</p>
+                                            </div>
+                                                       
+                                            <div class="rating floa-left d-flex align-items-center mt-1" style="width: 50%; height: 45px;float: left; ">
+                                                <img src="group.svg" height="70%" width="70%">
+                                                <p class="my-0">1000</p>
+                                            </div>
+                                            <div class="rating floa-left d-flex align-items-center mt-1" style="width: 50%; height: 45px; float: left; ">
+                                                <img src="group.svg" height="70%" width="70%">
+                                                <p class="my-0">1000</p>
+                                            </div>
+                                            <div class="rating floa-left d-flex align-items-center mt-1" style="width: 100%; height: 45px; float: left; ">
+                                                <img src="udemy.svg" height="70%" width="100%">
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ads" style="width: 100%; height: 70px; margin-top: 300px; text-align: center;">
+                                        Place Your AD
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+
+                                       <!-- ---------------------add another coupon inside this div----------------------- -->
+              
 
 
-<!-- COURSES -->
-<div style="z-index: 99;bottom: 40px;" class="container-fluid d-flex justify-content-end position-fixed">
-    {% include 'courses/search_bar.html' %}
-</div>
+                
+                <!-- -------------------------------------add Anothe coupon before this div------------------------- -->
+        
+            </div>
 
+        </div>
+        
+<!-- ================================================================================================================         -->
+        <div class="p-2 flex-fill bd-highlight"style="width: 210px;">
+             <div class="card text-center" >
+                <div class="card-header">
+                  Trending Topics
+                </div>
+                <div class="card-body">
+                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>
+                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>
+                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>
+                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>
+                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>
+                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>    
+                </div>
+                
+              </div>
 
-<!-- MESSAGE -->
-{% if message %}
-<div style="height: 75px; width: 100%"></div>
-<center><h1 style="color: bisque;">{{ message }}</h1></center>
-{% endif %}
+              <div class="card text-center">
+                <div class="card-header">
+                  Related Topics
+                </div>
+                <div class="card-body">
+                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>
+                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>
+                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>
+                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>
+                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>
+                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>    
+                </div>
+                
+              </div>
+              <div class="card text-center">
+                <div class="card-header">
+                  Tags
+                </div>
+                <div class="card-body">
+                        <a href="#" class="btn btn-primary" >Advanced</a>
+                        <a href="#" class="btn btn-primary" >Algorithms</a>
+                        <a href="#" class="btn btn-primary" >Angular</a>
+                        <a href="#" class="btn btn-primary" >Beginners</a>
+                        <a href="#" class="btn btn-primary" >Business</a>
+                        <a href="#" class="btn btn-primary" >C#</a>
+                        <a href="#" class="btn btn-primary" >Data & Analytics</a>
+                        <a href="#" class="btn btn-primary" >Database</a>
+                        <a href="#" class="btn btn-primary" >Data Science</a>
+                        <a href="#" class="btn btn-primary" >Deep Learning</a>
+                        <a href="#" class="btn btn-primary" >Design</a>
+                        <a href="#" class="btn btn-primary" >Development</a>
+                        <a href="#" class="btn btn-primary" >Ethical Hacking</a>
+                        <a href="#" class="btn btn-primary" >Full Stack</a>
+                        <a href="#" class="btn btn-primary" >Game Development</a>
+                        <a href="#" class="btn btn-primary" >HTML CSS</a>
+                        <a href="#" class="btn btn-primary" >IOS</a>
+                        <a href="#" class="btn btn-primary" >JAVA</a>
+                        <a href="#" class="btn btn-primary" >JavaScript</a>
+                        <a href="#" class="btn btn-primary" >Language</a>
+                        <a href="#" class="btn btn-primary" >Learning</a>
+                        <a href="#" class="btn btn-primary" >Machine Learning</a>
+                        <a href="#" class="btn btn-primary" >Mobile Apps</a>
+                        <a href="#" class="btn btn-primary" >Marketing</a>
+                        <a href="#" class="btn btn-primary" >Network Security</a>
+                        <a href="#" class="btn btn-primary" >Node JS</a>
+                        <a href="#" class="btn btn-primary" >Photoshop</a>
+                        <a href="#" class="btn btn-primary" >PHP</a>
+                        <a href="#" class="btn btn-primary" >Professional</a>
+                        <a href="#" class="btn btn-primary" >Python</a>
+                        <a href="#" class="btn btn-primary" >React</a>
+                        <a href="#" class="btn btn-primary" >Software</a>
+                        <a href="#" class="btn btn-primary" >The Complete</a>
+                        <a href="#" class="btn btn-primary" >Web Application</a>
+                        <a href="#" class="btn btn-primary" >Web Design</a>
+                        <a href="#" class="btn btn-primary" >Web Developer</a>
+                        <a href="#" class="btn btn-primary" >Web Development</a>
+                        <a href="#" class="btn btn-primary" >Website</a>
+                        <a href="#" class="btn btn-primary" >Wordpress</a>
+                    
+                </div>
+                
+              </div>
+              
+        </div>
 
+    </div>  
 
+<!-- ===================================================Script Section==========================================     -->
 
-<div style="height: 100px; width: 100%"></div>
-
-<div class="container d-flex p-2 align-items-center flex-wrap justify-content-center">
-    {% include 'courses/card.html' %}
-</div>
-
-{% include 'courses/subscribe.html' %}
-
-
-{% endblock %}
+<!-- ===============================================================================End Script============================= -->
+    
+</body>
+</html>

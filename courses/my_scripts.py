@@ -29,7 +29,8 @@ class CourseInfo:
             img_name = self.get_name()
             # Filtering Name
             img_name = img_name.strip().replace(' ', '_')
-            img_name = img_name.replace('/', '-')
+            img_name = img_name.replace('/', '-').replace('\\', '-')
+            img_name = img_name.replace('"', '_')
 
             temp_img = f"media/{img_name}.jpg"
             if not os.path.exists('media'):
@@ -38,7 +39,7 @@ class CourseInfo:
                 wget.download(remote_img_url, temp_img)
             return temp_img
         print('[-] Image Not Found!')
-        return ''
+        return 'images/no-image.svg'
 
     def get_platform(self):
         return self.url.strip('"').strip("'").split('//')[-1].split('/')[0].split('www.')[-1].split('.')[0].capitalize()

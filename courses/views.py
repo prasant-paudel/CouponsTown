@@ -6,8 +6,11 @@ from .my_scripts import CourseInfo
 
 def home(request):
     courses = Course.objects.order_by('upload_date').reverse()
-    return render(request, 'courses/home.html', {'courses': courses})
+    return render(request, 'courses/home1.html', {'courses': courses})
 
+def info_page(request):
+    name = request.GET.get('name')
+    return render(request, 'courses/info_page.html', {'name':name})
 
 def search(request):
     template = 'courses/home.html'
