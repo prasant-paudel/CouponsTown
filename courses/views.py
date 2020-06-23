@@ -1,19 +1,30 @@
 from django.shortcuts import render, redirect, HttpResponse
-from .models import Course, Subscriber
+from .models import Course, Subscriber, RealDiscount
 from django.db.models import Q
 from .my_scripts import CourseInfo
+from .tags_scraper import TagScraper
 
 
 def home(request):
     courses = Course.objects.order_by('upload_date').reverse()
-    return render(request, 'courses/home1.html', {'courses': courses})
+    high_rated = Course.objects.order_by('rating')
+
+    all_small_tags = courses.first().tags.choices
+    keys = list(all_small_tags)
+    all_tags = [(all_small_tags[x]) for x in keys] 
+
+    return render(request, 'courses/home1.html', {'courses': courses, 'high_rated':high_rated, 'all_tags': all_tags})
 
 def info_page(request):
     course_id = request.GET.get('course_id')
     course = Course.objects.get(id=course_id)
-    tags = course.tags
-    related_courses = Course.objects.filter(Q(tags__contains=tags))
-    return render(request, 'courses/info_page.html', {'course': course, 'related_courses': related_courses})
+
+    all_small_tags = course.tags.choices
+    keys = list(all_small_tags)
+    all_tags = [(all_small_tags[x]) for x in keys] 
+    
+    related_courses = Course.objects.filter(Q(tags__contains=course.tags))
+    return render(request, 'courses/info_page.html', {'course': course, 'related_courses': related_courses, 'all_tags': all_tags})
 
 def search(request):
     template = 'courses/home.html'

@@ -79,7 +79,7 @@
                 </div>
                 <div class="card-body">
                 {% for course in related_courses %}
-                    <marquee direction="left"><a href="#">{{ course.name }}</a></marquee>    
+                    <marquee direction="left"><a href="{% url 'info_page' %}?course_id={{course.id}}">{{ course.name }}</a></marquee>    
                 {% endfor %}
                 </div>
                 <div class="card-footer text-muted">
@@ -106,48 +106,13 @@
                <div class="p-2 flex-fill bd-highlight"style="width: 455px;">
                 <div class="card text-center">
                     <div class="card-header" style="font-weight: bolder;">
-                      TAGS
+                      ALL TAGS
                     </div>
                     <div class="card-body">
-                        <a href="#" class="btn btn-primary" >Advanced</a>
-                        <a href="#" class="btn btn-primary" >Algorithms</a>
-                        <a href="#" class="btn btn-primary" >Angular</a>
-                        <a href="#" class="btn btn-primary" >Beginners</a>
-                        <a href="#" class="btn btn-primary" >Business</a>
-                        <a href="#" class="btn btn-primary" >C#</a>
-                        <a href="#" class="btn btn-primary" >Data & Analytics</a>
-                        <a href="#" class="btn btn-primary" >Database</a>
-                        <a href="#" class="btn btn-primary" >Data Science</a>
-                        <a href="#" class="btn btn-primary" >Deep Learning</a>
-                        <a href="#" class="btn btn-primary" >Design</a>
-                        <a href="#" class="btn btn-primary" >Development</a>
-                        <a href="#" class="btn btn-primary" >Ethical Hacking</a>
-                        <a href="#" class="btn btn-primary" >Full Stack</a>
-                        <a href="#" class="btn btn-primary" >Game Development</a>
-                        <a href="#" class="btn btn-primary" >HTML CSS</a>
-                        <a href="#" class="btn btn-primary" >IOS</a>
-                        <a href="#" class="btn btn-primary" >JAVA</a>
-                        <a href="#" class="btn btn-primary" >JavaScript</a>
-                        <a href="#" class="btn btn-primary" >Language</a>
-                        <a href="#" class="btn btn-primary" >Learning</a>
-                        <a href="#" class="btn btn-primary" >Machine Learning</a>
-                        <a href="#" class="btn btn-primary" >Mobile Apps</a>
-                        <a href="#" class="btn btn-primary" >Marketing</a>
-                        <a href="#" class="btn btn-primary" >Network Security</a>
-                        <a href="#" class="btn btn-primary" >Node JS</a>
-                        <a href="#" class="btn btn-primary" >Photoshop</a>
-                        <a href="#" class="btn btn-primary" >PHP</a>
-                        <a href="#" class="btn btn-primary" >Professional</a>
-                        <a href="#" class="btn btn-primary" >Python</a>
-                        <a href="#" class="btn btn-primary" >React</a>
-                        <a href="#" class="btn btn-primary" >Software</a>
-                        <a href="#" class="btn btn-primary" >The Complete</a>
-                        <a href="#" class="btn btn-primary" >Web Application</a>
-                        <a href="#" class="btn btn-primary" >Web Design</a>
-                        <a href="#" class="btn btn-primary" >Web Developer</a>
-                        <a href="#" class="btn btn-primary" >Web Development</a>
-                        <a href="#" class="btn btn-primary" >Website</a>
-                        <a href="#" class="btn btn-primary" >Wordpress</a>
+                        <!-- Test -->
+                        {% for tag in all_tags %}
+                        <a href="#" class="btn btn-primary" >{{tag}}</a>
+                        {% endfor %}
                     </div>
             </div>
             <!-- ============================Category====================== -->

@@ -12,7 +12,7 @@ class Course(models.Model):
     platform = models.CharField(max_length=30, blank=True)
     duration = models.CharField(blank=True, max_length=10)
     upload_date = models.DateTimeField(auto_now_add=True)
-    rating = models.CharField(max_length=5, blank=True)
+    rating = models.FloatField(max_length=5, blank=True)
     category_coices = (
         ('not_set', 'NOT SET'),
         ( 'development', 'DEVELOPMENT'),
