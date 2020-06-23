@@ -1,4 +1,5 @@
 {% extends 'courses/base.html' %}
+{% load static %}
 {% block body %}
     <div class="d-flex justify-content flex-wrap" style="width: 100%;" style=" display: flex; flex-wrap: wrap;">
         
@@ -24,7 +25,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-md-center flex-wrap">
                         <div class="p-2 flex-fill bd-highlight"style="width: 296px;">
-                            <img src="#" class="card-img-top" alt="...">
+                            <img src="{{ image }}" class="card-img-top" alt="...">
                         </div>
 
                         <div class="p-2 flex-fill bd-highlight"style="width: 296px;">
@@ -37,7 +38,7 @@
     
                         <div class="p-2 flex-fill bd-highlight"style="width: 296px;">
                             <div class="get-coupon" style="width: 100%; height: 40px;  ">
-                                <a href="info_page/" style="text-decoration: none; color: #03e9f4; border-radius: 0px; width: 100%;"> 
+                                <a href="{{coupon}}" style="text-decoration: none; color: #03e9f4; border-radius: 0px; width: 100%;" target="blank"> 
                                     <span></span>
                                     <span></span>
                                     <span></span>
@@ -46,91 +47,18 @@
                                 </a>
                             </div>
                             <div class="rating floa-left d-flex align-items-center mt-1" style="width: 100%; height: 45px; float: left; ">
-                                <img src="udemy.svg" height="70%" width="100%">
-                                
+                                {% if platform == 'Udemy' %}
+                                <img src="{% static 'images/udemy.svg' %}" height="70%" width="100%">
+                                {% elif platform == 'Eduonix' %}
+                                <img src="{% static 'images/eduonix.png' %}" height="70%" width="100%">
+                                {% endif %}
                             </div>
                             
                         </div> 
 
                         <div class="p-2 flex-fill bd-highlight"style="width: 100%;">
-                            <h3>Hello World Welcomr to My Course Please enroll to learn something new</h3>
-                            Created by Jose Portilla, Inanc Gumus
-                            Last updated 5/2020
-                            English
-                            English [Auto-generated]
-                            
-                             
-                            What you’ll learn
-                            
-                                Watch the free videos to see how I teach Go programming in depth.
-                                Practice with 1000+ Exercises (with included solutions)
-                                Pass Interviews: Master Go Internals In-Depth
-                                Master Interfaces and Internals
-                                Master Slice Internals: Slice Header and Memory Allocations
-                                Master Map Internals: Map Header
-                                Encode and Decode JSON
-                                Create a log file parser, spam masker, retro led clock, console animations, dictionary programs and so on.
-                                Requirements
-                                    Access to a computer with an internet connection.
-                                 
-                                Description
-                            
-                                Get a Real In-Depth Understanding of Go and its Internal Mechanisms by:
-                                    Ultra-detailed, entertaining, intuitive, and easy to understand animations.
-                            
-                                Learn by doing:
-                                    Write a log parser, file scanner, spam masker and more.
-                                    Solve 1000+ hands-on exercises.
-                                    Learn a lot of tips and tricks that you can’t find easily anywhere else.
-                            
-                                What’s included?
-                                    Go OOP: Interfaces and Methods
-                                        Internals of Methods and Interfaces
-                                        Functions and Pointers: Program design, pass by value, and addressability.
-                                        Implicit interface satisfaction
-                                        Type assertion and Type Switch
-                                        Empty interface: []interface{} vs interface{}
-                                        Value, Pointer, and Nil Receivers
-                                        Promoted Methods
-                                    Famous Interfaces
-                                        Tips about when to use interfaces
-                                        fmt.Stringer, sort.Sort, json.Marshaler, json.Unmarshaler, and so on.
-                                    Composite Types: Arrays, Slices, Maps, and Structs
-                                        Internals of Slices and Maps
-                                        Backing array, slice header, capacity, and map header
-                                        JSON encoding and decoding, field tags, embedding
-                                        Make, copy, full Slice expressions and append mechanics
-                                        UTF-8 encoding and decoding
-                                    Go Type System Mechanics
-                                        Type inference, underlying, predeclared, and unnamed types.
-                                        Untyped constants and iota.
-                                        Blank Identifier, short declaration, redeclaration, scopes, naming conventions
-                                    I/O
-                                        Process Command-Line Arguments, printf, working with files, bufio.Scanner, …
-                                    How to create your own Go packages
-                                        How to run multiple Go files, and how to use third-party packages
-                                    Go tools
-                                        Debugging Go code, go doc, and others.
-                                    …and more.
-                            
-                                Why Go?
-                            
-                                Go is one of the most desired, easy to learn, and the highest paying programming languages. There are 1+ million Go programmers around the world, and the number is increasing each day exponentially. It’s been used by Google, Facebook, Twitter, Uber, Docker, Kubernetes, Heroku, and many others.
-                            
-                                Go is Efficient like C, C++, and Java, and Easy to use like Python and Javascript. It’s Open-Source, Simple, Powerful, Efficient, Cross-Platform (OS X, Windows, Linux, …), Compiled, Garbage-Collected, and Concurrent.
-                            
-                                Go is best for Command-line Tools, Web APIs, Distributed Network Applications like Microservices, Database Engines, Big-Data Processing Pipelines, and so on.
-                            
-                                Go has been designed by one of the most influential people in the industry:
-                                    Unix: Ken Thompson
-                                    UTF-8, Plan 9: Rob Pike
-                                    Hotspot JVM (Java Virtual Machine): Robert Griesemer
-                                Who this course is for:
-                                    Beginners who have never programmed before.
-                                    Programmers switching languages to Go.
-                                    Intermediate Go programmers who want to level up their skills!
-                                    Intermediate Go programmers who want to learn the internals of slices, maps, interfaces, and so on.
-                            
+                            <h3>{{ name }}</h3>
+                                <!-- Description here -->
                         </div>
                     </div>
                     

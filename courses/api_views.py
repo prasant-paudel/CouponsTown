@@ -4,6 +4,7 @@ from .my_scripts import CourseInfo
 import wget
 import os
 from .coupon_extractor import CouponExtractor
+from .tags_scraper import TagScraper
 
 def api(request):
     # query = request.GET.get('query')
@@ -46,7 +47,7 @@ def api(request):
             if not course.name:
                 print(f'[+] Fetching Name for {course.name}')
                 Course.objects.filter(id=course.id).update(name=obj.get_name())
-            
+
             # Fetch Platform
             if not course.platform:
                 print(f'[+] Fetching Platform for {course.name}')
@@ -56,16 +57,27 @@ def api(request):
             if not course.rating:
                 print(f'[+] Fetching Rating for {course.name}')
                 Course.objects.filter(id=course.id).update(rating=obj.get_rating())
-            
+
             # Fetch Duration
             if not course.duration:
                 print(f'[+] Fetching Duration for {course.name}')
                 Course.objects.filter(id=course.id).update(duration=obj.get_duration())
-            
+
             # Fetch Image
             if 'udemy' in course.url.lower():
                 print(f'[+] Fetching Image for {course.name}')
                 Course.objects.filter(id=course.id).update(image=obj.get_image())
+
+            # Fetch Tags
+            print(f'[+] Fetching Tags for {course.name}')
+            rd = RealDiscount.objects.get(coupon=course.url)
+            ts = TagScraper(rd.offer)
+            tags = ts.get_course_tags()
+            print(f'{tags}\n')
+            # Adding Tags to the database
+            Course.objects.filter(id=course.id).update(tags=tags)
+            # print(list(course.tags))
+
 
         print('\n[+] New Courses Deployed Successfully!\n')
         return HttpResponse('New Courses Deployed Successfully!')

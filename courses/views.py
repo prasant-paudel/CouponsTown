@@ -10,7 +10,10 @@ def home(request):
 
 def info_page(request):
     name = request.GET.get('name')
-    return render(request, 'courses/info_page.html', {'name':name})
+    image = request.GET.get('image')
+    platform = request.GET.get('platform')
+    coupon = request.GET.get('coupon')
+    return render(request, 'courses/info_page.html', {'name':name, 'image':image, 'platform':platform, 'coupon':coupon})
 
 def search(request):
     template = 'courses/home.html'
