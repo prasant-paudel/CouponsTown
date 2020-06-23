@@ -9,11 +9,11 @@ def home(request):
     return render(request, 'courses/home1.html', {'courses': courses})
 
 def info_page(request):
-    name = request.GET.get('name')
-    image = request.GET.get('image')
-    platform = request.GET.get('platform')
-    coupon = request.GET.get('coupon')
-    return render(request, 'courses/info_page.html', {'name':name, 'image':image, 'platform':platform, 'coupon':coupon})
+    course_id = request.GET.get('course_id')
+    course = Course.objects.get(id=course_id)
+    tags = course.tags
+    related_courses = Course.objects.filter(Q(tags__contains=tags))
+    return render(request, 'courses/info_page.html', {'course': course, 'related_courses': related_courses})
 
 def search(request):
     template = 'courses/home.html'

@@ -20,12 +20,12 @@
             <div class="card text-center">
                 <div class="card-header">
                     <!-- Tableau 2020 A-Z:Hands-On Tableau Training For Data Science! -->
-                    {{ name }}
+                    {{ course.name }}
                 </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-md-center flex-wrap">
                         <div class="p-2 flex-fill bd-highlight"style="width: 296px;">
-                            <img src="{{ image }}" class="card-img-top" alt="...">
+                            <img src="{{ course.image.url }}" class="card-img-top" alt="...">
                         </div>
 
                         <div class="p-2 flex-fill bd-highlight"style="width: 296px;">
@@ -38,7 +38,7 @@
     
                         <div class="p-2 flex-fill bd-highlight"style="width: 296px;">
                             <div class="get-coupon" style="width: 100%; height: 40px;  ">
-                                <a href="{{coupon}}" style="text-decoration: none; color: #03e9f4; border-radius: 0px; width: 100%;" target="blank"> 
+                                <a href="{{ course.url }}" style="text-decoration: none; color: #03e9f4; border-radius: 0px; width: 100%;" target="blank"> 
                                     <span></span>
                                     <span></span>
                                     <span></span>
@@ -78,13 +78,9 @@
                   Related Topics
                 </div>
                 <div class="card-body">
-                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>
-                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>
-                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>
-                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>
-                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>
-                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>    
-                  
+                {% for course in related_courses %}
+                    <marquee direction="left"><a href="#">{{ course.name }}</a></marquee>    
+                {% endfor %}
                 </div>
                 <div class="card-footer text-muted">
                     <label for="category" style="background: red transparent;">Select Category</label>

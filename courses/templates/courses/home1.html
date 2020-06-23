@@ -71,7 +71,7 @@
                     
             <div class="container d-flex justify-content-center" style="width: 100%;">
         
-        
+                
                 {% for course in courses %}
                 {% if course.image %}
                 <!-- --------------Startin008 of coupon--------- -->
@@ -90,7 +90,7 @@
                                 {% endif %}
                                 </div>  
                                 <div class="get-coupon" style="width: 100%; height: 40px;  ">
-                                    <a href="{% url 'info_page' %}?name={{course.name}}&image={{course.image.url}}&platform={{course.platform}}&coupon={{course.url}}" style="text-decoration: none; color: #03e9f4;"> 
+                                    <a href="{% url 'info_page' %}?course_id={{course.id}}" style="text-decoration: none; color: #03e9f4;"> 
                                         <span></span>
                                         <span></span>
                                         <span></span>
@@ -139,13 +139,13 @@
                             </div>
                     </div>
                 </div>
-                <!-- Test -->
-                <div>
+                <!-- Tags -->
+                <!-- <div>
                     {% for tag in course.tags %}
                         {{ tag }}
                     {% endfor %}
-                </div>
-                <!-- / Test -->
+                </div> -->
+                <!-- / Tags -->
                 {% endif %}
                 {% endfor %}
                 
@@ -187,7 +187,7 @@
                     <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>
                     <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>
                     <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>
-                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>    
+                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as possible</a></marquee>
                 </div>
                 
               </div>
