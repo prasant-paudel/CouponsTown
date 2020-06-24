@@ -19,8 +19,8 @@ class CourseInfo:
         except:
             return ''
 
-    def get_rating(self):
-        return re.findall('(?:.*>)(\d\.\d)', self.response.text)[0]
+    # def get_rating(self):
+    #     return re.findall('(?:.*>)(\d\.\d)', self.response.text)[0]
     
     def get_image(self):
         if self.platform == 'Udemy':
@@ -86,7 +86,7 @@ class CourseInfo:
             rating = re.findall('\w\.\w', str(rating_container))[0]
             return rating
         except:
-            return 'N/A'
+            return '00'
 
     def get_duration(self):
         # For exuonix
