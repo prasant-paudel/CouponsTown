@@ -183,13 +183,15 @@ class Course(models.Model):
         ('programming_languages', 'Programming Languages'),
         ('web_development', 'Web Development'),
     )
-    tags = MultiSelectField(choices=tags_choices)
+    tags = MultiSelectField(choices=tags_choices, null=True)
 
 
 
 
     def __str__(self):
-        return self.name + ' | ' + self.platform
+        if self.image:
+            return self.name
+        return f'(No Image) {self.name}'
     
     class Meta:
         ordering = ['platform']
@@ -216,4 +218,4 @@ class RealDiscount(models.Model):
             validity = 'Valid'
         else:
             validity = 'Invalid'
-        return self.coupon + ' | ' + validity
+        return self.coupon #+ ' | ' + validity

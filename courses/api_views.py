@@ -77,6 +77,7 @@ def api(request):
             # Adding Tags to the database
             Course.objects.filter(id=course.id).update(tags=tags)
             # print(list(course.tags))
+            
 
 
         print('\n[+] New Courses Deployed Successfully!\n')

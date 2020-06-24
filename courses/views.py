@@ -9,7 +9,9 @@ def home(request):
     courses = Course.objects.order_by('upload_date').reverse()
     high_rated = Course.objects.order_by('rating')
 
-    all_small_tags = courses.first().tags.choices
+    all_small_tags = []
+    if courses.first():
+        all_small_tags = courses.first().tags.choices
     keys = list(all_small_tags)
     all_tags = [(all_small_tags[x]) for x in keys] 
 

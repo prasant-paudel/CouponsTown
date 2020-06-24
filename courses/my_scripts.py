@@ -50,23 +50,22 @@ class CourseInfo:
         return False
 
     def is_expired(self):
-        response = requests.get(self.url)
-        parsed_html = BeautifulSoup(response.text, features='lxml')
-
         # Eduonix Pricing Div
         if 'eduonix.com' in self.url:
-            pricing = parsed_html.findAll('div', {'id': 'scrollTp'})
+            pricing = self.parsed_html.findAll('div', {'id': 'scrollTp'})
         
         # Udemy Pricing Div
         elif 'udemy.com' in self.url:
-            pricing = parsed_html.findAll('div', {'class': 'buy-box'})
+            pricing = self.parsed_html.findAll('div', {'class': 'buy-box'})
         
         else:
             pricing = 'not compatible platform'
-        
+
         # Checking Price
         if 'enroll now' in str(pricing).lower():
+            print('--> Valid')
             return False
+        print('--> Expired')
         return True
 
     def get_rating(self):

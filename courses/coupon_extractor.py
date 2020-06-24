@@ -10,6 +10,7 @@ class CouponExtractor:
         self.target_url = target_url
         self.target_pattern = target_pattern
         self.links_list = []
+        self.coupon_count = 0
 
     def request(self, url):
         url = url.strip()
@@ -42,25 +43,28 @@ class CouponExtractor:
                         if self.target_pattern in link:  # link == offer
                             # If Offer does not exist in database
                             if not RealDiscount.objects.filter(offer=link).exists():
-                                print('[+]', link)
-                                # Store offer link in database
-                                RealDiscount.objects.create(offer=link)
-                                # Extract Coupon from offer link
+                                # Extract Coupon from offer link and filter Coupon
                                 coupon = self.course_url_from(link)
-                                # Filter Coupon and store in databse
                                 coupon = 'http://' + coupon.split('//')[-1]
-                                RealDiscount.objects.filter(offer=link).update(coupon=coupon)
                                 # Validate Coupon
                                 if not self.expired(coupon):
+                                    self.coupon_count += 1
+                                    # Store offer link in database
+                                    RealDiscount.objects.create(offer=link, coupon=coupon)
                                     RealDiscount.objects.filter(offer=link).update(valid=True)
                                 else:
                                     RealDiscount.objects.filter(offer=link).update(valid=True)
+
+                                print('[+]',self.coupon_count, link)
+                                
                                 # Update Platform
                                 platform = coupon.split('//')[-1].split('www.')[-1].split('.')[0].capitalize()
                                 RealDiscount.objects.filter(offer=link).update(platform=platform)
 
             except KeyError:
                 pass
+            except KeyboardInterrupt:
+                return self.links_list
         return self.links_list
 
     # Crawling each of the links for more links recursively
