@@ -40,6 +40,7 @@ def api(request):
     # Remove Affiliate URLs
     if command == 'remove_affiliate_urls':
         courses = Course.objects.all().update(affiliate_url='')
+        return HttpResponse('Affiliate URLs Removed Successfully!')
 
     # Fetch infomation of courses from the url in Course database table
     if command == 'fetch_course_info_from_url':
@@ -68,9 +69,8 @@ def api(request):
                 Course.objects.filter(id=course.id).update(duration=obj.get_duration())
 
             # Fetch Image
-            if 'udemy' in course.url.lower():
-                print(f'[+] Fetching Image for {course.name}')
-                Course.objects.filter(id=course.id).update(image=obj.get_image())
+            print(f'[+] Fetching Image for {course.name}')
+            Course.objects.filter(id=course.id).update(image=obj.get_image())
 
             # Fetch Tags
             print(f'[+] Fetching Tags for {course.name}')
