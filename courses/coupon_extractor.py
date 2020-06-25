@@ -3,7 +3,9 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import os
-from .models import RealDiscount
+from .models import RealDiscount, Course
+from django.db.utils import IntegrityError
+from .my_scripts import CourseInfo
 
 class CouponExtractor:
     def __init__(self, target_url, target_pattern):
@@ -30,7 +32,7 @@ class CouponExtractor:
         domain = self.target_url.split('//')[-1].split('/')[0]
 
         print('')
-        print('Extracting Links from ' + self.target_url)
+        print('Extracting Links from ' + url)
         print('')
 
         a_tags = parsed_html.findAll('a')
@@ -40,18 +42,28 @@ class CouponExtractor:
                 if link[:4] == 'http' and domain in url:
                     if not link in self.links_list:
                         self.links_list.append(link)
+                        # if offer page found
                         if self.target_pattern in link:  # link == offer
+                            offer_page_source = self.request(link).content
+                            # if offer is already expired
+                            if 'Expired' in str(offer_page_source):
+                                continue
                             # If Offer does not exist in database
                             if not RealDiscount.objects.filter(offer=link).exists():
                                 # Extract Coupon from offer link and filter Coupon
-                                coupon = self.course_url_from(link)
+                                coupon = self.course_url_from(offer_page_source)
                                 coupon = 'http://' + coupon.split('//')[-1]
                                 # Validate Coupon
                                 if not self.expired(coupon):
                                     self.coupon_count += 1
                                     # Store offer link in database
-                                    RealDiscount.objects.create(offer=link, coupon=coupon)
-                                    RealDiscount.objects.filter(offer=link).update(valid=True)
+                                    try:
+                                        RealDiscount.objects.create(offer=link, coupon=coupon)
+                                        RealDiscount.objects.filter(offer=link).update(valid=True)
+                                        Course.objects.create(url=coupon, category='not_set')
+                                    except IntegrityError:
+                                        self.coupon_count -= 1
+                                        continue
                                 else:
                                     RealDiscount.objects.filter(offer=link).update(valid=True)
 
@@ -79,11 +91,10 @@ class CouponExtractor:
         except KeyboardInterrupt:
             print('\n[-] Stopping Crawler')
         except requests.exceptions.ConnectionError:
-            print['\n[-] Connection Error!']
+            print('\n[-] Connection Error!')
 
-    def course_url_from(self, offer_page_url):
-        page_source = self.request(offer_page_url).content
-        parsed_html = BeautifulSoup(page_source)
+    def course_url_from(self, offer_page_source):
+        parsed_html = BeautifulSoup(offer_page_source)
         course_url = parsed_html.findAll('a', {'class': 'btn'})[0]['href']
         return course_url.strip()
 

@@ -14,9 +14,9 @@ def api(request):
     if command == "validate":
         courses = Course.objects.all()
         for course in courses:
+            print(f'[+] Validing  {course.name}')
             obj = CourseInfo(course.url)
             Course.objects.filter(id=course.id).update(expired=obj.is_expired())
-            print(f'[+] Validated  {course.name}')
         return HttpResponse('Course Validation Completed Successfully!')
 
     # Get Rating for Courses
@@ -41,7 +41,7 @@ def api(request):
     if command == 'fetch_course_info_from_url':
         courses = Course.objects.all()
         for course in courses:
-            obj = CourseInfo(course.url)
+            obj = CourseInfo(url=course.url)
 
             # Fetch Name
             if not course.name:
@@ -70,7 +70,11 @@ def api(request):
 
             # Fetch Tags
             print(f'[+] Fetching Tags for {course.name}')
-            rd = RealDiscount.objects.get(coupon=course.url)
+            try:
+                rd = RealDiscount.objects.get(coupon=course.url)
+            except:
+                continue
+                
             ts = TagScraper(rd.offer)
             tags = ts.get_course_tags()
             print(f'{tags}\n')

@@ -5,13 +5,17 @@ import os
 import wget
 
 class CourseInfo:
-    def __init__(self, url):
+    def __init__(self, url, page_source=None):
         self.url = url
+        self.page_source = page_source
         self.affiliate_url = 'http://adf.ly/23576813/' + url.strip('"').strip("'").split('//')[-1]
         self.platform = self.url.split('//')[-1].split('/')[0].split('www.')[-1].split('.')[0].capitalize()
 
-        self.response = requests.get(url)
-        self.parsed_html = BeautifulSoup(self.response.content)
+        if self.page_source:
+            self.parsed_html = BeautifulSoup(self.page_source)
+        else:
+            self.response = requests.get(url)
+            self.parsed_html = BeautifulSoup(self.response.content)
 
     def get_name(self):
         try:
@@ -30,7 +34,7 @@ class CourseInfo:
             # Filtering Name
             img_name = img_name.strip().replace(' ', '_')
             img_name = img_name.replace('/', '-').replace('\\', '-')
-            img_name = img_name.replace('"', '_')
+            img_name = img_name.replace('"', '_').replace('|', '_')
 
             temp_img = f"media/{img_name}.jpg"
             if not os.path.exists('media'):
