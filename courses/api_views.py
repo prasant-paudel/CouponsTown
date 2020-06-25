@@ -133,4 +133,11 @@ def api(request):
             print(f'[+] URL Filtered for {course.name}')
         return HttpResponse('URLs Filtered Successfully!')
 
+    if command == 'remove_duplicate_courses':
+        courses = Course.objects.all()
+        for course in courses:
+            filtered = Course.objects.filter(name=course.name)
+            if len(filtered) > 1:
+                course.delete()
+
     return HttpResponse(f'Successful Ineraction!')
