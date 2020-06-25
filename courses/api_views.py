@@ -37,6 +37,10 @@ def api(request):
             print(f'[+] Affiliate URLs Updated for {course.url}')
         return HttpResponse('Affiliate URLs Updated Successfully!')
 
+    # Remove Affiliate URLs
+    if command == 'remove_affiliate_urls':
+        courses = Course.objects.all().update(affiliate_url='')
+
     # Fetch infomation of courses from the url in Course database table
     if command == 'fetch_course_info_from_url':
         courses = Course.objects.all()
