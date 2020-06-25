@@ -74,7 +74,7 @@
                 
                 {% for course in courses %}
                 {% if course.image %}
-                <!-- {% if not course.expired %} -->
+                {% if not course.expired %}
                 <!-- --------------Startin008 of coupon--------- -->
                 <div class="card" style="width: 18rem; color: white; background: #050801; margin: 10px;">
                     
@@ -147,7 +147,7 @@
                     {% endfor %}
                 </div> -->
                 <!-- / Tags -->
-                <!-- {% endif %} -->
+                {% endif %}
                 {% endif %}
                 {% endfor %}
                 
