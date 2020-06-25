@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import re
 import os
 import wget
+from .models import RealDiscount
 
 class CourseInfo:
     def __init__(self, url, page_source=None):
@@ -10,7 +11,10 @@ class CourseInfo:
         self.page_source = page_source
         self.affiliate_url = 'http://adf.ly/23576813/' + url.strip('"').strip("'").split('//')[-1]
         self.platform = self.url.split('//')[-1].split('/')[0].split('www.')[-1].split('.')[0].capitalize()
-
+        
+        ob = RealDiscount.objects.get(coupon=self.url)
+        self.offer_url = ob.offer
+        
         if self.page_source:
             self.parsed_html = BeautifulSoup(self.page_source)
         else:
@@ -29,21 +33,27 @@ class CourseInfo:
     def get_image(self):
         if self.platform == 'Udemy':
             remote_img_url = self.parsed_html.findAll('img')[1].attrs['src']
+        else:
+            page_src = requests.get(self.offer_url).content
+            parsed = BeautifulSoup(page_src)
+            remote_img_url = parsed.findAll('img')[0]['src']
+            
+            
+        img_name = self.get_name()
+        # Filtering Name
+        img_name = img_name.strip().replace(' ', '_')
+        img_name = img_name.replace('/', '-').replace('\\', '-')
+        img_name = img_name.replace('"', '_').replace('|', '_')
 
-            img_name = self.get_name()
-            # Filtering Name
-            img_name = img_name.strip().replace(' ', '_')
-            img_name = img_name.replace('/', '-').replace('\\', '-')
-            img_name = img_name.replace('"', '_').replace('|', '_')
-
-            temp_img = f"media/{img_name}.jpg"
-            if not os.path.exists('media'):
-                os.mkdir('media')
-            if not os.path.exists(temp_img):
-                wget.download(remote_img_url, temp_img)
-            return temp_img
-        print('[-] Image Not Found!')
-        return 'images/no-image.svg'
+        temp_img = f"media/{img_name}.jpg"
+        if not os.path.exists('media'):
+            os.mkdir('media')
+        if not os.path.exists(temp_img):
+            wget.download(remote_img_url, temp_img)
+        return temp_img
+        
+        # print('[-] Image Not Found!')
+        # return 'images/no-image.svg'
 
     def get_platform(self):
         return self.url.strip('"').strip("'").split('//')[-1].split('/')[0].split('www.')[-1].split('.')[0].capitalize()

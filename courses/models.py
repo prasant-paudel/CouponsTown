@@ -188,10 +188,10 @@ class Course(models.Model):
 
 
 
-    def __str__(self):
-        if self.image:
-            return self.name
-        return f'(No Image) {self.name}'
+    def __str__(self):   
+        if self.expired:
+            return ' (Expired) ' + self.name 
+        return self.name
     
     class Meta:
         ordering = ['platform']
