@@ -17,21 +17,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
                     </li>
 
                     <li class="nav-item dropdown">
                         <div class="dropdown">
                             <a><button class="dropbtn" style="color: black; margin-top: 8px;">Category</button></a>
                             <div class="dropdown-content">
-
-                                <a class="dropdown-item" href="#">Development</a>
-                                <a class="dropdown-item" href="#">IT & Software</a>
-                                <a class="dropdown-item" href="#">Office Productivity</a>
-                                <a class="dropdown-item" href="#">Design & Photography</a>
-                                <a class="dropdown-item" href="#">Health & Fitness</a>
-                                <a class="dropdown-item" href="#">Music</a>
-                                <a class="dropdown-item" href="#">Business & Marketing</a>
+                                <a class="dropdown-item" role="presentation" href="/category?search=development">DEVELOPMENT</a>
+                                <a class="dropdown-item" role="presentation" href="/category?search=software">IT & SOFTWARE</a>
+                                <a class="dropdown-item" role="presentation" href="/category?search=office&productivity">OFFICE PRODUCTIVITY</a>
+                                <a class="dropdown-item" role="presentation" href="/category?search=design&photography">DESIGN & PHOTOGRAPHY</a>
+                                <a class="dropdown-item" role="presentation" href="/category?search=marketing&business">MARKETING & BUSINESS</a>
+                                <a class="dropdown-item" role="presentation" href="/category?search=others">OTHERS</a>
                             </div>
                     </li>
                     <li class="nav-item">
@@ -48,8 +46,8 @@
 
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="GET" enctype="application/x-www-form-urlencoded">
+                    <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
@@ -64,8 +62,14 @@
 
 
     <div class="p-2 flex-fill bd-highlight" style="width: 40px; ">
-
     </div>
+
+    <div class="container">
+        {% if message %}
+        <center><h2>{{ message }}</h2></center>
+        {% endif %}
+    </div>
+
 
     <!-- ========================================================================================         -->
     <div class="p-2 flex-fill bd-highlight" style="width: 908px;">
