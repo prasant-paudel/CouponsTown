@@ -4,7 +4,7 @@ from multiselectfield import MultiSelectField
 class Course(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, blank=True)
-    url = models.CharField(max_length=200)
+    url = models.CharField(max_length=200, unique=True)
     affiliate_url = models.CharField(max_length=256,blank=True)
     image = models.ImageField(upload_to='media/', blank=True)
     best_seller = models.BooleanField(null=True)
@@ -183,13 +183,15 @@ class Course(models.Model):
         ('programming_languages', 'Programming Languages'),
         ('web_development', 'Web Development'),
     )
-    tags = MultiSelectField(choices=tags_choices)
+    tags = MultiSelectField(choices=tags_choices, null=True)
 
 
 
 
-    def __str__(self):
-        return self.name + ' | ' + self.platform
+    def __str__(self):   
+        if self.expired:
+            return ' (Expired) ' + self.name 
+        return self.name
     
     class Meta:
         ordering = ['platform']
@@ -206,8 +208,8 @@ class Subscriber(models.Model):
 class RealDiscount(models.Model):
     id = models.AutoField(primary_key=True)
     # title = models.CharField(max_length=200)
-    offer = models.CharField(max_length=200)
-    coupon = models.CharField(max_length=200, blank=True)
+    offer = models.CharField(max_length=200, unique=True)
+    coupon = models.CharField(max_length=200, unique=True)
     platform = models.CharField(max_length=30, blank=True)
     valid = models.BooleanField(default=True)
 
@@ -216,4 +218,4 @@ class RealDiscount(models.Model):
             validity = 'Valid'
         else:
             validity = 'Invalid'
-        return self.coupon + ' | ' + validity
+        return self.coupon #+ ' | ' + validity

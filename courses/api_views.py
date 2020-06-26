@@ -14,9 +14,9 @@ def api(request):
     if command == "validate":
         courses = Course.objects.all()
         for course in courses:
+            print(f'[+] Validing  {course.name}')
             obj = CourseInfo(course.url)
             Course.objects.filter(id=course.id).update(expired=obj.is_expired())
-            print(f'[+] Validated  {course.name}')
         return HttpResponse('Course Validation Completed Successfully!')
 
     # Get Rating for Courses
@@ -37,11 +37,16 @@ def api(request):
             print(f'[+] Affiliate URLs Updated for {course.url}')
         return HttpResponse('Affiliate URLs Updated Successfully!')
 
+    # Remove Affiliate URLs
+    if command == 'remove_affiliate_urls':
+        courses = Course.objects.all().update(affiliate_url='')
+        return HttpResponse('Affiliate URLs Removed Successfully!')
+
     # Fetch infomation of courses from the url in Course database table
     if command == 'fetch_course_info_from_url':
         courses = Course.objects.all()
         for course in courses:
-            obj = CourseInfo(course.url)
+            obj = CourseInfo(url=course.url)
 
             # Fetch Name
             if not course.name:
@@ -64,19 +69,23 @@ def api(request):
                 Course.objects.filter(id=course.id).update(duration=obj.get_duration())
 
             # Fetch Image
-            if 'udemy' in course.url.lower():
-                print(f'[+] Fetching Image for {course.name}')
-                Course.objects.filter(id=course.id).update(image=obj.get_image())
+            print(f'[+] Fetching Image for {course.name}')
+            Course.objects.filter(id=course.id).update(image=obj.get_image())
 
             # Fetch Tags
             print(f'[+] Fetching Tags for {course.name}')
-            rd = RealDiscount.objects.get(coupon=course.url)
+            try:
+                rd = RealDiscount.objects.get(coupon=course.url)
+            except:
+                continue
+                
             ts = TagScraper(rd.offer)
             tags = ts.get_course_tags()
             print(f'{tags}\n')
             # Adding Tags to the database
             Course.objects.filter(id=course.id).update(tags=tags)
             # print(list(course.tags))
+            
 
 
         print('\n[+] New Courses Deployed Successfully!\n')
@@ -123,5 +132,12 @@ def api(request):
             Course.objects.filter(id=course.id).update(url=filtered_url)
             print(f'[+] URL Filtered for {course.name}')
         return HttpResponse('URLs Filtered Successfully!')
+
+    if command == 'remove_duplicate_courses':
+        courses = Course.objects.all()
+        for course in courses:
+            filtered = Course.objects.filter(name=course.name)
+            if len(filtered) > 1:
+                course.delete()
 
     return HttpResponse(f'Successful Ineraction!')
