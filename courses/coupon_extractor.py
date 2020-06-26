@@ -3,16 +3,13 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import os
-from .models import RealDiscount, Course
-from django.db.utils import IntegrityError
-from .my_scripts import CourseInfo
+from .models import RealDiscount
 
 class CouponExtractor:
     def __init__(self, target_url, target_pattern):
         self.target_url = target_url
         self.target_pattern = target_pattern
         self.links_list = []
-        self.coupon_count = 0
 
     def request(self, url):
         url = url.strip()
@@ -32,7 +29,7 @@ class CouponExtractor:
         domain = self.target_url.split('//')[-1].split('/')[0]
 
         print('')
-        print('Extracting Links from ' + url)
+        print('Extracting Links from ' + self.target_url)
         print('')
 
         a_tags = parsed_html.findAll('a')
@@ -42,41 +39,28 @@ class CouponExtractor:
                 if link[:4] == 'http' and domain in url:
                     if not link in self.links_list:
                         self.links_list.append(link)
-                        # if offer page found
                         if self.target_pattern in link:  # link == offer
-                            offer_page_source = self.request(link).content
-                            # if offer is already expired
-                            if 'Expired' in str(offer_page_source):
-                                continue
                             # If Offer does not exist in database
                             if not RealDiscount.objects.filter(offer=link).exists():
-                                # Extract Coupon from offer link and filter Coupon
-                                coupon = self.course_url_from(offer_page_source)
+                                print('[+]', link)
+                                # Store offer link in database
+                                RealDiscount.objects.create(offer=link)
+                                # Extract Coupon from offer link
+                                coupon = self.course_url_from(link)
+                                # Filter Coupon and store in databse
                                 coupon = 'http://' + coupon.split('//')[-1]
+                                RealDiscount.objects.filter(offer=link).update(coupon=coupon)
                                 # Validate Coupon
                                 if not self.expired(coupon):
-                                    self.coupon_count += 1
-                                    # Store offer link in database
-                                    try:
-                                        RealDiscount.objects.create(offer=link, coupon=coupon)
-                                        RealDiscount.objects.filter(offer=link).update(valid=True)
-                                        Course.objects.create(url=coupon, category='not_set')
-                                    except IntegrityError:
-                                        self.coupon_count -= 1
-                                        continue
+                                    RealDiscount.objects.filter(offer=link).update(valid=True)
                                 else:
                                     RealDiscount.objects.filter(offer=link).update(valid=True)
-
-                                print('[+]',self.coupon_count, link)
-                                
                                 # Update Platform
                                 platform = coupon.split('//')[-1].split('www.')[-1].split('.')[0].capitalize()
                                 RealDiscount.objects.filter(offer=link).update(platform=platform)
 
             except KeyError:
                 pass
-            except KeyboardInterrupt:
-                return self.links_list
         return self.links_list
 
     # Crawling each of the links for more links recursively
@@ -91,10 +75,11 @@ class CouponExtractor:
         except KeyboardInterrupt:
             print('\n[-] Stopping Crawler')
         except requests.exceptions.ConnectionError:
-            print('\n[-] Connection Error!')
+            print['\n[-] Connection Error!']
 
-    def course_url_from(self, offer_page_source):
-        parsed_html = BeautifulSoup(offer_page_source)
+    def course_url_from(self, offer_page_url):
+        page_source = self.request(offer_page_url).content
+        parsed_html = BeautifulSoup(page_source)
         course_url = parsed_html.findAll('a', {'class': 'btn'})[0]['href']
         return course_url.strip()
 
