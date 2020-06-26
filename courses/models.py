@@ -183,7 +183,7 @@ class Course(models.Model):
         ('programming_languages', 'Programming Languages'),
         ('web_development', 'Web Development'),
     )
-    tags = MultiSelectField(choices=tags_choices)
+    tags = MultiSelectField(choices=tags_choices, null=True)
 
 
 
