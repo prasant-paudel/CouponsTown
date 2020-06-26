@@ -15,7 +15,7 @@ def home(request):
     keys = list(all_small_tags)
     all_tags = [(all_small_tags[x]) for x in keys] 
 
-    return render(request, 'courses/home1.html', {'courses': courses, 'high_rated':high_rated, 'all_tags': all_tags})
+    return render(request, 'courses/home.html', {'courses': courses, 'high_rated':high_rated, 'all_tags': all_tags})
 
 def info_page(request):
     course_id = request.GET.get('course_id')
@@ -30,7 +30,7 @@ def info_page(request):
 
 def search(request):
     template = 'courses/home.html'
-    query = request.GET.get('search')
+    query = request.GET.get('q')
     query = str(query).strip("'").strip('"')
     results = Course.objects.filter(Q(name__contains=query) | Q(category__contains=query))
     msg = f'Search results for "{ query}"'
@@ -42,7 +42,8 @@ def category(request):
     query = request.GET.get('search')
     query = str(query).strip("'").strip('"')
     results = Course.objects.filter(Q(category__contains=query))
-    return render(request, template, {'courses': results})
+    msg = 'Sorry! Page is under Construction.'
+    return render(request, template, {'courses': results, 'message': msg})
 
 def subscribe(request):
     email = request.POST.get('email')
