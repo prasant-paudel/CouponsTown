@@ -181,10 +181,8 @@
                 </div>
                 <div class="card-body">
                     {% for course in high_rated %}
-                    {% if course.rating > 4 %}
                     <marquee direction="left"><a href="{% url 'info_page' %}?course_id={{course.id}}"
                             target="blank">{{ course.name }}</a></marquee>
-                    {% endif %}
                     {% endfor %}
                 </div>
 

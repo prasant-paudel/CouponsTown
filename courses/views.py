@@ -8,7 +8,7 @@ from .tags_scraper import TagScraper
 def home(request):
     courses = Course.objects.order_by('upload_date').reverse()
     high_rated = Course.objects.order_by('rating')
-    high_rated = list(high_rated)[:20]
+    high_rated = list(high_rated)[:10]
 
     all_small_tags = courses.first().tags.choices
     keys = list(all_small_tags)
