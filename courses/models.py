@@ -206,8 +206,8 @@ class Subscriber(models.Model):
 class RealDiscount(models.Model):
     id = models.AutoField(primary_key=True)
     # title = models.CharField(max_length=200)
-    offer = models.CharField(max_length=200)
-    coupon = models.CharField(max_length=200, blank=True)
+    offer = models.CharField(max_length=200, unique=True)
+    coupon = models.CharField(max_length=200, blank=True, unique=True)
     platform = models.CharField(max_length=30, blank=True)
     valid = models.BooleanField(default=True)
 
