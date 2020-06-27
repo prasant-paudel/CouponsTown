@@ -31,7 +31,14 @@ def search(request):
     template = 'courses/home.html'
     query = request.GET.get('q')
     query = str(query).strip("'").strip('"')
-    results = Course.objects.filter(Q(name__contains=query) | Q(category__contains=query))
+
+    queryset = query.split()
+    results = []
+    for q in queryset:
+        r = Course.objects.filter(Q(name__contains=q) | Q(category__contains=q))
+        for i in r:
+            results.append(i)
+
     msg = f'Search results for "{ query}"'
     return render(request, template, {'courses': results, 'message': msg})
 
