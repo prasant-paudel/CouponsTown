@@ -1,9 +1,9 @@
 var req = new XMLHttpRequest()
 
-req.open('GET', '/api/?command=fetch_course_info_from_url')
-req.send()
-req.open('GET', '/api/?command=deploy_coupons')
-req.send()
+// req.open('GET', '/api/?command=fetch_course_info_from_url')
+// req.send()
+// req.open('GET', '/api/?command=deploy_coupons')
+// req.send()
 
 
 function midnight() {
@@ -20,11 +20,4 @@ function midnight() {
         }
     }
     return false
-}
-
-if (midnight()){
-    req.open('GET', '/api/?command=validate')
-    req.send()
-    req.open('GET', '/api/?command=update_ratings')
-    req.send()
 }
