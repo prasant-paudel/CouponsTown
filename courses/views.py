@@ -24,7 +24,7 @@ def info_page(request):
     keys = list(all_small_tags)
     all_tags = [(all_small_tags[x]) for x in keys] 
     
-    related_courses = Course.objects.filter(Q(tags__contains=course.tags))
+    related_courses = Course.objects.filter(Q(tags__icontains=course.tags))
     return render(request, 'courses/info_page.html', {'course': course, 'related_courses': related_courses, 'all_tags': all_tags})
 
 def search(request):
@@ -35,7 +35,7 @@ def search(request):
     queryset = query.split()
     results = []
     for q in queryset:
-        r = Course.objects.filter(Q(name__contains=q) | Q(category__contains=q))
+        r = Course.objects.filter(Q(name__icontains=q) | Q(category__icontains=q))
         for i in r:
             results.append(i)
 
@@ -47,7 +47,7 @@ def category(request):
     template = 'courses/home.html'
     query = request.GET.get('search')
     query = str(query).strip("'").strip('"')
-    results = Course.objects.filter(Q(category__contains=query))
+    results = Course.objects.filter(Q(category__icontains=query))
     msg = 'Sorry! Page is under Construction.'
     return render(request, template, {'courses': results, 'message': msg})
 
