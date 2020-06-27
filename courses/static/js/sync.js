@@ -1,10 +1,8 @@
 var req = new XMLHttpRequest()
 
-// req.open('GET', '/api/?command=fetch_course_info_from_url')
-// req.send()
-// req.open('GET', '/api/?command=deploy_coupons')
-// req.send()
-
+req.open('GET', '/api/?command=validate')
+req.send()
+ 
 
 function midnight() {
     var date = new Date()
