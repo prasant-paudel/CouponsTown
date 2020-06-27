@@ -69,14 +69,15 @@ def api(request):
                 Course.objects.filter(id=course.id).update(image=obj.get_image())
 
             # Fetch Tags
-            print(f'[+] Fetching Tags for {course.name}')
-            rd = RealDiscount.objects.get(coupon=course.url)
-            ts = TagScraper(rd.offer)
-            tags = ts.get_course_tags()
-            print(f'{tags}\n')
-            # Adding Tags to the database
-            Course.objects.filter(id=course.id).update(tags=tags)
-            # print(list(course.tags))
+            if not course.tags:
+                print(f'[+] Fetching Tags for {course.name}')
+                rd = RealDiscount.objects.get(coupon=course.url)
+                ts = TagScraper(rd.offer)
+                tags = ts.get_course_tags()
+                print(f'{tags}\n')
+                # Adding Tags to the database
+                Course.objects.filter(id=course.id).update(tags=tags)
+                # print(list(course.tags))
 
 
         print('\n[+] New Courses Deployed Successfully!\n')
