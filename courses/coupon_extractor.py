@@ -92,6 +92,8 @@ class CouponExtractor:
             print('\n[-] Stopping Crawler')
         except requests.exceptions.ConnectionError:
             print('\n[-] Connection Error!')
+        except IndexError:
+            pass
 
     def course_url_from(self, offer_page_source):
         parsed_html = BeautifulSoup(offer_page_source)
