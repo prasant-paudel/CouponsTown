@@ -24,10 +24,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'f$5d&42-%=p33lwl2f-_-qy7a=yq7o@@27ykzfw$e=m1+954at'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['prasant7878.pythonanywhere.com', '127.0.0.1','ec2-54-167-87-176.compute-1.amazonaws.com','54.162.84.174','freecoupons.ddns.net','ip-172-31-49-183.ec2.internal', 'coursehub.ddns.net', 'coursehub.prasant.tech', 'couponstown.me']
-
+# ALLOWED_HOSTS = ['prasant7878.pythonanywhere.com', '127.0.0.1','ec2-54-167-87-176.compute-1.amazonaws.com','54.162.84.174','freecoupons.ddns.net','ip-172-31-49-183.ec2.internal', 'coursehub.ddns.net', 'coursehub.prasant.tech', 'couponstown.me']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
