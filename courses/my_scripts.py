@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import re
 import os
 import wget
+from .models import RealDiscount
 
 class CourseInfo:
     def __init__(self, url):
@@ -25,21 +26,24 @@ class CourseInfo:
     def get_image(self):
         if self.platform == 'Udemy':
             remote_img_url = self.parsed_html.findAll('img')[1].attrs['src']
+        else:
+            offer_url = RealDiscount.objects.get(coupon=self.url).offer
+            r = requests.get(offer_url)
+            parsed_offer = BeautifulSoup(r.content)
+            remote_img_url = parsed_offer.findAll('img')[0]['src']
 
-            img_name = self.get_name()
-            # Filtering Name
-            img_name = img_name.strip().replace(' ', '_')
-            img_name = img_name.replace('/', '-').replace('\\', '-')
-            img_name = img_name.replace('"', '_')
+        img_name = self.get_name()
+        # Filtering Name
+        img_name = img_name.strip().replace(' ', '_')
+        img_name = img_name.replace('/', '-').replace('\\', '-')
+        img_name = img_name.replace('"', '_')
 
-            temp_img = f"media/{img_name}.jpg"
-            if not os.path.exists('media'):
-                os.mkdir('media')
-            if not os.path.exists(temp_img):
-                wget.download(remote_img_url, temp_img)
-            return temp_img
-        print('[-] Image Not Found!')
-        return 'images/no-image.svg'
+        temp_img = f"media/{img_name}.jpg"
+        if not os.path.exists('media'):
+            os.mkdir('media')
+        if not os.path.exists(temp_img):
+            wget.download(remote_img_url, temp_img)
+        return temp_img
 
     def get_platform(self):
         return self.url.strip('"').strip("'").split('//')[-1].split('/')[0].split('www.')[-1].split('.')[0].capitalize()

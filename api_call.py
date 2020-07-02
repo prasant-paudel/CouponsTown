@@ -12,7 +12,7 @@ help = '''
 7. Update Affiliate URLs
 8. Remove Affiliate URLs
 9. Update Course Durations
-10.
+10. Remove Duplicate Courses
 11. Main Menu
 '''
 
@@ -66,15 +66,18 @@ while 1:
     # Select Server
     print('''
     1. LocalHost
-    2. CourseHub
-    3. CourseHub 8000
+    2. LocalHost 8000
+    3. CourseHub
+    4. CourseHub 8000
     ''')
     opt = take_int()
     if opt == 1:
-        server = '127.0.0.1:8000'
+        server = '127.0.0.1:80'
     elif opt == 2:
-        server = 'coursehub.ddns.net:80'
+        server = '127.0.0.1:8000'
     elif opt == 3:
+        server = 'coursehub.ddns.net:80'
+    elif opt == 4:
         server = 'coursehub.ddns.net:8000'
     else:
         print('[-] Invalid Range!')
