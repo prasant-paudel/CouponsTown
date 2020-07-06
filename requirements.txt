@@ -10,6 +10,7 @@ click==7.1.2
 colorama==0.4.3
 distlib==0.3.0
 Django==3.0.7
+django-environ==0.4.5
 django-multiselectfield==0.1.12
 docopt==0.6.2
 filelock==3.0.12
@@ -39,6 +40,7 @@ soupsieve==2.0.1
 sqlparse==0.3.1
 toml==0.10.1
 tzlocal==2.1
+Unipath==1.1
 urllib3==1.25.9
 virtualenv==20.0.21
 Werkzeug==1.0.1

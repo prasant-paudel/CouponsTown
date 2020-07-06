@@ -22,23 +22,25 @@ sudo ufw allow 'Nginx HTTP'
 sudo ufw allow 'Nginx HTTPS'
 
 sudo ufw status
-sudo systemctl status nginx
 
 echo "###########  Nginx Setup Completed ###########"
 echo
 # Create and Enter into Virtual Environment
-sudo apt install -y virtualenv
+sudo apt install -y python virtualenv
 virtualenv venv
+sleep 1
 source venv/bin/activate
 echo
-echo ######################################
-echo ##########  Gunicorn Setup  ##########
-echo ######################################
+echo "######################################"
+echo "##########  Gunicorn Setup  ##########"
+echo "######################################"
 echo 
 
 # install gunicorn
 sudo apt install -y python3-pip
 pip3 install gunicorn
+#ls -s /usr/local/bin/gunicorn venv/bin/gunicorn
+pip3 install -r requirements.txt
 deactivate
 
 # Create Gunicorn Service
@@ -61,9 +63,9 @@ ExecStart=$(pwd)/venv/bin/gunicorn --access-logfile - --workers 3 --bind 0.0.0.0
 [Install]" > temp.txt
 sudo mv temp.txt /etc/systemd/system/gunicorn.service
 
-echo ###########  Gunicorn Service Created ###########
+echo "###########  Gunicorn Service Created ###########"
 echo 
-echo ###########  Enabling Gunicorn Service ###########
+echo "###########  Enabling Gunicorn Service ###########"
 echo
 sudo systemctl start gunicorn; sudo systemctl enable gunicorn
 sudo systemctl status gunicorn
@@ -92,6 +94,7 @@ echo "##########  Testing Nginx  ##########"
 sudo nginx -t
 echo "##########  Restarting Nginx  ##########"
 sudo systemctl restart nginx
+sudo systemctl status nginx
 
 
 
