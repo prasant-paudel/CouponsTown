@@ -10,9 +10,12 @@ def home(request):
     high_rated = Course.objects.order_by('rating')
     high_rated = list(high_rated)[:10]
 
-    all_small_tags = courses.first().tags.choices
-    keys = list(all_small_tags)
-    all_tags = [(all_small_tags[x]) for x in keys] 
+    try:
+        all_small_tags = courses.first().tags.choices
+        keys = list(all_small_tags)
+        all_tags = [(all_small_tags[x]) for x in keys] 
+    except AttributeError:
+        all_tags = []
 
     return render(request, 'courses/home.html', {'courses': courses, 'high_rated':high_rated, 'all_tags': all_tags})
 
