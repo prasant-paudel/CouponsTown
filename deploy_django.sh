@@ -82,6 +82,7 @@ echo "###########  Configure Nginix to Proxy Pass to Gunicorn  ###########"
 echo "####################################################################"
 echo
 read -p "Server name or IP adddress > " server_name
+sudo rm -f /etc/nginx/sites-enabled/default
 sudo rm -f /etc/nginx/sites-enabled/$project_name
 echo "server {
     listen 80;
