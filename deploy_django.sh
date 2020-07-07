@@ -16,10 +16,12 @@ sudo apt install -y nginx
 sudo ufw enable
 sudo ufw app list
 
-# Enable Nginx in Firewall
+# Enable Nginx and some other ports in Firewall
 sudo ufw allow 'Nginx Full'
 sudo ufw allow 'Nginx HTTP'
 sudo ufw allow 'Nginx HTTPS'
+sudo ufw allow 'OpenSSH'
+sudo ufw allow 8000/tcp
 
 sudo ufw status
 
@@ -56,7 +58,7 @@ After=network.target
 
 [Service]
 User=$username
-Group=www-data
+Group=root
 WorkingDirectory=$(pwd)
 ExecStart=$(pwd)/venv/bin/gunicorn --access-logfile - --workers 3 --bind 0.0.0.0:$gunicorn_port $project_name.wsgi:application
 
@@ -67,11 +69,13 @@ echo "###########  Gunicorn Service Created ###########"
 echo 
 echo "###########  Enabling Gunicorn Service ###########"
 echo
-sudo systemctl start gunicorn; sudo systemctl enable gunicorn
-sudo systemctl status gunicorn
-#sudo journalctl -u gunicorn
+#sudo systemctl start gunicorn; 
 sudo systemctl daemon-reload
+sudo systemctl enable gunicorn
+#sudo journalctl -u gunicorn
+#sudo systemctl daemon-reload
 sudo systemctl restart gunicorn
+sudo systemctl status gunicorn
 echo
 echo "####################################################################"
 echo "###########  Configure Nginix to Proxy Pass to Gunicorn  ###########"
@@ -86,7 +90,9 @@ echo "server {
     location / {
         proxy_pass http://localhost:$gunicorn_port;
     }
-}" > /etc/nginx/sites-available/$project_name
+}" > temp_site1
+sudo mv temp_site1 /etc/nginx/sites-available/$project_name
+rm -f temp_site1
 
 echo "##########  Creating Symlink for Nginx Sites  ##########"
 sudo ln -s /etc/nginx/sites-available/$project_name /etc/nginx/sites-enabled/$project_name
