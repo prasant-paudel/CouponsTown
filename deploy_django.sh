@@ -84,21 +84,36 @@ echo
 read -p "Server name or IP adddress > " server_name
 sudo rm -f /etc/nginx/sites-enabled/default
 sudo rm -f /etc/nginx/sites-enabled/$project_name
-echo "server {
-    listen 80;
-    server_name $server_name;
+echo "server{
+	listen 443 ssl;
+	server_name $server_name;
+	
+	ssl_certificate /etc/letsencrypt/live/$server_name/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/$server_name/privkey.pem;
+	
+	location / {
+		proxy_pass http://localhost:$gunicorn_port;
+	}
+}
 
-    location / {
-        proxy_pass http://localhost:$gunicorn_port;
-    }
+server {
+	listen 80;
+	server_name $server_name;
+	return 301 https://$host$request_uri;
+
 }" > temp_site1
 sudo mv temp_site1 /etc/nginx/sites-available/$project_name
 rm -f temp_site1
-
+echo "#############################################################"
+echo "##########  Configuring Certbot and Nginx for SSL  ##########"
+echo "#############################################################"
+echo
 echo "##########  Creating Symlink for Nginx Sites  ##########"
 sudo ln -s /etc/nginx/sites-available/$project_name /etc/nginx/sites-enabled/$project_name
+echo
 echo "##########  Testing Nginx  ##########"
 sudo nginx -t
+echo
 echo "##########  Restarting Nginx  ##########"
 sudo systemctl restart nginx
 sudo systemctl status nginx
