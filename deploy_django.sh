@@ -143,5 +143,28 @@ sudo systemctl start couponstown
 sudo systemctl enable couponstown
 sudo systemctl daemon-reload
 sudo systemctl restart couponstown
+sudo systecmtl status couponstown
+echo 
+echo "#####################################################################"
+echo "##########  Creating CouponsTown Schedule Updater Service  ##########"
+echo "#####################################################################"
+echo "[Unit]
+Description=CouponsTown Schedule Updater Daemon
+After=network.target
+
+[Service]
+User=$username
+Group=www-data
+WorkingDirectory=$(pwd)
+ExecStart=$(pwd)/venv/bin/python3 schedule_update.py
+
+[Install]
+WantedBy=multi-user.target" > temp.txt
+sudo mv temp.txt /etc/systemd/system/couponstown_updater.service
+sudo systemctl start couponstown_updater
+sudo systemctl enable couponstown_updater
+sudo systemctl daemon-reload
+sudo systemctl restart couponstown_updater
+sudo systemctl status couponstown_updater
 
 
