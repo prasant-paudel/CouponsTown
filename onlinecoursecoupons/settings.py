@@ -11,11 +11,21 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from unipath import Path
+
+# SECURITY WARNING: don't run with debug turned on in production!
+import environ
+env = environ.Env(
+    DEBUG=(bool, True)
+)
+environ.Env.read_env()
+DEBUG=env('DEBUG')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-#BASE_DIR = Path(__file__).ancestor(3)
+if DEBUG:
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+else:
+    from unipath import Path
+    BASE_DIR = Path(__file__).ancestor(3)
 
 
 
@@ -24,15 +34,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'f$5d&42-%=p33lwl2f-_-qy7a=yq7o@@27ykzfw$e=m1+954at'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-import environ
-env = environ.Env(
-    DEBUG=(bool, True)
-)
-environ.Env.read_env()
-DEBUG=env('DEBUG')
 
 
 # ALLOWED_HOSTS = ['prasant7878.pythonanywhere.com', '127.0.0.1','ec2-54-167-87-176.compute-1.amazonaws.com','54.162.84.174','freecoupons.ddns.net','ip-172-31-49-183.ec2.internal', 'coursehub.ddns.net', 'coursehub.prasant.tech', 'couponstown.me']
