@@ -28,6 +28,7 @@ def info_page(request):
     all_tags = [(all_small_tags[x]) for x in keys] 
     
     related_courses = Course.objects.filter(Q(tags__icontains=course.tags))
+    related_courses = list(related_courses)[:10]
     return render(request, 'courses/info_page.html', {'course': course, 'related_courses': related_courses, 'all_tags': all_tags})
 
 def search(request):
