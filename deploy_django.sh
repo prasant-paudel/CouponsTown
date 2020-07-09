@@ -92,7 +92,7 @@ echo "server{
 	ssl_certificate_key /etc/letsencrypt/live/$server_name/privkey.pem;
 	
 	location /media/ {
-		autoindex off;
+		autoindex on;
 		alias $(pwd);
 	}
 	
