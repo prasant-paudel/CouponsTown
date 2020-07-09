@@ -20,7 +20,7 @@ help = '''
 def switch(opt, server):
     if opt == 1:
         resp = requests.get(f'http://{server}/api/?command=fetch_coupons')
-    elif opt == 2:
+    elif opt == 6:
         resp = requests.get(f'http://{server}/api/?command=update_ratings')
     elif opt == 3:
         resp = requests.get(f'http://{server}/api/?command=filter_existing_urls')
@@ -28,7 +28,7 @@ def switch(opt, server):
         resp = requests.get(f'http://{server}/api/?command=fetch_course_info_from_url')
     elif opt == 5:
         resp = requests.get(f'http://{server}/api/?command=validate')
-    elif opt == 6:
+    elif opt == 2:
         resp = requests.get(f'http://{server}/api/?command=deploy_coupons')
     elif opt == 7:
         resp = requests.get(f'http://{server}/api/?command=update_affiliate_urls')
