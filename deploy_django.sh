@@ -91,6 +91,11 @@ echo "server{
 	ssl_certificate /etc/letsencrypt/live/$server_name/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/$server_name/privkey.pem;
 	
+	location /media/ {
+		autoindex off;
+		alias $(pwd);
+	}
+	
 	location / {
 		proxy_pass http://localhost:$gunicorn_port;
 	}
