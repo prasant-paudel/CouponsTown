@@ -34,9 +34,9 @@ class CourseInfo:
 
         img_name = self.get_name()
         # Filtering Name
-        img_name = img_name.strip().replace(' ', '_')
+        img_name = img_name.strip().replace(' ', '_').replace('"', '_')
         img_name = img_name.replace('/', '-').replace('\\', '-')
-        img_name = img_name.replace('"', '_')
+        img_name = img_name.replace('(', '_').replace(')', '_')
 
         temp_img = f"media/{img_name}.jpg"
         if not os.path.exists('media'):
