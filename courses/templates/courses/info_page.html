@@ -2,200 +2,230 @@
 {% load static %}
 {% block body %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <div class="d-flex justify-content flex-wrap" style="width: 100%;" style=" display: flex; flex-wrap: wrap;">
-        
-        <div class="p-2 flex-fill bd-highlight" id="scroll-navbar" style="width: 100%; height: 80px; position: fixed; margin: 0; padding: 0; z-index: 2;transition: top 0.9s; top: -70px;">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed;margin-top:-50px;left:0;width: 100%; z-index: 100;">
-                <a class="navbar-brand" href="#"><img src="{% static 'images/coursehub.png' %}" style="width: 100px;"></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-              
-                <div class="collapse navbar-collapse" id="navbarSupportedContent" >
-                  <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    
-                    <li class="nav-item dropdown">
-                        <div class="dropdown" >
-                            <a><button class="dropbtn" style="color: black; margin-top: 8px;">Category</button></a>
-                            <div class="dropdown-content" >
-                                <a class="dropdown-item" href="#">Development</a>
-                                <a class="dropdown-item" href="#">IT & Software</a>
-                                <a class="dropdown-item" href="#">Office Productivity</a>
-                                <a class="dropdown-item" href="#">Design & Photography</a>
-                                <a class="dropdown-item" href="#">Health & Fitness</a>
-                                <a class="dropdown-item" href="#">Music</a>
-                                <a class="dropdown-item" href="#">Business & Marketing</a>
-                            </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Download Course</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Download Books</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Tags</a>
-                      </li>
-                      
-                    
-                    
-                </li>
-                  </ul>
-                  <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                  </form>
-                </div>
-              </nav>    
-        </div>
-        
-        <div class="p-2 flex-fill bd-highlight" style="width: 100%; height: 400px; background:linear-gradient(black, white) ; text-align: center;">
-            <img src="{% static 'images/course.png' %}" class="img-fluid" alt="Responsive image" style="height: 40vh; margin-top: 50px;">
-            
-        </div>
-        
-        <div class="p-2 flex-fill bd-highlight" style="width: 95px; ">
-        
-        </div>
-        
-        
-        <div class="p-2 flex-fill bd-highlight"style="width: 673px;">
-            <div class="card text-center">
-                <div class="card-header">
-                    <!-- Tableau 2020 A-Z:Hands-On Tableau Training For Data Science! -->
-                    {{ course.name }}
-                </div>
-                <div class="card-body">
-                    <div class="d-flex justify-content-md-center flex-wrap">
-                        <div class="p-2 flex-fill bd-highlight"style="width: 296px;">
-                            <img src="{{ course.image.url }}" class="card-img-top" alt="...">
-                        </div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<div class="d-flex justify-content flex-wrap" style="width: 100%;" style=" display: flex; flex-wrap: wrap;">
 
-                        <div class="p-2 flex-fill bd-highlight"style="width: 296px;">
-                            <img src="lol.jpg" class="card-img-top" alt="...">
-                        </div>
-    
-                        <div class="p-2 flex-fill bd-highlight"style="width: 296px;">
-                            <img src="lol.jpg" class="card-img-top" alt="...">
-                        </div>
-    
-                        <div class="p-2 flex-fill bd-highlight"style="width: 296px;">
-                            <div class="get-coupon" style="width: 100%; height: 40px;  ">
-                                <a href="{{ course.url }}" style="text-decoration: none; color: #03e9f4; border-radius: 0px; width: 100%;" target="blank"> 
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    Enroll Now
-                                </a>
-                            </div>
-                            <div class="rating floa-left d-flex align-items-center mt-1" style="width: 100%; height: 45px; float: left; ">
-                                {% if platform == 'Udemy' %}
-                                <img src="{% static 'images/udemy.svg' %}" height="70%" width="100%">
-                                {% elif platform == 'Eduonix' %}
-                                <img src="{% static 'images/eduonix.png' %}" height="70%" width="100%">
-                                {% endif %}
-                            </div>
-                            
-                        </div> 
+  <div class="p-2 flex-fill bd-highlight" id="scroll-navbar"
+    style="width: 100%; height: 80px; position: fixed; margin: 0; padding: 0; z-index: 2;transition: top 0.9s; top: -70px;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light"
+      style="position: fixed;margin-top:-50px;left:0;width: 100%; z-index: 100;">
+      <a class="navbar-brand" href="#"><img src="{% static 'images/couponstown.png' %}" style="width: 100px;"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-                        <div class="p-2 flex-fill bd-highlight"style="width: 100%;">
-                            <h3>{{ name }}</h3>
-                                <!-- Description here -->
-                        </div>
-                    </div>
-                    
-                </div>
-                
-                <div class="card-footer">
-                  
-                </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <div class="dropdown">
+              <a><button class="dropbtn" style="color: black; margin-top: 8px;">Category</button></a>
+              <div class="dropdown-content">
+                <a class="dropdown-item" href="#">Development</a>
+                <a class="dropdown-item" href="#">IT & Software</a>
+                <a class="dropdown-item" href="#">Office Productivity</a>
+                <a class="dropdown-item" href="#">Design & Photography</a>
+                <a class="dropdown-item" href="#">Health & Fitness</a>
+                <a class="dropdown-item" href="#">Music</a>
+                <a class="dropdown-item" href="#">Business & Marketing</a>
               </div>
-        </div>
-        
-        
-        <div class="p-2 flex-fill bd-highlight"style="width: 455px;">
-            <div class="card text-center">
-                <!-- ======Provide Suggestions of Related Topics====== -->
-                <div class="card-header">
-                  Related Topics
-                </div>
-                <div class="card-body">
-                {% for course in related_courses %}
-                    <marquee direction="left"><a href="{% url 'info_page' %}?course_id={{course.id}}">{{ course.name }}</a></marquee>    
-                {% endfor %}
-                </div>
-                <div class="card-footer text-muted">
-                    <label for="category" style="background: red transparent;">Select Category</label>
-                    <select name="category" style="background: red transparent;">
-                      <a><option value="Development">Development</option></a>
-                      <a><option value="BusinessMarketin">Business & Marketing</option></a>
-                      <a><option value="itsoftware">It & Software</option></a>
-                      <a><option value="designphotography">Design Photography</option></a>
-                      <a><option value="office">Office & Productivity</option></a>
-                      <a><option value=""></option></a>
-                      <a><option value=""></option></a>
-                      <a><option value=""></option></a>
-                      <a><option value=""></option></a>
-                      <a><option value=""></option></a>
-                      <a><option value=""></option></a>
-                    </select>
-                </div>
-              </div>
-               <!-- =============end of Providing Suggestions of related topics========  -->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Download Course</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Download Books</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Tags</a>
+          </li>
 
-              
-              <!-- =============================Popular Courses============ -->
-               <div class="p-2 flex-fill bd-highlight"style="width: 455px;">
-                <div class="card text-center">
-                    <div class="card-header" style="font-weight: bolder;">
-                      ALL TAGS
-                    </div>
-                    <div class="card-body">
-                        <!-- Test -->
-                        {% for tag in all_tags %}
-                        <a href="#" class="btn btn-primary" >{{tag}}</a>
-                        {% endfor %}
-                    </div>
+
+
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+  </div>
+
+  <div class="p-2 flex-fill bd-highlight"
+    style="width: 100%; height: 400px; background:linear-gradient(black, white) ; text-align: center;">
+    <img src="{% static 'images/course.png' %}" class="img-fluid" alt="Responsive image"
+      style="height: 40vh; margin-top: 50px;">
+  </div>
+
+  <div class="p-2 flex-fill bd-highlight" style="width: 95px; ">
+
+  </div>
+
+
+  <div class="p-2 flex-fill bd-highlight" style="width: 673px;">
+    <div class="card text-center">
+      <div class="card-header">
+        <!-- Tableau 2020 A-Z:Hands-On Tableau Training For Data Science! -->
+        {{ course.name }}
+      </div>
+      <div class="card-body">
+        <div class="d-flex justify-content-md-center flex-wrap">
+          <div class="p-2 flex-fill bd-highlight" style="width: 296px;">
+            <img src="{{ course.image.url }}" class="card-img-top" alt="...">
+          </div>
+
+          <div class="p-2 flex-fill bd-highlight" style="width: 296px;">
+            <img src="lol.jpg" class="card-img-top" alt="...">
+          </div>
+
+          <div class="p-2 flex-fill bd-highlight" style="width: 296px;">
+            <img src="lol.jpg" class="card-img-top" alt="...">
+          </div>
+
+          <div class="p-2 flex-fill bd-highlight" style="width: 296px;">
+            <div class="get-coupon" style="width: 100%; height: 40px;  ">
+              <a href="{{ course.url }}" style="text-decoration: none; color: #03e9f4; border-radius: 0px; width: 100%;"
+                target="blank">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Enroll Now
+              </a>
             </div>
-            <!-- ============================Category====================== -->
-            <div class="p-2 flex-fill bd-highlight"style="width: 455px;">
-                <div class="card text-center">
-                    <div class="card-header">
-                      Category
-                    </div>
-                    <div class="card-body">
-                      <h5 class="card-title">Special title treatment</h5>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                    <div class="card-footer text-muted">
-                      2 days ago
-                    </div>
-                  </div>
+            <div class="rating floa-left d-flex align-items-center mt-1"
+              style="width: 100%; height: 45px; float: left; ">
+              {% if platform == 'Udemy' %}
+              <img src="{% static 'images/udemy.svg' %}" height="70%" width="100%">
+              {% elif platform == 'Eduonix' %}
+              <img src="{% static 'images/eduonix.png' %}" height="70%" width="100%">
+              {% endif %}
             </div>
-            <!-- =========================End of category Section=============== -->
+
+          </div>
+
+          <div class="p-2 flex-fill bd-highlight" style="width: 100%;">
+            <h3>{{ name }}</h3>
+            <!-- Description here -->
+          </div>
         </div>
+
+      </div>
+
+      <div class="card-footer">
+
+      </div>
     </div>
-        
-        
-        
-        <div class="p-2 flex-fill bd-highlight" style="width: 95px; ">
-        
+  </div>
+
+
+  <div class="p-2 flex-fill bd-highlight" style="width: 455px;">
+    <div class="card text-center">
+      <!-- ======Provide Suggestions of Related Topics====== -->
+      <div class="card-header">
+        Related Topics
+      </div>
+      <div class="card-body">
+        {% for course in related_courses %}
+        <marquee direction="left"><a href="{% url 'info_page' %}?course_id={{course.id}}">{{ course.name }}</a>
+        </marquee>
+        {% endfor %}
+      </div>
+      <div class="card-footer text-muted">
+        <label for="category" style="background: red transparent;">Select Category</label>
+        <select name="category" style="background: red transparent;">
+          <a>
+            <option value="Development">Development</option>
+          </a>
+          <a>
+            <option value="BusinessMarketin">Business & Marketing</option>
+          </a>
+          <a>
+            <option value="itsoftware">It & Software</option>
+          </a>
+          <a>
+            <option value="designphotography">Design Photography</option>
+          </a>
+          <a>
+            <option value="office">Office & Productivity</option>
+          </a>
+          <a>
+            <option value=""></option>
+          </a>
+          <a>
+            <option value=""></option>
+          </a>
+          <a>
+            <option value=""></option>
+          </a>
+          <a>
+            <option value=""></option>
+          </a>
+          <a>
+            <option value=""></option>
+          </a>
+          <a>
+            <option value=""></option>
+          </a>
+        </select>
+      </div>
+    </div>
+    <!-- =============end of Providing Suggestions of related topics========  -->
+
+
+    <!-- =============================Popular Courses============ -->
+    <div class="p-2 flex-fill bd-highlight" style="width: 455px;">
+      <div class="card text-center">
+        <div class="card-header" style="font-weight: bolder;">
+          ALL TAGS
         </div>
- <!-- =========================================sliding section=====================================        -->
-        <div class="p-2 flex-fill bd-highlight" style="width: 600px; ">
-            
-                <div class="autoplay" style="width: 100%;">
-                    
-                    <div class="carousel" data-flickity='{ "autoPlay": 1500, "pauseAutoPlayOnHover": false }'>
-                        <div class="carousel-cell">
-                            
-                        </div>
-    
-{% endblock %}
-</html>
+        <div class="card-body" style="height: 500px; overflow: hidden scroll">
+          <!-- Test -->
+          {% for tag in all_tags %}
+          <a href="#" class="btn btn-primary">{{tag}}</a>
+          {% endfor %}
+        </div>
+      </div>
+      <!-- ============================Category====================== -->
+      <div class="p-2 flex-fill bd-highlight" style="width: 455px;">
+        <div class="card text-center">
+          <div class="card-header">
+            Category
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+          <div class="card-footer text-muted">
+            2 days ago
+          </div>
+        </div>
+      </div>
+      <!-- =========================End of category Section=============== -->
+    </div>
+  </div>
+
+
+
+  <div class="p-2 flex-fill bd-highlight" style="width: 95px; ">
+
+  </div>
+  <!-- =========================================sliding section=====================================        -->
+  <div class="p-2 flex-fill bd-highlight" style="width: 600px; ">
+
+    <div class="autoplay" style="width: 100%;">
+
+      <div class="carousel" data-flickity='{ "autoPlay": 1500, "pauseAutoPlayOnHover": false }'>
+        <div class="carousel-cell">
+
+        </div>
+
+        {% endblock %}
+
+        </html>
