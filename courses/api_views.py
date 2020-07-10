@@ -115,13 +115,22 @@ def api(request):
 
         print('\n[+] Coupons Deployed Successfully!\n')
         return HttpResponse('Coupons Deployed Successfully!')
-        
+
     if command == 'filter_existing_urls':
         courses = Course.objects.all()
+        rd_objs = RealDiscount.objects.all()
         for course in courses:
-            filtered_url = 'http://' + course.url.split('//')[-1]
+            filtered_url = 'https://' + course.url.split('//')[-1]
             Course.objects.filter(id=course.id).update(url=filtered_url)
-            print(f'[+] URL Filtered for {course.name}')
+            print(f'[+] URL Filtered for Course {course.name}')
+        print('')
+        for obj in rd_objs:
+            filtered_url = 'https://' + str(obj.coupon).split('//')[-1]
+            obj.coupon = filtered_url
+            obj.save()
+            print(f'[+] URL Filtered for Offer {obj.offer.split("/offer/")[-1]}')
+
         return HttpResponse('URLs Filtered Successfully!')
+
 
     return HttpResponse(f'Successful Ineraction!')

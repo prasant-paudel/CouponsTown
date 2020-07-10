@@ -23,6 +23,8 @@ while 1:
         requests.get('http://couponstown.me:8000/api/?command=remove_duplicate_courses')
         print('[+] Fetching Course info from URLs')
         requests.get('http://couponstown.me:8000/api/?command=fetch_course_info_from_url')
+        print('[+] Filtering Existing URLs')
+        requests.get('http://couponstown.me:8000/api/?command=filter_existing_urls')
         print('[+] Validating Courses')
         requests.get('http://couponstown.me:8000/api/?command=validate')
         print('[+] Updating Ratings')
