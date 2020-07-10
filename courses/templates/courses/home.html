@@ -95,7 +95,7 @@
                         {% if course.platform == 'Udemy' %}
 
                         <div class="imagebox" data-text="UDEMY"
-                            style="background:url({{course.image.url}}) ; background-size:contain; background-position: center; background-repeat: no-repeat;">
+                            style='background:url("{{course.image.url}}") ; background-size:contain; background-position: center; background-repeat: no-repeat;'>
                             {% elif course.platform == 'Eduonix' %}
                             <div class="imagebox" data-text="EDUONIX"
                                 style="background:url({{course.image.url}}) ; background-size:contain; background-position: center; background-repeat: no-repeat;">
@@ -188,31 +188,12 @@
 
             </div>
 
-            <div class="card text-center" style="margin-top: 10px;">
-                <div class="card-header">
-                    New Course
-                </div>
-                <div class="card-body">
-                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as
-                            possible</a></marquee>
-                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as
-                            possible</a></marquee>
-                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as
-                            possible</a></marquee>
-                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as
-                            possible</a></marquee>
-                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as
-                            possible</a></marquee>
-                    <marquee direction="left"><a href="#">Hello world welcome to my course please get enroll as soon as
-                            possible</a></marquee>
-                </div>
 
-            </div>
             <div class="card text-center">
                 <div class="card-header">
                     Tags
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="height: 500px; overflow: hidden scroll">
                     <!-- Test -->
                     {% for tag in all_tags %}
                     <a href="#" class="btn btn-primary">{{tag}}</a>
