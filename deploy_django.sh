@@ -91,6 +91,11 @@ echo "server{
 	ssl_certificate /etc/letsencrypt/live/$server_name/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/$server_name/privkey.pem;
 	
+	location /media/ {
+		autoindex on;
+		alias $(pwd);
+	}
+	
 	location / {
 		proxy_pass http://localhost:$gunicorn_port;
 	}
@@ -99,7 +104,7 @@ echo "server{
 server {
 	listen 80;
 	server_name $server_name;
-	return 301 https://$host$request_uri;
+	return 301 https://\$host\$request_uri;
 
 }" > temp_site1
 sudo mv temp_site1 /etc/nginx/sites-available/$project_name
