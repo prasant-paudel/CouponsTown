@@ -100,6 +100,10 @@ echo "server{
 		alias $(pwd)/static/robots.txt;
 	}
 
+	location /sitemap.xml {
+		alias $(pwd)/static/sitemap.xml;
+	}
+
 	location / {
 		proxy_pass http://localhost:$gunicorn_port;
 	}
