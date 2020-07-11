@@ -20,7 +20,7 @@ def home(request):
     return render(request, 'courses/home.html', {'courses': courses, 'high_rated':high_rated, 'all_tags': all_tags})
 
 def info_page(request):
-    course_id = request.GET.get('course_id')
+    course_id = request.GET.get('id')
     course = Course.objects.get(id=course_id)
 
     all_small_tags = course.tags.choices

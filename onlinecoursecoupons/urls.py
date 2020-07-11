@@ -26,7 +26,7 @@ urlpatterns = [
     path('category/', views.category, name='category'),
     path('subscribe/', views.subscribe, name='subscribe'),
     path('api/', api_views.api, name='api'),
-    path('info_page/', views.info_page, name='info_page'),
+    path('info-page/', views.info_page, name='info_page'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
