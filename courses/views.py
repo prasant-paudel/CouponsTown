@@ -70,4 +70,5 @@ def subscribe(request):
     return render(request, 'courses/home.html', {'message': msg, 'courses': courses})
 
 
-
+def error_404_view(request, exception):
+    return render(request, 'courses/404.html')
