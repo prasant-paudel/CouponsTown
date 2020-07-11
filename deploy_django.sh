@@ -96,6 +96,10 @@ echo "server{
 		alias $(pwd);
 	}
 	
+	location /robots.txt {
+		alias $(pwd)/static/robots.txt;
+	}
+
 	location / {
 		proxy_pass http://localhost:$gunicorn_port;
 	}
