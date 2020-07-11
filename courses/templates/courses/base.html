@@ -2,6 +2,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- BASE HTML META TAGS -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Coupons Town" />
+    {% block page_meta %}
+    {% endblock %}        
+    
     <title>{% block title %}Coupons Town | Free Online Courses Coupons{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/card-style.css' %}">
@@ -13,16 +22,6 @@
 
     <!-- Google Adsense -->
     <script data-ad-client="ca-pub-5582220802128786" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    <!-- BASE HTML META TAGS -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Coupons Town" />
-
-    {% block page_meta %}
-    {% endblock %}        
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-172159238-1"></script>
