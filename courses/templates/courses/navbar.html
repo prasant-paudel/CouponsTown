@@ -1,0 +1,47 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light"
+            style="position: fixed;margin-top:-50px;left:0;width: 100%; z-index: 100;">
+            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/couponstown.png' %}" style="width: 100px;"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <div class="dropdown">
+                            <a><button class="dropbtn" style="color: black; margin-top: 8px;">Category</button></a>
+                            <div class="dropdown-content">
+                                <a class="dropdown-item" role="presentation" href="/category?search=development">DEVELOPMENT</a>
+                                <a class="dropdown-item" role="presentation" href="/category?search=software">IT & SOFTWARE</a>
+                                <a class="dropdown-item" role="presentation" href="/category?search=office&productivity">OFFICE PRODUCTIVITY</a>
+                                <a class="dropdown-item" role="presentation" href="/category?search=design&photography">DESIGN & PHOTOGRAPHY</a>
+                                <a class="dropdown-item" role="presentation" href="/category?search=marketing&business">MARKETING & BUSINESS</a>
+                                <a class="dropdown-item" role="presentation" href="/category?search=others">OTHERS</a>
+                            </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Download Course</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Download Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Tags</a>
+                    </li>
+
+
+
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="GET" enctype="application/x-www-form-urlencoded">
+                    <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
