@@ -151,9 +151,10 @@ def api(request):
                 img = Image.open(image)
                 x = img.size[0]*compression_percent/100
                 y = img.size[1]*compression_percent/100
-                print('[+] Compressed', image)
+                img.convert('RGB')
                 img = img.resize((int(x),int(y)), Image.ANTIALIAS)
                 img.save(image, optimize=True, quality=95)
+                print('[+] Compressed', image)
                 img.close()
 
 
