@@ -132,5 +132,30 @@ def api(request):
 
         return HttpResponse('URLs Filtered Successfully!')
 
+    # Compress images > 300 KB
+    if command == 'compress_images':
+        image_dir = 'media/'
+        minimum_original_size = 300000
+        compression_percent = 30
+
+        from PIL import Image
+        from pathlib import Path
+
+        images = os.listdir(image_dir)
+        for image in images:
+            image = os.path.join(image_dir, image)
+            # get image size
+            size = Path(image).stat().st_size
+            if size >= minimum_original_size:
+                # Open image
+                img = Image.open(image)
+                x = img.size[0]*compression_percent/100
+                y = img.size[1]*compression_percent/100
+                print('[+] Compressed', image)
+                img = img.resize((int(x),int(y)), Image.ANTIALIAS)
+                img.save(image, optimize=True, quality=95)
+                img.close()
+
+
 
     return HttpResponse(f'Successful Ineraction!')

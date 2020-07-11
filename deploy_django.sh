@@ -69,11 +69,9 @@ echo "###########  Gunicorn Service Created ###########"
 echo 
 echo "###########  Enabling Gunicorn Service ###########"
 echo
-#sudo systemctl start gunicorn; 
+sudo systemctl start gunicorn; 
 sudo systemctl daemon-reload
 sudo systemctl enable gunicorn
-#sudo journalctl -u gunicorn
-#sudo systemctl daemon-reload
 sudo systemctl restart gunicorn
 sudo systemctl status gunicorn
 echo
@@ -93,7 +91,12 @@ echo "server{
 	
 	location /media/ {
 		autoindex on;
-		alias $(pwd);
+		alias $(pwd)/;
+	}
+	
+	location /static/ {
+		autoindex on;
+		alias $(pwd)/static/;
 	}
 	
 	location /robots.txt {
