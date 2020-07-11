@@ -1,5 +1,15 @@
 {% extends 'courses/base.html' %}
 {% load static %}
+
+{% block page_meta %}
+<meta name="title" content="[100% OFF] | {{ course.name }}"  />
+<meta name="description" content="{{course.name}}: Free Online Courses with Certificate of Completion, Constantly Validated , Free Coupon (Promo) Code." />
+<meta property="og:title" content="[100% Off] | {{course.name}}" />
+<meta property="og:description" content="" />
+<meta property="og:url" content="" />
+<meta property="og:image" content="{{course.image.url}}" />
+{% endblock %}
+
 {% block body %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
