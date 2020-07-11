@@ -107,9 +107,14 @@ echo "server{
 
 server {
 	listen 80;
-	server_name $server_name;
-	return 301 https://\$host\$request_uri;
+	server_name $server_name, www.$server_name;
+	return 301 https://couponstown.me\$request_uri;
+}
 
+server {
+	listen 443;
+	server_name www.$server_name;
+	return 301 https://couponstown.me\$request_uri;
 }" > temp_site1
 sudo mv temp_site1 /etc/nginx/sites-available/$project_name
 rm -f temp_site1
