@@ -4,7 +4,7 @@
 {% block page_meta %}
 <meta name="title" content="[100% off] Free Online Courses with Certificates | CouponsTown.Me" />
 <meta name="description" content="All Validated Courses, Free Udemy Coupon Codes, Free Online Courses with Certificate of Completion." />
-<meta property="og:title" content="Get 100% Off | Online Courses Coupons | Udemy | Eduonix| 2020 ⇒ Coupons Town" />
+<meta property="og:title" content="Coupons Town: Get 100% OFF Online Courses Coupons | Udemy | Eduonix| 2020" />
 <meta property="og:description" content="Udemy Coupon, Free Online Courses, Udemy Free Courses, Free Online Courses with Certificates, Free e-courses, 100% Working, Free Tutorials" />
 <meta property="og:url" content="https://couponstown.me/" />
 <meta property="og:image" content="https://couponstown.me/static/images/course.png" />
@@ -24,18 +24,29 @@
         <img src="{% static 'images/course.png' %}" class="img-fluid" alt="Responsive image" style="height: 40vh; margin-top: 50px;">
     </div>
 
-
-    <div class="p-2 flex-fill bd-highlight" style="width: 40px; ">
-    </div>
-
-    <div class="container">
+    <div class="container-fluid">
         {% if message %}
-        <center><h2>{{ message }}</h2></center>
+        <center><h1>{{ message }}</h1></center>
+        {% else %}
+        <center>
+        <div class="container bg-light shadow">
+            <h1 style="font-weight: 500; margin:auto;">Free Udemy and Other Online Courses</h1>
+            <h2 style="color: gray; font-weight: 600; font-size: xx-large; margin:auto; padding: 6px;">with Free Certificate of Completion</h2>
+            <p class="container" style="text-align: start; font-family: 'Courier New', Courier, monospace; font-size: 18px;">
+                Here we provide coupons FREE online courses for popular platforms like Udemy, Eduonix, BitDegree,
+                Coursera, and so on. <br>
+                The Coupns we provide are constantly validated and 100% Working, except some technical errors.
+                We are here to provide FREE and Valid coupons for Best Online Courses with Certificate of Completion.
+                Eventually, we also provide Discounts on E-degrees from Best-known Universities like Harvard, Stanford, MIT and others
+                as well as on Certifications from large tech companies like Google, Microsoft, IBM, Amazon and so on.
+            </p>
+        </div>
+        </center>
         {% endif %}
     </div>
 
 
-    <!-- ========================================================================================         -->
+    <!-- ======================================================================================== -->
     <div class="p-2 flex-fill bd-highlight" style="width: 908px;">
 
 
@@ -129,8 +140,6 @@
                 {% endif %}
                 {% endfor %}
 
-                <!-- ---------------------add another coupon inside this div----------------------- -->
-
                 <!-- -------------------------------------add Anothe coupon before this div------------------------- -->
 
             </div>
@@ -140,7 +149,7 @@
         <!-- ================================================================================================================         -->
         <div class="p-2 flex-fill bd-highlight" style="width: 210px;">
             <div class="card text-center">
-                <div class="card-header">
+                <div class="card-header" style="font-weight: bolder;">
                     Trending Topics
                 </div>
                 <div class="card-body">
@@ -154,8 +163,8 @@
 
 
             <div class="card text-center">
-                <div class="card-header">
-                    Tags
+                <div class="card-header" style="font-weight: bolder;">
+                    ALL TAGS
                 </div>
                 <div class="card-body" style="height: 500px; overflow: hidden scroll">
                     <!-- Test -->
@@ -163,15 +172,10 @@
                     <a href="#" class="btn btn-primary" style="font-size: 20; padding-top: 11px; padding-bottom: 11px;">{{tag}}</a>
                     {% endfor %}
                 </div>
-
             </div>
 
         </div>
 
     </div>
 
-    <!-- ===================================================Script Section==========================================     -->
-
-    <!-- ===============================================================================End Script============================= -->
-
-    {% endblock %}
+{% endblock %}
