@@ -46,7 +46,7 @@ def search(request):
         for i in r:
             results.append(i)
 
-    msg = f'Search results for "{ query}"'
+    msg = f'Search results for "{query}"'
     return render(request, template, {'courses': results, 'message': msg})
 
 
