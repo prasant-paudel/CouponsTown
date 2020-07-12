@@ -94,12 +94,13 @@
       <div class="card-header" style="font-weight: bolder;">
         Related Topics
       </div>
+      
       <div class="card-body">
         {% for course in related_courses %}
-        <marquee direction="left"><a href="{% url 'info_page' %}?id={{course.id}}">{{ course.name }}</a>
-        </marquee>
+          {% include 'courses/side-card-small.html' %}
         {% endfor %}
       </div>
+
       <div class="card-footer text-muted">
         <label for="category" style="background: red transparent;">Select Category</label>
         <select name="category" style="background: red transparent;">

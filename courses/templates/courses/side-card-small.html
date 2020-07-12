@@ -1,0 +1,13 @@
+<a href="{% url 'info_page' %}?id={{course.id}}" target="blank" style="color: black;">
+    <ul class="card container-sm my-1 shadow">
+        <div class="row" style="min-height: 50px;">
+            <div class="col-sm-2" style='
+                background: url(&#34 {{course.image.url}} &#34);
+                background-size: cover;background-position: center;'>
+            </div>
+            <div class="col-sm d-flex align-items-center">
+                <p class="m-0" style="text-align: start;">{{ course.name }}</p>
+            </div>
+        </div>
+    </ul>
+</a>

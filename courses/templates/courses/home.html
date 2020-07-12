@@ -151,12 +151,11 @@
                 <div class="card-header" style="font-weight: bolder;">
                     Trending Topics
                 </div>
-                <div class="card-body">
-                    {% for course in high_rated %}
-                    <marquee direction="left"><a href="{% url 'info_page' %}?id={{course.id}}"
-                            target="blank">{{ course.name }}</a></marquee>
-                    {% endfor %}
-                </div>
+                <!-- Trending Course Card Small -->
+                {% for course in high_rated %}
+                    {% include 'courses/side-card-small.html' %}
+                {% endfor %}
+                <!-- / Trending Course Card Small -->
 
             </div>
 
