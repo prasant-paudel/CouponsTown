@@ -96,7 +96,7 @@
       </div>
       <div class="card-body">
         {% for course in related_courses %}
-        <marquee direction="left"><a href="{% url 'info_page' %}?course_id={{course.id}}">{{ course.name }}</a>
+        <marquee direction="left"><a href="{% url 'info_page' %}?id={{course.id}}">{{ course.name }}</a>
         </marquee>
         {% endfor %}
       </div>
