@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse, Http404
 from .models import Course, Subscriber, RealDiscount
 from django.db.models import Q
 from .my_scripts import CourseInfo
@@ -21,7 +21,10 @@ def home(request):
 
 def info_page(request):
     course_id = request.GET.get('id')
-    course = Course.objects.get(id=course_id)
+    try:
+        course = Course.objects.get(id=course_id)
+    except:
+        raise(Http404)
 
     all_small_tags = course.tags.choices
     keys = list(all_small_tags)
