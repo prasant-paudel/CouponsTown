@@ -19,9 +19,6 @@ class CourseInfo:
             return self.parsed_html.findAll('h1')[0].get_text().strip()
         except:
             return ''
-
-    # def get_rating(self):
-    #     return re.findall('(?:.*>)(\d\.\d)', self.response.text)[0]
     
     def get_image(self):
         if self.platform == 'Udemy':

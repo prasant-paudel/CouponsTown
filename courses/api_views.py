@@ -41,34 +41,46 @@ def api(request):
     if command == 'fetch_course_info_from_url':
         courses = Course.objects.all()
         for course in courses:
-            obj = CourseInfo(course.url)
+            obj = None
+            # Fetch Image
+            if not course.image:
+                obj = CourseInfo(course.url)                
+                print(f'[+] Fetching Image for {course.name}')
+                Course.objects.filter(id=course.id).update(image=obj.get_image())
+
 
             # Fetch Name
             if not course.name:
+                if not obj:
+                    obj = CourseInfo(course.url)
                 print(f'[+] Fetching Name for {course.name}')
                 Course.objects.filter(id=course.id).update(name=obj.get_name())
 
             # Fetch Platform
             if not course.platform:
+                if not obj:
+                    obj = CourseInfo(course.url)
                 print(f'[+] Fetching Platform for {course.name}')
                 Course.objects.filter(id=course.id).update(platform=obj.platform)
 
             # Fetch Rating 
             if not course.rating:
+                if not obj:
+                    obj = CourseInfo(course.url)
                 print(f'[+] Fetching Rating for {course.name}')
                 Course.objects.filter(id=course.id).update(rating=obj.get_rating())
 
             # Fetch Duration
             if not course.duration:
+                if not obj:
+                    obj = CourseInfo(course.url)
                 print(f'[+] Fetching Duration for {course.name}')
                 Course.objects.filter(id=course.id).update(duration=obj.get_duration())
 
-            # Fetch Image
-            print(f'[+] Fetching Image for {course.name}')
-            Course.objects.filter(id=course.id).update(image=obj.get_image())
-
             # Fetch Tags
             if not course.tags:
+                if not obj:
+                    obj = CourseInfo(course.url)
                 print(f'[+] Fetching Tags for {course.name}')
                 rd = RealDiscount.objects.get(coupon=course.url)
                 ts = TagScraper(rd.offer)
