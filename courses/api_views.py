@@ -188,5 +188,14 @@ def api(request):
             course.image = ''
             course.save()
 
+    if command == 'remove_duplicate_courses':
+        courses = Course.objects.all()
+        for course in courses:
+            similar = Course.objects.filter(name=course.name)
+            if len(similar) > 1:
+                course.delete()
+
+
+
 
     return HttpResponse(f'Successful Ineraction!')
