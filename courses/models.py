@@ -8,6 +8,7 @@ class Course(models.Model):
     url = models.CharField(max_length=200)
     affiliate_url = models.CharField(max_length=256,blank=True)
     image = models.ImageField(upload_to='media/', blank=True)
+    contents = models.BinaryField(blank=True)
     best_seller = models.BooleanField(null=True)
     expired = models.BooleanField(default=False)
     platform = models.CharField(max_length=30, blank=True)
@@ -22,7 +23,6 @@ class Course(models.Model):
         ('design&photography', 'DESIGN & PHOTOGRAPHY'),
         ('marketing&business', 'MARKETING & BUSINESS'),
         ('others', 'OTHERS'),
-        
     )
     category = models.CharField(choices=category_coices, default='not_set', max_length=21)
     # Tags

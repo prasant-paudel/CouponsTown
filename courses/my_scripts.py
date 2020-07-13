@@ -10,6 +10,8 @@ class CourseInfo:
         self.url = url
         self.affiliate_url = 'http://adf.ly/23576813/' + url.strip('"').strip("'").split('//')[-1]
         self.platform = self.url.split('//')[-1].split('/')[0].split('www.')[-1].split('.')[0].capitalize()
+        self.contents = []
+        self.count = 0
 
         self.response = requests.get(url)
         self.parsed_html = BeautifulSoup(self.response.content)
@@ -114,6 +116,24 @@ class CourseInfo:
                 print(f"Udemy exception while updating duration \n{msg}\n")
                 pass
         return 'N/A'
+    
+    def get_content_list(self):
+        url = self.url
+        # url = 'https://www.udemy.com/course/architecting-a-cybersecurity-solution/?couponCode=30D8CDE1617492C56637'
+        if 'udemy.com' in url.lower():
+            page_src = requests.get(url).content
+            parsed_html = BeautifulSoup(page_src)
+            lists = parsed_html.findAll('span', {"class": "what-you-will-learn--objective-item--ECarc"})
+            if self.count < 10 and not lists:
+                self.count += 1
+                lists = self.get_content_list()
+            else:
+                for item in lists:
+                    self.contents.append(item.get_text())
+            print('\n[+] Contents for', self.url)
+            for i in self.contents:
+                print(i)
+            return self.contents
 
 
         

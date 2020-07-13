@@ -50,7 +50,6 @@ def api(request):
                 # Course.objects.filter(id=course.id).update(image=obj.get_image())
                 course.image = obj.get_image()
 
-
             # Fetch Name
             if not course.name:
                 if not obj:
@@ -73,6 +72,9 @@ def api(request):
                 print(f'[+] Fetching Platform for {course.name}')
                 # Course.objects.filter(id=course.id).update(platform=obj.platform)
                 course.platform = obj.platform
+
+            # Fetch Contents / Description / Things You'll Learn
+
 
             # Fetch Rating 
             if not course.rating:
@@ -195,7 +197,18 @@ def api(request):
             if len(similar) > 1:
                 course.delete()
 
-
+    if command == 'update_course_contents':
+        print('[+] Updating Course Contents')
+        courses = Course.objects.all()
+        for course in courses:
+            if 'udemy.com' in course.url:
+                obj = CourseInfo(url=course.url)
+                contents = obj.get_content_list()
+                if contents:
+                    import pickle
+                    print(len(contents))
+                    course.contents = pickle.dumps(contents)
+                    course.save()
 
 
     return HttpResponse(f'Successful Ineraction!')

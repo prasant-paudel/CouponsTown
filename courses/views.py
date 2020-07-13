@@ -3,6 +3,7 @@ from .models import Course, Subscriber, RealDiscount
 from django.db.models import Q
 from .my_scripts import CourseInfo
 from .tags_scraper import TagScraper
+import pickle
 
 
 def home(request):
@@ -23,16 +24,18 @@ def info_page(request):
     _course = request.GET.get('course')
     try:
         course = Course.objects.get(name_encoded=_course)
+        contents = pickle.loads(course.contents)
     except:
         raise(Http404)
-
+    
+    
     all_small_tags = course.tags.choices
     keys = list(all_small_tags)
     all_tags = [(all_small_tags[x]) for x in keys] 
     
     related_courses = Course.objects.filter(Q(tags__icontains=course.tags))
     related_courses = list(related_courses)[:10]
-    return render(request, 'courses/info_page.html', {'course': course, 'related_courses': related_courses, 'all_tags': all_tags})
+    return render(request, 'courses/info_page.html', {'course': course, 'related_courses': related_courses, 'all_tags': all_tags, 'contents':contents})
 
 def search(request):
     template = 'courses/home.html'
