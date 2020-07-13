@@ -2,6 +2,10 @@ import datetime
 import requests
 import time
 
+def log(string):
+    with open('couponstown.log', 'a') as f:
+        f.write(string)
+
 while 1:
     now = datetime.datetime.now()
     # Every 2 Hour
@@ -17,17 +21,17 @@ while 1:
         pass
 
     # Every 10 Minutes
-    if now.minute % 10 == 0:
+    if now.minute % 2 == 0:
         print(now)
-        print('[+] Removing Duplicate Courses')
+        log('[+] Removing Duplicate Courses')
         requests.get('http://couponstown.me:8000/api/?command=remove_duplicate_courses')
-        print('[+] Fetching Course info from URLs')
+        log('[+] Fetching Course info from URLs')
         requests.get('http://couponstown.me:8000/api/?command=fetch_course_info_from_url')
-        print('[+] Filtering Existing URLs')
+        log('[+] Filtering Existing URLs')
         requests.get('http://couponstown.me:8000/api/?command=filter_existing_urls')
-        print('[+] Validating Courses')
+        log('[+] Validating Courses')
         requests.get('http://couponstown.me:8000/api/?command=validate')
-        print('[+] Updating Ratings')
+        log('[+] Updating Ratings')
         requests.get('http://couponstown.me:8000/api/?command=update_ratings')
     
     time.sleep(1)

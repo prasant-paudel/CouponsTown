@@ -59,8 +59,7 @@ def api(request):
                 # Course.objects.filter(id=course.id).update(name=obj.get_name())
                 course.name = obj.get_name()
             
-            # if course.name and not course.name_encoded:
-            if True:
+            if course.name and not course.name_encoded:
                 temp_name = course.name.replace(' ', '-').replace('_', '-')
                 temp_name = temp_name.replace(':', '')
                 print(f'[+] Course Name Encoded: {temp_name}')
