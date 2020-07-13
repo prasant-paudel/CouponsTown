@@ -188,11 +188,11 @@ class Course(models.Model):
 
     def __str__(self):
         if self.expired:
-            return '--Expired-- ' + self.name
+            return '--Expired-- ' + self.name + ' | ' + self.platform
         return self.name + ' | ' + self.platform
     
     class Meta:
-        ordering = ['platform']
+        ordering = ['name']
         
 
 
