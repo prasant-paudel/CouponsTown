@@ -49,7 +49,8 @@ def search(request):
     for q in queryset:
         r = Course.objects.filter(Q(name__icontains=q) | Q(category__icontains=q))
         for i in r:
-            results.append(i)
+            if not i in results:
+                results.append(i)
 
     msg = f'Search results for "{query}"'
     return render(request, template, {'courses': results, 'message': msg})
