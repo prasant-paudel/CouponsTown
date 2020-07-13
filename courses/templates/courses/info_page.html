@@ -60,7 +60,7 @@
                     <script>
                       function countDown(secs,elem) {
                         var element = document.getElementById(elem);
-                        element.innerHTML = "<h6 class='text-info'>Please wait for "+secs+" seconds</h6>";
+                        element.innerHTML = "<h4 class='text-info'>Please wait for "+secs+" seconds</h4>";
                         if(secs < 1) {
                           clearTimeout(timer);
                           element.innerHTML = '<p class="lead text-success" style="font-weight:500;">Successfully Generated &#128540;</p>';
