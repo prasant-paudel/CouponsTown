@@ -93,7 +93,9 @@
               <h1 style="font-size: 20px;" class="">{{ course.name }}</h1>
             </div>  
             <ul>
-              <li>Learn From Scratch</li>
+              {% for item in contents %}
+              <li style="text-align: left;">{{ item }}</li>
+              {% endfor %}
             </ul>
             
           </div>
@@ -154,12 +156,6 @@
 </div>
 
  
-
-
-  
-
-
-
 
   <!-- =========================================sliding section=====================================        -->
 
