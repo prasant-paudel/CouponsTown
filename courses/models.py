@@ -192,7 +192,7 @@ class Course(models.Model):
         return self.name + ' | ' + self.platform
     
     class Meta:
-        ordering = ['name']
+        ordering = ['expired' ,'name']
         
 
 
