@@ -4,7 +4,7 @@ import time
 
 def log(string):
     with open('couponstown.log', 'a') as f:
-        f.write(string)
+        f.write(str(string) + '\n')
 
 while 1:
     now = datetime.datetime.now()
