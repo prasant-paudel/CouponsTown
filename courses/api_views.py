@@ -16,7 +16,10 @@ def api(request):
         for course in courses:
             obj = CourseInfo(course.url)
             Course.objects.filter(id=course.id).update(expired=obj.is_expired())
-            print(f'[+] Validated  {course.name}')
+            if obj.is_expired():
+                print(f'[-] Expired  {course.name}')
+            else:
+                print(f'[+] Valid  {course.name}')
         return HttpResponse('Course Validation Completed Successfully!')
 
     # Get Rating for Courses
@@ -49,6 +52,7 @@ def api(request):
                 print(f'[+] Fetching Image for {course.name}')
                 # Course.objects.filter(id=course.id).update(image=obj.get_image())
                 course.image = obj.get_image()
+                course.save()
 
             # Fetch Name
             if not course.name:
@@ -57,12 +61,14 @@ def api(request):
                 print(f'[+] Fetching Name for {course.name}')
                 # Course.objects.filter(id=course.id).update(name=obj.get_name())
                 course.name = obj.get_name()
+                course.save()
             
             if course.name and not course.name_encoded:
                 temp_name = course.name.replace(' ', '-').replace('_', '-')
                 temp_name = temp_name.replace(':', '')
                 print(f'[+] Course Name Encoded: {temp_name}')
                 course.name_encoded = temp_name
+                course.save()
                 
 
             # Fetch Platform
@@ -72,9 +78,17 @@ def api(request):
                 print(f'[+] Fetching Platform for {course.name}')
                 # Course.objects.filter(id=course.id).update(platform=obj.platform)
                 course.platform = obj.platform
+                course.save()
 
             # Fetch Contents / Description / Things You'll Learn
-
+            if 'udemy.com' in course.url:
+                obj = CourseInfo(url=course.url)
+                contents = obj.get_content_list()
+                if contents:
+                    import pickle
+                    print(len(contents))
+                    course.contents = pickle.dumps(contents)
+                    course.save()
 
             # Fetch Rating 
             if not course.rating:
@@ -83,6 +97,7 @@ def api(request):
                 print(f'[+] Fetching Rating for {course.name}')
                 # Course.objects.filter(id=course.id).update(rating=obj.get_rating())
                 course.rating = obj.get_rating()
+                course.save()
 
             # Fetch Duration
             if not course.duration:
@@ -91,6 +106,7 @@ def api(request):
                 print(f'[+] Fetching Duration for {course.name}')
                 # Course.objects.filter(id=course.id).update(duration=obj.get_duration())
                 course.duration = obj.get_duration()
+                course.save()
 
             # Fetch Tags
             if not course.tags:
@@ -103,8 +119,9 @@ def api(request):
                 print(f'{tags}\n')
                 # Course.objects.filter(id=course.id).update(tags=tags)
                 course.tags = tags
-
-            course.save()
+                course.save()
+            
+            # course.save()
 
         print('\n[+] New Courses Deployed Successfully!\n')
         return HttpResponse('New Courses Deployed Successfully!')
