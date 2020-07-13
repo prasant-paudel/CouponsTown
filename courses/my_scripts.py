@@ -87,9 +87,9 @@ class CourseInfo:
         # Extracting Rating 
         try:
             rating = re.findall('\w\.\w', str(rating_container))[0]
-            return rating
+            return float(rating)
         except:
-            return '00'
+            return float('00')
 
     def get_duration(self):
         # For exuonix
