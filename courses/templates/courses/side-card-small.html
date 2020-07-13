@@ -1,15 +1,15 @@
 <a href="{% url 'info_page' %}?course={{course.name_encoded}}" target="blank" style="color: black;">
     <ul class="card container-sm my-1 shadow">
         <div class="row" style="min-height: 50px;">
-            <div class="col-sm-2" style='
+            <div class="col-2" style='
                 {% if course.image %}
                 background: url(&#34 {{course.image.url}} &#34);
                 {% else %}
                 background: url("https://couponstown.me/static/course.png");
                 {% endif %}
-                background-size: cover;background-position: center;'>
+                background-size: cover;background-position: center; '>
             </div>
-            <div class="col-sm d-flex align-items-center">
+            <div class="col d-flex align-items-center">
                 <p class="m-0" style="text-align: start;">{{ course.name }}</p>
             </div>
         </div>
