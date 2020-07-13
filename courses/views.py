@@ -13,16 +13,16 @@ def home(request):
     try:
         all_small_tags = courses.first().tags.choices
         keys = list(all_small_tags)
-        all_tags = [(all_small_tags[x]) for x in keys] 
+        all_tags = [(all_small_tags[x]) for x in keys]
     except AttributeError:
         all_tags = []
 
     return render(request, 'courses/home.html', {'courses': courses, 'high_rated':high_rated, 'all_tags': all_tags})
 
 def info_page(request):
-    course_id = request.GET.get('id')
+    _course = request.GET.get('course')
     try:
-        course = Course.objects.get(id=course_id)
+        course = Course.objects.get(name_encoded=_course)
     except:
         raise(Http404)
 

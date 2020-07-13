@@ -108,7 +108,7 @@
         </div>
         <div class="card-body">
           {% for course in related_courses %}
-          <a href="{% url 'info_page' %}?id={{course.id}}">{{ course.name }}</a>
+          {% include 'courses/side-card-small.html' %}
           
           {% endfor %}
         </div>
