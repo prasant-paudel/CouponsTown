@@ -24,11 +24,13 @@ def info_page(request):
     _course = request.GET.get('course')
     try:
         course = Course.objects.get(name_encoded=_course)
-        contents = pickle.loads(course.contents)
     except:
         raise(Http404)
-    
-    
+    try:
+        contents = pickle.loads(course.contents)
+    except TypeError:
+        contents = []
+
     all_small_tags = course.tags.choices
     keys = list(all_small_tags)
     all_tags = [(all_small_tags[x]) for x in keys] 

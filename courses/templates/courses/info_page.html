@@ -93,9 +93,11 @@
               <h1 style="font-size: 20px;" class="">{{ course.name }}</h1>
             </div>  
             <ul>
+              {% if contents %}
               {% for item in contents %}
               <li style="text-align: left;">{{ item }}</li>
               {% endfor %}
+              {% endif %}
             </ul>
             
           </div>
