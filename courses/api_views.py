@@ -91,7 +91,7 @@ def api(request):
                     course.save()
 
             # Fetch Rating 
-            if not course.rating:
+            if not (course.rating and course.expired):
                 if not obj:
                     obj = CourseInfo(course.url)
                 print(f'[+] Fetching Rating for {course.name}')
@@ -100,7 +100,7 @@ def api(request):
                 course.save()
 
             # Fetch Duration
-            if not course.duration:
+            if not (course.duration and course.expired):
                 if not obj:
                     obj = CourseInfo(course.url)
                 print(f'[+] Fetching Duration for {course.name}')
