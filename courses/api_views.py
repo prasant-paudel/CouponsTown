@@ -113,14 +113,16 @@ def api(request):
                 if not obj:
                     obj = CourseInfo(course.url)
                 print(f'[+] Fetching Tags for {course.name}')
-                rd = RealDiscount.objects.get(coupon=course.url)
-                ts = TagScraper(rd.offer)
-                tags = ts.get_course_tags()
-                print(f'{tags}\n')
-                # Course.objects.filter(id=course.id).update(tags=tags)
-                course.tags = tags
-                course.save()
-            
+                try:
+                    rd = RealDiscount.objects.get(coupon=course.url)
+                    ts = TagScraper(rd.offer)
+                    tags = ts.get_course_tags()
+                    print(f'{tags}\n')
+                    # Course.objects.filter(id=course.id).update(tags=tags)
+                    course.tags = tags
+                    course.save()
+                except:
+                    pass
             # course.save()
 
         print('\n[+] New Courses Deployed Successfully!\n')
