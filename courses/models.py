@@ -189,6 +189,8 @@ class Course(models.Model):
 
 
     def __str__(self):
+        if self.expired:
+            return 'Expired | ' + self.name
         return self.name + ' | ' + self.platform
     
     class Meta:

@@ -157,6 +157,11 @@ def api(request):
                 print('[+] Compressed', image)
                 img.close()
 
+    if command == 'clear_image_urls_from_db':
+        courses = Course.objects.all()
+        for course in courses:
+            course.image = ''
+            course.save()
 
 
     return HttpResponse(f'Successful Ineraction!')
