@@ -4,6 +4,7 @@ from multiselectfield import MultiSelectField
 class Course(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, blank=True)
+    name_encoded = models.CharField(max_length=100, blank=True)
     url = models.CharField(max_length=200)
     affiliate_url = models.CharField(max_length=256,blank=True)
     image = models.ImageField(upload_to='media/', blank=True)
@@ -185,9 +186,6 @@ class Course(models.Model):
     )
     tags = MultiSelectField(choices=tags_choices, null=True)
 
-
-
-
     def __str__(self):
         if self.expired:
             return 'Expired | ' + self.name
@@ -195,6 +193,7 @@ class Course(models.Model):
     
     class Meta:
         ordering = ['platform']
+        
 
 
 class Subscriber(models.Model):

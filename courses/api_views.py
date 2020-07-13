@@ -42,11 +42,13 @@ def api(request):
         courses = Course.objects.all()
         for course in courses:
             obj = None
+
             # Fetch Image
             if not course.image:
-                obj = CourseInfo(course.url)                
+                obj = CourseInfo(course.url)            
                 print(f'[+] Fetching Image for {course.name}')
-                Course.objects.filter(id=course.id).update(image=obj.get_image())
+                # Course.objects.filter(id=course.id).update(image=obj.get_image())
+                course.image = obj.get_image()
 
 
             # Fetch Name
@@ -54,28 +56,40 @@ def api(request):
                 if not obj:
                     obj = CourseInfo(course.url)
                 print(f'[+] Fetching Name for {course.name}')
-                Course.objects.filter(id=course.id).update(name=obj.get_name())
+                # Course.objects.filter(id=course.id).update(name=obj.get_name())
+                course.name = obj.get_name()
+            
+            # if course.name and not course.name_encoded:
+            if True:
+                temp_name = course.name.replace(' ', '-').replace('_', '-')
+                temp_name = temp_name.replace(':', '')
+                print(f'[+] Course Name Encoded: {temp_name}')
+                course.name_encoded = temp_name
+                
 
             # Fetch Platform
             if not course.platform:
                 if not obj:
                     obj = CourseInfo(course.url)
                 print(f'[+] Fetching Platform for {course.name}')
-                Course.objects.filter(id=course.id).update(platform=obj.platform)
+                # Course.objects.filter(id=course.id).update(platform=obj.platform)
+                course.platform = obj.platform
 
             # Fetch Rating 
             if not course.rating:
                 if not obj:
                     obj = CourseInfo(course.url)
                 print(f'[+] Fetching Rating for {course.name}')
-                Course.objects.filter(id=course.id).update(rating=obj.get_rating())
+                # Course.objects.filter(id=course.id).update(rating=obj.get_rating())
+                course.rating = obj.get_rating()
 
             # Fetch Duration
             if not course.duration:
                 if not obj:
                     obj = CourseInfo(course.url)
                 print(f'[+] Fetching Duration for {course.name}')
-                Course.objects.filter(id=course.id).update(duration=obj.get_duration())
+                # Course.objects.filter(id=course.id).update(duration=obj.get_duration())
+                course.duration = obj.get_duration()
 
             # Fetch Tags
             if not course.tags:
@@ -86,10 +100,10 @@ def api(request):
                 ts = TagScraper(rd.offer)
                 tags = ts.get_course_tags()
                 print(f'{tags}\n')
-                # Adding Tags to the database
-                Course.objects.filter(id=course.id).update(tags=tags)
-                # print(list(course.tags))
+                # Course.objects.filter(id=course.id).update(tags=tags)
+                course.tags = tags
 
+            course.save()
 
         print('\n[+] New Courses Deployed Successfully!\n')
         return HttpResponse('New Courses Deployed Successfully!')
