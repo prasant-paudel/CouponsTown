@@ -61,13 +61,16 @@ class CouponExtractor:
                                         RealDiscount.objects.create(offer=link, coupon=coupon)
                                         RealDiscount.objects.filter(offer=link).update(valid=True)
                                         Course.objects.create(url=coupon, category='not_set')
+                                        course_id = Course.objects.get(url=coupon).id
+                                        requests.get(f'http://localhost:8000/api/?command=fetch_single_course_info&id={course_id}')
+
                                     except IntegrityError:
                                         self.coupon_count -= 1
                                         continue
+                                    print('[+]',self.coupon_count, link)
                                 else:
-                                    RealDiscount.objects.filter(offer=link).update(valid=True)
-
-                                print('[+]',self.coupon_count, link)
+                                    RealDiscount.objects.filter(offer=link).update(valid=False)
+                                    print('[!]',self.coupon_count, link)
                                 
                                 # Update Platform
                                 platform = coupon.split('//')[-1].split('www.')[-1].split('.')[0].capitalize()

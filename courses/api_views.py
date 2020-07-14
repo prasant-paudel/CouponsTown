@@ -7,7 +7,6 @@ from .coupon_extractor import CouponExtractor
 from .tags_scraper import TagScraper
 
 def api(request):
-    # query = request.GET.get('query')
     command = request.GET.get('command')
     
     # Check validation i.e. Course is expired or not
@@ -81,12 +80,12 @@ def api(request):
                 course.save()
 
             # Fetch Contents / Description / Things You'll Learn
-            if 'udemy.com' in course.url:
+            if 'udemy.com' in course.url and not (course.contents or course.expired):
                 obj = CourseInfo(url=course.url)
                 contents = obj.get_content_list()
                 if contents:
                     import pickle
-                    print(len(contents))
+                    # print(len(contents))
                     course.contents = pickle.dumps(contents)
                     course.save()
 
@@ -95,9 +94,9 @@ def api(request):
                 if not obj:
                     obj = CourseInfo(course.url)
                 print(f'[+] Fetching Rating for {course.name}')
-                # Course.objects.filter(id=course.id).update(rating=obj.get_rating())
-                course.rating = obj.get_rating()
-                course.save()
+                Course.objects.filter(id=course.id).update(rating=obj.get_rating())
+                # course.rating = obj.get_rating()
+                # course.save()
 
             # Fetch Duration
             if not (course.duration and course.expired):
@@ -127,6 +126,49 @@ def api(request):
 
         print('\n[+] New Courses Deployed Successfully!\n')
         return HttpResponse('New Courses Deployed Successfully!')
+
+    # Fetch Single Course Info
+    if command == 'fetch_single_course_info':
+        course_id = request.GET.get('id')
+        course = Course.objects.filter(id=course_id).first()
+        obj = CourseInfo(course.url)
+        # Fetch Name
+        course.name = obj.get_name()
+        # Encode name for urls
+        temp_name = course.name.replace(' ', '-').replace('_', '-')
+        temp_name = temp_name.replace(':', '')
+        course.name_encoded = temp_name
+        # Fetch Image
+        course.image = obj.get_image()
+        # Fetch Contents / Description / Things You'll Learn
+        contents = obj.get_content_list()
+        if contents:
+            import pickle
+            # print(len(contents))
+            course.contents = pickle.dumps(contents)
+        # Fetch Rating
+        course.rating = obj.get_rating()
+        # Fetch Duration
+        course.duration = obj.get_duration()
+        # Fetch Platform
+        course.platform = obj.platform
+        # Fetch Tags
+        try:
+            rd = RealDiscount.objects.get(coupon=course.url)
+            ts = TagScraper(rd.offer)
+            tags = ts.get_course_tags()
+            # Course.objects.filter(id=course.id).update(tags=tags)
+            course.tags = tags
+        except:
+            pass
+        # Save Info
+        try:
+            course.save()
+            print('[+] Course added', course.name)
+            return HttpResponse('[+] Course added ' + str(course.name) + '\n')
+        except TypeError:
+            pass
+
 
     if command == 'update_durations':
         courses = Course.objects.all()
