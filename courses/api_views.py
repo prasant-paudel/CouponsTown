@@ -69,7 +69,6 @@ def api(request):
                 course.name_encoded = temp_name
                 course.save()
                 
-
             # Fetch Platform
             if not course.platform:
                 if not obj:
