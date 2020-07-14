@@ -5,7 +5,7 @@ import time
 
 def log(string):
     with open('couponstown.log', 'a') as f:
-        f.write(str(string) + '\n')
+        f.write(f"[{datetime.datetime.now()}] {str(string)} \n")
 
 
 if __name__ == '__main__':

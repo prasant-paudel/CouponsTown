@@ -63,9 +63,20 @@
                         element.innerHTML = "<h4 class='text-info'>Please wait for "+secs+" seconds</h4>";
                         if(secs < 1) {
                           clearTimeout(timer);
-                          element.innerHTML = '<p class="lead text-success" style="font-weight:500;">Successfully Generated &#128540;</p>';
-                        
-                          element.innerHTML += '<a href="{{ course.url }}" target="blank" style="text-decoration: none; color: #03e9f4; border-radius: 0px; width: 100%;" ><span></span><span></span><span></span><span></span>Get Coupon</a>';
+                          element.innerHTML = '<p class="lead text-success" style="font-weight:500;">\
+                          {% if course.expired %}\
+                          Sorry! No Coupons Found &#128549 \
+                          {% else %}\
+                          Successfully Generated \
+                          {% endif %}\
+                          ;</p>';
+                          element.innerHTML += '<a href="{{ course.url }}" target="blank" style="text-decoration: none; color: #03e9f4; border-radius: 0px; width: 100%;" ><span></span><span></span><span></span><span></span>\
+                          {% if course.expired %}\
+                          Coupon Expired\
+                          {% else %}\
+                          Get Coupon\
+                          {% endif %}\
+                          </a>';
                         }
                       secs--;
                       var timer = setTimeout('countDown('+secs+',"'+elem+'")',1000);
