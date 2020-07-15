@@ -155,7 +155,7 @@ After=network.target
 User=$username
 Group=www-data
 WorkingDirectory=$(pwd)
-ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8000
+ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8000 --settings \"onlinecoursecoupons.settings.development\"
 
 [Install]
 WantedBy=multi-user.target" > temp.txt
