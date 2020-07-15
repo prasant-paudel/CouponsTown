@@ -13,19 +13,16 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 # SECURITY WARNING: don't run with debug turned on in production!
-import environ
-env = environ.Env(
-    DEBUG=(bool, True)
-)
-environ.Env.read_env()
-DEBUG=env('DEBUG')
+DEBUG=True
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-if DEBUG:
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-else:
-    from unipath import Path
-    BASE_DIR = Path(__file__).ancestor(3)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# if DEBUG:
+#     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# else:
+#     from unipath import Path
+#     BASE_DIR = Path(__file__).ancestor(3)
 
 
 
