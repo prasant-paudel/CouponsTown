@@ -25,6 +25,9 @@ class Course(models.Model):
         ('others', 'OTHERS'),
     )
     category = models.CharField(choices=category_coices, default='not_set', max_length=21)
+    
+    urlbox = models.TextField(null=True)
+
     # Tags
     tags_choices = (
         ('all_academics', 'All Academics'),
@@ -184,7 +187,7 @@ class Course(models.Model):
         ('programming_languages', 'Programming Languages'),
         ('web_development', 'Web Development'),
     )
-    tags = MultiSelectField(choices=tags_choices, null=True)
+    tags = MultiSelectField(choices=tags_choices, null=True, default='all_academics', blank=True)
 
     def __str__(self):
         if self.expired:
@@ -218,3 +221,6 @@ class RealDiscount(models.Model):
         else:
             validity = 'Invalid'
         return self.coupon + ' | ' + validity
+
+
+

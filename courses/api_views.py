@@ -129,8 +129,16 @@ def api(request):
     # Fetch Single Course Info
     if command == 'fetch_single_course_info':
         course_id = request.GET.get('id')
-        course = Course.objects.filter(id=course_id).first()
-        obj = CourseInfo(course.url)
+        coupon = request.GET.get('coupon')
+        if course_id:
+            course = Course.objects.filter(id=course_id).first()
+            obj = CourseInfo(course.url)
+        if coupon:
+            if not Course.objects.filter(url=coupon):
+                Course.objects.create(url=coupon, category='not_set')
+            course = Course.objects.get(url=coupon)
+            obj = CourseInfo(coupon)
+
         # Fetch Name
         course.name = obj.get_name()
         # Encode name for urls
