@@ -68,7 +68,6 @@ def api(request):
                 print(f'[+] Course Name Encoded: {temp_name}')
                 course.name_encoded = temp_name
                 course.save()
-                django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
 
             # Fetch Platform
             if not course.platform:
