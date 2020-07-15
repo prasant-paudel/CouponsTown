@@ -28,7 +28,7 @@ def info_page(request):
         raise(Http404)
     try:
         contents = pickle.loads(course.contents)
-    except TypeError:
+    except:
         contents = []
 
     all_small_tags = course.tags.choices
