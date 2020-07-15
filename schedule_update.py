@@ -12,8 +12,9 @@ if __name__ == '__main__':
     while 1:
         now = datetime.datetime.now()
         # Every 2 Hour
-        log('[+] Fetching Course info from URLs')
-        requests.get('http://couponstown.me:8000/api/?command=fetch_course_info_from_url')
+        if now.hour % 2 == 0:
+            log('[+] Fetching Course info from URLs')
+            requests.get('http://couponstown.me:8000/api/?command=fetch_course_info_from_url')
 
         # Every Hour
         if now.minute == 30:
