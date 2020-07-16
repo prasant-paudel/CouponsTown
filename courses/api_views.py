@@ -62,9 +62,11 @@ def api(request):
                 course.name = obj.get_name()
                 course.save()
             
-            if course.name and not course.name_encoded:
+            # if course.name and not course.name_encoded:
+            if 1==1:
                 temp_name = course.name.replace(' ', '-').replace('_', '-')
-                temp_name = temp_name.replace(':', '')
+                temp_name = temp_name.replace(':', '').replace('&', 'and')
+                temp_name = temp_name.replace('=', '-')
                 print(f'[+] Course Name Encoded: {temp_name}')
                 course.name_encoded = temp_name
                 course.save()

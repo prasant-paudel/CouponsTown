@@ -30,18 +30,7 @@ def info_page(request):
         contents = pickle.loads(course.contents)
     except:
         contents = []
-    try:
-        all_small_tags = course.tags.choices
-    except:
-        all_small_tags = []
-    keys = list(all_small_tags)
-    all_tags = [(all_small_tags[x]) for x in keys]
     
-    # if all_tags:
-    #     related_courses = Course.objects.filter(Q(tags__icontains=course.tags))
-    # else:
-    #     related_courses = []
-
     keys = course.name.split()
     results = []
     for q in keys:
