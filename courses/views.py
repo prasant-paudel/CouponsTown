@@ -37,8 +37,21 @@ def info_page(request):
     keys = list(all_small_tags)
     all_tags = [(all_small_tags[x]) for x in keys]
     
-    related_courses = Course.objects.filter(Q(tags__icontains=course.tags))
-    related_courses = list(related_courses)[:10]
+    # if all_tags:
+    #     related_courses = Course.objects.filter(Q(tags__icontains=course.tags))
+    # else:
+    #     related_courses = []
+
+    keys = course.name.split()
+    results = []
+    for q in keys:
+        r = Course.objects.filter(Q(name__icontains=q) | Q(category__icontains=q))
+        r = r.exclude(name=course.name)
+        for i in r:
+            if not i in results:
+                results.append(i)
+
+    related_courses = list(results)[:10]
     return render(request, 'courses/info_page.html', {'course': course, 'related_courses': related_courses, 'all_tags': all_tags, 'contents':contents})
 
 def search(request):
