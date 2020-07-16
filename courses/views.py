@@ -30,10 +30,12 @@ def info_page(request):
         contents = pickle.loads(course.contents)
     except:
         contents = []
-
-    all_small_tags = course.tags.choices
+    try:
+        all_small_tags = course.tags.choices
+    except:
+        all_small_tags = []
     keys = list(all_small_tags)
-    all_tags = [(all_small_tags[x]) for x in keys] 
+    all_tags = [(all_small_tags[x]) for x in keys]
     
     related_courses = Course.objects.filter(Q(tags__icontains=course.tags))
     related_courses = list(related_courses)[:10]
