@@ -66,7 +66,7 @@ def api(request):
             if 1==1:
                 temp_name = course.name.replace(' ', '-').replace('_', '-')
                 temp_name = temp_name.replace(':', '').replace('&', 'and')
-                temp_name = temp_name.replace('=', '-')
+                temp_name = temp_name.replace('=', '-').replace('+', 'plus')
                 print(f'[+] Course Name Encoded: {temp_name}')
                 course.name_encoded = temp_name
                 course.save()
