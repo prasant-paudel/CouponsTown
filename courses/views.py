@@ -41,7 +41,7 @@ def info_page(request):
                 results.append(i)
 
     related_courses = list(results)[:10]
-    return render(request, 'courses/info_page.html', {'course': course, 'related_courses': related_courses, 'all_tags': all_tags, 'contents':contents})
+    return render(request, 'courses/info_page.html', {'course': course, 'related_courses': related_courses, 'contents':contents})
 
 def search(request):
     template = 'courses/home.html'
