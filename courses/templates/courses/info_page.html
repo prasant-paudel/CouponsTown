@@ -13,6 +13,7 @@
 {% block body %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 <div class="container-fluid">
 <div class="d-flex justify-content flex-wrap" style="width: 100%;" style=" display: flex; flex-wrap: wrap;">
 
@@ -21,22 +22,20 @@
       {% include 'courses/navbar.html' %}
   </div>
 
-  <div class="p-2 flex-fill bd-highlight"
-    style="width: 100%; height: 400px; background:linear-gradient(black, white) ; text-align: center;">
-    <img src="{% static 'images/course.png' %}" class="img-fluid" alt="Responsive image"
-      style="height: 40vh; margin-top: 50px;">
+  {% if message %}
+  <center><h1>{{ message }}</h1></center>
+  {% else %}
+  {% include 'courses/navbar1.html' %}
+  </center>
+  {% endif %}  
 
-  </div>
-
-  
-
-  <div class="container-fluid">
-    <div class="row">
+  <div class="container-fluid  border-danger">
+    <div class="row mt-3">
 
 
-      <div class="col-lg-8">
+      <div class="col-lg-8 border-danger">
         <div class="card text-center">
-          <div class="card-header">
+          <div class="card-header bg-danger ">
             <h1 style="font-size: 20px;">{{ course.name }}</h1>
           </div>
           <div class="card-body ">
@@ -98,15 +97,21 @@
             </div>
     
           </div>
-    
-          <div class="card-footer">
-            <div class="card-header  text-warning">
+          <style>
+            .card-footer ul li:before {
+               content: '✓';
+               color: #22bb33;
+               font-size: 36px;
+            }
+          </style>
+          <div class="card-footer border-danger">
+            <div class="card-header  text-light bg-danger">
               <h1 style="font-size: 20px;" class="">{{ course.name }}</h1>
             </div>  
             <ul>
               {% if contents %}
               {% for item in contents %}
-              <li style="text-align: left;">{{ item }}</li>
+              <li style="text-align: left; list-style: none;">{{ item }}</li>
               {% endfor %}
               {% endif %}
             </ul>
@@ -115,10 +120,10 @@
         </div>     
     </div>
 
-    <div class="col-lg-4">
-      <div class="card text-center">
+    <div class="col-lg-4 ">
+      <div class="card text-center ">
         <!-- ======Provide Suggestions of Related Topics====== -->
-        <div class="card-header" style="font-weight: bolder;">
+        <div class="card-header bg-danger text-white" style="font-weight: bolder;">
           Related Topics
         </div>
         <div class="card-body">
@@ -127,31 +132,11 @@
           
           {% endfor %}
         </div>
-        <div class="card-footer text-muted">
-          <label for="category" style="background: red transparent;">Select Category</label>
-          <select name="category" style="background: red transparent;">
-            <a>
-              <option value="Development">Development</option>
-            </a>
-            <a>
-              <option value="BusinessMarketin">Business & Marketing</option>
-            </a>
-            <a>
-              <option value="itsoftware">It & Software</option>
-            </a>
-            <a>
-              <option value="designphotography">Design Photography</option>
-            </a>
-            <a>
-              <option value="office">Office & Productivity</option>
-            </a>
-            
-          </select>
-        </div>
+        
       </div>
       <!-- ================================== -->
-      <div class="card text-center">
-        <div class="card-header" style="font-weight: bolder;">
+      <div class="card text-center mt-3 ">
+        <div class="card-header bg-danger text-white" style="font-weight: bolder;">
           ALL TAGS
         </div>
         <div class="card-body" style="height: 500px; overflow: hidden scroll">
@@ -167,7 +152,7 @@
   
   
 </div>
-
+{% include 'courses/carousel.html' %}
  
 
   <!-- =========================================sliding section=====================================        -->

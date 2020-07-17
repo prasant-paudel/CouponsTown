@@ -1,0 +1,304 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400, 500,600,700,800,900&display=swap');
+*
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background: #222; */
+    min-height: 100vh;
+}
+
+.container
+{
+    position: relative;
+    width: 1000px;
+    display: flex;
+    justify-content: space-between;    
+    flex-wrap: wrap;
+    margin: 10px;
+}
+.container .card-body
+{
+    position: relative;
+    height: 350px;
+    /* background: #fff; */
+    display: flex;
+    width: 100%;
+    /* margin: 80px 0 0 0; */
+    
+}
+
+.container .card .imagebox
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color:red;
+    /* background:#333; */
+    /* background: url("llol.jpg"); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: 0.5s ease-in-out;
+}
+
+.container .card:hover .imagebox
+{
+    width: 150px;
+    height: 150px;
+    left: -75px;
+    top: calc(50% - 75px);
+    transition: 0.5s ease-in-out;
+    /* background: #ff0057; */
+    /* background: url("llol.jpg"); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.container .card .imagebox::before{
+    content: attr(data-text);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: rgba(255, 255, 255, .05);
+    font-weight: 700;
+    font-size: 3em;
+}
+
+.container .card .imagebox img{
+    max-width: 100px;
+    transition: 0.5s ease-in-out;
+}
+.container .card:hover .imagebox img{
+    max-width: 75px;
+}
+
+.container .card .content
+{
+    position: absolute;
+    right: 0;
+    width: calc(100% - 75px);
+    height: 100%;
+    /* padding: 20px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .card .content h3
+{
+    margin-bottom: 5px;
+    font-size: 24px;
+    color: red;
+    top: 0;
+}
+.container .card .content a{
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background: #333;
+    text-decoration: none;
+    color: #fff;
+}
+/* ---------------------------------------botton------------------------------------- */
+
+
+
+.card-body .get-coupon a{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    /* margin-left: 40px ; */
+    background: #050801 !important;;
+    color: #03e9f4  !important;
+    font-size: 24px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 0.5s;
+    letter-spacing: 4px;
+    /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
+}
+
+
+
+.card-body .get-coupon a:hover{
+    background:   #03e9f4 !important;;
+    color: #050801 !important;
+    text-decoration: none;
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 200px #03e9f4;
+}
+
+a span{
+    position: absolute;
+    display: block;
+}
+
+
+a span:nth-child(1)
+{
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent,
+                 #03e9f4);
+    animation: animate1 1s  linear infinite;
+} 
+
+ @keyframes animate1
+{
+    0%
+    {
+        left: -100%;
+    }
+    50%, 100%
+    {
+        left: 100%;
+    }
+}
+
+a span:nth-child(2)
+{
+    top:-100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent,#03e9f4);
+    animation: animate2 1s  linear infinite;
+    animation-delay: 0.25s;
+}
+
+@keyframes animate2
+{
+    0%
+    {
+        top: -100%;
+    }
+    50%, 100%
+    {
+        top: 100%;
+    }
+}
+
+a span:nth-child(3)
+{
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent,
+                 #03e9f4);
+    animation: animate3 1s  linear infinite;
+    animation-delay: 0.25s;
+}
+
+@keyframes animate3
+{
+    0%
+    {
+        right: -100%;
+    }
+    50%, 100%
+    {
+        right: 100%;
+    }
+}
+
+a span:nth-child(4)
+{
+    bottom:-100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent,#03e9f4);
+    animation: animate4 1s  linear infinite;
+    animation-delay: 0.75s;
+}
+
+@keyframes animate4
+{
+    0%
+    {
+        bottom: -100%;
+    }
+    50%, 100%
+    {
+        bottom: 100%;
+    }
+} 
+
+/* external css: flickity.css */
+
+* { box-sizing: border-box; }
+
+
+
+.carousel {
+  background: #EEE;
+}
+
+.carousel-cell {
+  width: 45%;
+  height: 300px;
+  /* margin-right: 10px; */
+  background: #8C8;
+  border-radius: 5px;
+  counter-increment: gallery-cell;
+}
+
+
+.carousel-cell:before {
+  display: block;
+  text-align: center;
+  /* content: counter(gallery-cell); */
+  line-height: 200px;
+  font-size: 80px;
+  color: white;
+}
+
+
+.card-body a{
+    width: auto;
+    border-radius: 10px;
+    box-shadow: none;
+    margin-bottom: 4px;
+}
+.card-body a:hover{
+    background:   #03e9f4 !important;;
+    color: #050801 !important;
+    text-decoration: none;
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 200px #03e9f4;
+}
+.card-body marquee a{
+    font-size: 18px;
+    background: none !important;
+    color: black !important;
+    letter-spacing: 0px;
+}
