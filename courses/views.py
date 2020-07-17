@@ -18,7 +18,7 @@ def home(request):
     except AttributeError:
         all_tags = []
 
-    return render(request, 'courses/home.html', {'courses': courses, 'high_rated':high_rated, 'all_tags': all_tags})
+    return render(request, 'courses/landing.html', {'courses': courses, 'high_rated':high_rated, 'all_tags': all_tags})
 
 def info_page(request):
     _course = request.GET.get('course')
