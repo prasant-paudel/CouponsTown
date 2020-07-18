@@ -7,6 +7,10 @@ import pickle
 
 
 def home(request):
+    courses = Course.objects.order_by('rating')
+    return render(request, 'courses/landing.html', {'courses': courses})
+
+def courses(request):
     courses = Course.objects.order_by('upload_date').reverse()
     high_rated = Course.objects.order_by('rating')
     high_rated = list(high_rated)[:10]
@@ -18,7 +22,7 @@ def home(request):
     except AttributeError:
         all_tags = []
 
-    return render(request, 'courses/landing.html', {'courses': courses, 'high_rated':high_rated, 'all_tags': all_tags})
+    return render(request, 'courses/home.html', {'courses': courses, 'high_rated':high_rated, 'all_tags': all_tags})
 
 def info_page(request):
     _course = request.GET.get('course')
