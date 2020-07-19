@@ -63,10 +63,11 @@
   </nav>
 
   <script >
-      alert("Hello")
-      var a = document.URL
-      var page = a[a.length-1]
-      if page === "courses"{
+      
+    var a = document.URL.split('/')
+    var page = a[a.length-1]
+    if (page === "courses"){
         document.getElementById("navcourses").classList.add("active")
-      }
+    }
+
   </script>
