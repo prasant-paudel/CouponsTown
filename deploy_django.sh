@@ -96,15 +96,15 @@ echo "server{
 	
 	location /static/ {
 		autoindex on;
-		alias $(pwd)/static/;
+		alias $(pwd)/$project_name/static/;
 	}
 	
 	location /robots.txt {
-		alias $(pwd)/static/robots.txt;
+		alias $(pwd)/$project_name/static/robots.txt;
 	}
 
 	location /sitemap.xml {
-		alias $(pwd)/static/sitemap.xml;
+		alias $(pwd)/$project_name/static/sitemap.xml;
 	}
 
 	location / {
