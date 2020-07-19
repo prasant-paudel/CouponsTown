@@ -1,56 +1,72 @@
 {% load static %}
 <style>
-    @media (max-width: 992px)
-    {
-        #navbarSupportedContent{
-            margin-top: -52px;
-        }
-        
+    .top-nav-collapse {
+      background-color: #3f51b5 !important;
     }
-</style>
-<nav class="navbar navbar-expand-lg navbar-light bg-danger"
-            style="position: fixed;margin-top:-50px;left:0;width: 100%; z-index: 100; height: 50px;">
-            <a class="navbar-brand" href="{% url 'home' %}" style="z-index: 555555555; "><img src="{% static 'images/couponstown.png' %}" style="width: 100px; z-index: 555555555;" alt=""></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon" style="margin-top: -50px; "></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="background-color:#ff3547 ; color: white; text-align: center; margin-top: ;">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item ">
-                        <a class="nav-link" href="{% url 'courses' %}">All Coupons <span class="sr-only">(current)</span></a>
-                    </li>
+    .nav-item{
+        width: max-content;
+        padding: 5px;
+    }
+    .navbar:not(.top-nav-collapse) {
+      background: transparent !important;
+    }
 
-                    <li class="nav-item dropdown">
-                        <div class="dropdown">
-                            <a><button class="dropbtn" style="color: black; margin-top: 8px;">Category</button></a>
-                            <div class="dropdown-content">
-                                <a class="dropdown-item" role="presentation" href="/category?search=development">DEVELOPMENT</a>
-                                <a class="dropdown-item" role="presentation" href="/category?search=software">IT & SOFTWARE</a>
-                                <a class="dropdown-item" role="presentation" href="/category?search=office&productivity">OFFICE PRODUCTIVITY</a>
-                                <a class="dropdown-item" role="presentation" href="/category?search=design&photography">DESIGN & PHOTOGRAPHY</a>
-                                <a class="dropdown-item" role="presentation" href="/category?search=marketing&business">MARKETING & BUSINESS</a>
-                                <a class="dropdown-item" role="presentation" href="/category?search=others">OTHERS</a>
-                            </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Download Course</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Download Books</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Tags</a>
-                    </li>
+    @media (max-width: 768px) {
+      .navbar:not(.top-nav-collapse) {
+        background: #3f51b5 !important;
+      }
+    }
+    @media (min-width: 800px) and (max-width: 850px) {
+        .navbar:not(.top-nav-collapse) {
+            background: #3f51b5!important;
+        }
+    }
+  </style>
 
+<!-- Navbar -->
+ <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar" style="height: 80px;">
+    <div class="container">
+      <a class="navbar-brand {% url 'courses' %}" href="{% url 'home' %}">
+        <img src="{% static 'images/couponstown.png' %}" style="width: 50px; height: 40px; z-index: 555555555;" alt="" > </a>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
+        aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent-9">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item " id="navcourses">
+            <a class="nav-link" href="{% url 'courses' %}">Course Coupons
+              <!-- <span class="sr-only">(current)</span> -->
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Download Courses</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Download Books</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Games Coupons</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Giveaway</a>
+          </li>
+        </ul>
+        <form class="form-inline">
+          <div class="md-form ">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" action="{% url 'search' %}" method="GET" enctype="application/x-www-form-urlencoded">
+          </div>
+        </form>
+      </div>
+    </div>
+  </nav>
 
-
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0 " action="{% url 'search' %}" method="GET" enctype="application/x-www-form-urlencoded" style="text-align: center; align-items: center; justify-content: center;">
-                    <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search" required style="border-radius: 20px;">
-                    <button class="btn btn-sm btn-white  my-2 my-sm-0" type="submit" style="border-radius: 20px;"><i class="fas fa-search" style="color: #d9534f ; font-size: 24px;"></i></button>
-                </form>
-            </div>
-        </nav>
+  <script >
+      alert("Hello")
+      var a = document.URL
+      var page = a[a.length-1]
+      if page === "courses"{
+        document.getElementById("navcourses").classList.add("active")
+      }
+  </script>
