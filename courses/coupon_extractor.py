@@ -47,6 +47,7 @@ class CouponExtractor:
                             offer_page_source = self.request(link).content
                             # if offer is already expired
                             if 'Expired' in str(offer_page_source):
+                                print('[-] Offer Expired', link)
                                 continue
                             # If Offer does not exist in database
                             if not RealDiscount.objects.filter(offer=link).exists():
@@ -70,7 +71,7 @@ class CouponExtractor:
                                     print('[+]',self.coupon_count, link)
                                 else:
                                     RealDiscount.objects.filter(offer=link).update(valid=False)
-                                    print('[!]',self.coupon_count, link)
+                                    print('[-] Expired',self.coupon_count, link)
                                 
                                 # Update Platform
                                 platform = coupon.split('//')[-1].split('www.')[-1].split('.')[0].capitalize()
@@ -118,8 +119,10 @@ class CouponExtractor:
         else:
             pricing = 'not compatible platform'
         
+        pricing_lwr = str(pricing).lower()
+
         # Checking Price
-        if 'enroll now' in str(pricing).lower():
+        if 'enroll now' in pricing_lwr or 'free' in pricing_lwr:
             return False
         return True
 
