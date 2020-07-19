@@ -47,12 +47,20 @@
     </script>
 
 </head>
-<body style="margin-bottom: 30px;">
+<body style="margin-bottom: 30px;" id="top-section">
     {% block body %}
-    {% endblock %}
 
+    {% endblock %}
+    
+    <div class="fixed-action-btn smooth-scroll" style="bottom: 45px; right: 24px;">
+        <a href="#top-section" class="btn-floating btn-large red">
+          <i class="fas fa-arrow-up"></i>
+        </a>
+    </div>
+    
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'js/smooth-scroll.js' %}"></script>
     <script src="{% static 'js/mdb.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>

@@ -17,4 +17,5 @@ window.onload = function(){
     var element = discount.getElementById("enroll-button")[0];
     element.disabled = false;
   },5000);
-}    
+}   
+ 
