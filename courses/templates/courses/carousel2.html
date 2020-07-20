@@ -2,12 +2,12 @@
 <div id="carousel-example-multi" class="carousel slide carousel-multi-item v-2 mt-3" data-ride="carousel">
 
     <!--Controls-->
-    <!-- <div class="controls-top ">
+    <div class="controls-top ">
       <a class="btn-floating bg-danger" href="#carousel-example-multi" data-slide="prev"><i
           class="fas fa-chevron-left"></i></a>
       <a class="btn-floating bg-danger" href="#carousel-example-multi" data-slide="next"><i
           class="fas fa-chevron-right"></i></a>
-    </div> -->
+    </div>
     <!--/.Controls-->
   
     <!-- Indicators -->
@@ -34,10 +34,10 @@
           <div class="card mb-2">
             <img class="card-img-top" src="{{ item.image.url }}"
               alt="Free Udemy Coupon | Free Online Courses | {{ item.name }}">
-            <div class="card-body">
-              <h4 class="card-title font-weight-bold">{{ item.name }}</h4>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                card's content.</p>
+            <div class="card-body" >
+              <div class="card-title" style="height: 130px;">
+                <h4 style="font-size: 20px; text-align: center; justify-content: center;">{{ item.name }}</h4>
+              </div>
               <a class="btn btn-primary btn-md btn-rounded" href="{% url 'info_page' %}?course={{item.name_encoded}}">Enroll Now</a>
             </div>
           </div>
