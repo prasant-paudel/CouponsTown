@@ -65,18 +65,20 @@ def info_page(request):
         'gmail', 'google docs', 'google drive', 'evernote', 'google classroom', 'onedrive', 'youtube',
         'google sites', 'trello', 'powerapps', 'slack', 'wordpress', 'business analysis', 'gsuite', 'trademark',
         'blazor', 'blogging', 'animated promo', 'google photos', 'office 365', 'google drawings', 'jamboard', 
-        'sap', 'power bi', 'schedule', 'business', 'communication', 'kubernetes']
+        'sap', 'power bi', 'schedule', 'business', 'communication', 'kubernetes', 'linux']
     office = get_queryset(keys)
-    # Category - Network and Ethical Hacking
+    # Category - Network Security and Ethical Hacking
     keys = ['ethical hacking', 'cybersecurity', 'cyber security', 'pentesting', 'penetration testing', 
         'malware', 'nework security', 'wireshark', 'social engineering', 'deep web', 'dark web', 'kali',
-        'linux', 'operating system', 'debugger', 'bug bounty', 'shell', 'scripting', 'cisco','comptia','python', 'javascript']
+        'linux', 'operating system', 'debugger', 'bug bounty', 'shell', 'scripting', 'oscp', 'ceh', 'cisco',
+        'ccna', 'ccnp', 'ccie','comptia', 'routing & switching', 'routing and switching', 'subnetting', 'ipv4', 
+        'ipv6', 'python', 'javascript']
     hacking = get_queryset(keys)
 
     # Category - Server and Cloud Computing
     keys = ['azure', 'aws' 'google cloud', 'cloud', 'windows server', 'server', 'red hat', 'centos', 'open suse',
         'oracle', 'vm', 'vmware', 'microservices', 'power bi', 'elastic beanstalk', 'ec2', 'route 53',
-        'powershell', 'system center', 'devops', 'docker',]
+        'powershell', 'system center', 'devops', 'docker', 'big data', 'hadoop']
     cloud = get_queryset(keys)
 
 
