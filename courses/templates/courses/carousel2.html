@@ -23,90 +23,28 @@
   
     <div class="carousel-inner v-2" role="listbox">
   
-      <div class="carousel-item  active">
-        <div class="col-sm-6 col-8 offset-sm-0 offset-2 col-md-4 col-lg-3">
-          <div class="card mb-2">
-            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (36).jpg"
-              alt="Card image cap">
-            <div class="card-body">
-              <h4 class="card-title font-weight-bold">Card title</h4>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                card's content.</p>
-              <a class="btn btn-primary btn-md btn-rounded">Button</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      {% for index, item in carousel2 %}
+      {% if item.image %}
+      {% if index == 0 %}
+      <div class="carousel-item active" >
+      {% else %}
       <div class="carousel-item" >
+      {% endif %}
         <div class="col-sm-6 col-8 offset-sm-0 offset-2 col-md-4 col-lg-3">
           <div class="card mb-2">
-            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (34).jpg"
-              alt="Card image cap">
+            <img class="card-img-top" src="{{ item.image.url }}"
+              alt="Free Udemy Coupon | Free Online Courses | {{ item.name }}">
             <div class="card-body">
-              <h4 class="card-title font-weight-bold">Card title</h4>
+              <h4 class="card-title font-weight-bold">{{ item.name }}</h4>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                 card's content.</p>
-              <a class="btn btn-primary btn-md btn-rounded">Button</a>
+              <a class="btn btn-primary btn-md btn-rounded" href="{% url 'info_page' %}?course={{item.name_encoded}}">Enroll Now</a>
             </div>
           </div>
         </div>
       </div>
-      <div class="carousel-item" >
-        <div class="col-sm-6 col-8 offset-sm-0 offset-2 col-md-4 col-lg-3">
-          <div class="card mb-2">
-            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (38).jpg"
-              alt="Card image cap">
-            <div class="card-body">
-              <h4 class="card-title font-weight-bold">Card title</h4>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                card's content.</p>
-              <a class="btn btn-primary btn-md btn-rounded">Button</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item" >
-        <div class="col-sm-6 col-8 offset-sm-0 offset-2 col-md-4 col-lg-3">
-          <div class="card mb-2">
-            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg"
-              alt="Card image cap">
-            <div class="card-body">
-              <h4 class="card-title font-weight-bold">Card title</h4>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                card's content.</p>
-              <a class="btn btn-primary btn-md btn-rounded">Button</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item" >
-        <div class="col-sm-6 col-8 offset-sm-0 offset-2 col-md-4 col-lg-3">
-          <div class="card mb-2">
-            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (30).jpg"
-              alt="Card image cap">
-            <div class="card-body">
-              <h4 class="card-title font-weight-bold">Card title</h4>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                card's content.</p>
-              <a class="btn btn-primary btn-md btn-rounded">Button</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item" >
-        <div class="col-sm-6 col-8 offset-sm-0 offset-2 col-md-4 col-lg-3">
-          <div class="card mb-2">
-            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (27).jpg"
-              alt="Card image cap">
-            <div class="card-body">
-              <h4 class="card-title font-weight-bold">Card title</h4>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                card's content.</p>
-              <a class="btn btn-primary btn-md btn-rounded">Button</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      {% endif %}
+      {% endfor %}
   
     </div>
   

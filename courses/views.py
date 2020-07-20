@@ -7,8 +7,9 @@ import pickle
 
 
 def home(request):
-    courses = Course.objects.order_by('rating')
-    return render(request, 'courses/landing.html', {'courses': courses})
+    courses = Course.objects.order_by('rating').order_by('image').reverse()
+    carousel2 = ((i,e) for (i,e) in enumerate(courses))
+    return render(request, 'courses/landing.html', {'courses': courses, 'carousel2':carousel2})
 
 def courses(request):
     courses = Course.objects.order_by('upload_date').reverse()
