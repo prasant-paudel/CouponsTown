@@ -44,11 +44,11 @@
             {% if course.image %}
             {% if not course.expired %}
             <!-- --------------Startin008 of coupon--------- -->
-            <div class="card mb-2 ml-2" style="width: 18rem; height: fit-content; background: #06284b">
+            <div class="card mb-2 ml-2 m-2" style="width: 18rem; height: fit-content; background: #f1faee">
                 <div class="main-card-body" style="width: 270px;">
-                    <div class="course-title text-white"
+                    <div class="course-title"
                         style=" justify-content: center;">
-                        <h4 style="font-size: 1.3rem; font-family: cursive; width: 18rem; height: 80px; font-weight: 800; text-align: center; padding: 5px;">
+                        <h4 style="font-size: 1.3rem; font-family: cursive; width: 18rem; height: 80px; font-weight: 800; text-align: center; padding: 5px; color: #1d3557">
                             <!-- The Complete SQL Bootcamp 2020: Go from Zero to  The Complete Course -->
                             {{ course.name }}
                         </h4>
@@ -102,7 +102,8 @@
                                             {% if course.platform == 'Udemy' %}
                                             <img src="{% static 'images/udemy.svg' %}" height="70%" width="100%" alt="CouponsTown | Best Courses Udemy | Free Certificate | Free Udemy Course | Highest Rated | {{course.id}}">
                                             {% elif course.platform == 'Eduonix' %}
-                                            <img src="{% static 'images/eduonix.png' %}" height="70%" width="50%" alt="CouponsTown | Best Eduonix Courses | Free Certification | Highest Rated | Bestseller | {{course.id}}">
+                                            <img src="{% static 'images/eduonix.png' %}" height="70%" width="50%" style="background:#e63946; border-radius:5px; opacity:80%;"
+                                            alt="CouponsTown | Best Eduonix Courses | Free Certification | Highest Rated | Bestseller | {{course.id}}">
                                             {% endif %}
                                         </div>
                                     </div>
