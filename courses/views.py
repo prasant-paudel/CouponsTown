@@ -36,17 +36,35 @@ def info_page(request):
     except:
         contents = []
     
+    def get_queryset(keywords_list):
+        _results = []
+        for q in keywords_list:
+            r = Course.objects.filter(Q(name__icontains=q) | Q(category__icontains=q))
+            try:
+                r = r.exclude(name=course.name)
+            except:
+                pass
+            for i in r:
+                if not i in _results:
+                    _results.append(i)
+        return _results
+    
+    # Related Courses
     keys = course.name.split()
-    results = []
-    for q in keys:
-        r = Course.objects.filter(Q(name__icontains=q) | Q(category__icontains=q))
-        r = r.exclude(name=course.name)
-        for i in r:
-            if not i in results:
-                results.append(i)
-
+    results = get_queryset(keys)
     related_courses = list(results)[:10]
-    return render(request, 'courses/info_page.html', {'course': course, 'related_courses': related_courses, 'contents':contents})
+    # Category - Web Development
+    keys = ['web', 'html', 'css', 'js', 'javascript']
+    web_development = get_queryset(keys)
+    # Category - Graphics Design
+    keys = ['adobe', 'photoshop' 'illustrator', 'inkscape', 'video editing', 'figma', 'prototype']
+    graphics_design = get_queryset(keys)
+    
+
+    return render(request, 'courses/info_page.html', {
+        'course': course, 'related_courses': related_courses, 'contents':contents,
+        'web_development': web_development,
+    })
 
 def search(request):
     template = 'courses/home.html'
