@@ -44,7 +44,7 @@
             {% if course.image %}
             {% if not course.expired %}
             <!-- --------------Startin008 of coupon--------- -->
-            <div class="card mb-2 ml-2 m-2" style="width: 18rem; height: fit-content; background: #f1faee">
+            <div class="card mb-2 ml-2 m-2 bg-purple-gradient" style="width: 18rem; height: fit-content; background: #f1faee;">
                 <div class="main-card-body" style="width: 270px;">
                     <div class="course-title"
                         style=" justify-content: center;">
@@ -64,7 +64,7 @@
                                 {% endif %}
                             </div>
                             <div class="get-coupon" style="width: 100%; height: 40px;  ">
-                                <a href="{% url 'info_page' %}?course={{course.name_encoded}}" style="text-decoration: nonea; color: #03e9f4;">
+                                <a href="{% url 'info_page' %}?course={{course.name_encoded}}" class="btn peach-gradient">
                                     
                                     Enroll Now
                                 </a>

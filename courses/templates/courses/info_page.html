@@ -58,7 +58,8 @@
                     <script>
                       function countDown(secs,elem) {
                         var element = document.getElementById(elem);
-                        element.innerHTML = "<h4 class='text-info'>Please wait for "+secs+" seconds</h4>";
+                       
+                        element.innerHTML = "<h4 class='text-info'><span class='text-danger'>Generating Coupon</span> <br> Please wait for "+secs+" seconds</h4>";
                         if(secs < 1) {
                           clearTimeout(timer);
                           element.innerHTML = '<p class="lead text-success" style="font-weight:500;">\
@@ -68,7 +69,7 @@
                           Successfully Generated \
                           {% endif %}\
                           ;</p>';
-                          element.innerHTML += '<a href="{{ course.url }}" target="blank" style="text-decoration: none; color: #03e9f4; border-radius: 0px; width: 100%;" ><span></span><span></span><span></span><span></span>\
+                          element.innerHTML += '<a href="{{ course.url }}" class="btn peach-gradient text-white" target="blank" style="text-decoration: none; color: #03e9f4; border-radius: 0px; width: max-content; margin-top:-3px;" ><span></span><span></span><span></span><span></span>\
                           {% if course.expired %}\
                           Coupon Expired\
                           {% else %}\
@@ -86,9 +87,9 @@
                 <div class="rating floa-left d-flex align-items-center mt-5"
                   style="width: 100%; height: 45px; float: left; ">
                   {% if course.platform == 'Udemy' %}
-                  <img src="{% static 'images/udemy.svg' %}" height="70%" width="100%" alt="CouponsTown | Best Courses Udemy | Free Certificate | Free Udemy Course | Highest Rated | {{course.id}}">
+                  <img src="{% static 'images/udemy.svg' %}" class="rounded mx-auto d-block" height="70%" width="100%" alt="CouponsTown | Best Courses Udemy | Free Certificate | Free Udemy Course | Highest Rated | {{course.id}}">
                   {% elif course.platform == 'Eduonix' %}
-                  <img src="{% static 'images/eduonix.png' %}" height="70%" style="margin:0 auto; width:max-content; background:antiquewhite; border-radius: 5%;" alt="CouponsTown | Best Eduonix Courses | Free Certification | Highest Rated | Bestseller | {{course.id}}">
+                  <img src="{% static 'images/eduonix.png' %}" class="rounded mx-auto d-block" height="70%" style="margin:0 auto; width:max-content; background:antiquewhite; border-radius: 5%;" alt="CouponsTown | Best Eduonix Courses | Free Certification | Highest Rated | Bestseller | {{course.id}}">
                   {% endif %}
                 </div>
     

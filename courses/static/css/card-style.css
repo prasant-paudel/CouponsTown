@@ -116,13 +116,12 @@ body
 
 
 .card-body .get-coupon a{
+    height: 50px;
     position: relative;
     display: inline-block;
     width: 100%;
-    text-align: center;
-    background: #050801 !important;;
-    color: #03e9f4  !important;
-    font-size: 24px;
+    text-align: center;             
+    font-size: 18px;
     text-decoration: none;
     text-transform: uppercase;
     overflow: hidden;
@@ -132,12 +131,3 @@ body
 
 
 
-.card-body .get-coupon a:hover{
-    background:   #03e9f4 !important;;
-    color: #050801 !important;
-    text-decoration: none;
-    box-shadow: 0 0 5px #03e9f4,
-                0 0 25px #03e9f4,
-                0 0 50px #03e9f4,
-                0 0 200px #03e9f4;
-}
