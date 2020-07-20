@@ -47,23 +47,43 @@ def info_page(request):
             for i in r:
                 if not i in _results:
                     _results.append(i)
-        return _results
+        return _results[:8]
     
     # Related Courses
     keys = course.name.split()
     results = get_queryset(keys)
     related_courses = list(results)[:10]
     # Category - Web Development
-    keys = ['web', 'html', 'css', 'js', 'javascript']
+    keys = ['web', 'html', 'css', 'js', 'javascript', 'bootstrap', 'react', 'angular', 'vue', 'php']
     web_development = get_queryset(keys)
-    # Category - Graphics Design
-    keys = ['adobe', 'photoshop' 'illustrator', 'inkscape', 'video editing', 'figma', 'prototype']
-    graphics_design = get_queryset(keys)
-    
+    # Category - Programming
+    keys = ['python', 'javascript', 'java', 'programming', 'ruby', 'angular', 'react', 'vue', 
+        'flutter', 'android studio', 'sdk', 'swift', 'php', 'algorithm']
+    programming = get_queryset(keys)
+    # Category - Office & Productivity
+    keys = ['office', 'word', 'excel', 'powerpoint', 'ms access', 'microsoft access', 'tally', 
+        'gmail', 'google docs', 'google drive', 'evernote', 'google classroom', 'onedrive', 'youtube',
+        'google sites', 'trello', 'powerapps', 'slack', 'wordpress', 'business analysis', 'gsuite', 'trademark',
+        'blazor', 'blogging', 'animated promo', 'google photos', 'office 365', 'google drawings', 'jamboard', 
+        'sap', 'power bi', 'schedule', 'business', 'communication', 'kubernetes']
+    office = get_queryset(keys)
+    # Category - Network and Ethical Hacking
+    keys = ['ethical hacking', 'cybersecurity', 'cyber security', 'pentesting', 'penetration testing', 
+        'malware', 'nework security', 'wireshark', 'social engineering', 'deep web', 'dark web', 'kali',
+        'linux', 'operating system', 'debugger', 'bug bounty', 'shell', 'scripting', 'cisco','comptia','python', 'javascript']
+    hacking = get_queryset(keys)
+
+    # Category - Server and Cloud Computing
+    keys = ['azure', 'aws' 'google cloud', 'cloud', 'windows server', 'server', 'red hat', 'centos', 'open suse',
+        'oracle', 'vm', 'vmware', 'microservices', 'power bi', 'elastic beanstalk', 'ec2', 'route 53',
+        'powershell', 'system center', 'devops', 'docker',]
+    cloud = get_queryset(keys)
+
 
     return render(request, 'courses/info_page.html', {
         'course': course, 'related_courses': related_courses, 'contents':contents,
-        'web_development': web_development,
+        'web_development': web_development, 'programming': programming,
+        'office': office, 'hacking': hacking, 'cloud': cloud,
     })
 
 def search(request):

@@ -15,6 +15,8 @@
     <li data-target="#carousel-with-lb" data-slide-to="0" class="active secondary-color"></li>
     <li data-target="#carousel-with-lb" data-slide-to="1" class="secondary-color"></li>
     <li data-target="#carousel-with-lb" data-slide-to="2" class="secondary-color"></li>
+    <li data-target="#carousel-with-lb" data-slide-to="3" class="secondary-color"></li>
+    <li data-target="#carousel-with-lb" data-slide-to="3" class="secondary-color"></li>
   </ol>
   <!--/.Indicators-->
 
@@ -32,12 +34,9 @@
           <!-- Card image -->
           <img class="card-img-top" src="{{item.image.url}}" alt="Free Udemy Coupon | Web Development Courses for free | {{course.name}}">
           <!-- Card content -->
-          <div class="card-body">
+          <div class="card-body" style="height: 220px;">
             <!-- Title -->
             <h4 class="card-title"><a>{{ item.name }}</a></h4>
-            <!-- Text -->
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
             <!-- Button -->
             <a href="{% url 'info_page' %}?course={{item.name_encoded}}" class="btn btn-primary">Enroll Now</a>
           </div>
@@ -50,21 +49,18 @@
 
     <!--Second slide-->
     <div class="carousel-item text-center">
-      <h3>Graphics Design</h3>
-      {% for item in graphics_design %}
+      <h3>Programming</h3>
+      {% for item in programming %}
       <!-- CARD -->
       <figure class="col-md-3 col-sm-6 offset-xm-3 d-md-inline-block">
         <div class="card">
           <!-- Card image -->
-          <img class="card-img-top" src="{{item.image.url}}" alt="Free Udemy Coupon | Web Development Courses for free | {{course.name}}">
+          <img class="card-img-top" src="{{item.image.url}}" alt="Free Udemy Coupon | Programming Courses for free | {{course.name}}">
           <!-- Card content -->
-          <div class="card-body">
+          <div class="card-body" style="height: 220px;">
             <!-- Title -->
             <h4 class="card-title"><a>{{ item.name }}</a></h4>
             <!-- Text -->
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-            <!-- Button -->
             <a href="{% url 'info_page' %}?course={{item.name_encoded}}" class="btn btn-primary">Enroll Now</a>
           </div>
         </div>
@@ -78,187 +74,80 @@
 
     <!--Third slide-->
     <div class="carousel-item text-center">
-      <h3>Course Category</h3>
+      <h3>Office & Productivity</h3>
+
+      {% for item in office %}
+      <!-- CARD -->
       <figure class="col-md-3 col-sm-6 offset-xm-3 d-md-inline-block">
         <div class="card">
-
           <!-- Card image -->
-          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" alt="Card image cap">
-        
+          <img class="card-img-top" src="{{item.image.url}}" alt="Free Udemy Coupon | Office Productivity Courses for free | {{course.name}}">
           <!-- Card content -->
-          <div class="card-body">
-        
+          <div class="card-body" style="height: 220px;">
             <!-- Title -->
-            <h4 class="card-title"><a>Card title</a></h4>
+            <h4 class="card-title"><a>{{ item.name }}</a></h4>
             <!-- Text -->
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-            <!-- Button -->
-            <a href="#" class="btn btn-primary">Button</a>
-        
+            <a href="{% url 'info_page' %}?course={{item.name_encoded}}" class="btn btn-primary">Enroll Now</a>
           </div>
-        
         </div>
       </figure>
-
-      <figure class="col-md-3 col-sm-6 offset-xm-3 d-md-inline-block">
-        <div class="card">
-
-          <!-- Card image -->
-          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" alt="Card image cap">
-        
-          <!-- Card content -->
-          <div class="card-body">
-        
-            <!-- Title -->
-            <h4 class="card-title"><a>Card title</a></h4>
-            <!-- Text -->
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-            <!-- Button -->
-            <a href="#" class="btn btn-primary">Button</a>
-        
-          </div>
-        
-        </div>
-      </figure>
-
-      <figure class="col-md-3 col-sm-6 offset-xm-3 d-md-inline-block">
-        <div class="card">
-
-          <!-- Card image -->
-          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" alt="Card image cap">
-        
-          <!-- Card content -->
-          <div class="card-body">
-        
-            <!-- Title -->
-            <h4 class="card-title"><a>Card title</a></h4>
-            <!-- Text -->
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-            <!-- Button -->
-            <a href="#" class="btn btn-primary">Button</a>
-        
-          </div>
-        
-        </div>
-      </figure>
-
-      <figure class="col-md-3 col-sm-6 offset-xm-3 d-md-inline-block">
-        <div class="card">
-
-          <!-- Card image -->
-          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" alt="Card image cap">
-        
-          <!-- Card content -->
-          <div class="card-body">
-        
-            <!-- Title -->
-            <h4 class="card-title"><a>Card title</a></h4>
-            <!-- Text -->
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-            <!-- Button -->
-            <a href="#" class="btn btn-primary">Button</a>
-        
-          </div>
-        
-        </div>
-      </figure>
-
-      <figure class="col-md-3 col-sm-6 offset-xm-3 d-md-inline-block">
-        <div class="card">
-
-          <!-- Card image -->
-          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" alt="Card image cap">
-        
-          <!-- Card content -->
-          <div class="card-body">
-        
-            <!-- Title -->
-            <h4 class="card-title"><a>Card title</a></h4>
-            <!-- Text -->
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-            <!-- Button -->
-            <a href="#" class="btn btn-primary">Button</a>
-        
-          </div>
-        
-        </div>
-      </figure>
-
-      <figure class="col-md-3 col-sm-6 offset-xm-3 d-md-inline-block">
-        <div class="card">
-
-          <!-- Card image -->
-          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" alt="Card image cap">
-        
-          <!-- Card content -->
-          <div class="card-body">
-        
-            <!-- Title -->
-            <h4 class="card-title"><a>Card title</a></h4>
-            <!-- Text -->
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-            <!-- Button -->
-            <a href="#" class="btn btn-primary">Button</a>
-        
-          </div>
-        
-        </div>
-      </figure>
-
-      <figure class="col-md-3 col-sm-6 offset-xm-3 d-md-inline-block">
-        <div class="card">
-
-          <!-- Card image -->
-          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" alt="Card image cap">
-        
-          <!-- Card content -->
-          <div class="card-body">
-        
-            <!-- Title -->
-            <h4 class="card-title"><a>Card title</a></h4>
-            <!-- Text -->
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-            <!-- Button -->
-            <a href="#" class="btn btn-primary">Button</a>
-        
-          </div>
-        
-        </div>
-      </figure>
-
-      <figure class="col-md-3 col-sm-6 offset-xm-3 d-md-inline-block">
-        <div class="card">
-
-          <!-- Card image -->
-          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" alt="Card image cap">
-        
-          <!-- Card content -->
-          <div class="card-body">
-        
-            <!-- Title -->
-            <h4 class="card-title"><a>Card title</a></h4>
-            <!-- Text -->
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-            <!-- Button -->
-            <a href="#" class="btn btn-primary">Button</a>
-        
-          </div>
-        
-        </div>
-      </figure>
-
-      
+      <!-- / CARD -->
+      {% endfor %}
 
     </div>
-    <!--/.Third slide-->
+    <!--/.Fourth slide-->
+
+        <!--Fourth slide-->
+        <div class="carousel-item text-center">
+          <h3>Network & Etchical Hacking</h3>
+    
+          {% for item in hacking %}
+          <!-- CARD -->
+          <figure class="col-md-3 col-sm-6 offset-xm-3 d-md-inline-block">
+            <div class="card">
+              <!-- Card image -->
+              <img class="card-img-top" src="{{item.image.url}}" alt="Free Udemy Coupon | Office Productivity Courses for free | {{course.name}}">
+              <!-- Card content -->
+              <div class="card-body" style="height: 220px;">
+                <!-- Title -->
+                <h4 class="card-title"><a>{{ item.name }}</a></h4>
+                <!-- Text -->
+                <a href="{% url 'info_page' %}?course={{item.name_encoded}}" class="btn btn-primary">Enroll Now</a>
+              </div>
+            </div>
+          </figure>
+          <!-- / CARD -->
+          {% endfor %}
+    
+        </div>
+        <!--/.Fourth slide-->
+        
+        <!--/.Fifth slide-->
+
+        <!--Fifth slide-->
+        <div class="carousel-item text-center">
+          <h3>Server & Cloud Computing</h3>
+    
+          {% for item in cloud %}
+          <!-- CARD -->
+          <figure class="col-md-3 col-sm-6 offset-xm-3 d-md-inline-block">
+            <div class="card">
+              <!-- Card image -->
+              <img class="card-img-top" src="{{item.image.url}}" alt="Free Udemy Coupon | Office Productivity Courses for free | {{course.name}}">
+              <!-- Card content -->
+              <div class="card-body" style="height: 220px;">
+                <!-- Title -->
+                <h4 class="card-title"><a>{{ item.name }}</a></h4>
+                <!-- Text -->
+                <a href="{% url 'info_page' %}?course={{item.name_encoded}}" class="btn btn-primary">Enroll Now</a>
+              </div>
+            </div>
+          </figure>
+          <!-- / CARD -->
+          {% endfor %}
+    
+        </div>
+        <!--/.Fifth slide-->
 
   </div>
   <!--/.Slides-->
