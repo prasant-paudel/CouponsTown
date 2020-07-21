@@ -4,6 +4,7 @@ from django.db.models import Q
 from .my_scripts import CourseInfo
 from .tags_scraper import TagScraper
 import pickle
+from django.core.paginator import Paginator, EmptyPage
 
 
 def home(request):
@@ -13,6 +14,19 @@ def home(request):
 
 def courses(request):
     courses = Course.objects.order_by('upload_date').reverse()
+
+    p = Paginator(courses, 9)  # Total no of items per page = 9
+    try:
+        page_num = int(request.GET.get('page'))
+    except:
+        page_num = 1
+
+    page = p.page(page_num)  # Items from first page
+    total_pages = [x+1 for x in range(p.num_pages)]
+    active_page = page_num
+
+    print(page_num)
+
     high_rated = Course.objects.order_by('rating')
     high_rated = list(high_rated)[:10]
 
@@ -23,7 +37,7 @@ def courses(request):
     except AttributeError:
         all_tags = []
 
-    return render(request, 'courses/home.html', {'courses': courses, 'high_rated':high_rated, 'all_tags': all_tags})
+    return render(request, 'courses/home.html', {'courses': page, 'total_pages': total_pages, 'active_page': active_page, 'num_pages': p.num_pages, 'high_rated':high_rated, 'all_tags': all_tags})
 
 def info_page(request):
     _course = request.GET.get('course')
