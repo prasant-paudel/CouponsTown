@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div id="carousel-example-multi" class="carousel slide carousel-multi-item v-2 mt-3" data-ride="carousel">
+  <div id="carousel-example-multi" class="carousel slide carousel-multi-item v-2 mt-3 " data-ride="carousel">
 
       <!--Controls-->
       <div class="controls-top ">
@@ -17,7 +17,7 @@
         {% if index == 0 %}
         <div class="carousel-item active" >
         {% else %}
-        <div class="carousel-item" >
+        <div class="carousel-item hello" >
         {% endif %}
           <div class="col-sm-6 col-8 offset-sm-0 offset-2 col-md-4 col-lg-3">
             <div class="card mb-2">
@@ -52,7 +52,7 @@
 </div>  
 
 <script>
-  $('.carousel.carousel-multi-item.v-2 .carousel-item').each(function(){
+  $('.carousel.carousel-multi-item.v-2 .carousel-item .hello').each(function(){
       var next = $(this).next();
       if (!next.length) {
       next = $(this).siblings(':first');

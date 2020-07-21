@@ -44,7 +44,7 @@
             {% if course.image %}
             {% if not course.expired %}
             <!-- --------------Startin008 of coupon--------- -->
-            <div class="card mb-2 ml-2 m-2 bg-purple-gradient" style="width: 18rem; height: fit-content; background: #f1faee;">
+            <div class="card mb-2 ml-2 m-2 " style="width: 18rem; height: fit-content; background: #f1faee;">
                 <div class="main-card-body" style="width: 270px;">
                     <div class="course-title"
                         style=" justify-content: center;">
@@ -124,9 +124,8 @@
                 {% endfor %}
 
                 <!-- -------------------------------------add Anothe coupon before this div------------------------- -->
-
             </div>
-
+            
         </div>
 
         <!-- ================================================================================================================         -->
@@ -158,11 +157,9 @@
 
         </div>
         
-        <!-- <div class="container-fluid"> -->
         
-        <!-- </div> -->
         <div style="width: 100%;">
-            {% include 'courses/carousel.html' %}
+            
             {% include 'courses/footer.html' %}
         </div>
 </div>
