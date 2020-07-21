@@ -43,7 +43,6 @@
 
             {% for course in courses %}
             {% if course.image %}
-            {% if not course.expired %}
             <!-- --------------Startin008 of coupon--------- -->
             <div class="card mb-2 ml-2 m-2 " style="width: 18rem; height: fit-content; background: #f1faee;">
                 <div class="main-card-body" style="width: 270px;">
@@ -120,7 +119,6 @@
                     </div>
                 </div>
                 
-                {% endif %}
                 {% endif %}
                 {% endfor %}
 

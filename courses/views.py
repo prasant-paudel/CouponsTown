@@ -14,6 +14,7 @@ def home(request):
 
 def courses(request):
     courses = Course.objects.order_by('upload_date').reverse()
+    courses = courses.order_by('expired').reverse().order_by('rating').reverse()
 
     p = Paginator(courses, 9)  # Total no of items per page = 9
     try:
