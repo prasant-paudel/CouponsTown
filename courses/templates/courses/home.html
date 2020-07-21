@@ -1,5 +1,6 @@
 {% extends 'courses/base.html' %}
 {% load static %}
+{% load mathfilters %}
 
 {% block page_meta %}
 <meta name="title" content="[100% off] Free Online Courses with Certificates | CouponsTown.Me" />
@@ -122,6 +123,47 @@
                 {% endif %}
                 {% endif %}
                 {% endfor %}
+
+                <!-- <div class="container bg-secondary text-white d-flex justify-content-center">
+                    {% for i in total_pages %}
+                        <a href="{% url 'courses' %}?page={{i}}" style="color: black;">{{i}}</a> &nbsp;
+                    {% endfor %}               
+                </div> -->
+
+                <!-- PAGINATION -->
+                <nav class="container d-flex justify-content-center">
+                    <ul class="pagination pg-red">
+                      <li class="page-item">
+                        {% if active_page == 1 %}
+                        <a class="page-link" aria-label="Previous">
+                        {% else %}
+                        <a class="page-link" aria-label="Previous" href="{% url 'courses' %}?page={{active_page|add:-1}}">
+                        {% endif %}
+                          <span aria-hidden="true">&laquo;</span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                      </li>
+
+                      {% for i in total_pages %}
+                        {% if i == active_page %}
+                      <li id="page-item{{i}}" class="page-item active"><a class="page-link" href="{% url 'courses' %}?page={{i}}">{{i}}</a></li>
+                        {% else %}
+                        <li class="page-item"><a class="page-link" href="{% url 'courses' %}?page={{i}}">{{i}}</a></li>
+                        {% endif %}
+                      {% endfor %}
+                      <li class="page-item">
+                        {% if active_page == num_pages %}
+                        <a class="page-link" aria-label="Next">
+                        {% else %}
+                        <a class="page-link" aria-label="Next" href="{% url 'courses' %}?page={{active_page|add:1}}">
+                        {% endif %}
+                          <span aria-hidden="true">&raquo;</span>
+                          <span class="sr-only">Next</span>
+                        </a>
+                      </li>
+                    </ul>
+                </nav>
+                <!-- / PAGINATION -->
 
                 <!-- -------------------------------------add Anothe coupon before this div------------------------- -->
 
