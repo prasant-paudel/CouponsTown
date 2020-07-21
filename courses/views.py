@@ -32,7 +32,7 @@ def courses(request):
     high_rated = list(high_rated)[:10]
 
     try:
-        all_small_tags = courses.first().tags.choices
+        all_small_tags = Course.objects.first().tags.choices
         keys = list(all_small_tags)
         all_tags = [(all_small_tags[x]) for x in keys]
     except AttributeError:
@@ -116,8 +116,18 @@ def search(request):
             if not i in results:
                 results.append(i)
 
+    high_rated = Course.objects.order_by('rating')
+    high_rated = list(high_rated)[:10]
+
+    try:
+        all_small_tags = Course.objects.first().tags.choices
+        keys = list(all_small_tags)
+        all_tags = [(all_small_tags[x]) for x in keys]
+    except AttributeError:
+        all_tags = []
+
     msg = f'Search results for "{query}"'
-    return render(request, template, {'courses': results, 'message': msg})
+    return render(request, template, {'courses': results, 'message': msg, 'high_rated': high_rated, 'all_tags': all_tags})
 
 
 def category(request):
