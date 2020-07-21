@@ -28,6 +28,7 @@ urlpatterns = [
     path('subscribe/', views.subscribe, name='subscribe'),
     re_path('^api/$', api_views.api, name='api'),
     path('info-page/', views.info_page, name='info_page'),
+    path('test/', views.test, name='test'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
