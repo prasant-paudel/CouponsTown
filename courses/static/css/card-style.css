@@ -7,14 +7,6 @@
     box-sizing: border-box;
 }
 
-body
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-
 .container
 {
     position: relative;
@@ -115,8 +107,8 @@ body
 
 
 
-.card-body .get-coupon a{
-    height: 50px;
+.get-coupon a{
+    height: 50px; 
     position: relative;
     display: inline-block;
     width: 100%;
@@ -126,7 +118,7 @@ body
     text-transform: uppercase;
     overflow: hidden;
     transition: 0.5s;
-    letter-spacing: 4px;
+    /* letter-spacing: 4px; */
 }
 
 

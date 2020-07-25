@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}">
     
     <!----------------Custom Css-->
-    <link rel="stylesheet" href="{% static 'css/card-style.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/card-style.css' %}"> -->
    
        <!-- Favicon -->
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
@@ -39,19 +39,33 @@
     </script>
 
 </head>
-<body style="background:#f1faee;" id="top-section" class="scrollbar-danger">
-
-    
+<body style="background:#f1faee;" id="top-section" class="fixed-sn">
+ 
+  <header>
+    {% include 'courses/navbar.html' %}
+  </header>
+  <main style="margin: 0 !important;">
+    {% include 'courses/navbar1.html' %}    
     {% block body %}
     
-    
+  
     {% endblock %}
-     <!--------Arrow Up // Go to TOP ARROw-->
-    <div class="fixed-action-btn smooth-scroll" style="bottom: 45px; right: 24px;">
-        <a href="#top-section" class="btn-floating btn-large red">
-          <i class="fas fa-arrow-up"></i>
-        </a>
-    </div>
+  </main>  
+    
+    
+            
+  
+    
+
+  <footer  class="page-footer text-center text-md-left pt-4 bg-dark"> 
+    {% include 'courses/footer.html' %}
+  </footer>
+  <!--------Arrow Up // Go to TOP ARROw-->
+  <div class="fixed-action-btn smooth-scroll" style="bottom: 45px; right: 24px;">
+    <a href="#top-section" class="btn-floating btn-large red">
+      <i class="fas fa-arrow-up"></i>
+    </a>
+  </div>  
     
     <!---jQuery-->
     <script src="{% static 'js/jquery.min.js' %}"></script>

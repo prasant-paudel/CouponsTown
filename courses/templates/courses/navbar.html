@@ -1,130 +1,132 @@
 {% load static%}
-  <body class="fixed-sn ">
 
-    <!--Double navigation-->
-    <header>
-      <!-- Sidebar navigation -->
-      <div id="slide-out" class="side-nav fixed bg-danger">
-        <ul class="custom-scrollbar">
-          <!-- Logo -->
-          <li>
-            <div class="logo-wrapper waves-light">
-            	<a href="{% url 'home' %}"><img src="{% static 'images/CouponsTown-background.png' %}" class="img-fluid flex-center" style="padding: 0; height: 100%; width: 100% ;"></a>
-            </div>
-          </li>
-          <!--/. Logo -->
-          <!--Social-->
-          <li>
-            <ul class="social">
-              <li><a  href="https://www.facebook.com/couponstown/" target="blank" class="icons-sm fb-ic"><i class="fab fa-facebook-f"> </i></a></li>
-              <li><a href="https://t.me/coupons_town" target="blank" class="icons-sm pin-ic"><i class="fab fa-telegram"> </i></a></li>
-              <li><a  href="https://www.instagram.com/couponstown/" target="blank" class="icons-sm gplus-ic"><i class="fab fa-instagram"> </i></a></li>
-              <li><a href="https://twitter.com/CouponsTown" target="blank" class="icons-sm tw-ic"><i class="fab fa-twitter"> </i></a></li>
-            </ul>
-          </li>
-          <!--/Social-->
-          <!--Search Form-->
-          <li>
-            <form class="search-form" role="search" method="GET" action="{% url 'search' %}">
-              <div class="form-group md-form mt-0 pt-1 waves-light">
-                <input type="text" class="form-control" placeholder="Search" name="q">
-              </div>
-            </form>
-          </li>
-          <!--/.Search Form-->
-          <!-- Side navigation links -->
-          <li>
-          <ul class="collapsible collapsible-accordion">
-            <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-chevron-right"></i>Education Course<i class="fas fa-angle-down rotate-icon"></i></a>
-              <div class="collapsible-body">
-                <ul class="list-unstyled">
-                  <li><a href="{% url 'courses' %}" class="waves-effect">Course Coupons</a>
-                  </li>
-                  <li><a href="#" class="waves-effect">Download Course</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li>
-              <a class="collapsible-header waves-effect arrow-r"><i class="fas fa-book"></i>Books<i class="fas fa-angle-down rotate-icon"></i></a>
-              <div class="collapsible-body">
-                <ul class="list-unstyled">
-                  <li><a href="#" class="waves-effect">Books Offer/Coupons</a>
-                  </li>
-                  <li><a href="#" class="waves-effect">Download Books</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li><a class="collapsible-header waves-effect arrow-r"><i class="fab fa-steam"></i>Games Coupons<i class="fas fa-angle-down rotate-icon"></i></a>
-              <div class="collapsible-body">
-                <ul class="list-unstyled">
-                  <li><a href="#" class="waves-effect">Game Coupons</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-gifts"></i>Other Giveaways<i class="fas fa-angle-down rotate-icon"></i></a>
-              <div class="collapsible-body">
-                <ul class="list-unstyled">
-                  <li><a href="#" class="waves-effect">Software</a>
-                  </li>
-                  <li><a href="#" class="waves-effect">Android Apllication</a>
-                  </li>
-                  <li><a href="#" class="waves-effect">Premium Account</a>
-                  </li>
-                  <li><a href="#" class="waves-effect">Serial Keys</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            
-            <li><a class="collapsible-header waves-effect arrow-r"><i class="far fa-envelope"></i>Support Us<i class="fas fa-angle-down rotate-icon"></i></a>
-              <div class="collapsible-body">
-                <ul class="list-unstyled">
-                  <li><a  class="waves-effect" data-toggle="modal" data-target="#LeaveFeedback">Leave Feedback</a>
-                  </li>
-                  <li><a  class="waves-effect" data-toggle="modal" data-target="#WriteMessage">Contact Us</a>
-                  </li>
-                  <li><a  class="waves-effect" data-toggle="modal" data-target="#">Submit Coupon</a>
-                  </li>
-                  <li><a class="waves-effect" data-toggle="modal" data-target="#">Request Course</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </li>
-            
-        <div class="sidenav-bg mask-strong"></div>
-      </div>
-      <!--/. Sidebar navigation -->
-      <!-- Navbar -->
-      <nav class="navbar bg-danger text-white fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav">
-        <!-- SideNav slide-out button -->
-        <div class="float-left">
-          <a href="#" data-activates="slide-out" class="button-collapse"><i class="fas fa-bars"></i></a>
+
+<!--Double navigation-->
+<header>
+  <!-- Sidebar navigation -->
+  <div id="slide-out" class="side-nav fixed bg-danger">
+    <ul class="custom-scrollbar">
+      <!-- Logo -->
+      <li>
+        <div class="logo-wrapper waves-light">
+          <a href="{% url 'home' %}"><img src="{% static 'images/CouponsTown-background.png' %}" class="img-fluid flex-center" style="padding: 0; height: 100%; width: 100% ;"></a>
         </div>
-        <!-- Breadcrumb-->
-        <div class="breadcrumb-dn mr-auto">
-          <p style="font-weight:bold; font-family: cursive; font-size: 2rem; ">Coupons Town</p>
-        </div>
-        <ul class="nav navbar-nav nav-flex-icons ml-auto">
-          <li class="nav-item">
-            <a class="nav-link"><i class="fas fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Contact</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link"><i class="fas fa-comments"></i> <span class="clearfix d-none d-sm-inline-block">Support</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link"><i class="fas fa-search"></i> <span class="clearfix d-none d-sm-inline-block">Search</span></a>
-          </li>
+      </li>
+      <!--/. Logo -->
+      <!--Social-->
+      <li>
+        <ul class="social">
+          <li><a  href="https://www.facebook.com/couponstown/" target="blank" class="icons-sm fb-ic"><i class="fab fa-facebook-f"> </i></a></li>
+          <li><a href="https://t.me/coupons_town" target="blank" class="icons-sm pin-ic"><i class="fab fa-telegram"> </i></a></li>
+          <li><a  href="https://www.instagram.com/couponstown/" target="blank" class="icons-sm gplus-ic"><i class="fab fa-instagram"> </i></a></li>
+          <li><a href="https://twitter.com/CouponsTown" target="blank" class="icons-sm tw-ic"><i class="fab fa-twitter"> </i></a></li>
         </ul>
-      </nav>
-      <!-- /.Navbar -->
-    </header>
-    <!--/.Double navigation-->
-  </body>
+      </li>
+      <!--/Social-->
+      <!--Search Form-->
+      <li>
+        <form class="search-form" role="search" method="GET" action="{% url 'search' %}">
+          <div class="form-group md-form mt-0 pt-1 waves-light">
+            <input type="text" class="form-control" placeholder="Search" name="q">
+          </div>
+        </form>
+      </li>
+      <!--/.Search Form-->
+      <!-- Side navigation links -->
+      <li>
+      <ul class="collapsible collapsible-accordion">
+        <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-chevron-right"></i>Education Course<i class="fas fa-angle-down rotate-icon"></i></a>
+          <div class="collapsible-body">
+            <ul class="list-unstyled">
+              <li><a href="{% url 'courses' %}" class="waves-effect">Course Coupons</a>
+              </li>
+              <li><a href="#" class="waves-effect">Download Course</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a class="collapsible-header waves-effect arrow-r"><i class="fas fa-book"></i>Books<i class="fas fa-angle-down rotate-icon"></i></a>
+          <div class="collapsible-body">
+            <ul class="list-unstyled">
+              <li><a href="#" class="waves-effect">Books Offer/Coupons</a>
+              </li>
+              <li><a href="#" class="waves-effect">Download Books</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li><a class="collapsible-header waves-effect arrow-r"><i class="fab fa-steam"></i>Games Coupons<i class="fas fa-angle-down rotate-icon"></i></a>
+          <div class="collapsible-body">
+            <ul class="list-unstyled">
+              <li><a href="#" class="waves-effect">Game Coupons</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-gifts"></i>Other Giveaways<i class="fas fa-angle-down rotate-icon"></i></a>
+          <div class="collapsible-body">
+            <ul class="list-unstyled">
+              <li><a href="#" class="waves-effect">Software</a>
+              </li>
+              <li><a href="#" class="waves-effect">Android Apllication</a>
+              </li>
+              <li><a href="#" class="waves-effect">Premium Account</a>
+              </li>
+              <li><a href="#" class="waves-effect">Serial Keys</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        
+        <li><a class="collapsible-header waves-effect arrow-r"><i class="far fa-envelope"></i>Support Us<i class="fas fa-angle-down rotate-icon"></i></a>
+          <div class="collapsible-body">
+            <ul class="list-unstyled">
+              <li><a  class="waves-effect" data-toggle="modal" data-target="#LeaveFeedback">Leave Feedback</a>
+              </li>
+              <li><a  class="waves-effect" data-toggle="modal" data-target="#WriteMessage">Contact Us</a>
+              </li>
+              <li><a  class="waves-effect" data-toggle="modal" data-target="#">Submit Coupon</a>
+              </li>
+              <li><a class="waves-effect" data-toggle="modal" data-target="#">Request Course</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </li>
+        
+    <div class="sidenav-bg mask-strong"></div>
+  </div>
+  <!--/. Sidebar navigation -->
+  <!-- Navbar -->
+  <nav class="navbar bg-danger text-white fixed-top navbar-toggleable-md navbar-expan-xl scrolling-navbar double-nav">
+    <!-- SideNav slide-out button -->
+    <div class="float-left">
+      <a href="#" data-activates="slide-out" class="button-collapse"><i class="fas fa-bars"></i></a>
+    </div>
+    <!-- Breadcrumb-->
+    <div class="breadcrumb-dn mr-auto">
+      <p>
+        <a href="{% url 'home' %}" style="font-weight:bold; font-family: cursive; font-size: 2rem; ">Coupons Town</a>
+      </p>
+    </div>
+    <ul class="nav navbar-nav nav-flex-icons ml-auto">
+      <li class="nav-item">
+        <a class="nav-link"><i class="fas fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Contact</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"><i class="fas fa-comments"></i> <span class="clearfix d-none d-sm-inline-block">Support</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="modal" data-target="#searchModal"><i class="fas fa-search"></i> <span class="clearfix d-none d-sm-inline-block">Search</span></a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.Navbar -->
+</header>
+<!--/.Double navigation-->
+
  <!---------------------------Moadal for leave feedback ---------------------------->   
 
 <div class="modal fade" id="LeaveFeedback" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -216,7 +218,7 @@
 </div>
 
 
- <!---------------------------Moadal for leave feedback ---------------------------->
+        <!---------------------------Moadal for leave feedback ---------------------------->
 <div class="modal fade" id="WriteMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog cascading-modal" role="document">
     <!--Content-->
@@ -299,6 +301,42 @@
           <!--/.Panel 8-->
         </div>
 
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
+<!-- --------------------------modal for search-------------------- -->
+
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog cascading-modal" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Modal cascading tabs-->
+      <div class="modal-c-tabs">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs md-tabs tabs-2 bg-danger darken-3" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i class="fas fa-search mr-1"></i>
+              Search</a>
+          </li>
+        </ul>
+        <!-- Tab panels -->
+        <div class="tab-content">
+          <!--Panel 7-->
+          <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+            <!--Body-->
+            <div class="modal-body mb-1" >
+              <form class="form-inline mr-auto search-form"  role="search" method="GET" action="{% url 'search' %}">
+                <input class="form-control mr-sm-2" style="width: 100%;" type="text" placeholder="Search" name="q">
+               </form>
+              <div class="text-center mt-2">
+                 <button class="btn btn-outline-danger btn-rounded btn-sm my-0" type="submit" >Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <!--/.Content-->
