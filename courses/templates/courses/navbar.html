@@ -1,41 +1,46 @@
-{% load static %}
+{% load static%}
+  <body class="fixed-sn ">
 
-<body class="fixed-sn">
-
-  <!--Double navigation-->
-  <header>
-    <!-- Sidebar navigation -->
-    <div id="slide-out" class="side-nav bg-danger ">
-      <ul class="custom-scrollbar">
-        <!-- Logo -->
-        <li >
-          <div class="logo-wrapper waves-light" >
-            <a href="#"><img src="{% static 'images/coupons.png' %}" class="img-fluid flex-center" style="padding: 0; height: 100%; width: 100% ;"></a>
-          </div>
-        </li>
-        <!--/. Logo -->
-        <!--Social-->
-        <li>
-          <ul class="social">
-            <li><a href="#" class="icons-sm fb-ic"><i class="fab fa-facebook-f"> </i></a></li>
-            <li><a href="#" class="icons-sm pin-ic"><i class="fab fa-telegram"> </i></a></li>
-            <li><a href="#" class="icons-sm gplus-ic"><i class="fab fa-instagram"> </i></a></li>
-            <li><a href="#" class="icons-sm tw-ic"><i class="fab fa-twitter"> </i></a></li>
-          </ul>
-        </li>
-        <!--/Social-->
-       
-        <!-- Side navigation links -->
-        <li>
+    <!--Double navigation-->
+    <header>
+      <!-- Sidebar navigation -->
+      <div id="slide-out" class="side-nav fixed bg-danger">
+        <ul class="custom-scrollbar">
+          <!-- Logo -->
+          <li>
+            <div class="logo-wrapper waves-light">
+            	<a href="{% url 'home' %}"><img src="{% static 'images/CouponsTown-background.png' %}" class="img-fluid flex-center" style="padding: 0; height: 100%; width: 100% ;"></a>
+            </div>
+          </li>
+          <!--/. Logo -->
+          <!--Social-->
+          <li>
+            <ul class="social">
+              <li><a  href="https://www.facebook.com/couponstown/" target="blank" class="icons-sm fb-ic"><i class="fab fa-facebook-f"> </i></a></li>
+              <li><a href="https://t.me/coupons_town" target="blank" class="icons-sm pin-ic"><i class="fab fa-telegram"> </i></a></li>
+              <li><a  href="https://www.instagram.com/couponstown/" target="blank" class="icons-sm gplus-ic"><i class="fab fa-instagram"> </i></a></li>
+              <li><a href="https://twitter.com/CouponsTown" target="blank" class="icons-sm tw-ic"><i class="fab fa-twitter"> </i></a></li>
+            </ul>
+          </li>
+          <!--/Social-->
+          <!--Search Form-->
+          <li>
+            <form class="search-form" role="search" method="GET" action="{% url 'search' %}">
+              <div class="form-group md-form mt-0 pt-1 waves-light">
+                <input type="text" class="form-control" placeholder="Search" name="q">
+              </div>
+            </form>
+          </li>
+          <!--/.Search Form-->
+          <!-- Side navigation links -->
+          <li>
           <ul class="collapsible collapsible-accordion">
             <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-chevron-right"></i>Education Course<i class="fas fa-angle-down rotate-icon"></i></a>
               <div class="collapsible-body">
                 <ul class="list-unstyled">
-                  <li><a href="#" class="waves-effect">Course Coupons</a>
+                  <li><a href="{% url 'courses' %}" class="waves-effect">Course Coupons</a>
                   </li>
                   <li><a href="#" class="waves-effect">Download Course</a>
-                  </li>
-                  <li><a href="#" class="waves-effect">Download Books</a>
                   </li>
                 </ul>
               </div>
@@ -77,61 +82,58 @@
             <li><a class="collapsible-header waves-effect arrow-r"><i class="far fa-envelope"></i>Support Us<i class="fas fa-angle-down rotate-icon"></i></a>
               <div class="collapsible-body">
                 <ul class="list-unstyled">
-                  <li><a  class="waves-effect" data-toggle="modal" data-target="#darkmodalLRForm">Leave Feedback</a>
+                  <li><a  class="waves-effect" data-toggle="modal" data-target="#LeaveFeedback">Leave Feedback</a>
                   </li>
-                  <li><a  class="waves-effect" data-toggle="modal" data-target="#darkmodalLRForm1">Contact Us</a>
+                  <li><a  class="waves-effect" data-toggle="modal" data-target="#WriteMessage">Contact Us</a>
                   </li>
-                  <li><a  class="waves-effect" data-toggle="modal" data-target="#darkmodalLRForm2">Submit Coupon</a>
+                  <li><a  class="waves-effect" data-toggle="modal" data-target="#">Submit Coupon</a>
                   </li>
-                  <li><a class="waves-effect" data-toggle="modal" data-target="#darkmodalLRForm3">Request Course</a>
+                  <li><a class="waves-effect" data-toggle="modal" data-target="#">Request Course</a>
                   </li>
                 </ul>
               </div>
             </li>
           </ul>
         </li>
-        <!--/. Side navigation links -->
-      </ul>
-      <div class="sidenav-bg mask-strong"></div>
-    </div>
-    <!--/. Sidebar navigation -->
-    <!-- Navbar -->
-    <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav bg-danger text-white" >
-      <!-- SideNav slide-out button -->
-      <div class="float-left">
-        <a href="#" data-activates="slide-out" class="btn-floating red-gradient button-collapse btn"><i class="fas fa-bars"></i></a>
+            
+        <div class="sidenav-bg mask-strong"></div>
       </div>
-      <!-- Breadcrumb-->
-      <div class="breadcrumb-dn mr-auto">
-        <p><img src="">Coupons Town</p>
-      </div>
-      <ul class="nav navbar-nav nav-flex-icons ml-auto" >
-        <li class="nav-item ">
-          <a class="nav-link text-white"><i class="fas fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Contact</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white"><i class="far fa-comments"></i> <span class="clearfix d-none d-sm-inline-block">Support</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white"><i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Account</span></a>
-        </li>
-        
-      </ul>
-      
-    </nav>
-    <!-- /.Navbar -->
-  </header>
-  <!--/.Double navigation-->
-<!-------------------------------------Modals-------------------------------------->
- <!-- ---------------------Modal for leave message-------------------------------- -->
-<!--Modal: Login / Register Form-->
-<div class="modal fade" id="darkmodalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <!--/. Sidebar navigation -->
+      <!-- Navbar -->
+      <nav class="navbar bg-danger text-white fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav">
+        <!-- SideNav slide-out button -->
+        <div class="float-left">
+          <a href="#" data-activates="slide-out" class="button-collapse"><i class="fas fa-bars"></i></a>
+        </div>
+        <!-- Breadcrumb-->
+        <div class="breadcrumb-dn mr-auto">
+          <p style="font-weight:bold; font-family: cursive; font-size: 2rem; ">Coupons Town</p>
+        </div>
+        <ul class="nav navbar-nav nav-flex-icons ml-auto">
+          <li class="nav-item">
+            <a class="nav-link"><i class="fas fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Contact</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"><i class="fas fa-comments"></i> <span class="clearfix d-none d-sm-inline-block">Support</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"><i class="fas fa-search"></i> <span class="clearfix d-none d-sm-inline-block">Search</span></a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.Navbar -->
+    </header>
+    <!--/.Double navigation-->
+  </body>
+ <!---------------------------Moadal for leave feedback ---------------------------->   
+
+<div class="modal fade" id="LeaveFeedback" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog cascading-modal" role="document">
     <!--Content-->
     <div class="modal-content">
 
       <!--Modal cascading tabs-->
-      <div class="modal-c-tabs">
+            <div class="modal-c-tabs">
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs md-tabs tabs-2 bg-danger darken-3" role="tablist">
@@ -212,10 +214,93 @@
     <!--/.Content-->
   </div>
 </div>
-<!--Modal: Login / Register Form-->
 
-<div class="text-center">
-  <a href="" class="btn btn-danger btn-rounded my-3" data-toggle="modal" data-target="#modalLRForm1">Send</a>
+
+ <!---------------------------Moadal for leave feedback ---------------------------->
+<div class="modal fade" id="WriteMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog cascading-modal" role="document">
+    <!--Content-->
+    <div class="modal-content">
+
+      <!--Modal cascading tabs-->
+            <div class="modal-c-tabs">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs md-tabs tabs-2 bg-danger darken-3" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link " data-toggle="tab" href="#panel7" role="tab"><i class="fas fa-comments mr-1"></i>
+              Give Us Feedback </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#panel8" role="tab"><i class="fas fa-inbox mr-1"></i>
+              Write Message</a>
+          </li>
+        </ul>
+
+        <!-- Tab panels -->
+        <div class="tab-content">
+          <!--Panel 7-->
+          <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+
+            <!--Body-->
+            <div class="modal-body mb-1">
+              <div class="md-form form-sm mb-5">
+                <i class="fas fa-envelope prefix"></i>
+                <input type="email" id="modalLRInput10" class="form-control form-control-sm validate" required>
+                <label data-error="wrong" data-success="right" for="modalLRInput10">Your email</label>
+              </div>
+
+              <div class="md-form form-sm mb-4">
+                <i class="fas fa-user prefix"></i>
+                <input type="text" id="modalLRInput11" class="form-control form-control-sm validate" required>
+                <label data-error="wrong" data-success="right" for="modalLRInput11">Your Name </label>
+              </div>
+              <!--Textarea with icon prefix-->
+              <div class="md-form amber-textarea active-amber-textarea-2">
+                <i class="fas fa-pencil-alt prefix"></i>
+                <textarea id="form24" class="md-textarea form-control" rows="3"></textarea>
+                <label for="form24">Write Feedback</label>
+              </div>
+              <div class="text-center mt-2">
+                <button class="btn btn-danger">Send <i class="fas fa-sign-in ml-1"></i></button>
+              </div>
+            </div>
+            
+          </div>
+          <!--/.Panel 7-->
+
+          <!--Panel 8-->
+          <div class="tab-pane fade" id="panel8" role="tabpanel">
+
+            <!--Body-->
+            <div class="modal-body mb-1">
+              <div class="md-form form-sm mb-5">
+                <i class="fas fa-envelope prefix"></i>
+                <input type="email" id="modalLRInput10" class="form-control form-control-sm validate" required>
+                <label data-error="wrong" data-success="right" for="modalLRInput10">Your email</label>
+              </div>
+
+              <div class="md-form form-sm mb-4">
+                <i class="fas fa-user prefix"></i>
+                <input type="text" id="modalLRInput11" class="form-control form-control-sm validate" required>
+                <label data-error="wrong" data-success="right" for="modalLRInput11">Your Name </label>
+              </div>
+              <!--Textarea with icon prefix-->
+              <div class="md-form amber-textarea active-amber-textarea-2">
+                <i class="fas fa-pencil-alt prefix"></i>
+                <textarea id="form24" class="md-textarea form-control" rows="3"></textarea>
+                <label for="form24">Write Message</label>
+              </div>
+              <div class="text-center mt-2">
+                <button class="btn btn-danger">Send <i class="fas fa-sign-in ml-1"></i></button>
+              </div>
+            </div>
+          </div>
+          <!--/.Panel 8-->
+        </div>
+
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
 </div>
-
-</body>

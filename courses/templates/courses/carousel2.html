@@ -45,6 +45,53 @@
       </div>
     
     </div>
+<!-- ---------------------------------------------Second------------------------------------ -->
+<div id="carousel-example-multi" class="carousel slide carousel-multi-item v-2 mt-3" data-ride="carousel">
+
+  <!--Controls-->
+  <div class="controls-top ">
+    <a class="btn-floating bg-danger" href="#carousel-example-multi" data-slide="prev"><i
+        class="fas fa-chevron-left"></i></a>
+    <a class="btn-floating bg-danger" href="#carousel-example-multi" data-slide="next"><i
+        class="fas fa-chevron-right"></i></a>
+  </div>
+  <!--/.Controls-->
+
+  <div class="carousel-inner v-2" role="listbox">
+
+    {% for index, item in carousel2 %}
+    {% if item.image %}
+    {% if index == 0 %}
+    <div class="carousel-item active" >
+    {% else %}
+    <div class="carousel-item" >
+    {% endif %}
+      <div class="col-sm-12 col-8 offset-sm-0 offset-2 col-md-4 col-lg-3">
+        <div class="card mb-2">
+          <img class="card-img-top" style="height: 200px !important;" src="{{ item.image.url }}" alt="Free Udemy Coupon | Free Online Courses | {{ item.name }}">
+          <div class="card-body" style="height: 200px;" >
+            <div class="course-title" style=" justify-content: center;">
+                <h4 style="font-size: 1.3rem; font-family: cursive; width: 100%; height: 80px; font-weight: 800; text-align: center; padding: 5px; color: #1d3557">
+                    <!-- The Complete SQL Bootcamp 2020: Go from Zero to  The Complete Course -->
+                    {{ item.name }}
+                </h4>
+            </div>
+            <div class="get-coupon" style="width: 100%; height: 40px;  ">
+              <a href="{% url 'info_page' %}?course={{item.name_encoded}}" class="btn peach-gradient" style="font-size:1rem; font-weight:bolder">
+                  
+                  Enroll Now
+              </a>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+  </div>
+
+</div>
 
 
 
