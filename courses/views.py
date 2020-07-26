@@ -23,7 +23,7 @@ def get_queryset(keywords_list):
 
 def home(request):
     courses = Course.objects.order_by('image').order_by('upload_date').reverse()
-    carousel2 = ((i,e) for (i,e) in enumerate(courses))
+    carousel2 = ((i,e) for (i,e) in enumerate(courses) if not e.expired)
     return render(request, 'courses/landing.html', {'courses': courses, 'carousel2':carousel2})
 
 def courses(request):
