@@ -7,9 +7,23 @@ import pickle
 from django.core.paginator import Paginator, EmptyPage
 
 
+def get_queryset(keywords_list):
+    _results = []
+    for q in keywords_list:
+        r = Course.objects.filter(Q(name__icontains=q) | Q(category__icontains=q))
+        try:
+            r = r.exclude(name=course.name)
+        except:
+            pass
+        for i in r:
+            if not i in _results:
+                _results.append(i)
+    return _results
+
+
 def home(request):
-    courses = Course.objects.order_by('rating').order_by('image').reverse()
-    carousel2 = ((i,e) for (i,e) in enumerate(courses))
+    courses = Course.objects.order_by('image').order_by('upload_date').reverse()
+    carousel2 = ((i,e) for (i,e) in enumerate(courses) if not e.expired)
     return render(request, 'courses/landing.html', {'courses': courses, 'carousel2':carousel2})
 
 def courses(request):
@@ -51,50 +65,37 @@ def info_page(request):
     except:
         contents = []
     
-    def get_queryset(keywords_list):
-        _results = []
-        for q in keywords_list:
-            r = Course.objects.filter(Q(name__icontains=q) | Q(category__icontains=q))
-            try:
-                r = r.exclude(name=course.name)
-            except:
-                pass
-            for i in r:
-                if not i in _results:
-                    _results.append(i)
-        return _results[:8]
-    
     # Related Courses
     keys = course.name.split()
     results = get_queryset(keys)
     related_courses = list(results)[:10]
+
     # Category - Web Development
     keys = ['web', 'html', 'css', 'js', 'javascript', 'bootstrap', 'react', 'angular', 'vue', 'php']
-    web_development = get_queryset(keys)
+    web_development = get_queryset(keys)[:8]
     # Category - Programming
     keys = ['python', 'javascript', 'java', 'programming', 'ruby', 'angular', 'react', 'vue', 
         'flutter', 'android studio', 'sdk', 'swift', 'php', 'algorithm']
-    programming = get_queryset(keys)
+    programming = get_queryset(keys)[:8]
     # Category - Office & Productivity
     keys = ['office', 'word', 'excel', 'powerpoint', 'ms access', 'microsoft access', 'tally', 
         'gmail', 'google docs', 'google drive', 'evernote', 'google classroom', 'onedrive', 'youtube',
         'google sites', 'trello', 'powerapps', 'slack', 'wordpress', 'business analysis', 'gsuite', 'trademark',
         'blazor', 'blogging', 'animated promo', 'google photos', 'office 365', 'google drawings', 'jamboard', 
         'sap', 'power bi', 'schedule', 'business', 'communication', 'kubernetes', 'linux']
-    office = get_queryset(keys)
+    office = get_queryset(keys)[:8]
     # Category - Network Security and Ethical Hacking
     keys = ['ethical hacking', 'cybersecurity', 'cyber security', 'pentesting', 'penetration testing', 
         'malware', 'nework security', 'wireshark', 'social engineering', 'deep web', 'dark web', 'kali',
         'linux', 'operating system', 'debugger', 'bug bounty', 'shell', 'scripting', 'oscp', 'ceh', 'cisco',
         'ccna', 'ccnp', 'ccie','comptia', 'routing & switching', 'routing and switching', 'subnetting', 'ipv4', 
         'ipv6', 'python', 'javascript']
-    hacking = get_queryset(keys)
-
+    hacking = get_queryset(keys)[:8]
     # Category - Server and Cloud Computing
     keys = ['azure', 'aws' 'google cloud', 'cloud', 'windows server', 'server', 'red hat', 'centos', 'open suse',
         'oracle', 'vm', 'vmware', 'microservices', 'power bi', 'elastic beanstalk', 'ec2', 'route 53',
         'powershell', 'system center', 'devops', 'docker', 'big data', 'hadoop']
-    cloud = get_queryset(keys)
+    cloud = get_queryset(keys)[:8]
 
 
     return render(request, 'courses/info_page.html', {
