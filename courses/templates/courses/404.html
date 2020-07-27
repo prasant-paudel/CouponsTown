@@ -6,11 +6,10 @@
           <div class="py-5">
             <h1 class="h1 text-warning"><i class="fas fa-error"></i>404 ERROR</h1>
             <h2 class="card-title h2 my-4 py-2 text-white">Sorry! The URL You Requested is Invalid or Removed.</h2>
-            <p class="mb-2  px-md-5 mx-md-5">Proceed To Homepage</p>
-            <a class="btn btn-outline-success"><i class="fas fa-home left"></i>Coupons Town</a>
+            <a href="{% url 'home' %}" class="btn btn-danger btn-lg"><i class="fas fa-home left"></i>Coupons Town</a>
           </div>
         </div>
     </div>
-    {% include 'courses/carousel.html' %}
+    
 {% endblock %}
 </body>

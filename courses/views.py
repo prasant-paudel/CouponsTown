@@ -25,7 +25,7 @@ def home(request):
     courses = Course.objects.order_by('image').order_by('upload_date').reverse()
     courses = courses.order_by('expired').reverse()
     carousel2 = ((i,e) for (i,e) in enumerate(courses[:20]))
-    return render(request, 'courses/landing.html', {'courses': courses, 'carousel2':carousel2})
+    return render(request, 'courses/home.html', {'courses': courses, 'carousel2':carousel2})
 
 def courses(request):
     courses = Course.objects.order_by('image').order_by('upload_date').reverse()
