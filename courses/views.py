@@ -57,7 +57,7 @@ def courses(request):
 def info_page(request):
     _course = request.GET.get('course')
     try:
-        course = Course.objects.filter(name_encoded=_course).first()
+        course = Course.objects.get(name_encoded=_course)
     except:
         raise(Http404)
     try:
