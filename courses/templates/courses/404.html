@@ -1,27 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 Not Found</title>
-    <!-- {% load static %} -->
-    <!---------- FontAwaesome Icon ------->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-    <!---------- Bootstrap  and Material design ------------->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}">
-    <!----------------- Favicon ------------------->
-    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
-
-</head>
-<body>
-
-    <center>
-        <p style="font-size: 20px;">Error</p>
-        <p style="font-size: 5rem; margin-top: 10px !important;">404 Not Found</p>
-    </center>
-
-    <!-- Bootstrap, Jquery & Popper -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+{% extends 'courses/base.html' %}
+{% load static %}
+{% block body %}
+    <div class="card card-image" style="background-image: url(http://getwallpapers.com/wallpaper/full/e/2/a/648078.jpg);">
+        <div class="text-white text-center rgba-stylish-strong py-5 px-4">
+          <div class="py-5">
+            <h1 class="h1 text-warning"><i class="fas fa-error"></i>404 ERROR</h1>
+            <h2 class="card-title h2 my-4 py-2 text-white">Sorry! The URL You Requested is Invalid or Removed.</h2>
+            <p class="mb-2  px-md-5 mx-md-5">Proceed To Homepage</p>
+            <a class="btn btn-outline-success"><i class="fas fa-home left"></i>Coupons Town</a>
+          </div>
+        </div>
+    </div>
+    {% include 'courses/carousel.html' %}
+{% endblock %}
 </body>
-</html>
