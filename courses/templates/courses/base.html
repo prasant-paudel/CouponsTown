@@ -1,56 +1,60 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <!-- BASE HTML META TAGS -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Coupons Town" />
-  <link rel="cannonical" href="https://couponstown.me/" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:creator" content="@CouponsTown" />
-  <meta name="twitter:site" content="@CouponsTown" />
+    <!-- BASE HTML META TAGS -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Coupons Town" />
+    <link rel="cannonical" href="https://couponstown.me/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="@CouponsTown" />
+    <meta name="twitter:site" content="@CouponsTown" />
 
+    
+    {% block page_meta %}
+    {% endblock %}        
+    
+    <title>{% block title %}Coupons Town: Free Udemy and other Courses{% endblock %}</title>
+    
+    <!----------Bootstrap  and Material design -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}">
+    
+    <!----------------Custom Css-->
+    <link rel="stylesheet" href="{% static 'css/card-style.css' %}">
+   
+       <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
 
-  {% block page_meta %}
-  {% endblock %}
+    <!-- Google Adsense -->
+    <script data-ad-client="ca-pub-5582220802128786" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
-  <title>{% block title %}Coupons Town: Free Udemy and other Courses{% endblock %}</title>
-
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
-
-  <!-- Google Adsense -->
-  <script data-ad-client="ca-pub-5582220802128786" async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-172159238-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'UA-172159238-1');
-  </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-172159238-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-172159238-1');
+    </script>
 
 </head>
-
 <body style="background:#f1faee;" id="top-section" class="fixed-sn">
-
+ 
   <header>
     {% include 'courses/navbar.html' %}
   </header>
   <main style="margin: 0 !important;">
-    {% include 'courses/navbar1.html' %}
+    {% include 'courses/navbar1.html' %}    
     {% block body %}
     {% endblock %}
   </main>
+    
 
-
-  <footer class="page-footer text-center text-md-left pt-4 bg-dark">
+  <footer  class="page-footer text-center text-md-left pt-4 bg-dark"> 
     {% include 'courses/footer.html' %}
   </footer>
   <!--------Arrow Up // Go to TOP ARROw-->
@@ -58,35 +62,28 @@
     <a href="#top-section" class="btn-floating btn-large red">
       <i class="fas fa-arrow-up"></i>
     </a>
-  </div>
+  </div>  
+    
+    <!----------FontAwaesome Icon-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    
+    <!---jQuery-->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
 
-
-  <!---------- Bootstrap and Material design CSS ---------->
-  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}">
-  <!----------------Custom Css -------->
-  <link rel="stylesheet" href="{% static 'css/card-style.css' %}">
-  <!----------FontAwaesome Icon ----------------->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-
-  <!--------------- jQuery, popper & bootstrap js------------------->
-  <script src="{% static 'js/jquery.min.js' %}"></script>
-  <script src="{% static 'js/popper.min.js' %}"></script>
-  <script src="{% static 'js/bootstrap.min.js' %}"></script>
-
-  <!-------------Material Design Script ----------->
-  <script src="{% static 'js/mdb.min.js' %}"></script>
-
-  <!---------------Custom Scripts --------------->
-  <script type="text/javascript">
-    $(document).ready(() => {
-      // SideNav Initialization
-      $(".button-collapse").sideNav();
-
-      new WOW().init();
-    })
-  </script>
-
+    <script src="{% static 'js/popper.min.js' %}"></script>
+   <!----------------Bootstrap Core Script-->
+   <script src="{% static 'js/bootstrap.min.js' %}"></script>
+   <!-------------Material Design Script-->
+   <script src="{% static 'js/mdb.min.js' %}"></script>
+   
+    <!---------------Custom Scripts-->
+    <script type="text/javascript">
+      $(document).ready(() => {
+        // SideNav Initialization
+        $(".button-collapse").sideNav();
+  
+          new WOW().init();
+      })
+    </script> 
 </body>
-
 </html>
