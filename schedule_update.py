@@ -15,7 +15,7 @@ if __name__ == '__main__':
             # Every 2 Hour
             if now.hour % 2 == 0:
                 log('[+] Fetching Course info from URLs')
-                requests.get('http://couponstown.me:8000/api/?command=fetch_course_info_from_url')
+                requests.get('http://localhost:8000/api/?command=fetch_course_info_from_url')
 
             # Every Hour
             if now.minute == 30:
@@ -27,19 +27,19 @@ if __name__ == '__main__':
                 print(now)
                 # Fetch New Coupons from Internet
                 print('[+] Fetching New Courses form Internet')
-                requests.get('http://couponstown.me:8000/api/?command=fetch_coupons')
+                requests.get('http://localhost:8000/api/?command=fetch_coupons')
 
             # Every 2 Minutes
             if now.minute % 2 == 0:
                 print(now)
                 log('[+] Removing Duplicate Courses')
-                requests.get('http://couponstown.me:8000/api/?command=remove_duplicate_courses')
+                requests.get('http://localhost:8000/api/?command=remove_duplicate_courses')
                 log('[+] Filtering Existing URLs')
-                requests.get('http://couponstown.me:8000/api/?command=filter_existing_urls')
+                requests.get('http://localhost:8000/api/?command=filter_existing_urls')
                 log('[+] Validating Courses')
-                requests.get('http://couponstown.me:8000/api/?command=validate')
+                requests.get('http://localhost:8000/api/?command=validate')
                 log('[+] Updating Ratings')
-                requests.get('http://couponstown.me:8000/api/?command=update_ratings')
+                requests.get('http://localhost:8000/api/?command=update_ratings')
 
             time.sleep(1)
         except (ConnectionError, requests.exceptions.ConnectionError):

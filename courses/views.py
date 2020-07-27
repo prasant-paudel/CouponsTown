@@ -24,7 +24,7 @@ def get_queryset(keywords_list):
 def home(request):
     courses = Course.objects.order_by('image').order_by('upload_date').reverse()
     courses = courses.order_by('expired').reverse()
-    carousel2 = ((i,e) for (i,e) in enumerate(courses))
+    carousel2 = ((i,e) for (i,e) in enumerate(courses[:20]))
     return render(request, 'courses/landing.html', {'courses': courses, 'carousel2':carousel2})
 
 def courses(request):
@@ -106,7 +106,7 @@ def info_page(request):
     })
 
 def search(request):
-    template = 'courses/home.html'
+    template = 'courses/courses.html'
     query = request.GET.get('q')
     query = str(query).strip("'").strip('"')
 
@@ -139,7 +139,7 @@ def search(request):
 
 
 def category(request):
-    template = 'courses/home.html'
+    template = 'courses/courses.html'
     query = request.GET.get('search')
     query = str(query).strip("'").strip('"')
     results = Course.objects.filter(Q(category__icontains=query))
@@ -158,7 +158,7 @@ def subscribe(request):
 
     courses = Course.objects.order_by('upload_date').reverse()
 
-    return render(request, 'courses/home.html', {'message': msg, 'courses': courses})
+    return render(request, 'courses/courses.html', {'message': msg, 'courses': courses})
 
 def error_404_view(request, exception):
     return render(request, 'courses/404.html')
