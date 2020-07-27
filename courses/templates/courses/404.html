@@ -4,8 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 Not Found</title>
+    <!-- {% load static %} -->
+    <!---------- FontAwaesome Icon ------->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!---------- Bootstrap  and Material design ------------->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}">
+    <!----------------- Favicon ------------------->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+
 </head>
 <body>
-    <center><h1>404 Not Found</h1></center>
+
+    <center>
+        <p style="font-size: 20px;">Error</p>
+        <p style="font-size: 5rem; margin-top: 10px !important;">404 Not Found</p>
+    </center>
+
+    <!-- Bootstrap, Jquery & Popper -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

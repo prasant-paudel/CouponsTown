@@ -109,11 +109,17 @@ def search(request):
     query = request.GET.get('q')
     query = str(query).strip("'").strip('"')
 
-    queryset = query.split()
+    keywordset = query.split()
     results = []
-    for q in queryset:
-        r = Course.objects.filter(Q(name__icontains=q) | Q(category__icontains=q))
-        for i in r:
+    # Using whole string
+    _r = Course.objects.filter(Q(name__icontains=query))
+    for i in _r:
+        if not i in results:
+            results.append(i)
+    # Using OR operation to the splitted string
+    for q in keywordset:
+        _r = Course.objects.filter(Q(name__icontains=q) | Q(category__icontains=q))
+        for i in _r:
             if not i in results:
                 results.append(i)
 
