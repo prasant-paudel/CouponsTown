@@ -3,7 +3,7 @@
     <div id="carousel-example-multi" class="carousel slide carousel-multi-item v-2 mt-3" data-ride="carousel">
         
         <p><a class="btn btn-outline-danger waves-effect mr-5" style="font-weight: bold; float:right;">View All</a></p>
-        <p><a class="btn btn-danger waves-effect ml-5 mb-0" style="font-weight: bold; float:left; cursor: default;">Category Name</a></p>
+        <p><a  href="{% url 'courses' %}"  class="btn btn-danger waves-effect ml-5 mb-0" style="font-weight: bold; float:left; cursor: default;">Category Name</a></p>
         <!--/.Controls-->
         <div class="carousel-inner v-2" role="listbox">    
           {% for index, item in carousel2 %}
@@ -22,6 +22,7 @@
                           <!-- The Complete SQL Bootcamp 2020: Go from Zero to  The Complete Course -->
                           {{ item.name }}
                       </h4>
+                      <p class="my-0 py-0">Added on {{item.upload_date}}</p>
                   </div>
                   <div class="get-coupon" style="width: 100%; height: 50px;  ">
                     <a href="{% url 'info_page' %}?course={{item.name_encoded}}" class="btn peach-gradient" style="font-size:1rem; font-weight:bolder">  
