@@ -5,6 +5,7 @@ import wget
 import os
 from .coupon_extractor import CouponExtractor
 from .tags_scraper import TagScraper
+from base64 import b64encode
 
 def api(request):
     command = request.GET.get('command')
@@ -64,10 +65,7 @@ def api(request):
             
             # if course.name and not course.name_encoded:
             if 1==1:
-                temp_name = course.name.replace(' ', '-').replace('_', '-')
-                temp_name = temp_name.replace(':', '').replace('&', 'and')
-                temp_name = temp_name.replace('=', '-').replace('+', 'plus')
-                print(f'[+] Course Name Encoded: {temp_name}')
+                temp_name = b64encode(str(course.name).encode()).decode()
                 course.name_encoded = temp_name
                 course.save()
 
@@ -144,9 +142,8 @@ def api(request):
         # Fetch Name
         course.name = obj.get_name()
         # Encode name for urls
-        temp_name = course.name.replace(' ', '-').replace('_', '-')
-        temp_name = temp_name.replace(':', '')
-        course.name_encoded = temp_name
+        temp_name = b64encode(str(course.name).encode())
+        course.name_encoded = temp_name.decode()
         # Fetch Image
         course.image = obj.get_image()
         # Fetch Contents / Description / Things You'll Learn
