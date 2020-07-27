@@ -23,12 +23,13 @@ def get_queryset(keywords_list):
 
 def home(request):
     courses = Course.objects.order_by('image').order_by('upload_date').reverse()
+    courses = courses.order_by('expired').reverse()
     carousel2 = ((i,e) for (i,e) in enumerate(courses))
     return render(request, 'courses/landing.html', {'courses': courses, 'carousel2':carousel2})
 
 def courses(request):
-    courses = Course.objects.order_by('upload_date').reverse()
-    courses = courses.order_by('expired').reverse().order_by('rating').reverse()
+    courses = Course.objects.order_by('image').order_by('upload_date').reverse()
+    courses = courses.order_by('expired').reverse()
 
     p = Paginator(courses, 9)  # Total no of items per page = 9
     try:
@@ -52,7 +53,7 @@ def courses(request):
     except AttributeError:
         all_tags = []
 
-    return render(request, 'courses/home.html', {'courses': page, 'total_pages': total_pages, 'active_page': active_page, 'num_pages': p.num_pages, 'high_rated':high_rated, 'all_tags': all_tags})
+    return render(request, 'courses/courses.html', {'courses': page, 'total_pages': total_pages, 'active_page': active_page, 'num_pages': p.num_pages, 'high_rated':high_rated, 'all_tags': all_tags})
 
 def info_page(request):
     _course = request.GET.get('course')
