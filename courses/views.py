@@ -22,8 +22,8 @@ def get_queryset(keywords_list):
 
 
 def home(request):
-    courses = Course.objects.order_by('image').order_by('upload_date').reverse()
-    courses = courses.order_by('expired').reverse()
+    courses = Course.objects.order_by('upload_date').reverse()
+    courses = courses.filter(expired=False)
     carousel2 = ((i,e) for (i,e) in enumerate(courses[:20]))
     return render(request, 'courses/home.html', {'courses': courses, 'carousel2':carousel2})
 
@@ -36,8 +36,7 @@ def courses(request):
     else:
         courses = Course.objects.all()
     
-    courses = courses.order_by('image').order_by('upload_date').reverse()
-    courses = courses.order_by('expired').reverse()
+    courses = courses.order_by('upload_date').reverse()
 
     p = Paginator(courses, 9)  # Total no of items per page = 9
     try:
@@ -52,6 +51,7 @@ def courses(request):
     print(page_num)
 
     high_rated = Course.objects.order_by('rating')
+    high_rated = high_rated.filter(expired=False)
     high_rated = list(high_rated)[:10]
 
     try:
