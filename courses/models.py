@@ -4,9 +4,9 @@ from multiselectfield import MultiSelectField
 class Course(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, blank=True)
+    name_base64 = models.CharField(max_length=100, blank=True)
     name_encoded = models.CharField(max_length=100, blank=True)
     url = models.CharField(max_length=200)
-    url_encoded = models.CharField(max_length=100, blank=True)
     affiliate_url = models.CharField(max_length=256,blank=True)
     image = models.ImageField(upload_to='media/', blank=True)
     contents = models.BinaryField(blank=True)

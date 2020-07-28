@@ -4,8 +4,9 @@ from .my_scripts import CourseInfo
 import wget
 import os
 from .coupon_extractor import CouponExtractor
-from .tags_scraper import TagScraper
+# from .tags_scraper import TagScraper
 from base64 import b64encode
+from urllib.parse import quote_plus
 
 def api(request):
     command = request.GET.get('command')
@@ -48,7 +49,7 @@ def api(request):
 
             # Fetch Image
             if not course.image:
-                obj = CourseInfo(course.url)            
+                obj = CourseInfo(course.url)         
                 print(f'[+] Fetching Image for {course.name}')
                 # Course.objects.filter(id=course.id).update(image=obj.get_image())
                 course.image = obj.get_image()
@@ -66,6 +67,9 @@ def api(request):
             # if course.name and not course.name_encoded:
             if 1==1:
                 temp_name = b64encode(str(course.name).encode()).decode()
+                course.name_base64 = temp_name
+                course.save()
+                temp_name = quote_plus(course.name)
                 course.name_encoded = temp_name
                 course.save()
 
@@ -106,21 +110,6 @@ def api(request):
                 course.duration = obj.get_duration()
                 course.save()
 
-            # Fetch Tags
-            if not course.tags:
-                if not obj:
-                    obj = CourseInfo(course.url)
-                print(f'[+] Fetching Tags for {course.name}')
-                try:
-                    rd = RealDiscount.objects.get(coupon=course.url)
-                    ts = TagScraper(rd.offer)
-                    tags = ts.get_course_tags()
-                    print(f'{tags}\n')
-                    # Course.objects.filter(id=course.id).update(tags=tags)
-                    course.tags = tags
-                    course.save()
-                except:
-                    pass
             # course.save()
 
         print('\n[+] New Courses Deployed Successfully!\n')
@@ -158,15 +147,7 @@ def api(request):
         course.duration = obj.get_duration()
         # Fetch Platform
         course.platform = obj.platform
-        # Fetch Tags
-        try:
-            rd = RealDiscount.objects.get(coupon=course.url)
-            ts = TagScraper(rd.offer)
-            tags = ts.get_course_tags()
-            # Course.objects.filter(id=course.id).update(tags=tags)
-            course.tags = tags
-        except:
-            pass
+        
         # Save Info
         try:
             course.save()
