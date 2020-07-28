@@ -9,7 +9,10 @@
       <!-- Logo -->
       <li>
         <div class="logo-wrapper waves-light">
-          <a href="{% url 'home' %}"><img src="{% static 'images/CouponsTown-background.png' %}" class="img-fluid flex-center" style="padding: 0; height: 100%; width: 100% ;"></a>
+          <a href="{% url 'home' %}"><img src="{% static 'images/CouponsTown-background.png' %}" class="img-fluid flex-center" 
+            style="padding: 0; height: 100%; width: 100% ;" 
+            alt="Coupons Town - Free Udemy Cooupons, Free Online Courses, Courses with Certificate, e-courses, Tutorials, 100% Working">
+          </a>
         </div>
       </li>
       <!--/. Logo -->
@@ -38,11 +41,11 @@
         <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-chevron-right"></i>Education Course<i class="fas fa-angle-down rotate-icon"></i></a>
           <div class="collapsible-body">
             <ul class="list-unstyled">
-              <li><a href="{% url 'courses' %}" class="waves-effect">Course Coupons</a>
+              <li><a href="{% url 'courses' %}" class="waves-effect">All Course Coupons</a>
               </li>
-              <li><a href="#" class="waves-effect">Udemy Coupons</a>
+              <li><a href="{% url 'courses' %}?filter=udemy" class="waves-effect">Udemy Coupons</a>
               </li>
-              <li><a href="#" class="waves-effect">Eduonix Coupons</a>
+              <li><a href="{% url 'courses' %}?filter=eduonix" class="waves-effect">Eduonix Coupons</a>
               </li>
               <li><a href="#" class="waves-effect">Download Course</a>
               </li>

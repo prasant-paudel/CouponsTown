@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse, Http404
+from django.shortcuts import render, redirect, HttpResponse, Http404, reverse
 from .models import Course, Subscriber, RealDiscount
 from django.db.models import Q
 from .my_scripts import CourseInfo
@@ -28,7 +28,15 @@ def home(request):
     return render(request, 'courses/home.html', {'courses': courses, 'carousel2':carousel2})
 
 def courses(request):
-    courses = Course.objects.order_by('image').order_by('upload_date').reverse()
+    cat = request.GET.get('filter')
+    cat = str(cat).strip("'").strip('"')
+    if cat.lower() == 'udemy' or cat.lower() == 'eduonix':
+        courses = Course.objects.filter(Q(platform__icontains=cat))
+        msg = cat.capitalize() + ' Coupons'
+    else:
+        courses = Course.objects.all()
+    
+    courses = courses.order_by('image').order_by('upload_date').reverse()
     courses = courses.order_by('expired').reverse()
 
     p = Paginator(courses, 9)  # Total no of items per page = 9
@@ -54,6 +62,7 @@ def courses(request):
         all_tags = []
 
     return render(request, 'courses/courses.html', {'courses': page, 'total_pages': total_pages, 'active_page': active_page, 'num_pages': p.num_pages, 'high_rated':high_rated, 'all_tags': all_tags})
+
 
 def info_page(request):
     _course = request.GET.get('course')
@@ -105,6 +114,7 @@ def info_page(request):
         'office': office, 'hacking': hacking, 'cloud': cloud,
     })
 
+
 def search(request):
     template = 'courses/courses.html'
     query = request.GET.get('q')
@@ -139,12 +149,20 @@ def search(request):
 
 
 def category(request):
+    cat = request.GET.get('filter')
+    cat = str(cat).strip("'").strip('"')
+    if cat.lower() == 'udemy' or 'eduonix':
+        results = Course.objects.filter(Q(platform__icontains=cat))
+        results = results.order_by('upload_date').reverse()
+        results = results.order_by('expired').reverse()
+        msg = cat.capitalize() + ' Coupons'
+    else:
+        msg = 'Sorry! Page is under Construction.'
+
     template = 'courses/courses.html'
-    query = request.GET.get('search')
-    query = str(query).strip("'").strip('"')
-    results = Course.objects.filter(Q(category__icontains=query))
-    msg = 'Sorry! Page is under Construction.'
-    return render(request, template, {'courses': results, 'message': msg})
+    context = {'courses': results, 'message': msg}
+    return render(request, template, context)
+
 
 def subscribe(request):
     email = request.POST.get('email')
@@ -160,8 +178,10 @@ def subscribe(request):
 
     return render(request, 'courses/courses.html', {'message': msg, 'courses': courses})
 
+
 def error_404_view(request, exception):
     return render(request, 'courses/404.html')
+
 
 def test(request):
     return render(request, 'courses/test.html')
