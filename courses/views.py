@@ -68,6 +68,8 @@ def info_page(request):
     _course = request.GET.get('course')
     try:
         course = Course.objects.filter(Q(name=_course) | Q(name_base64=_course)).first()
+        if not course:
+            raise(Http404)
     except:
         raise(Http404)
     try:
