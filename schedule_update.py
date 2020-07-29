@@ -38,6 +38,9 @@ if __name__ == '__main__':
                 log('[+] Removing Duplicate Courses')
                 requests.get('http://localhost:8011/api/?command=remove_duplicate_courses')
             
+            def scrape_discudemy():
+                log('[+] Scraping Discudemy')
+                requests.get('http://localhost:8000/api/?command=scrape_discudemy')
 
             t1 = Thread(target=fetch_coupons)
             t2 = Thread(target=update_courses)
@@ -45,6 +48,11 @@ if __name__ == '__main__':
             t4 = Thread(target=filter_urls)
             t5 = Thread(target=update_ratings)
             t6 = Thread(target=remove_duplicate)
+            t7 = Thread(target=scrape_discudemy)
+
+            # Every Day
+            if now.hour == 0 and now.minute == 7 and now.second == 0:
+                t6.start()  # Scrape Discudemy
 
             # Every 3 Hour
             if now.hour % 3 == 0 and now.minute == 0 and now.second == 0:

@@ -257,5 +257,8 @@ def api(request):
                     course.contents = pickle.dumps(contents)
                     course.save()
 
+    if command == 'scrape_discudemy':
+        from courses.discudemy_scraper import crawl
+        crawl()
 
     return HttpResponse(f'Successful Ineraction!')
