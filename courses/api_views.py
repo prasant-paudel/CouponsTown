@@ -130,8 +130,12 @@ def api(request):
         # Fetch Name
         course.name = obj.get_name()
         # Encode name for urls
-        temp_name = b64encode(str(course.name).encode())
-        course.name_encoded = temp_name.decode()
+        temp_name = b64encode(str(course.name).encode()).decode()
+        course.name_base64 = temp_name
+        course.save()
+        temp_name = quote_plus(course.name)
+        course.name_encoded = temp_name
+        course.save()
         # Fetch Image
         course.image = obj.get_image()
         # Fetch Contents / Description / Things You'll Learn

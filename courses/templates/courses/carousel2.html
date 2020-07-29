@@ -7,7 +7,6 @@
         <!--/.Controls-->
         <div class="carousel-inner v-2" role="listbox">    
           {% for index, item in carousel2 %}
-          {% if item.image %}
           {% if index == 0 %}
           <div class="carousel-item active" >
           {% else %}
@@ -33,7 +32,6 @@
               </div>
             </div>
           </div>
-          {% endif %}
           {% endfor %}
         </div>
     </div>
