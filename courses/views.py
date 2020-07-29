@@ -48,26 +48,18 @@ def courses(request):
     total_pages = [x+1 for x in range(p.num_pages)]
     active_page = page_num
 
-    print(page_num)
-
-    high_rated = Course.objects.order_by('rating')
-    high_rated = high_rated.filter(expired=False)
+    high_rated = Course.objects.filter(expired=False).order_by('rating')
     high_rated = list(high_rated)[:10]
 
-    try:
-        all_small_tags = Course.objects.first().tags.choices
-        keys = list(all_small_tags)
-        all_tags = [(all_small_tags[x]) for x in keys]
-    except AttributeError:
-        all_tags = []
-
-    return render(request, 'courses/courses.html', {'courses': page, 'total_pages': total_pages, 'active_page': active_page, 'num_pages': p.num_pages, 'high_rated':high_rated, 'all_tags': all_tags})
+    template = 'courses/courses.html'
+    context = {'courses': page, 'total_pages': total_pages, 'active_page': active_page, 'num_pages': p.num_pages, 'high_rated':high_rated}
+    return render(request, template, context)
 
 
 def info_page(request):
     _course = request.GET.get('course')
     try:
-        course = Course.objects.filter(Q(name=_course) | Q(name_base64=_course)).first()
+        course = Course.objects.filter(Q(name=_course) | Q(name_base64=_course) | Q(name_encoded=_course)).first()
         if not course:
             raise(Http404)
     except:
@@ -133,21 +125,15 @@ def search(request):
     for q in keywordset:
         _r = Course.objects.filter(Q(name__icontains=q) | Q(category__icontains=q))
         for i in _r:
-            if not i in results:
+            if not ( i in results and i.expired):
                 results.append(i)
 
-    high_rated = Course.objects.order_by('rating')
+    high_rated = Course.objects.filter(expired=False).order_by('rating')
     high_rated = list(high_rated)[:10]
 
-    try:
-        all_small_tags = Course.objects.first().tags.choices
-        keys = list(all_small_tags)
-        all_tags = [(all_small_tags[x]) for x in keys]
-    except AttributeError:
-        all_tags = []
 
     msg = f'Search results for "{query}"'
-    return render(request, template, {'courses': results, 'message': msg, 'high_rated': high_rated, 'all_tags': all_tags})
+    return render(request, template, {'courses': results, 'message': msg, 'high_rated': high_rated})
 
 
 def category(request):

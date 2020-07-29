@@ -62,7 +62,9 @@ class CourseInfo:
         
         # Udemy Pricing Div
         elif 'udemy.com' in self.url:
-            pricing = parsed_html.findAll('div', {'class': 'buy-box'})
+            pricing1 = parsed_html.findAll('div', {'class': 'buy-box'})
+            pricing2 = parsed_html.findAll('div', {'class': 'heading'})
+            pricing = str(pricing1) + str(pricing2)
         
         else:
             pricing = 'not compatible platform'

@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import re
 import os
 from .models import RealDiscount, Course
-from django.db.utils import IntegrityError
+from django.db.utils import IntegrityError, OperationalError
 from .my_scripts import CourseInfo
 
 class CouponExtractor:
@@ -70,8 +70,15 @@ class CouponExtractor:
                                         continue
                                     print('[+]',self.coupon_count, link)
                                 else:
-                                    RealDiscount.objects.filter(offer=link).update(valid=False)
-                                    print('[-] Expired',self.coupon_count, link)
+                                    try:
+                                        RealDiscount.objects.filter(offer=link).update(valid=False)
+                                    except OperationalError:
+                                        obj = RealDiscount.get(offer=link)
+                                        obj.valid = False
+                                        obj.save()
+                                    finally:
+                                        pass
+                                    print('[-] Expired', self.coupon_count, link)
                                 
                                 # Update Platform
                                 platform = coupon.split('//')[-1].split('www.')[-1].split('.')[0].capitalize()
