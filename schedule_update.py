@@ -1,6 +1,7 @@
+from threading import *
 import datetime
-import requests
 import time
+import requests
 
 
 def log(string):
@@ -12,39 +13,57 @@ if __name__ == '__main__':
     while 1:
         try:
             now = datetime.datetime.now()
-            # Every 2 Hour
-            if now.hour % 2 == 0:
-                log('[+] Fetching Course info from URLs')
-                requests.get('http://localhost:8000/api/?command=fetch_course_info_from_url')
+
+            def fetch_coupons():
+                log('[+] Fetching Coupons from Internet')
+                requests.get('http://localhost:8006/api/?command=fetch_coupons')
+            
+            def update_courses():
+                log('[+] Updating Courses info from URLs')
+                requests.get('http://localhost:8007/api/?command=fetch_course_info_from_url')
+            
+            def validate_courses():
+                log('[+] Validating Courses')
+                requests.get('http://localhost:8008/api/?command=validate')
+            
+            def filter_urls():
+                log('[+] Filtering Existing URLs')
+                requests.get('http://localhost:8009/api/?command=filter_existing_urls')
+
+            def update_ratings():
+                log('[+] Updating Ratings')
+                requests.get('http://localhost:8010/api/?command=update_ratings')
+            
+            def remove_duplicate():
+                log('[+] Removing Duplicate Courses')
+                requests.get('http://localhost:8011/api/?command=remove_duplicate_courses')
+            
+
+            t1 = Thread(target=fetch_coupons)
+            t2 = Thread(target=update_courses)
+            t3 = Thread(target=validate_courses)
+            t4 = Thread(target=filter_urls)
+            t5 = Thread(target=update_ratings)
+            t6 = Thread(target=remove_duplicate)
 
             # Every Hour
-            if now.minute == 30:
-                # Execute every hour
-                pass
+            if now.minute == 0 and now.second == 0:
+                t1.start()  # Fetch New Coupons
+                
+            # Every 5 Minutes
+            if now.minute % 5 == 0 and now.second == 0:
+                t2.start()  # Update Courses Info
+                t4.start()  # Filter URLs
+                t5.start()  # Update Ratings
 
-            # Every 30 minute
-            if now.minute == 10 or now.minute == 40:
-                print(now)
-                # Fetch New Coupons from Internet
-                print('[+] Fetching New Courses form Internet')
-                requests.get('http://localhost:8000/api/?command=fetch_coupons')
-
-            # Every 2 Minutes
-            if now.minute % 2 == 0:
-                print(now)
-                log('[+] Removing Duplicate Courses')
-                requests.get('http://localhost:8000/api/?command=remove_duplicate_courses')
-                log('[+] Filtering Existing URLs')
-                requests.get('http://localhost:8000/api/?command=filter_existing_urls')
-                log('[+] Validating Courses')
-                requests.get('http://localhost:8000/api/?command=validate')
-                log('[+] Updating Ratings')
-                requests.get('http://localhost:8000/api/?command=update_ratings')
-
-            time.sleep(1)
+            # Every Minute
+            if now.second == 0:
+                t3.start()  # Validate Courses
+                t6.start()  # Remove Duplicate Courses
         except (ConnectionError, requests.exceptions.ConnectionError):
             print('[!] Connection Error!')
         finally:
             pass
 
+        time.sleep(1)
 

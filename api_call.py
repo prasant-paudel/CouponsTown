@@ -13,7 +13,8 @@ help = '''
 8. Remove Affiliate URLs
 9. Update Course Durations
 10. Remove Duplicate Courses
-11. Main Menu
+11. Add a Course Coupon in Couponstown
+12. Main Menu
 '''
 
 
@@ -39,6 +40,9 @@ def switch(opt, server):
     elif opt == 10:
         resp = requests.get(f'http://{server}/api/?command=remove_duplicate_courses')
     elif opt == 11:
+        coupon_url = input('Coupon URL > ').strip('"').strip("'").strip()
+        resp = requests.get(f'http://{server}/api/?command=fetch_single_course_info&coupon={coupon_url}')
+    elif opt == 12:
         raise Exception('Back to Main Menu')
     else:
         print('[-] Invalid Range!')

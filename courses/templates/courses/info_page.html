@@ -8,6 +8,8 @@
 <meta property="og:description" content="" />
 <meta property="og:url" content="" />
 <meta property="og:image" content="{{course.image.url}}" />
+<link rel="cannonical" href="https://couponstown.me/info-page/{{course.name_base64}}" />
+
 {% endblock %}
 
 {% block title %} [100% Off] | {{course.name}} {% endblock %}
@@ -19,7 +21,6 @@
     <div class="container-fluid  border-danger">
       <div class="row mt-3">
 
-
         <div class="col-lg-8 border-danger">
           <div class="card text-center">
             <div class="card-header bg-danger ">
@@ -30,7 +31,7 @@
                 <div class="p-2 flex-fill bd-highlight" style="width: 296px;">
                   <img src="{{ course.image.url }}" class="card-img-top" alt="{{course.name}} | Coupons Town | e-learning free courses online">
                 </div>
-      
+
                 <div class="p-2 flex-fill bd-highlight" style="width: 296px;">
                   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                   <!-- test-square -->

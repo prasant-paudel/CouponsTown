@@ -61,6 +61,7 @@ User=$username
 Group=root
 WorkingDirectory=$(pwd)
 ExecStart=$(pwd)/venv/bin/gunicorn --access-logfile - --workers 3 --bind 0.0.0.0:$gunicorn_port $project_name.wsgi:application
+Restart=on-failure
 
 [Install]" > temp.txt
 sudo mv temp.txt /etc/systemd/system/gunicorn.service
@@ -144,9 +145,9 @@ echo "##########  Restarting Nginx  ##########"
 sudo systemctl restart nginx
 sudo systemctl status nginx
 echo 
-echo "#######################################################"
-echo "##########  Creating CouponsTown API Server  ##########"
-echo "#######################################################"
+echo "###############################################################"
+echo "##########  Creating CouponsTown Development Server  ##########"
+echo "###############################################################"
 echo "[Unit]
 Description=CouponsTown API Daemon
 After=network.target
@@ -156,15 +157,101 @@ User=$username
 Group=www-data
 WorkingDirectory=$(pwd)
 ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8000 --settings \"onlinecoursecoupons.settings.development\"
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target" > temp.txt
 sudo mv temp.txt /etc/systemd/system/couponstown.service
-sudo systemctl start couponstown
-sudo systemctl enable couponstown
-sudo systemctl daemon-reload
-sudo systemctl restart couponstown
-sudo systecmtl status couponstown
+echo "[Unit]
+Description=CouponsTown API Daemon
+After=network.target
+
+[Service]
+User=$username
+Group=www-data
+WorkingDirectory=$(pwd)
+ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8006 --settings \"onlinecoursecoupons.settings.development\"
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target" > temp.txt
+sudo mv temp.txt /etc/systemd/system/couponstown6.service
+echo "[Unit]
+Description=CouponsTown API Daemon
+After=network.target
+
+[Service]
+User=$username
+Group=www-data
+WorkingDirectory=$(pwd)
+ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8007 --settings \"onlinecoursecoupons.settings.development\"
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target" > temp.txt
+sudo mv temp.txt /etc/systemd/system/couponstown7.service
+echo "[Unit]
+Description=CouponsTown API Daemon
+After=network.target
+
+[Service]
+User=$username
+Group=www-data
+WorkingDirectory=$(pwd)
+ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8008 --settings \"onlinecoursecoupons.settings.development\"
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target" > temp.txt
+sudo mv temp.txt /etc/systemd/system/couponstown8.service
+echo "[Unit]
+Description=CouponsTown API Daemon
+After=network.target
+
+[Service]
+User=$username
+Group=www-data
+WorkingDirectory=$(pwd)
+ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8009 --settings \"onlinecoursecoupons.settings.development\"
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target" > temp.txt
+sudo mv temp.txt /etc/systemd/system/couponstown9.service
+echo "[Unit]
+Description=CouponsTown API Daemon
+After=network.target
+
+[Service]
+User=$username
+Group=www-data
+WorkingDirectory=$(pwd)
+ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8010 --settings \"onlinecoursecoupons.settings.development\"
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target" > temp.txt
+sudo mv temp.txt /etc/systemd/system/couponstown10.service
+echo "[Unit]
+Description=CouponsTown API Daemon
+After=network.target
+
+[Service]
+User=$username
+Group=www-data
+WorkingDirectory=$(pwd)
+ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8011 --settings \"onlinecoursecoupons.settings.development\"
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target" > temp.txt
+sudo mv temp.txt /etc/systemd/system/couponstown11.service
+
+sudo systemctl start couponstown couponstown6 couponstown7 couponstown8 couponstown9 couponstown10 couponstown11
+sudo systemctl enable couponstown couponstown6 couponstown7 couponstown8 couponstown9 couponstown10 couponstown11
+sudo systemctl daemon-reload couponstown6 couponstown7 couponstown8 couponstown9 couponstown10 couponstown11
+sudo systemctl restart couponstown couponstown6 couponstown7 couponstown8 couponstown9 couponstown10 couponstown11
+sudo systecmtl status couponstown couponstown6 couponstown7 couponstown8 couponstown9 couponstown10 couponstown11
 echo 
 echo "#####################################################################"
 echo "##########  Creating CouponsTown Schedule Updater Service  ##########"
@@ -178,6 +265,7 @@ User=$username
 Group=www-data
 WorkingDirectory=$(pwd)
 ExecStart=$(pwd)/venv/bin/python3 schedule_update.py
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target" > temp.txt
