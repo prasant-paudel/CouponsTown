@@ -34,7 +34,7 @@ def courses(request):
         courses = Course.objects.filter(Q(platform__icontains=cat))
         msg = cat.capitalize() + ' Coupons'
     else:
-        courses = Course.objects.all()
+        courses = Course.objects.filter(expired=False)
     
     courses = courses.order_by('upload_date').reverse()
 
@@ -128,12 +128,22 @@ def search(request):
             if not ( i in results and i.expired):
                 results.append(i)
 
+    p = Paginator(results, 9)  # Total no of items per page = 9
+    try:
+        page_num = int(request.GET.get('page'))
+    except:
+        page_num = 1
+
+    page = p.page(page_num)  # Items from first page
+    total_pages = [x+1 for x in range(p.num_pages)]
+    active_page = page_num
+
     high_rated = Course.objects.filter(expired=False).order_by('rating')
     high_rated = list(high_rated)[:10]
 
 
     msg = f'Search results for "{query}"'
-    return render(request, template, {'courses': results, 'message': msg, 'high_rated': high_rated})
+    return render(request, template, {'courses': page, 'message': msg, 'total_pages': total_pages, 'active_page': active_page, 'num_pages': p.num_pages, 'high_rated': high_rated})
 
 
 def category(request):
