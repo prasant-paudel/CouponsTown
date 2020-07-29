@@ -46,8 +46,8 @@ if __name__ == '__main__':
             t5 = Thread(target=update_ratings)
             t6 = Thread(target=remove_duplicate)
 
-            # Every Hour
-            if now.minute == 0 and now.second == 0:
+            # Every 3 Hour
+            if now.hour % 3 == 0 and now.minute == 0 and now.second == 0:
                 t1.start()  # Fetch New Coupons
                 
             # Every 5 Minutes
