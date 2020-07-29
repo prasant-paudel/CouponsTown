@@ -16,27 +16,27 @@ if __name__ == '__main__':
 
             def fetch_coupons():
                 log('[+] Fetching Coupons from Internet')
-                requests.get('http://localhost:8000/api/?command=fetch_coupons')
+                requests.get('http://localhost:8006/api/?command=fetch_coupons')
             
             def update_courses():
                 log('[+] Updating Courses info from URLs')
-                requests.get('http://localhost:8000/api/?command=fetch_course_info_from_url')
+                requests.get('http://localhost:8007/api/?command=fetch_course_info_from_url')
             
             def validate_courses():
                 log('[+] Validating Courses')
-                requests.get('http://localhost:8000/api/?command=validate')
+                requests.get('http://localhost:8008/api/?command=validate')
             
             def filter_urls():
                 log('[+] Filtering Existing URLs')
-                requests.get('http://localhost:8000/api/?command=filter_existing_urls')
+                requests.get('http://localhost:8009/api/?command=filter_existing_urls')
 
             def update_ratings():
                 log('[+] Updating Ratings')
-                requests.get('http://localhost:8000/api/?command=update_ratings')
+                requests.get('http://localhost:8010/api/?command=update_ratings')
             
             def remove_duplicate():
                 log('[+] Removing Duplicate Courses')
-                requests.get('http://localhost:8000/api/?command=remove_duplicate_courses')
+                requests.get('http://localhost:8011/api/?command=remove_duplicate_courses')
             
 
             t1 = Thread(target=fetch_coupons)
