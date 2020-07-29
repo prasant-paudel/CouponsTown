@@ -64,7 +64,8 @@ def api(request):
                 course.name = obj.get_name()
                 course.save()
             
-            if course.name and not (course.name_encoded and course.name_base64):
+            # if course.name and not (course.name_encoded and course.name_base64):
+            if 1==1:
                 temp_name = b64encode(str(course.name).encode()).decode()
                 course.name_base64 = temp_name
                 course.save()
