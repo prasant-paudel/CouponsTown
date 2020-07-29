@@ -14,7 +14,11 @@
           {% endif %}
             <div class="col-12 col-sm-6 col-md-4 col-lg-3" itemscope>
               <div class="card mb-2">
+                {% if item.image %}
                 <img class="card-img-top" style="height: 200px !important;" src="{{ item.image.url }}" alt="Free Udemy Coupon | Free Online Courses | {{ item.name }}">
+                {% else %}
+                <img class="card-img-top" style="height: 200px !important;" src="{% static 'images/CouponsTown-background.png' %}" alt="Free Udemy Coupon | Free Online Courses | {{ item.name }}">
+                {% endif %}
                 <div class="card-body" style="height: 200px;" >
                   <div class="course-title" style=" justify-content: center;">
                       <h4 style="font-size: 1.2rem; font-family: cursive; width: 100%; height: 80px; font-weight: 800; text-align: center; padding: 5px; color: #1d3557">
