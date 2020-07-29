@@ -13,16 +13,16 @@
           {% else %}
           <div class="carousel-item" >
           {% endif %}
-            <div class="col-sm-6 col-8 offset-sm-0 offset-2 col-md-4 col-lg-3" itemscope>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3" itemscope>
               <div class="card mb-2">
                 <img class="card-img-top" style="height: 200px !important;" src="{{ item.image.url }}" alt="Free Udemy Coupon | Free Online Courses | {{ item.name }}">
                 <div class="card-body" style="height: 200px;" >
                   <div class="course-title" style=" justify-content: center;">
-                      <h4 style="font-size: 1.3rem; font-family: cursive; width: 100%; height: 80px; font-weight: 800; text-align: center; padding: 5px; color: #1d3557">
+                      <h4 style="font-size: 1.2rem; font-family: cursive; width: 100%; height: 80px; font-weight: 800; text-align: center; padding: 5px; color: #1d3557">
                           <!-- The Complete SQL Bootcamp 2020: Go from Zero to  The Complete Course -->
                           {{ item.name }}
                       </h4>
-                      <p class="my-0 py-0">Added on {{item.upload_date}}</p>
+                      <p style="font-size: 0.7rem; margin-bottom: 0px !important;">Added on {{item.upload_date}}</p>
                   </div>
                   <div class="get-coupon" style="width: 100%; height: 50px;  ">
                     <a href="{% url 'info_page' %}?course={{item.name_encoded}}" class="btn peach-gradient" style="font-size:1rem; font-weight:bolder">  
