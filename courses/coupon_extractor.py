@@ -78,7 +78,7 @@ class CouponExtractor:
                                         obj.save()
                                     finally:
                                         pass
-                                    print('[-] Expired',self.coupon_count, link)
+                                    print('[-] Expired', self.coupon_count, link)
                                 
                                 # Update Platform
                                 platform = coupon.split('//')[-1].split('www.')[-1].split('.')[0].capitalize()
