@@ -190,7 +190,7 @@ def show_coupons(request):
     courses = Course.objects.filter(expired=False).order_by('upload_date')
     string = 'All Coupons<br>------------------<br>'
     for course in courses:
-        link = 'https://couponstown.me/info-page/' + course.name_encoded
+        link = 'https://couponstown.me/info-page/?course=' + course.name_encoded
         string += link + '<br>'
     return HttpResponse(string)
 
