@@ -124,8 +124,9 @@ def search(request):
     # Using OR operation to the splitted string
     for q in keywordset:
         _r = Course.objects.filter(Q(name__icontains=q) | Q(category__icontains=q))
+        _r = _r.filter(expired=False)
         for i in _r:
-            if not ( i in results and i.expired):
+            if not i in results:
                 results.append(i)
 
     p = Paginator(results, 9)  # Total no of items per page = 9
