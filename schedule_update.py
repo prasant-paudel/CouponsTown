@@ -73,5 +73,5 @@ if __name__ == '__main__':
         finally:
             pass
 
-        time.sleep(1)
+        time.sleep(0.9)
 
