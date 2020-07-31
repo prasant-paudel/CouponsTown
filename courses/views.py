@@ -5,7 +5,31 @@ from .my_scripts import CourseInfo
 from .tags_scraper import TagScraper
 import pickle
 from django.core.paginator import Paginator, EmptyPage
+import pyrebase
+from requests.exceptions import ConnectionError
 
+# Production Configuration
+config = {
+    "apiKey": "AIzaSyCvdtPMemkE6RBh8prl4h0P2kAva9PqLV0",
+    "authDomain": "coupons-town.firebaseapp.com",
+    "databaseURL": "https://coupons-town.firebaseio.com",
+    "projectId": "coupons-town",
+    "storageBucket": "coupons-town.appspot.com",
+    "messagingSenderId": "511956827149",
+    "appId": "1:511956827149:web:2c6f55d2030f27bd9d2944",
+    "measurementId": "G-8M4ZXV2J9G",
+}
+# # Test Configuration
+# config = {
+#     "apiKey": "AIzaSyAVdH5Qggi8KwUr-iMjBHkxB31reIw52V4",
+#     "authDomain": "coupons-town-test.firebaseapp.com",
+#     "databaseURL": "https://coupons-town-test.firebaseio.com",
+#     "projectId": "coupons-town-test",
+#     "storageBucket": "coupons-town-test.appspot.com",
+#     "messagingSenderId": "205056322149",
+#     "appId": "1:205056322149:web:a3a72b83a638ff88f0b48c",
+#     "measurementId": "G-575527J5PG",
+# }
 
 def get_queryset(keywords_list):
     _results = []
@@ -25,6 +49,7 @@ def home(request):
     courses = Course.objects.order_by('upload_date').reverse()
     courses = courses.filter(expired=False)
     carousel2 = ((i,e) for (i,e) in enumerate(courses[:20]))
+
     return render(request, 'courses/home.html', {'courses': courses, 'carousel2':carousel2})
 
 def courses(request):
@@ -165,18 +190,28 @@ def category(request):
 
 def subscribe(request):
     email = request.POST.get('email')
-    full_name = request.POST.get('full_name')
+    username = request.POST.get('username')
+    # email = 'user@domain'
+    # username = 'user'
     
-    if not Subscriber.objects.filter(email=email):
-        Subscriber.objects.create(full_name=full_name, email=email)
-        msg = f"Thank you! {full_name} You've successfully been subscribed as {email}"
-    else:
-        msg = "The email alerady exists!"
+    firebase = pyrebase.initialize_app(config)
+    auth = firebase.auth()
+    db = firebase.database()
 
-    courses = Course.objects.order_by('upload_date').reverse()
+    # Add user if not exists
+    all_users = db.child('users').get()
+    for _user in all_users.each():
+        _email = _user.val()['email']
+        if _email.lower() == email.lower():
+            email_exists = True
+            return HttpResponse('Email Already Exists')
+    if not email_exists:
+        _data = {'username': username, 'email': email}
+        db.child('users').push(_data)
+        return HttpResponse(f'Subscribes Successfully {_email, email}')
 
-    return render(request, 'courses/courses.html', {'message': msg, 'courses': courses})
-
+    # return render(request, 'courses/courses.html', {'message': msg, 'courses': courses})
+    return HttpResponse('hello')
 
 def error_404_view(request, exception):
     return render(request, 'courses/404.html')
