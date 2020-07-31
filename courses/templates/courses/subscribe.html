@@ -16,8 +16,8 @@
             <form action="{% url 'subscribe' %}" method="POST">
                 {% csrf_token %}
                 <div class="md-form mb-5">
-                    <input type="text" id="Form-pass5" name="full_name" class="form-control validate white-text" required>
-                    <label data-error="wrong" data-success="right" for="Form-pass5">Your Name</label>
+                    <input type="text" id="Form-pass5" name="username" class="form-control validate white-text" required>
+                    <label data-error="wrong" data-success="right" for="Form-pass5">Username</label>
                 </div>
 
                 <div class="md-form pb-3">
