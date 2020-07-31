@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'courses',
     'multiselectfield',
     'mathfilters',
+    'fcm_django',
 ] 
 
 MIDDLEWARE = [
@@ -134,3 +135,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR
+
+FCM_DJANGO_SETTINGS = {
+        "APP_VERBOSE_NAME": "fcm_django",
+         # default: _('FCM Django')
+        "FCM_SERVER_KEY": "AAAAdzMBPA0:APA91bEFXiA9Nf48xhQppwxCKCTjtToUa6ohzF7klRc1lIBcakeBFrJHnAtSACgWbIL0T-P5J2PubjkyhPF71lHb0svd91XbshoSnt5dE4AEVXZ4afjovSdEG64m3sFX57hMEy5-NTPH",
+         # true if you want to have only one active device per registered user at a time
+         # default: False
+        "ONE_DEVICE_PER_USER": False,
+         # devices to which notifications cannot be sent,
+         # are deleted upon receiving error response from FCM
+         # default: False
+        "DELETE_INACTIVE_DEVICES": False,
+}

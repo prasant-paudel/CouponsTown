@@ -7,6 +7,7 @@ import pickle
 from django.core.paginator import Paginator, EmptyPage
 import pyrebase
 from requests.exceptions import ConnectionError
+from fcm_django.models import FCMDevice
 
 # Production Configuration
 config = {
@@ -19,17 +20,6 @@ config = {
     "appId": "1:511956827149:web:2c6f55d2030f27bd9d2944",
     "measurementId": "G-8M4ZXV2J9G",
 }
-# # Test Configuration
-# config = {
-#     "apiKey": "AIzaSyAVdH5Qggi8KwUr-iMjBHkxB31reIw52V4",
-#     "authDomain": "coupons-town-test.firebaseapp.com",
-#     "databaseURL": "https://coupons-town-test.firebaseio.com",
-#     "projectId": "coupons-town-test",
-#     "storageBucket": "coupons-town-test.appspot.com",
-#     "messagingSenderId": "205056322149",
-#     "appId": "1:205056322149:web:a3a72b83a638ff88f0b48c",
-#     "measurementId": "G-575527J5PG",
-# }
 
 def get_queryset(keywords_list):
     _results = []
@@ -49,6 +39,20 @@ def home(request):
     courses = Course.objects.order_by('upload_date').reverse()
     courses = courses.filter(expired=False)
     carousel2 = ((i,e) for (i,e) in enumerate(courses[:20]))
+
+    notification = {
+    "to" : "AAAAdzMBPA0:APA91bEFXiA9Nf48xhQppwxCKCTjtToUa6ohzF7klRc1lIBcakeBFrJHnAtSACgWbIL0T-P5J2PubjkyhPF71lHb0svd91XbshoSnt5dE4AEVXZ4afjovSdEG64m3sFX57hMEy5-NTPH",
+    "notification" : {
+        "body" : "great match!",
+        "title" : "Portugal vs. Denmark",
+        "icon" : "myicon"
+        }
+    }
+    
+    devices = FCMDevice.objects.all()
+    devices.send_message(title="Title", body="Message")
+    devices.send_message(title="Title", body="Message", data={"test": "test"})
+    devices.send_message(data={"test": "test"})
 
     return render(request, 'courses/home.html', {'courses': courses, 'carousel2':carousel2})
 
