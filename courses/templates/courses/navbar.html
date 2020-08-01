@@ -43,11 +43,11 @@
             <ul class="list-unstyled">
               <li><a href="{% url 'courses' %}" class="waves-effect">All Valid Coupons</a>
               </li>
-              <li><a href="{% url 'courses' %}?filter=udemy" class="waves-effect">Udemy Coupons</a>
+              <li><a href="{% url 'courses' %}?filter=Udemy" class="waves-effect">Udemy Coupons</a>
               </li>
-              <li><a href="{% url 'courses' %}?filter=eduonix" class="waves-effect">Eduonix Coupons</a>
+              <li><a href="{% url 'courses' %}?filter=Eduonix" class="waves-effect">Eduonix Coupons</a>
               </li>
-              <li><a href="#" class="waves-effect">Downloadable Courses</a>
+              <li><a href="{% url 'courses' %}?filter=Expired" class="waves-effect">Expired Coupons</a>
               </li>
             </ul>
           </div>

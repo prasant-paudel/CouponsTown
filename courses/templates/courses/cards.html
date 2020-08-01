@@ -25,7 +25,7 @@
                     </div>
                     
                     <div class="get-coupon" style="width: 100%; height: 40px;  ">
-                        <a href="{% url 'info_page' %}?course={{course.name_encoded}}" class="btn ripe-malinka-gradient">
+                        <a href="{% url 'info_page' %}?course={{course.name_encoded}}&filter={{filter}}" class="btn ripe-malinka-gradient">
                             
                             Enroll Now
                         </a>
@@ -104,11 +104,11 @@
             <!-- Page Numbers -->
             {% for i in total_pages %}
                 {% if i == active_page %}
-                <li id="page-item{{i}}" class="page-item active"><a class="page-link" href="{% url 'courses' %}?page={{i}}&filter={{platform}}">{{i}}</a></li>
+                <li id="page-item{{i}}" class="page-item active"><a class="page-link" href="{% url 'courses' %}?page={{i}}&filter={{filter}}">{{i}}</a></li>
                 {% elif i == 1 or i == num_pages %}
-                <li class="page-item"><a class="page-link" href="{% url 'courses' %}?page={{i}}&filter={{platform}}">{{i}}</a></li>
+                <li class="page-item"><a class="page-link" href="{% url 'courses' %}?page={{i}}&filter={{filter}}">{{i}}</a></li>
                 {% elif i|add:1 == active_page or i|add:-1 == active_page %}
-                <li class="page-item"><a class="page-link" href="{% url 'courses' %}?page={{i}}&filter={{platform}}">{{i}}</a></li>
+                <li class="page-item"><a class="page-link" href="{% url 'courses' %}?page={{i}}&filter={{filter}}">{{i}}</a></li>
                 {% endif %}
             {% endfor %}
             <!-- / Page Numbers -->
@@ -118,7 +118,7 @@
                 {% if active_page == num_pages %}
                 <a class="page-link" aria-label="Next">
                 {% else %}
-                <a class="page-link" aria-label="Next" href="{% url 'courses' %}?page={{active_page|add:1}}&filter={{platform}}">
+                <a class="page-link" aria-label="Next" href="{% url 'courses' %}?page={{active_page|add:1}}&filter={{filter}}">
                 {% endif %}
                 <span aria-hidden="true">&raquo;</span>
                 <span class="sr-only">Next</span>

@@ -62,10 +62,14 @@ def courses(request):
     if cat.lower() == 'udemy' or cat.lower() == 'eduonix':
         courses = Course.objects.filter(Q(platform__icontains=cat))
         msg = cat.capitalize() + ' Coupons'
-        platform = cat.capitalize()
+        filter = cat.capitalize()
+    elif cat.lower() == 'expired':
+        courses = Course.objects.filter(expired=True).order_by('rating').reverse()
+        msg = 'Expired Coupons'
+        filter = 'Expired'
     else:
         courses = Course.objects.filter(expired=False)
-        platform = None
+        filter = None
     
     courses = courses.order_by('upload_date').reverse()
 
@@ -84,12 +88,13 @@ def courses(request):
 
     template = 'courses/courses.html'
     context = {'courses': page, 'total_pages': total_pages, 'active_page': active_page, 
-        'num_pages': p.num_pages, 'high_rated':high_rated, 'platform': platform}
+        'num_pages': p.num_pages, 'high_rated':high_rated, 'filter': filter}
     return render(request, template, context)
 
 
 def info_page(request):
     _course = request.GET.get('course')
+    filter = request.GET.get('filter')
     try:
         course = Course.objects.filter(Q(name=_course) | Q(name_base64=_course) | Q(name_encoded=_course)).first()
         if not course:
@@ -137,7 +142,7 @@ def info_page(request):
     return render(request, 'courses/info_page.html', {
         'course': course, 'related_courses': related_courses, 'contents':contents,
         'web_development': web_development, 'programming': programming,
-        'office': office, 'hacking': hacking, 'cloud': cloud,
+        'office': office, 'hacking': hacking, 'cloud': cloud, 'filter': filter,
     })
 
 
