@@ -62,8 +62,10 @@ def courses(request):
     if cat.lower() == 'udemy' or cat.lower() == 'eduonix':
         courses = Course.objects.filter(Q(platform__icontains=cat))
         msg = cat.capitalize() + ' Coupons'
+        platform = cat.capitalize()
     else:
         courses = Course.objects.filter(expired=False)
+        platform = None
     
     courses = courses.order_by('upload_date').reverse()
 
@@ -81,7 +83,8 @@ def courses(request):
     high_rated = list(high_rated)[:10]
 
     template = 'courses/courses.html'
-    context = {'courses': page, 'total_pages': total_pages, 'active_page': active_page, 'num_pages': p.num_pages, 'high_rated':high_rated}
+    context = {'courses': page, 'total_pages': total_pages, 'active_page': active_page, 
+        'num_pages': p.num_pages, 'high_rated':high_rated, 'platform': platform}
     return render(request, template, context)
 
 
