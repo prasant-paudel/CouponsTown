@@ -8,6 +8,7 @@ from django.core.paginator import Paginator, EmptyPage
 import pyrebase
 from requests.exceptions import ConnectionError
 from fcm_django.models import FCMDevice
+from django.views.decorators.csrf import csrf_protect
 
 # Production Configuration
 config = {
@@ -199,6 +200,7 @@ def category(request):
     context = {'courses': results, 'message': msg}
     return render(request, template, context)
 
+@csrf_protect
 def subscribe(request):
     email = request.POST.get('email')
     username = request.POST.get('username')
@@ -221,8 +223,9 @@ def subscribe(request):
         db.child('users').push(_data)
         return HttpResponse(f'Subscribes Successfully {_email, email}')
 
-    # return render(request, 'courses/courses.html', {'message': msg, 'courses': courses})
-    return HttpResponse('hello')
+    return render(request, 'courses/courses.html')
+    # return HttpResponse('hello')
+
 
 def error_404_view(request, exception):
     return render(request, 'courses/404.html')

@@ -13,7 +13,7 @@
         <!--Body-->
         <div class="modal-body">
           <!--Body-->
-            <form action="http://localhost:8000/subscribe/" method="POST">
+            <form action="{% url 'subscribe' %}" method="POST">
                 {% csrf_token %}
                 <div class="md-form mb-5">
                     <input type="text" id="Form-pass5" name="username" class="form-control validate white-text" required>
