@@ -199,7 +199,6 @@ def category(request):
     context = {'courses': results, 'message': msg}
     return render(request, template, context)
 
-
 def subscribe(request):
     email = request.POST.get('email')
     username = request.POST.get('username')
