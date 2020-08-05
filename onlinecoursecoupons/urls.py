@@ -19,7 +19,13 @@ from courses import views, api_views
 from django.conf import settings
 from django.conf.urls.static import static
 
+from django.contrib.sitemaps.views import sitemap
+from courses.sitemaps import CourseSitemap
+sitemaps = {'courses': CourseSitemap}
+
 urlpatterns = [
+    path('courses/sitemap.xml', sitemap, {'sitemaps': sitemaps},
+        name='django.contrib.sitemaps.views.sitemap'),
     path('averyverysecureadmin/', admin.site.urls),
     path('', views.home, name='home'),
     path('courses', views.courses, name='courses'),
@@ -32,6 +38,7 @@ urlpatterns = [
     path('test/', views.test, name='test'),
     path('XVuWnuQVjyS49iY2ks4gRSaYNtHv32Uw4hR5Y4JujhoUooQ5Yn3LYGGt9WXvfMA8', 
         views.show_coupons, name='show_coupons')
+    
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

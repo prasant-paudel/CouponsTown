@@ -1,5 +1,6 @@
 from django.db import models
 from multiselectfield import MultiSelectField
+from django.shortcuts import reverse
 
 class Course(models.Model):
     id = models.AutoField(primary_key=True)
@@ -36,6 +37,8 @@ class Course(models.Model):
     class Meta:
         ordering = ['expired' ,'name']
         
+    def get_absolute_url(self):
+        return reverse('info_page') + self.name_encoded
 
 
 class Subscriber(models.Model):

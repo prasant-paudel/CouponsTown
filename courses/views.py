@@ -273,6 +273,8 @@ def error_404_view(request, exception):
 
 
 def test(request):
+    # path('course/<str:anyarg>/', views.courses, 'courses') 
+    # return reverse('course', args=[''])
     return render(request, 'courses/test.html')
 
 
