@@ -146,11 +146,15 @@ def info_page(request):
         'office': office, 'hacking': hacking, 'cloud': cloud, 'filter': filter,
     })
 
+def description(request):
+    template = 'courses/description.html'
+    return render(request, template)
 
 def search(request):
     template = 'courses/courses.html'
     query = request.GET.get('q')
     query = str(query).strip("'").strip('"')
+    
 
     keywordset = query.split()
     results = []
@@ -182,7 +186,11 @@ def search(request):
 
 
     msg = f'Search results for "{query}"'
-    return render(request, template, {'courses': page, 'message': msg, 'total_pages': total_pages, 'active_page': active_page, 'num_pages': p.num_pages, 'high_rated': high_rated})
+    context = {'courses': page, 'message': msg, 'total_pages': total_pages, 
+        'active_page': active_page, 'num_pages': p.num_pages, 'high_rated': high_rated,
+        'filter':'search_page'
+    }
+    return render(request, template, context)
 
 
 def category(request):
@@ -223,7 +231,10 @@ def subscribe(request):
         db.child('users').push(_data)
         return HttpResponse(f'Subscribes Successfully {_email, email}')
 
-    return render(request, 'courses/courses.html')
+    context = {}
+    context.update(csrf(request))
+
+    return render(request, 'courses/courses.html', context)
     # return HttpResponse('hello')
 
 

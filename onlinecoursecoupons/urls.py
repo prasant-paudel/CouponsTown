@@ -28,6 +28,7 @@ urlpatterns = [
     path('subscribe/', views.subscribe, name='subscribe'),
     re_path('^api/$', api_views.api, name='api'),
     path('info-page/', views.info_page, name='info_page'),
+    path('description/', views.description, name='description'),
     path('test/', views.test, name='test'),
     path('XVuWnuQVjyS49iY2ks4gRSaYNtHv32Uw4hR5Y4JujhoUooQ5Yn3LYGGt9WXvfMA8', 
         views.show_coupons, name='show_coupons')

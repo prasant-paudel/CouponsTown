@@ -265,5 +265,6 @@ def api(request):
     if command == 'scrape_discudemy':
         from courses.discudemy_scraper import crawl
         crawl()
+        return HttpResponse(f'Crawling Discudemy')
 
     return HttpResponse(f'Successful Ineraction!')
