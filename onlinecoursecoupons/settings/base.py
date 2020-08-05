@@ -49,11 +49,11 @@ INSTALLED_APPS = [
     'multiselectfield',
     'mathfilters',
     'fcm_django',
-    'django.contrib.sites',
+    # 'django.contrib.sites',
     'django.contrib.sitemaps',
     
 ] 
-SITE_ID = 1
+# SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -38,7 +38,7 @@ class Course(models.Model):
         ordering = ['expired' ,'name']
         
     def get_absolute_url(self):
-        return 'https://couponstown.me/info-page/' + self.name_encoded
+        return reverse('info_page') + self.name_encoded
 
 
 class Subscriber(models.Model):
