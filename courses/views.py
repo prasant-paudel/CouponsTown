@@ -160,7 +160,6 @@ def info_page(request):
     except:
         contents = []
     try:
-        description = description()
         description = course.description.decode()
     except:
         description = ''
