@@ -1,11 +1,14 @@
 {% load static%}
 
+<style>
+  a{min-height: 48px; min-width: 48px;}
+</style>
 
 <!--Double navigation-->
 <header>
   <!-- Sidebar navigation -->
-  <div id="slide-out" class="side-nav fixed bg-danger">
-    <ul class="custom-scrollbar">
+  <div id="slide-out" class="side-nav fixed bg-danger" >
+    <ul class="scrollbar" style="overflow-y: scroll;">
       <!-- Logo -->
       <li>
         <div class="logo-wrapper waves-light">
@@ -120,7 +123,7 @@
     </div>
     <ul class="nav navbar-nav nav-flex-icons ml-auto" >
       <li class="nav-item ml-2">
-        <a href="{% url 'home' %}"" class="nav-link"><i class="fas fa-home"></i> <span class="clearfix d-none d-sm-inline-block">Home</span></a>
+        <a href="{% url 'home' %}" class="nav-link"><i class="fas fa-home"></i> <span class="clearfix d-none d-sm-inline-block">Home</span></a>
       </li>
       <li class="nav-item ml-2">
         <a class="nav-link"><i class="fas fa-comments"></i> <span class="clearfix d-none d-sm-inline-block">Support</span></a>

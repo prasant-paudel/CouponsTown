@@ -13,8 +13,12 @@ class CourseInfo:
         self.contents = []
         self.count = 0
 
-        self.response = requests.get(url)
-        self.parsed_html = BeautifulSoup(self.response.content)
+        try:
+            self.response = requests.get(url)
+            self.parsed_html = BeautifulSoup(self.response.content)
+        except:
+            print('Connection Error!')
+            self.parsed_html = ''
 
     def get_name(self):
         try:
@@ -123,10 +127,16 @@ class CourseInfo:
         url = self.url
         # url = 'https://www.udemy.com/course/architecting-a-cybersecurity-solution/?couponCode=30D8CDE1617492C56637'
         if 'udemy.com' in url.lower():
-            page_src = requests.get(url).content
-            parsed_html = BeautifulSoup(page_src)
+            try:
+                page_src = requests.get(url).content
+                parsed_html = BeautifulSoup(page_src)
+            except:
+                print('[!] Connection Error')
+                return None
             lists = parsed_html.findAll('span', {"class": "what-you-will-learn--objective-item--ECarc"})
-            if self.count < 10 and not lists:
+            if not lists:
+                print('[-] No Content Found')
+            if self.count < 5 and not lists:
                 self.count += 1
                 lists = self.get_content_list()
             else:
@@ -137,8 +147,17 @@ class CourseInfo:
                 print(i)
             return self.contents
 
+    def get_description(self):
+        description = ''
+        try:
+            description = self.parsed_html.findAll('div', {'data-purpose': \
+                'safely-set-inner-html:description:description'})[0]
+        except (AttributeError, IndexError):
+            print('[-] Description Not Found')
+        finally:
+            pass
+        return description
 
         
-
 
 

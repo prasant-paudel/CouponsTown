@@ -10,6 +10,7 @@ class Course(models.Model):
     affiliate_url = models.CharField(max_length=256,blank=True)
     image = models.ImageField(upload_to='media/', blank=True)
     contents = models.BinaryField(blank=True)
+    description = models.BinaryField(blank=True)
     best_seller = models.BooleanField(null=True)
     expired = models.BooleanField(default=False)
     platform = models.CharField(max_length=30, blank=True)

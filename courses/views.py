@@ -93,7 +93,7 @@ def courses(request):
     return render(request, template, context)
 
 
-def info_page(request):
+def coupon_page(request):
     _course = request.GET.get('course')
     filter = request.GET.get('filter')
     try:
@@ -140,15 +140,46 @@ def info_page(request):
     cloud = get_queryset(keys)[:8]
 
 
-    return render(request, 'courses/info_page.html', {
+    return render(request, 'courses/coupon_page.html', {
         'course': course, 'related_courses': related_courses, 'contents':contents,
         'web_development': web_development, 'programming': programming,
         'office': office, 'hacking': hacking, 'cloud': cloud, 'filter': filter,
     })
 
-def description(request):
-    template = 'courses/description.html'
-    return render(request, template)
+def info_page(request):
+    _course = request.GET.get('course')
+    filter = request.GET.get('filter')
+    try:
+        course = Course.objects.filter(Q(name=_course) | Q(name_base64=_course) | Q(name_encoded=_course)).first()
+        if not course:
+            raise(Http404)
+    except:
+        raise(Http404)
+    try:
+        contents = pickle.loads(course.contents)
+    except:
+        contents = []
+    try:
+        description = description()
+        description = course.description.decode()
+    except:
+        description = ''
+    
+    print('\n\n')
+    print(description)
+    print('\n\n')
+    
+    
+    # Related Courses
+    keys = course.name.split()
+    results = get_queryset(keys)
+    related_courses = list(results)[:10]
+
+    template = 'courses/info_page.html'
+    context = {'course': course, 'related_courses': related_courses,
+        'contents':contents, 'description': description, 'filter': filter,
+    }
+    return render(request, template, context)
 
 def search(request):
     template = 'courses/courses.html'

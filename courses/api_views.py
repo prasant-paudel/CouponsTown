@@ -45,27 +45,29 @@ def api(request):
     if command == 'fetch_course_info_from_url':
         courses = Course.objects.all()
         for course in courses:
+            print('===>', course.url, '<===')
             obj = None
+
+            # Fetch Name
+            if not course.name:
+                obj = CourseInfo(course.url)
+                print(f'[+] Fetching Name for {course.name}')
+                # Course.objects.filter(id=course.id).update(name=obj.get_name())
+                course.name = obj.get_name()
+                course.save()
 
             # Fetch Image
             if not course.image:
-                obj = CourseInfo(course.url)         
+                if not obj:
+                    obj = CourseInfo(course.url)         
                 print(f'[+] Fetching Image for {course.name}')
                 # Course.objects.filter(id=course.id).update(image=obj.get_image())
                 course.image = obj.get_image()
                 course.save()
 
-            # Fetch Name
-            if not course.name:
-                if not obj:
-                    obj = CourseInfo(course.url)
-                print(f'[+] Fetching Name for {course.name}')
-                # Course.objects.filter(id=course.id).update(name=obj.get_name())
-                course.name = obj.get_name()
-                course.save()
-            
             # if course.name and not (course.name_encoded and course.name_base64):
             if 1==1:
+                print(f'[+] Encoding Name {course.name}')
                 temp_name = b64encode(str(course.name).encode()).decode()
                 course.name_base64 = temp_name
                 course.save()
@@ -82,9 +84,11 @@ def api(request):
                 course.platform = obj.platform
                 course.save()
 
-            # Fetch Contents / Description / Things You'll Learn
+            # Fetch Contents / Things You'll Learn
             if 'udemy.com' in course.url and not (course.contents or course.expired):
-                obj = CourseInfo(url=course.url)
+                if not obj:
+                    obj = CourseInfo(url=course.url)
+                print(f'[+] Fetching Contents for {course.name}')
                 contents = obj.get_content_list()
                 if contents:
                     import pickle
@@ -92,8 +96,19 @@ def api(request):
                     course.contents = pickle.dumps(contents)
                     course.save()
 
+            # Fetch Description
+            # if not course.description:
+            if 1==1:
+                if not obj:
+                    obj = CourseInfo(url=course.url)
+                print(f'[+] Fetching Description for {course.name}')
+                description = obj.get_description()
+                if description:
+                    course.description = str(description).encode()
+                    course.save()
+
             # Fetch Rating 
-            if not (course.rating and course.expired):
+            if not (course.rating or course.expired):
                 if not obj:
                     obj = CourseInfo(course.url)
                 print(f'[+] Fetching Rating for {course.name}')
@@ -139,12 +154,17 @@ def api(request):
         course.save()
         # Fetch Image
         course.image = obj.get_image()
-        # Fetch Contents / Description / Things You'll Learn
+        # Fetch Contents / Things You'll Learn
         contents = obj.get_content_list()
         if contents:
             import pickle
             # print(len(contents))
             course.contents = pickle.dumps(contents)
+        # Fetch Description
+        description = obj.get_description()
+        if description:
+            course.description = str(description).encode()
+            course.save()
         # Fetch Rating
         course.rating = obj.get_rating()
         # Fetch Duration

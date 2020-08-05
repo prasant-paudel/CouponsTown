@@ -1,0 +1,161 @@
+{% extends 'courses/base.html' %}
+{% load static %}
+
+{% block page_meta %}
+<meta name="title" content="[100% OFF] | {{ course.name }}"  />
+<meta name="description" content="{{course.name}}: Udemy Coupon | Free Online Courses | Certificate of Completion | Free Coupon (Promo) Code." />
+<meta property="og:title" content="[100% Off] | {{course.name}}" />
+<meta property="og:description" content="CouponsTown - Free Udemy Coupons | Free Online Courses | Certificate of Completion | Free Coupon (Promo) Code."" />
+<meta property="og:url" content="" />
+<meta property="og:image" content="{{course.image.url}}" />
+<meta property="twitter:title" content="[100% Off] | {{course.name}}" />
+<meta property="twitter:description" content="CouponsTown - Free Udemy Coupons | Free Online Courses | Certificate of Completion | Free Coupon (Promo) Code." />
+<meta property="twitter:image" content="{{course.image.url}}" />
+<link rel="cannonical" href="https://couponstown.me/info-page/{{course.name_base64}}" />
+{% endblock %}
+
+{% block title %} [100% Off] | {{course.name}} {% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+  <div class="d-flex justify-content flex-wrap" style="width: 100%;" style=" display: flex; flex-wrap: wrap;">
+
+    <div class="container-fluid  border-danger">
+      <div class="row mt-3">
+
+        <div class="col-lg-8 border-danger">
+          <div class="card text-center">
+            <div class="card-header bg-danger ">
+              <h1 style="font-size: 20px; color:white">{{ course.name }}</h1>
+            </div>
+            <div class="card-body ">
+              <div class="d-flex justify-content-md-center flex-wrap">
+                <div class="p-2 flex-fill bd-highlight" style="width: 296px;">
+                  <img src="{{ course.image.url }}" class="card-img-top" alt="{{course.name}} | Coupons Town | e-learning free courses online">
+                </div>
+
+                <div class="p-2 flex-fill bd-highlight" style="width: 296px;">
+                  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                  <!-- test-square -->
+                  <ins class="adsbygoogle"
+                      style="display:block"
+                      data-ad-client="ca-pub-5582220802128786"
+                      data-ad-slot="3771324164"
+                      data-ad-format="auto"
+                      data-full-width-responsive="true"></ins>
+                  <script>
+                      (adsbygoogle = window.adsbygoogle || []).push({});
+                  </script>
+                </div>
+  
+                <div class="p-2 flex-fill bd-highlight" style="width: 296px;">
+                </div>
+                
+                <div class="p-2 flex-fill  " style="width: 296px;">
+                  <div class="get-coupon" style="width: 100%; height: 40px;  ">
+
+                      <script>
+                        function countDown(secs,elem) {
+                          var element = document.getElementById(elem);
+                        
+                          element.innerHTML = "<h4 class='text-info'><span class='text-danger'>Generating Coupon</span> <br> Please wait for "+secs+" seconds</h4>";
+                          if(secs < 1) {
+                            clearTimeout(timer);
+                            element.innerHTML = '<p class="lead text-success" style="font-weight:500;">\
+                            {% if course.expired %}\
+                            Sorry! No Coupons Found &#128549 \
+                            {% else %}\
+                            Successfully Generated \
+                            {% endif %}\
+                            </p>';
+                            element.innerHTML += '<a rel="nofollow" href="{{ course.url }}" class="btn peach-gradient text-white" style="text-decoration: none; color: #03e9f4; border-radius: 0px; width: max-content; margin-top:-3px;" ><span></span><span></span><span></span><span></span>\
+                            {% if course.expired %}\
+                            Coupon Expired\
+                            {% else %}\
+                            Get Coupon\
+                            {% endif %}\
+                            </a>';
+                          }
+                        secs--;
+                        var timer = setTimeout('countDown('+secs+',"'+elem+'")',500);
+                            }
+                      </script>
+                      <div id="status"></div>
+                      {% if filter == 'Expired' %}
+                      <script>countDown(0,"status");</script>
+                      {% else %}
+                      <script>countDown(10,"status");</script>
+                      {% endif %}
+                  </div>
+                  <div class="rating floa-left d-flex align-items-center mt-5"
+                    style="width: 100%; height: 45px; float: left; ">
+                    {% if course.platform == 'Udemy' %}
+                    <img src="{% static 'images/udemy.svg' %}" class="rounded mx-auto d-block" height="70%" width="100%" alt="CouponsTown | Best Courses Udemy | Free Certificate | Free Udemy Course | Highest Rated | {{course.id}}">
+                    {% elif course.platform == 'Eduonix' %}
+                    <img src="{% static 'images/eduonix.png' %}" class="rounded mx-auto d-block" height="70%" style="margin:0 auto; width:max-content; background:antiquewhite; border-radius: 5%;" alt="CouponsTown | Best Eduonix Courses | Free Certification | Highest Rated | Bestseller | {{course.id}}">
+                    {% endif %}
+                  </div>
+      
+                </div>
+              </div>
+      
+            </div>
+            <style>
+              .card-footer ul li:before {
+                content: '✓';
+                color: #22bb33;
+                font-size: 36px;
+              }
+            </style>
+            <div class="card-footer border-danger">
+              <div class="card-header  text-light bg-danger">
+                <h1 style="font-size: 20px;" class="">What You Will Learn?</h1>
+              </div>  
+              <ul>
+                {% if contents %}
+                {% for item in contents %}
+                <li style="text-align: left; list-style: none;">{{ item }}</li>
+                {% endfor %}
+                {% endif %}
+              </ul>
+              
+            </div>
+          </div>     
+      </div>
+
+      <div class="col-lg-4 ">
+        <div class="card text-center ">
+          <!-- ======Provide Suggestions of Related Topics====== -->
+          <div class="card-header bg-danger text-white" style="font-weight: bolder;">
+            Related Topics
+          </div>
+          <div class="card-body">
+            {% for course in related_courses %}
+            {% include 'courses/side-card-small.html' %}
+            {% endfor %}
+          </div>
+          
+        </div>
+        <!-- ================================== -->
+      </div>
+      </div>
+    </div>
+
+    <!-- Course Category -->
+  
+    {% include 'courses/carousel.html' %}
+    
+    
+      
+</div>
+
+</div>
+
+  
+
+    <!-- =========================================sliding section=====================================        -->
+
+    {% endblock %}
+        
+
+</html>
