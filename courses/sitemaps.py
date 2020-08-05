@@ -6,7 +6,7 @@ class CourseSitemap(Sitemap):
     priority = 0.64
 
     def items(self):
-        return Course.objects.all()
+        return Course.objects.order_by('upload_date').reverse()
 
     def lastmod(self, obj):
         return obj.upload_date
