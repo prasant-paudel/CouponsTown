@@ -43,7 +43,7 @@ def api(request):
 
     # Fetch infomation of courses from the url in Course database table
     if command == 'fetch_course_info_from_url':
-        courses = Course.objects.all()
+        courses = Course.objects.all().order_by('upload_date').reverse()
         for course in courses:
             print('===>', course.url, '<===')
             obj = None
