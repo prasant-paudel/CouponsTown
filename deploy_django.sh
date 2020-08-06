@@ -112,6 +112,13 @@ echo "server{
 		alias $(pwd)/$project_name/static/ads.txt;
 	}
 
+	location /OneSignalSDKUpdaterWorker.js {
+		alias $(pwd)/$project_name/static/OneSignalSDKUpdaterWorker.js;
+	}
+	location /OneSignalSDKWorker.js {
+		alias $(pwd)/$project_name/static/OneSignalSDKWorker.js;
+	}
+
 	location / {
 		proxy_pass http://localhost:$gunicorn_port;
 	}

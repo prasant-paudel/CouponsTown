@@ -3,6 +3,7 @@
 <html lang="en">
 
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
   <!-- BASE HTML META TAGS -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,9 +15,8 @@
   <meta name="twitter:site" content="@CouponsTown" />
   <meta name="theme-color" content="#ff3547" />
   <meta name="google-site-verification" content="I61KUjO-ZrdGF1jFjOjG5ZDQAoD7mhR1hSDslqk3mcc" />
-
-  {% block page_meta %}
-  {% endblock %}
+  <meta name="propeller" content="54b088c7de4d2972cb5e7ee4ce36e7ab">
+  {% block page_meta %} {% endblock %}
 
   <title>{% block title %}Coupons Town: Free Udemy and other Courses{% endblock %}</title>
 
@@ -42,6 +42,18 @@
     gtag('js', new Date());
     gtag('config', 'UA-172159238-1');
   </script>
+
+  <!-- OneSignal Notifier -->
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+  <script>
+    window.OneSignal = window.OneSignal || [];
+    OneSignal.push(function() {
+      OneSignal.init({
+        appId: "6b2c85d8-8cd2-460f-866e-8ae9f3a0d3f6",
+      });
+    });
+  </script>
+  <!-- / OneSignal Notifier -->
 
 </head>
 
