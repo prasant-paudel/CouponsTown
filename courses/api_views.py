@@ -153,18 +153,20 @@ def api(request):
                     _course.delete()
         
         # Fetch Name
+        print(coupon)
         course.name = obj.get_name()
 
         # Encode name for urls
         temp_name = b64encode(str(course.name).encode()).decode()
         course.name_base64 = temp_name
-        # course.save()
+        course.save()
         temp_name = quote_plus(course.name)
         course.name_encoded = temp_name
-        # course.save()
+        course.save()
 
         # Fetch Image
-        course.image = obj.get_image()
+        print(course)
+        # course.image = obj.get_image()
 
         # Fetch Contents / Things You'll Learn
         contents = obj.get_content_list()

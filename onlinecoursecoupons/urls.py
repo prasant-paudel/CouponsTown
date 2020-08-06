@@ -39,7 +39,7 @@ urlpatterns = [
     path('XVuWnuQVjyS49iY2ks4gRSaYNtHv32Uw4hR5Y4JujhoUooQ5Yn3LYGGt9WXvfMA8', 
         views.show_coupons, name='show_coupons'),
     path('games-giveaways/', views.games_giveaways, name='games_giveaways'),
-    path('submit-coupons/', views.submit_coupons, name='submit_coupons'),
+    re_path('^submit-coupons/$', views.submit_coupons, name='submit_coupons'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

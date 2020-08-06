@@ -9,6 +9,7 @@ import pyrebase
 from requests.exceptions import ConnectionError
 from fcm_django.models import FCMDevice
 from django.views.decorators.csrf import csrf_protect
+import requests
 
 # Production Configuration
 config = {
@@ -58,6 +59,7 @@ def home(request):
     return render(request, 'courses/home.html', {'courses': courses, 'carousel2':carousel2})
 
 def courses(request):
+    msg = 'All Valid Coupons'
     cat = request.GET.get('filter')
     cat = str(cat).strip("'").strip('"')
     if cat.lower() == 'udemy' or cat.lower() == 'eduonix':
@@ -89,7 +91,7 @@ def courses(request):
 
     template = 'courses/courses.html'
     context = {'courses': page, 'total_pages': total_pages, 'active_page': active_page, 
-        'num_pages': p.num_pages, 'high_rated':high_rated, 'filter': filter}
+        'num_pages': p.num_pages, 'high_rated':high_rated, 'filter': filter, 'message':msg}
     return render(request, template, context)
 
 
@@ -293,5 +295,21 @@ def games_giveaways(request):
     return render(request, template)
 
 def submit_coupons(request):
+    msg = 'Want to share coupons with us?'
+    name = request.GET.get('name')
+    coupon = request.GET.get('coupon')
+
+    if coupon:
+        if Course.objects.filter(url=coupon).exists():
+            msg = 'Sorry! Coupon Already Exists'
+        else:
+            url = 'http://localhost:8000/api/?command=fetch_single_course_info&coupon=' + coupon
+            try:
+                resp = requests.get(url)
+                msg = 'Thank You For Submitting Coupon <br>' + resp.text.split('] ')[-1]
+            except:
+                msg = 'Connection Error. Please Try Again'
+        
     template = 'courses/submit_coupons.html'
-    return render(request, template)
+    context = {'message': msg}
+    return render(request, template, context)
