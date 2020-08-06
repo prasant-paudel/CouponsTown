@@ -25,7 +25,8 @@
                           <!-- The Complete SQL Bootcamp 2020: Go from Zero to  The Complete Course -->
                           {{ item.name }}
                       </h4>
-                      <p style="font-size: 0.7rem; margin-bottom: 0px !important;">Added on {{item.upload_date}}</p>
+                      <p class="lead text-muted" style="font-size: 0.7rem; margin-bottom: 0px !important;"><em>Added on {{item.upload_date}}</em></p>
+                      <p class="lead text-muted" style="font-size: 0.7rem; margin-bottom: 0px !important;"><em>Added By: CouponsTown</em></p>
                   </div>
                   <div class="get-coupon" style="width: 100%; height: 50px;  ">
                     <a href="{% url 'info_page' %}?course={{item.name_encoded}}" target="blank" class="btn peach-gradient" style="font-size:1rem; font-weight:bolder" target="">  
