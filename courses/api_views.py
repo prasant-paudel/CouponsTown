@@ -143,35 +143,51 @@ def api(request):
             course = Course.objects.get(url=coupon)
             obj = CourseInfo(coupon)
 
+        # If uploaded by user Remove course with same title if exists
+        if coupon:
+            _old = Course.objects.filter(name=obj.get_name())
+            print(obj.get_name())
+            if _old.exists():
+                for _course in _old:
+                    print(_course.name)
+                    _course.delete()
+        
         # Fetch Name
         course.name = obj.get_name()
+
         # Encode name for urls
         temp_name = b64encode(str(course.name).encode()).decode()
         course.name_base64 = temp_name
-        course.save()
+        # course.save()
         temp_name = quote_plus(course.name)
         course.name_encoded = temp_name
-        course.save()
+        # course.save()
+
         # Fetch Image
         course.image = obj.get_image()
+
         # Fetch Contents / Things You'll Learn
         contents = obj.get_content_list()
         if contents:
             import pickle
             # print(len(contents))
             course.contents = pickle.dumps(contents)
+
         # Fetch Description
         description = obj.get_description()
         if description:
             course.description = str(description).encode()
-            course.save()
+            # course.save()
+
         # Fetch Rating
         course.rating = obj.get_rating()
         # Fetch Duration
         course.duration = obj.get_duration()
         # Fetch Platform
         course.platform = obj.platform
-        
+        # Declare Valid
+        course.expired = False
+
         # Save Info
         try:
             course.save()
