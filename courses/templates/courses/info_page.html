@@ -2,17 +2,14 @@
 {% load static %}
 
 {% block page_meta %}
-<meta name="title" content="[100% OFF] | {{ course.name }} | Info" />
-<meta name="description"
-    content="{{course.name}}: Free Online Course | Certificate of Completion | Free Coupon (Promo) Code. | Free Udemy Coupon" />
+<meta name="title" content="[100% OFF] | {{ course.name }} | Info"  />
+<meta name="description" content="{{course.name}}: Free Online Course | Certificate of Completion | Free Coupon (Promo) Code. | Free Udemy Coupon" />
 <meta property="og:title" content="[100% Off] | {{course.name}}" />
-<meta property="og:description"
-    content="CouponsTown - Free Udemy Coupon | Free Online Course | with Certificate of Completion | Free Coupon (Promo) Codes." />
+<meta property="og:description" content="CouponsTown - Free Udemy Coupon | Free Online Course | with Certificate of Completion | Free Coupon (Promo) Codes." />
 <meta property="og:url" content="" />
 <meta property="og:image" content="{{course.image.url}}" />
 <meta property="twitter:title" content="[100% Off] | {{course.name}}" />
-<meta property="twitter:description"
-    content="CouponsTown - Free Udemy Coupons | Free Online Courses | Certificate of Completion | Free Coupon (Promo) Code." />
+<meta property="twitter:description" content="CouponsTown - Free Udemy Coupons | Free Online Courses | Certificate of Completion | Free Coupon (Promo) Code." />
 <meta property="twitter:image" content="{{course.image.url}}" />
 <link rel="cannonical" href="https://couponstown.me/info-page/{{course.name_base64}}" />
 {% endblock %}
@@ -52,16 +49,14 @@
 
                             #lol strong {
                                 font-weight: 700;
-                                font-size: 24px;
                             }
 
                             #lol {
                                 margin-right: 7px;
-                                margin-bottom: 100px;
+                                margin-bottom: 10px;
                             }
-
-                            #lol p {
-                                font-size: 18px;
+                            #lol p{
+                                font-size: 16px;
                             }
                         </style>
 
@@ -69,6 +64,7 @@
                             <!-- Description -->
                             {{description | safe}}
                             <!-- / Description -->
+                            <p class="lead text-muted">Course Added By: <strong><em>CouponsTown</em></strong></p>
 
                             <div class="rating floa-left d-flex align-items-center mt-5"
                                 style="width: 100%; height: 45px; float: left; ">
@@ -120,7 +116,13 @@
             </div>
         </div>
 
+
+
     </div>
+
+
+</div>
+
 </div>
 
 {% endblock %}
