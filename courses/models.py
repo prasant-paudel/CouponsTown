@@ -17,6 +17,7 @@ class Course(models.Model):
     platform = models.CharField(max_length=30, blank=True)
     duration = models.CharField(blank=True, max_length=10)
     upload_date = models.DateTimeField(auto_now_add=True)
+    uploaded_by = models.CharField(default='Coupons Town', max_length=100)
     rating = models.FloatField(max_length=5, blank=True, null=True)
     category_coices = (
         ('not_set', 'NOT SET'),

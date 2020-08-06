@@ -290,9 +290,11 @@ def show_coupons(request):
         string += link + '<br>'
     return HttpResponse(string)
 
+
 def games_giveaways(request):
     template = 'courses/games_giveaways.html'
     return render(request, template)
+
 
 def submit_coupons(request):
     msg = 'Want to share coupons with us?'
@@ -310,6 +312,9 @@ def submit_coupons(request):
             except:
                 msg = 'Connection Error. Please Try Again'
         
+        if name:
+            Course.objects.filter(url=coupon).update(uploaded_by=name)
+
     template = 'courses/submit_coupons.html'
-    context = {'message': msg}
+    context = {'message': msg, 'name': name}
     return render(request, template, context)

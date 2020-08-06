@@ -198,7 +198,6 @@ def api(request):
         except TypeError:
             pass
 
-
     if command == 'update_durations':
         courses = Course.objects.all()
         for course in courses:
