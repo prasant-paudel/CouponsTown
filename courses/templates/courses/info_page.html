@@ -2,14 +2,17 @@
 {% load static %}
 
 {% block page_meta %}
-<meta name="title" content="[100% OFF] | {{ course.name }} | Info"  />
-<meta name="description" content="{{course.name}}: Free Online Course | Certificate of Completion | Free Coupon (Promo) Code. | Free Udemy Coupon" />
+<meta name="title" content="[100% OFF] | {{ course.name }} | Info" />
+<meta name="description"
+    content="{{course.name}}: Free Online Course | Certificate of Completion | Free Coupon (Promo) Code. | Free Udemy Coupon" />
 <meta property="og:title" content="[100% Off] | {{course.name}}" />
-<meta property="og:description" content="CouponsTown - Free Udemy Coupon | Free Online Course | with Certificate of Completion | Free Coupon (Promo) Codes." />
+<meta property="og:description"
+    content="CouponsTown - Free Udemy Coupon | Free Online Course | with Certificate of Completion | Free Coupon (Promo) Codes." />
 <meta property="og:url" content="" />
 <meta property="og:image" content="{{course.image.url}}" />
 <meta property="twitter:title" content="[100% Off] | {{course.name}}" />
-<meta property="twitter:description" content="CouponsTown - Free Udemy Coupons | Free Online Courses | Certificate of Completion | Free Coupon (Promo) Code." />
+<meta property="twitter:description"
+    content="CouponsTown - Free Udemy Coupons | Free Online Courses | Certificate of Completion | Free Coupon (Promo) Code." />
 <meta property="twitter:image" content="{{course.image.url}}" />
 <link rel="cannonical" href="https://couponstown.me/info-page/{{course.name_base64}}" />
 {% endblock %}
@@ -56,7 +59,10 @@
                                 margin-right: 7px;
                                 margin-bottom: 100px;
                             }
-                            #lol p{font-size: 18px;}
+
+                            #lol p {
+                                font-size: 18px;
+                            }
                         </style>
 
                         <div class="card-footer border-danger" id="lol">
@@ -114,13 +120,15 @@
             </div>
         </div>
 
-
-
     </div>
-
-
 </div>
 
-</div>
+<!-- Infolinks -->
+<script type="text/javascript">
+    var infolinks_pid = 3278010;
+    var infolinks_wsid = 0;
+</script>
+<script type="text/javascript" src="//resources.infolinks.com/js/infolinks_main.js"></script>
+<!-- / Infolinks -->
 
 {% endblock %}

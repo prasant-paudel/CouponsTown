@@ -108,6 +108,10 @@ echo "server{
 		alias $(pwd)/$project_name/static/sitemap.xml;
 	}
 
+	location /ads.txt {
+		alias $(pwd)/$project_name/static/ads.txt;
+	}
+
 	location / {
 		proxy_pass http://localhost:$gunicorn_port;
 	}
