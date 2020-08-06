@@ -288,3 +288,10 @@ def show_coupons(request):
         string += link + '<br>'
     return HttpResponse(string)
 
+def games_giveaways(request):
+    template = 'courses/games_giveaways.html'
+    return render(request, template)
+
+def submit_coupons(request):
+    template = 'courses/submit_coupons.html'
+    return render(request, template)
