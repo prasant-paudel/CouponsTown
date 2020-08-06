@@ -113,10 +113,10 @@ echo "server{
 	}
 
 	location /OneSignalSDKUpdaterWorker.js {
-		alias $(pwd)/$project_name/static/OneSignalSDKUpdaterWorker.js;
+		alias $(pwd)/$project_name/static/js/onesignal/OneSignalSDKUpdaterWorker.js;
 	}
 	location /OneSignalSDKWorker.js {
-		alias $(pwd)/$project_name/static/OneSignalSDKWorker.js;
+		alias $(pwd)/$project_name/static/js/onesignal/OneSignalSDKWorker.js;
 	}
 
 	location / {
