@@ -22,11 +22,22 @@ config = {
     "appId": "1:511956827149:web:2c6f55d2030f27bd9d2944",
     "measurementId": "G-8M4ZXV2J9G",
 }
-# =============================================================================#
+
+#=============================================================================#
+all_courses = Course.objects.all()
+valid_courses = all_courses.filter(expired=False)
+expired_courses = all_courses.filter(expired=True)
+udemy_courses = all_courses.filter(url__icontains='Udemy').filter(expired=False)
+eduonix_courses = all_courses.filter(url__icontains='Eduonix').filter(expired=False)
+
+context = {'all_courses':all_courses, 'valid_courses':valid_courses, 'expired_courses':expired_courses,
+    'udemy_courses':udemy_courses, 'eduonix_courses':eduonix_courses}
+#=============================================================================#
 def get_queryset(keywords_list):
+    global all_courses
     _results = []
     for q in keywords_list:
-        r = Course.objects.filter(Q(name__icontains=q) | Q(category__icontains=q))
+        r = valid_courses.filter(Q(name__icontains=q) | Q(category__icontains=q))
         r = r.order_by('expired').reverse()
         try:
             r = r.exclude(name=course.name)
@@ -38,42 +49,56 @@ def get_queryset(keywords_list):
     return _results
 
 
-# =============================================================================#
-all_courses = Course.objects.all()
-valid_courses = all_courses.filter(expired=False)
-expired_courses = all_courses.filter(expired=True)
-udemy_courses = all_courses.filter(Q(url__icontains='Udemy') & Q(expired=False))
-eduonix_courses = all_courses.filter(Q(url__icontains='Eduonix') & Q(expired=False))
+# Category - Web Development
+keys = ['web', 'html', 'css', 'js', 'javascript', 'bootstrap', 'react', 'angular', 'vue', 'php']
+web_development = get_queryset(keys)[:8]
+# Category - Programming
+keys = ['python', 'javascript', 'java', 'programming', 'ruby', 'angular', 'react', 'vue', 
+    'flutter', 'android studio', 'sdk', 'swift', 'php', 'algorithm']
+programming = get_queryset(keys)[:8]
+# Category - Office & Productivity
+keys = ['office', 'word', 'excel', 'powerpoint', 'ms access', 'microsoft access', 'tally', 
+    'gmail', 'google docs', 'google drive', 'evernote', 'google classroom', 'onedrive', 'youtube',
+    'google sites', 'trello', 'powerapps', 'slack', 'wordpress', 'business analysis', 'gsuite', 'trademark',
+    'blazor', 'blogging', 'animated promo', 'google photos', 'office 365', 'google drawings', 'jamboard', 
+    'sap', 'power bi', 'schedule', 'business', 'communication', 'kubernetes', 'linux']
+office = get_queryset(keys)[:8]
+# Category - Network Security and Ethical Hacking
+keys = ['ethical hacking', 'cybersecurity', 'cyber security', 'pentesting', 'penetration testing', 
+    'malware', 'nework security', 'wireshark', 'social engineering', 'deep web', 'dark web', 'kali',
+    'linux', 'operating system', 'debugger', 'bug bounty', 'shell', 'scripting', 'oscp', 'ceh', 'cisco',
+    'ccna', 'ccnp', 'ccie','comptia', 'routing & switching', 'routing and switching', 'subnetting', 'ipv4', 
+    'ipv6', 'python', 'javascript']
+hacking = get_queryset(keys)[:8]
+# Category - Server and Cloud Computing
+keys = ['azure', 'aws' 'google cloud', 'cloud', 'windows server', 'server', 'red hat', 'centos', 'open suse',
+    'oracle', 'vm', 'vmware', 'microservices', 'power bi', 'elastic beanstalk', 'ec2', 'route 53',
+    'powershell', 'system center', 'devops', 'docker', 'big data', 'hadoop']
+cloud = get_queryset(keys)[:8]
+# Category - Photography & Design
+keys = ['adobe', 'photoshop', 'drawing', 'painting', 'lightroom', 'coreldraw', 'blender', 'movami', 'flimora', 'premire', 
+    'design', 'power director', 'cyberlink', 'gimp', 'inkscape', 'sketch', 'figure', 'infographics', 'ambigram',
+    'sculptris', 'brochure templates', 'how to draw', 'water colors', 'canva', 'figma', 'pixologics', 'cartoon', 'whitepapers',
+    'illustrator', 'autocad', 'flash', 'design', 'photograph', 'photography', 'video editing']
+photography_and_design = get_queryset(keys)[:8]
+category_context = {
+    'photography_and_design': photography_and_design, 'web_development': web_development, 
+    'office': office, 'hacking': hacking, 'cloud': cloud, 'programming': programming,}
+#=============================================================================#
 
-context = {'all_courses':all_courses, 'valid_courses':valid_courses, 'expired_courses':expired_courses,
-    'udemy_courses':udemy_courses, 'eduonix_courses':eduonix_courses}
 
-# =============================================================================#
 def home(request):
     global context
-    courses = Course.objects.order_by('upload_date').reverse()
-    courses = courses.filter(expired=False)
+    global valid_courses
+    courses = valid_courses.order_by('upload_date').reverse()
     _r = [x for x in courses if x.image]
     courses = _r
     carousel2 = ((i,e) for (i,e) in enumerate(courses[:20]))
 
-    notification = {
-    "to" : "AAAAdzMBPA0:APA91bEFXiA9Nf48xhQppwxCKCTjtToUa6ohzF7klRc1lIBcakeBFrJHnAtSACgWbIL0T-P5J2PubjkyhPF71lHb0svd91XbshoSnt5dE4AEVXZ4afjovSdEG64m3sFX57hMEy5-NTPH",
-    "notification" : {
-        "body" : "great match!",
-        "title" : "Portugal vs. Denmark",
-        "icon" : "myicon"
-        }
-    }
-    
-    devices = FCMDevice.objects.all()
-    devices.send_message(title="Title", body="Message")
-    devices.send_message(title="Title", body="Message", data={"test": "test"})
-    devices.send_message(data={"test": "test"})
-
     template = 'courses/home.html'
     context.update({'courses': courses, 'carousel2':carousel2})
     return render(request, template, context)
+
 
 def courses(request):
     global context
@@ -81,11 +106,11 @@ def courses(request):
     cat = request.GET.get('filter')
     cat = str(cat).strip("'").strip('"')
     if cat.lower() == 'udemy' or cat.lower() == 'eduonix':
-        courses = Course.objects.filter(Q(platform__icontains=cat))
+        courses = valid_courses.filter(Q(platform__icontains=cat))
         msg = cat.capitalize() + ' Coupons'
         filter = cat.capitalize()
     elif cat.lower() == 'expired':
-        courses = Course.objects.filter(expired=True).order_by('rating').reverse()
+        courses = expired_courses.order_by('rating').reverse()
         msg = 'Expired Coupons'
         filter = 'Expired'
     else:
@@ -120,7 +145,7 @@ def coupon_page(request):
     _course = request.GET.get('course')
     filter = request.GET.get('filter')
     try:
-        course = Course.objects.filter(Q(name=_course) | Q(name_base64=_course) | Q(name_encoded=_course)).first()
+        course = all_courses.filter(Q(name=_course) | Q(name_base64=_course) | Q(name_encoded=_course)).first()
         if not course:
             raise(Http404)
     except:
@@ -135,52 +160,20 @@ def coupon_page(request):
     results = get_queryset(keys)
     related_courses = list(results)[:10]
 
-    # Category - Web Development
-    keys = ['web', 'html', 'css', 'js', 'javascript', 'bootstrap', 'react', 'angular', 'vue', 'php']
-    web_development = get_queryset(keys)[:8]
-    # Category - Programming
-    keys = ['python', 'javascript', 'java', 'programming', 'ruby', 'angular', 'react', 'vue', 
-        'flutter', 'android studio', 'sdk', 'swift', 'php', 'algorithm']
-    programming = get_queryset(keys)[:8]
-    # Category - Office & Productivity
-    keys = ['office', 'word', 'excel', 'powerpoint', 'ms access', 'microsoft access', 'tally', 
-        'gmail', 'google docs', 'google drive', 'evernote', 'google classroom', 'onedrive', 'youtube',
-        'google sites', 'trello', 'powerapps', 'slack', 'wordpress', 'business analysis', 'gsuite', 'trademark',
-        'blazor', 'blogging', 'animated promo', 'google photos', 'office 365', 'google drawings', 'jamboard', 
-        'sap', 'power bi', 'schedule', 'business', 'communication', 'kubernetes', 'linux']
-    office = get_queryset(keys)[:8]
-    # Category - Network Security and Ethical Hacking
-    keys = ['ethical hacking', 'cybersecurity', 'cyber security', 'pentesting', 'penetration testing', 
-        'malware', 'nework security', 'wireshark', 'social engineering', 'deep web', 'dark web', 'kali',
-        'linux', 'operating system', 'debugger', 'bug bounty', 'shell', 'scripting', 'oscp', 'ceh', 'cisco',
-        'ccna', 'ccnp', 'ccie','comptia', 'routing & switching', 'routing and switching', 'subnetting', 'ipv4', 
-        'ipv6', 'python', 'javascript']
-    hacking = get_queryset(keys)[:8]
-    # Category - Server and Cloud Computing
-    keys = ['azure', 'aws' 'google cloud', 'cloud', 'windows server', 'server', 'red hat', 'centos', 'open suse',
-        'oracle', 'vm', 'vmware', 'microservices', 'power bi', 'elastic beanstalk', 'ec2', 'route 53',
-        'powershell', 'system center', 'devops', 'docker', 'big data', 'hadoop']
-    cloud = get_queryset(keys)[:8]
-    # Category - Photography & Design
-    keys = ['adobe', 'photoshop', 'drawing', 'painting', 'lightroom', 'coreldraw', 'blender', 'movami', 'flimora', 'premire', 
-        'design', 'power director', 'cyberlink', 'gimp', 'inkscape', 'sketch', 'figure', 'infographics', 'ambigram',
-        'sculptris', 'brochure templates', 'how to draw', 'water colors', 'canva', 'figma', 'pixologics', 'cartoon', 'whitepapers',
-        'illustrator', 'autocad', 'flash', 'design', 'photograph', 'photography', 'video editing']
-    photography_and_design = get_queryset(keys)[:8]
+    
 
     template = 'courses/coupon_page.html'
-    context.update({'course': course, 'related_courses': related_courses, 'contents':contents,
-        'photography_and_design': photography_and_design, 'web_development': web_development, 
-        'office': office, 'hacking': hacking, 'cloud': cloud, 'programming': programming,
-        'filter': filter,})
+    context.update({'course': course, 'related_courses': related_courses, 'contents':contents,'filter': filter,})
+    context.update(category_context)
     return render(request, template, context)
+
 
 def info_page(request):
     global context
     _course = request.GET.get('course')
     filter = request.GET.get('filter')
     try:
-        course = Course.objects.filter(Q(name=_course) | Q(name_base64=_course) | Q(name_encoded=_course)).first()
+        course = all_courses.filter(Q(name=_course) | Q(name_base64=_course) | Q(name_encoded=_course)).first()
         if not course:
             raise(Http404)
     except:
@@ -209,6 +202,7 @@ def info_page(request):
         'contents':contents, 'description': description, 'filter': filter,})
     return render(request, template, context)
 
+
 def search(request):
     global context
     template = 'courses/courses.html'
@@ -219,13 +213,13 @@ def search(request):
     keywordset = query.split()
     results = []
     # Using whole string
-    _r = Course.objects.filter(Q(name__icontains=query))
+    _r = all_courses.filter(Q(name__icontains=query))
     for i in _r:
         if not i in results:
             results.append(i)
     # Using OR operation to the splitted string
     for q in keywordset:
-        _r = Course.objects.filter(Q(name__icontains=q) | Q(category__icontains=q))
+        _r = all_courses.filter(Q(name__icontains=q) | Q(category__icontains=q))
         _r = _r.filter(expired=False)
         for i in _r:
             if not i in results:
@@ -241,9 +235,8 @@ def search(request):
     total_pages = [x+1 for x in range(p.num_pages)]
     active_page = page_num
 
-    high_rated = Course.objects.filter(expired=False).order_by('rating')
+    high_rated = valid_courses.order_by('rating')
     high_rated = list(high_rated)[:10]
-
 
     msg = f'Search results for "{query}"'
     context.update({'courses': page, 'message': msg, 'total_pages': total_pages, 
@@ -268,34 +261,9 @@ def category(request):
     context.update({'courses': results, 'message': msg})
     return render(request, template, context)
 
-@csrf_protect
+
 def subscribe(request):
-    global context
-    email = request.POST.get('email')
-    username = request.POST.get('username')
-    # email = 'user@domain'
-    # username = 'user'
-    
-    firebase = pyrebase.initialize_app(config)
-    auth = firebase.auth()
-    db = firebase.database()
-
-    # Add user if not exists
-    all_users = db.child('users').get()
-    for _user in all_users.each():
-        _email = _user.val()['email']
-        if _email.lower() == email.lower():
-            email_exists = True
-            return HttpResponse('Email Already Exists')
-    if not email_exists:
-        _data = {'username': username, 'email': email}
-        db.child('users').push(_data)
-        return HttpResponse(f'Subscribes Successfully {_email, email}')
-
-    context.update(csrf(request))
-
-    return render(request, 'courses/courses.html', context)
-    # return HttpResponse('hello')
+    return redirect('home')
 
 
 def error_404_view(request, exception):
@@ -311,12 +279,11 @@ def test(request):
 
 
 def show_coupons(request):
-    courses = Course.objects.filter(expired=False).order_by('upload_date')
+    courses = valid_courses.order_by('upload_date')
     string = 'All Coupons<br>------------------<br>'
     for course in courses:
         # link = 'https://couponstown.me/info-page/?course=' + course.name_encoded
         link = course.url
-
         string += link + '<br>'
     return HttpResponse(string)
 
@@ -333,7 +300,7 @@ def submit_coupons(request):
     coupon = request.GET.get('coupon')
 
     if coupon:
-        if Course.objects.filter(url=coupon).exists():
+        if all_courses.filter(url=coupon).exists():
             msg = 'Sorry! Coupon Already Exists'
         else:
             url = 'http://localhost:8000/api/?command=fetch_single_course_info&coupon=' + coupon
@@ -342,9 +309,10 @@ def submit_coupons(request):
                 msg = 'Thank You For Submitting Coupon <br>' + resp.text.split('] ')[-1]
             except:
                 msg = 'Connection Error. Please Try Again'
-        
-        if name:
-            Course.objects.filter(url=coupon).update(uploaded_by=name)
+
+            course = Course.objects.filter(url=coupon)
+            if name and course.exists():
+                course.update(uploaded_by=name)
 
     template = 'courses/submit_coupons.html'
     context.update({'message': msg, 'name': name})
