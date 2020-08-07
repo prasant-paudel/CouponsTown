@@ -27,6 +27,7 @@ def get_queryset(keywords_list):
     _results = []
     for q in keywords_list:
         r = Course.objects.filter(Q(name__icontains=q) | Q(category__icontains=q))
+        r = r.order_by('expired').reverse()
         try:
             r = r.exclude(name=course.name)
         except:
@@ -36,6 +37,8 @@ def get_queryset(keywords_list):
                 _results.append(i)
     return _results
 
+
+# =============================================================================#
 all_courses = Course.objects.all()
 valid_courses = all_courses.filter(expired=False)
 expired_courses = all_courses.filter(expired=True)
@@ -158,11 +161,18 @@ def coupon_page(request):
         'oracle', 'vm', 'vmware', 'microservices', 'power bi', 'elastic beanstalk', 'ec2', 'route 53',
         'powershell', 'system center', 'devops', 'docker', 'big data', 'hadoop']
     cloud = get_queryset(keys)[:8]
+    # Category - Photography & Design
+    keys = ['adobe', 'photoshop', 'drawing', 'painting', 'lightroom', 'coreldraw', 'blender', 'movami', 'flimora', 'premire', 
+        'design', 'power director', 'cyberlink', 'gimp', 'inkscape', 'sketch', 'figure', 'infographics', 'ambigram',
+        'sculptris', 'brochure templates', 'how to draw', 'water colors', 'canva', 'figma', 'pixologics', 'cartoon', 'whitepapers',
+        'illustrator', 'autocad', 'flash', 'design', 'photograph', 'photography', 'video editing']
+    photography_and_design = get_queryset(keys)[:8]
 
     template = 'courses/coupon_page.html'
     context.update({'course': course, 'related_courses': related_courses, 'contents':contents,
-        'web_development': web_development, 'programming': programming,
-        'office': office, 'hacking': hacking, 'cloud': cloud, 'filter': filter,})
+        'photography_and_design': photography_and_design, 'web_development': web_development, 
+        'office': office, 'hacking': hacking, 'cloud': cloud, 'programming': programming,
+        'filter': filter,})
     return render(request, template, context)
 
 def info_page(request):

@@ -1,0 +1,95 @@
+{% load static %}
+<!--Carousel Wrapper-->
+<div id="carousel-with-lb" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+  <!--Controls-->
+  <div class="controls-top">
+    <a class="btn-floating btn-danger" href="#carousel-with-lb" data-slide="prev"><i
+        class="fas fa-chevron-left"></i></a>
+    <a class="btn-floating btn-danger" href="#carousel-with-lb" data-slide="next"><i
+        class="fas fa-chevron-right"></i></a>
+  </div>
+  <!--/.Controls-->
+
+  <!--Indicators-->
+  <ol class="carousel-indicators ">
+    <li data-target="#carousel-with-lb" data-slide-to="0" class="active danger-color"></li>
+    <li data-target="#carousel-with-lb" data-slide-to="1" class="danger-color"></li>
+    <li data-target="#carousel-with-lb" data-slide-to="2" class="danger-color"></li>
+    <li data-target="#carousel-with-lb" data-slide-to="3" class="danger-color"></li>
+    <li data-target="#carousel-with-lb" data-slide-to="4" class="danger-color"></li>
+    <li data-target="#carousel-with-lb" data-slide-to="5" class="danger-color"></li>
+  </ol>
+  <!--/.Indicators-->
+
+  <!--Slides and lightbox-->
+  <div id="mdb-lightbox-ui"></div>
+    <!--First slide-->
+    <div class="carousel-item active text-center">
+      <h3>Web Development</h3>  
+      {% for item in web_development %}
+        <!-- CARD -->
+        {% include 'courses/category_card.html' %}
+        <!-- / CARD -->
+      {% endfor %}
+    </div>
+    <!--/.First slide-->
+
+    <!--Second slide-->
+    <div class="carousel-item text-center">
+      <h3>Programming</h3>  
+      {% for item in programming %}
+        <!-- CARD -->
+        {% include 'courses/category_card.html' %}
+        <!-- / CARD -->
+      {% endfor %}
+    </div>
+    <!--/.second slide-->
+
+    <!--Third slide-->
+    <div class="carousel-item text-center">
+      <h3>Network Security & Etchical Hacking</h3>  
+      {% for item in hacking %}
+        <!-- CARD -->
+        {% include 'courses/category_card.html' %}
+        <!-- / CARD -->
+      {% endfor %}
+    </div>
+    <!--/.Third slide-->
+
+    <!--Forth slide-->
+    <div class="carousel-item text-center">
+      <h3>Office & Productivity</h3>  
+      {% for item in office %}
+        <!-- CARD -->
+        {% include 'courses/category_card.html' %}
+       <!-- / CARD -->
+      {% endfor %}
+    </div>
+    <!--/.Forth slide-->
+
+    <!--Fifth slide-->
+    <div class="carousel-item text-center">
+      <h3>Server & Cloud Computing</h3>  
+      {% for item in cloud %}
+        <!-- CARD -->
+        {% include 'courses/category_card.html' %}
+        <!-- / CARD -->
+      {% endfor %}
+    </div>
+    <!--/.Fifth slide-->
+
+    <!--Sixth slide-->
+    <div class="carousel-item text-center">
+      <h3>Photography & Design</h3>  
+      {% for item in photography_and_design %}
+        <!-- CARD -->
+        {% include 'courses/category_card.html' %}
+        <!-- / CARD -->
+      {% endfor %}
+    </div>
+    <!--/.Sixth slide-->
+
+    
+
+</div>  

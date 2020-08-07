@@ -1,0 +1,34 @@
+{% load static %}
+<figure class="col-md-4 col-lg-3 col-sm-6 offset-xm-3 d-sm-inline-block" >
+    <div class="card" style="max-height: 400px;">
+
+      <!-- Card image -->
+      {% if item.image %}
+      <img class="card-img-top" src="{{item.image.url}}" alt="Free Udemy Coupon | Web Development Courses for free | {{course.name}}" >
+      {% else %}
+      <img class="card-img-top" src="{% static 'images/CouponsTown-background.png' %}" alt="Free Udemy Coupon | Web Development Courses for free | {{course.name}}" >
+      {% endif %}
+
+      <!-- Card content -->
+      <div class="card-body"  style="height: 220px;">
+
+        <!-- Title -->
+        <div class="course-title" style=" justify-content: center; max-height: 100px;">
+          <h4 style="font-size: 1.2rem; font-family: cursive; font-weight: 500; text-align: center; color: #000">
+              <!-- The Complete SQ L Bootcamp 2020: Go from Zero to  The Complete Course -->
+              {{ item.name }}
+          </h4> 
+          <p class="pt-2">Added by : {{ item.uploaded_by }}</p>
+        </div>
+        
+        <!-- Button -->
+        <div class="get-coupon" style="width: 100%; height: 50px; ">
+          <a href="{% url 'info_page' %}?course={{item.name_encoded}}" class="btn peach-gradient" style="font-size: 1rem;">
+              
+              Enroll Now
+          </a>
+        </div>
+        
+      </div>
+    </div>
+</figure>
