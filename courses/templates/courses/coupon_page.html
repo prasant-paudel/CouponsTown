@@ -82,14 +82,14 @@
                             </a>';
                           }
                         secs--;
-                        var timer = setTimeout('countDown('+secs+',"'+elem+'")',500);
+                        var timer = setTimeout('countDown('+secs+',"'+elem+'")',1000);
                             }
                       </script>
                       <div id="status"></div>
-                      {% if filter == 'Expired' %}
+                      {% if filter == 'Expired' or course.expired %}
                       <script>countDown(0,"status");</script>
                       {% else %}
-                      <script>countDown(10,"status");</script>
+                      <script>countDown(5,"status");</script>
                       {% endif %}
                   </div>
                   <div class="rating floa-left d-flex align-items-center mt-5"
