@@ -42,10 +42,10 @@ def get_queryset(keywords_list):
 all_courses = Course.objects.all()
 valid_courses = all_courses.filter(expired=False)
 expired_courses = all_courses.filter(expired=True)
-udemy_courses = all_courses.filter(url__icontains='Udemy')
-eduonix_courses = all_courses.filter(url__icontains='Eduonix')
+udemy_courses = all_courses.filter(Q(url__icontains='Udemy') & Q(expired=False))
+eduonix_courses = all_courses.filter(Q(url__icontains='Eduonix') & Q(expired=False))
 
-context = {'valid_courses':valid_courses, 'expired_courses':expired_courses, 
+context = {'all_courses':all_courses, 'valid_courses':valid_courses, 'expired_courses':expired_courses,
     'udemy_courses':udemy_courses, 'eduonix_courses':eduonix_courses}
 
 # =============================================================================#
