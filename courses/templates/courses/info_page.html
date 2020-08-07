@@ -35,8 +35,13 @@
                         <div class="card-body ">
                             <div class="d-flex justify-content-md-center flex-wrap">
                                 <div class="p-2 flex-fill bd-highlight" style="width: 100%;">
+                                    {% if course.image %}
                                     <img src="{{ course.image.url }}" class="card-img-top"
                                         alt="{{course.name}} | Coupons Town | e-learning free courses online">
+                                    {% else %}
+                                    <img src="{% static 'images/CouponsTown-background.png' %}" class="card-img-top"
+                                        alt="{{course.name}} | Coupons Town | e-learning free courses online">
+                                    {% endif %}
                                 </div>
 
                             </div>
