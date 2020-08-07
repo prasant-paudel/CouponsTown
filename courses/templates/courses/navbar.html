@@ -44,13 +44,13 @@
         <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-chevron-right"></i>Course Coupons<i class="fas fa-angle-down rotate-icon"></i></a>
           <div class="collapsible-body">
             <ul class="list-unstyled">
-              <li><a href="{% url 'courses' %}" class="waves-effect">All Valid Coupons</a>
+              <li><a href="{% url 'courses' %}" class="waves-effect">All Valid Coupons ({{valid_courses.count}})</a>
               </li>
-              <li><a href="{% url 'courses' %}?filter=Udemy" class="waves-effect">Udemy Coupons</a>
+              <li><a href="{% url 'courses' %}?filter=Udemy" class="waves-effect">Udemy Coupons ({{udemy_courses.count}})</a>
               </li>
-              <li><a href="{% url 'courses' %}?filter=Eduonix" class="waves-effect">Eduonix Coupons</a>
+              <li><a href="{% url 'courses' %}?filter=Eduonix" class="waves-effect">Eduonix Coupons ({{eduonix_courses.count}})</a>
               </li>
-              <li><a href="{% url 'courses' %}?filter=Expired" class="waves-effect">Expired Coupons</a>
+              <li><a href="{% url 'courses' %}?filter=Expired" class="waves-effect">Expired Coupons ({{expired_courses.count}})</a>
               </li>
             </ul>
           </div>

@@ -22,7 +22,7 @@ config = {
     "appId": "1:511956827149:web:2c6f55d2030f27bd9d2944",
     "measurementId": "G-8M4ZXV2J9G",
 }
-
+# =============================================================================#
 def get_queryset(keywords_list):
     _results = []
     for q in keywords_list:
@@ -36,8 +36,18 @@ def get_queryset(keywords_list):
                 _results.append(i)
     return _results
 
+all_courses = Course.objects.all()
+valid_courses = all_courses.filter(expired=False)
+expired_courses = all_courses.filter(expired=True)
+udemy_courses = all_courses.filter(url__icontains='Udemy')
+eduonix_courses = all_courses.filter(url__icontains='Eduonix')
 
+context = {'valid_courses':valid_courses, 'expired_courses':expired_courses, 
+    'udemy_courses':udemy_courses, 'eduonix_courses':eduonix_courses}
+
+# =============================================================================#
 def home(request):
+    global context
     courses = Course.objects.order_by('upload_date').reverse()
     courses = courses.filter(expired=False)
     _r = [x for x in courses if x.image]
@@ -58,9 +68,12 @@ def home(request):
     devices.send_message(title="Title", body="Message", data={"test": "test"})
     devices.send_message(data={"test": "test"})
 
-    return render(request, 'courses/home.html', {'courses': courses, 'carousel2':carousel2})
+    template = 'courses/home.html'
+    context.update({'courses': courses, 'carousel2':carousel2})
+    return render(request, template, context)
 
 def courses(request):
+    global context
     msg = 'All Valid Coupons'
     cat = request.GET.get('filter')
     cat = str(cat).strip("'").strip('"')
@@ -94,12 +107,13 @@ def courses(request):
     high_rated = list(high_rated)[:10]
 
     template = 'courses/courses.html'
-    context = {'courses': page, 'total_pages': total_pages, 'active_page': active_page, 
-        'num_pages': p.num_pages, 'high_rated':high_rated, 'filter': filter, 'message':msg}
+    context.update({'courses': page, 'total_pages': total_pages, 'active_page': active_page, 
+        'num_pages': p.num_pages, 'high_rated':high_rated, 'filter': filter, 'message':msg})
     return render(request, template, context)
 
 
 def coupon_page(request):
+    global context
     _course = request.GET.get('course')
     filter = request.GET.get('filter')
     try:
@@ -145,14 +159,14 @@ def coupon_page(request):
         'powershell', 'system center', 'devops', 'docker', 'big data', 'hadoop']
     cloud = get_queryset(keys)[:8]
 
-
-    return render(request, 'courses/coupon_page.html', {
-        'course': course, 'related_courses': related_courses, 'contents':contents,
+    template = 'courses/coupon_page.html'
+    context.update({'course': course, 'related_courses': related_courses, 'contents':contents,
         'web_development': web_development, 'programming': programming,
-        'office': office, 'hacking': hacking, 'cloud': cloud, 'filter': filter,
-    })
+        'office': office, 'hacking': hacking, 'cloud': cloud, 'filter': filter,})
+    return render(request, template, context)
 
 def info_page(request):
+    global context
     _course = request.GET.get('course')
     filter = request.GET.get('filter')
     try:
@@ -181,12 +195,12 @@ def info_page(request):
     related_courses = list(results)[:10]
 
     template = 'courses/info_page.html'
-    context = {'course': course, 'related_courses': related_courses,
-        'contents':contents, 'description': description, 'filter': filter,
-    }
+    context.update({'course': course, 'related_courses': related_courses,
+        'contents':contents, 'description': description, 'filter': filter,})
     return render(request, template, context)
 
 def search(request):
+    global context
     template = 'courses/courses.html'
     query = request.GET.get('q')
     query = str(query).strip("'").strip('"')
@@ -222,14 +236,14 @@ def search(request):
 
 
     msg = f'Search results for "{query}"'
-    context = {'courses': page, 'message': msg, 'total_pages': total_pages, 
+    context.update({'courses': page, 'message': msg, 'total_pages': total_pages, 
         'active_page': active_page, 'num_pages': p.num_pages, 'high_rated': high_rated,
-        'filter':'search_page'
-    }
+        'filter':'search_page'})
     return render(request, template, context)
 
 
 def category(request):
+    global context
     cat = request.GET.get('filter')
     cat = str(cat).strip("'").strip('"')
     if cat.lower() == 'udemy' or 'eduonix':
@@ -241,11 +255,12 @@ def category(request):
         msg = 'Sorry! Page is under Construction.'
 
     template = 'courses/courses.html'
-    context = {'courses': results, 'message': msg}
+    context.update({'courses': results, 'message': msg})
     return render(request, template, context)
 
 @csrf_protect
 def subscribe(request):
+    global context
     email = request.POST.get('email')
     username = request.POST.get('username')
     # email = 'user@domain'
@@ -267,7 +282,6 @@ def subscribe(request):
         db.child('users').push(_data)
         return HttpResponse(f'Subscribes Successfully {_email, email}')
 
-    context = {}
     context.update(csrf(request))
 
     return render(request, 'courses/courses.html', context)
@@ -275,7 +289,9 @@ def subscribe(request):
 
 
 def error_404_view(request, exception):
-    return render(request, 'courses/404.html')
+    global context
+    template = 'courses/404.html'
+    return render(request, template, context)
 
 
 def test(request):
@@ -301,6 +317,7 @@ def games_giveaways(request):
 
 
 def submit_coupons(request):
+    global context
     msg = 'Want to share coupons with us?'
     name = request.GET.get('name')
     coupon = request.GET.get('coupon')
@@ -320,5 +337,5 @@ def submit_coupons(request):
             Course.objects.filter(url=coupon).update(uploaded_by=name)
 
     template = 'courses/submit_coupons.html'
-    context = {'message': msg, 'name': name}
+    context.update({'message': msg, 'name': name})
     return render(request, template, context)
