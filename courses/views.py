@@ -40,6 +40,8 @@ def get_queryset(keywords_list):
 def home(request):
     courses = Course.objects.order_by('upload_date').reverse()
     courses = courses.filter(expired=False)
+    _r = [x for x in courses if x.image]
+    courses = _r
     carousel2 = ((i,e) for (i,e) in enumerate(courses[:20]))
 
     notification = {
