@@ -75,6 +75,8 @@ def courses(request):
         filter = None
     
     courses = courses.order_by('upload_date').reverse()
+    _r = [x for x in courses if x.image]
+    courses = _r
 
     p = Paginator(courses, 9)  # Total no of items per page = 9
     try:
