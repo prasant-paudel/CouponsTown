@@ -1,3 +1,9 @@
+# Take User Input
+read -p "Username > " username
+read -p "Project name > " project_name
+read -p "Gunicorn Port > " gunicorn_port
+
+
 echo "############################################"
 echo "#############  Nginx Setup  ################"
 echo "############################################"
@@ -32,6 +38,8 @@ sudo apt install -y python virtualenv
 virtualenv venv
 sleep 1
 source venv/bin/activate
+# Create symlink for python3 in venv
+ln -s /usr/bin/python3 $pwd/venv/bin/python3
 echo
 echo "######################################"
 echo "##########  Gunicorn Setup  ##########"
@@ -42,14 +50,11 @@ echo
 sudo apt install -y python3-pip
 pip3 install gunicorn
 #ls -s /usr/local/bin/gunicorn venv/bin/gunicorn
+# Install dependencies
 pip3 install -r requirements.txt
 deactivate
 
 # Create Gunicorn Service
-read -p "Username > " username
-read -p "Project name > " project_name
-read -p "Gunicorn Port > " gunicorn_port
-
 sudo systemctl stop gunicorn
 sudo mkdir /var/log/gunicorn
 sudo echo "[Unit]
