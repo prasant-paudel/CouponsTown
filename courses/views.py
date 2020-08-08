@@ -157,6 +157,9 @@ def courses(request):
     high_rated = valid_courses.order_by('rating')
     high_rated = list(high_rated)[:10]
 
+    if not q:
+        q=''
+
     template = 'courses/courses.html'
     context.update({'courses': page, 'total_pages': total_pages, 'active_page': active_page, 
         'num_pages': p.num_pages, 'high_rated':high_rated, 'filter': filter, 'message':msg, 
