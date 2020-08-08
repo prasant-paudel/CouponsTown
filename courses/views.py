@@ -48,7 +48,6 @@ def get_queryset(keywords_list):
                 _results.append(i)
     return _results
 
-
 # Category - Web Development
 keys = ['web', 'html', 'css', 'js', 'javascript', 'bootstrap', 'react', 'angular', 'vue', 'php']
 web_development = get_queryset(keys)[:8]
@@ -85,7 +84,24 @@ category_context = {
     'photography_and_design': photography_and_design, 'web_development': web_development, 
     'office': office, 'hacking': hacking, 'cloud': cloud, 'programming': programming,}
 #=============================================================================#
-
+def search_for(query_string):
+    keywordset = query_string.split()
+    results = []
+    # Using whole string
+    _r = all_courses.filter(Q(name__icontains=query_string))
+    _r = [x for x in _r if x.image]
+    for i in _r:
+        if not i in results:
+            results.append(i)
+    # Using OR operation to the splitted string
+    for q in keywordset:
+        _r = all_courses.filter(Q(name__icontains=q) | Q(category__icontains=q))
+        _r = _r.filter(expired=False)
+        for i in _r:
+            if not i in results:
+                results.append(i)
+    return results
+#=============================================================================#
 
 def home(request):
     global context
@@ -105,6 +121,9 @@ def courses(request):
     msg = 'All Valid Coupons'
     cat = request.GET.get('filter')
     cat = str(cat).strip("'").strip('"')
+    q = request.GET.get('q')
+    filter = request.GET.get('filter')
+
     if cat.lower() == 'udemy' or cat.lower() == 'eduonix':
         courses = valid_courses.filter(Q(platform__icontains=cat))
         msg = cat.capitalize() + ' Coupons'
@@ -113,11 +132,15 @@ def courses(request):
         courses = expired_courses.order_by('rating').reverse()
         msg = 'Expired Coupons'
         filter = 'Expired'
+    elif q:
+        courses = search_for(q)
     else:
         courses = Course.objects.filter(expired=False)
-        filter = None
     
-    courses = courses.order_by('upload_date').reverse()
+    try:
+        courses = courses.order_by('upload_date').reverse()
+    except:
+        pass
     _r = [x for x in courses if x.image]
     courses = _r
 
@@ -131,12 +154,13 @@ def courses(request):
     total_pages = [x+1 for x in range(p.num_pages)]
     active_page = page_num
 
-    high_rated = Course.objects.filter(expired=False).order_by('rating')
+    high_rated = valid_courses.order_by('rating')
     high_rated = list(high_rated)[:10]
 
     template = 'courses/courses.html'
     context.update({'courses': page, 'total_pages': total_pages, 'active_page': active_page, 
-        'num_pages': p.num_pages, 'high_rated':high_rated, 'filter': filter, 'message':msg})
+        'num_pages': p.num_pages, 'high_rated':high_rated, 'filter': filter, 'message':msg, 
+        'q':q, 'filter': filter})
     return render(request, template, context)
 
 
@@ -204,45 +228,9 @@ def info_page(request):
 
 
 def search(request):
-    global context
-    template = 'courses/courses.html'
     query = request.GET.get('q')
-    query = str(query).strip("'").strip('"')
-    
-
-    keywordset = query.split()
-    results = []
-    # Using whole string
-    _r = all_courses.filter(Q(name__icontains=query))
-    for i in _r:
-        if not i in results:
-            results.append(i)
-    # Using OR operation to the splitted string
-    for q in keywordset:
-        _r = all_courses.filter(Q(name__icontains=q) | Q(category__icontains=q))
-        _r = _r.filter(expired=False)
-        for i in _r:
-            if not i in results:
-                results.append(i)
-
-    p = Paginator(results, 9)  # Total no of items per page = 9
-    try:
-        page_num = int(request.GET.get('page'))
-    except:
-        page_num = 1
-
-    page = p.page(page_num)  # Items from first page
-    total_pages = [x+1 for x in range(p.num_pages)]
-    active_page = page_num
-
-    high_rated = valid_courses.order_by('rating')
-    high_rated = list(high_rated)[:10]
-
-    msg = f'Search results for "{query}"'
-    context.update({'courses': page, 'message': msg, 'total_pages': total_pages, 
-        'active_page': active_page, 'num_pages': p.num_pages, 'high_rated': high_rated,
-        'filter':'search_page'})
-    return render(request, template, context)
+    redir = reverse('courses') + '?filter=search&q=' + query
+    return redirect(redir)
 
 
 def category(request):
