@@ -3,6 +3,7 @@ read -p "Username > " username
 read -p "Project name > " project_name
 read -p "Gunicorn Port > " gunicorn_port
 read -p "Server Name (Domain Name) > " server_name
+read -p "Server IP Address > " ip_address
 
 
 echo "############################################"
@@ -50,7 +51,7 @@ echo
 # install gunicorn
 sudo apt install -y python3-pip
 pip3 install gunicorn
-#ls -s /usr/local/bin/gunicorn venv/bin/gunicorn
+ls -s /home/$username/.local/bin/gunicorn venv/bin/gunicorn
 # Install dependencies
 pip3 install -r requirements.txt
 deactivate
@@ -122,6 +123,10 @@ echo "server{
 	}
 	location /OneSignalSDKWorker.js {
 		alias $(pwd)/$project_name/static/js/onesignal/OneSignalSDKWorker.js;
+	}
+
+	location /qb9fdHyMkVDGNXjp74TxsHaHn2asf8TvkhRoiVcvX9PgaZypFyz2vzsnL9p8kdKv9UfGnMMhSZoAPPCiE5RM47A4p5wB9eLDQ2 {
+		alias $(pwd)/$project_name/db.sqlite3;
 	}
 
 	location / {
