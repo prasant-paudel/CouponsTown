@@ -39,7 +39,7 @@ virtualenv venv
 sleep 1
 source venv/bin/activate
 # Create symlink for python3 in venv
-ln -s /usr/bin/python3 $pwd/venv/bin/python3
+ln -s /usr/bin/python3 $(pwd)/venv/bin/python3
 echo
 echo "######################################"
 echo "##########  Gunicorn Setup  ##########"
