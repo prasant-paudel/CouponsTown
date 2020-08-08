@@ -48,41 +48,43 @@ def get_queryset(keywords_list):
                 _results.append(i)
     return _results
 
-# Category - Web Development
-keys = ['web', 'html', 'css', 'js', 'javascript', 'bootstrap', 'react', 'angular', 'vue', 'php']
-web_development = get_queryset(keys)[:8]
-# Category - Programming
-keys = ['python', 'javascript', 'java', 'programming', 'ruby', 'angular', 'react', 'vue', 
-    'flutter', 'android studio', 'sdk', 'swift', 'php', 'algorithm']
-programming = get_queryset(keys)[:8]
-# Category - Office & Productivity
-keys = ['office', 'word', 'excel', 'powerpoint', 'ms access', 'microsoft access', 'tally', 
-    'gmail', 'google docs', 'google drive', 'evernote', 'google classroom', 'onedrive', 'youtube',
-    'google sites', 'trello', 'powerapps', 'slack', 'wordpress', 'business analysis', 'gsuite', 'trademark',
-    'blazor', 'blogging', 'animated promo', 'google photos', 'office 365', 'google drawings', 'jamboard', 
-    'sap', 'power bi', 'schedule', 'business', 'communication', 'kubernetes', 'linux']
-office = get_queryset(keys)[:8]
-# Category - Network Security and Ethical Hacking
-keys = ['ethical hacking', 'cybersecurity', 'cyber security', 'pentesting', 'penetration testing', 
-    'malware', 'nework security', 'wireshark', 'social engineering', 'deep web', 'dark web', 'kali',
-    'linux', 'operating system', 'debugger', 'bug bounty', 'shell', 'scripting', 'oscp', 'ceh', 'cisco',
-    'ccna', 'ccnp', 'ccie','comptia', 'routing & switching', 'routing and switching', 'subnetting', 'ipv4', 
-    'ipv6', 'python', 'javascript']
-hacking = get_queryset(keys)[:8]
-# Category - Server and Cloud Computing
-keys = ['azure', 'aws' 'google cloud', 'cloud', 'windows server', 'server', 'red hat', 'centos', 'open suse',
-    'oracle', 'vm', 'vmware', 'microservices', 'power bi', 'elastic beanstalk', 'ec2', 'route 53',
-    'powershell', 'system center', 'devops', 'docker', 'big data', 'hadoop']
-cloud = get_queryset(keys)[:8]
-# Category - Photography & Design
-keys = ['adobe', 'photoshop', 'drawing', 'painting', 'lightroom', 'coreldraw', 'blender', 'movami', 'flimora', 'premire', 
-    'design', 'power director', 'cyberlink', 'gimp', 'inkscape', 'sketch', 'figure', 'infographics', 'ambigram',
-    'sculptris', 'brochure templates', 'how to draw', 'water colors', 'canva', 'figma', 'pixologics', 'cartoon', 'whitepapers',
-    'illustrator', 'autocad', 'flash', 'design', 'photograph', 'photography', 'video editing']
-photography_and_design = get_queryset(keys)[:8]
-category_context = {
-    'photography_and_design': photography_and_design, 'web_development': web_development, 
-    'office': office, 'hacking': hacking, 'cloud': cloud, 'programming': programming,}
+def get_category_context():
+    # Category - Web Development
+    keys = ['web', 'html', 'css', 'js', 'javascript', 'bootstrap', 'react', 'angular', 'vue', 'php']
+    web_development = get_queryset(keys)[:8]
+    # Category - Programming
+    keys = ['python', 'javascript', 'java', 'programming', 'ruby', 'angular', 'react', 'vue', 
+        'flutter', 'android studio', 'sdk', 'swift', 'php', 'algorithm']
+    programming = get_queryset(keys)[:8]
+    # Category - Office & Productivity
+    keys = ['office', 'word', 'excel', 'powerpoint', 'ms access', 'microsoft access', 'tally', 
+        'gmail', 'google docs', 'google drive', 'evernote', 'google classroom', 'onedrive', 'youtube',
+        'google sites', 'trello', 'powerapps', 'slack', 'wordpress', 'business analysis', 'gsuite', 'trademark',
+        'blazor', 'blogging', 'animated promo', 'google photos', 'office 365', 'google drawings', 'jamboard', 
+        'sap', 'power bi', 'schedule', 'business', 'communication', 'kubernetes', 'linux']
+    office = get_queryset(keys)[:8]
+    # Category - Network Security and Ethical Hacking
+    keys = ['ethical hacking', 'cybersecurity', 'cyber security', 'pentesting', 'penetration testing', 
+        'malware', 'nework security', 'wireshark', 'social engineering', 'deep web', 'dark web', 'kali',
+        'linux', 'operating system', 'debugger', 'bug bounty', 'shell', 'scripting', 'oscp', 'ceh', 'cisco',
+        'ccna', 'ccnp', 'ccie','comptia', 'routing & switching', 'routing and switching', 'subnetting', 'ipv4', 
+        'ipv6', 'python', 'javascript']
+    hacking = get_queryset(keys)[:8]
+    # Category - Server and Cloud Computing
+    keys = ['azure', 'aws' 'google cloud', 'cloud', 'windows server', 'server', 'red hat', 'centos', 'open suse',
+        'oracle', 'vm', 'vmware', 'microservices', 'power bi', 'elastic beanstalk', 'ec2', 'route 53',
+        'powershell', 'system center', 'devops', 'docker', 'big data', 'hadoop']
+    cloud = get_queryset(keys)[:8]
+    # Category - Photography & Design
+    keys = ['adobe', 'photoshop', 'drawing', 'painting', 'lightroom', 'coreldraw', 'blender', 'movami', 'flimora', 'premire', 
+        'design', 'power director', 'cyberlink', 'gimp', 'inkscape', 'sketch', 'figure', 'infographics', 'ambigram',
+        'sculptris', 'brochure templates', 'how to draw', 'water colors', 'canva', 'figma', 'pixologics', 'cartoon', 'whitepapers',
+        'illustrator', 'autocad', 'flash', 'design', 'photograph', 'photography', 'video editing']
+    photography_and_design = get_queryset(keys)[:8]
+    category_context = {
+        'photography_and_design': photography_and_design, 'web_development': web_development, 
+        'office': office, 'hacking': hacking, 'cloud': cloud, 'programming': programming,}
+    return category_context
 #=============================================================================#
 def search_for(query_string):
     keywordset = query_string.split()
@@ -135,7 +137,7 @@ def courses(request):
     elif q:
         courses = search_for(q)
     else:
-        courses = Course.objects.filter(expired=False)
+        courses = valid_courses
     
     try:
         courses = courses.order_by('upload_date').reverse()
@@ -191,7 +193,7 @@ def coupon_page(request):
 
     template = 'courses/coupon_page.html'
     context.update({'course': course, 'related_courses': related_courses, 'contents':contents,'filter': filter,})
-    context.update(category_context)
+    context.update(get_category_context())
     return render(request, template, context)
 
 
