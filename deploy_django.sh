@@ -2,6 +2,7 @@
 read -p "Username > " username
 read -p "Project name > " project_name
 read -p "Gunicorn Port > " gunicorn_port
+read -p "Server Name (Domain Name) > " server_name
 
 
 echo "############################################"
@@ -85,7 +86,6 @@ echo "####################################################################"
 echo "###########  Configure Nginix to Proxy Pass to Gunicorn  ###########"
 echo "####################################################################"
 echo
-read -p "Server Name (Domain Name) > " server_name
 sudo rm -f /etc/nginx/sites-enabled/default
 sudo rm -f /etc/nginx/sites-enabled/$project_name
 echo "server{
