@@ -152,3 +152,6 @@ FCM_DJANGO_SETTINGS = {
          # default: False
         "DELETE_INACTIVE_DEVICES": False,
 }
+
+CSRF_COOKIE_DOMAIN = '.couponstown.me'
+CSRF_TRUSTED_ORIGINS = ['couponstown.me']
