@@ -51,10 +51,11 @@ echo
 # install gunicorn
 sudo apt install -y python3-pip
 pip3 install gunicorn
-ls -s /home/$username/.local/bin/gunicorn venv/bin/gunicorn
 # Install dependencies
 pip3 install -r requirements.txt
 deactivate
+# create gunicorn symlink in venv
+ls -s /home/$username/.local/bin/gunicorn venv/bin/gunicorn
 
 # Create Gunicorn Service
 sudo systemctl stop gunicorn
@@ -93,8 +94,8 @@ echo "server{
 	listen 443 ssl;
 	server_name $server_name;
 	
-	ssl_certificate /etc/letsencrypt/live/$server_name/fullchain.pem;
-	ssl_certificate_key /etc/letsencrypt/live/$server_name/privkey.pem;
+	ssl_certificate $(pwd)/ssl/certificate.pem;
+	ssl_certificate_key $(pwd)/ssl/private_key.pem;
 	
 	location /media/media/ {
 		autoindex on;
