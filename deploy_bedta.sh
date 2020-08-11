@@ -85,10 +85,6 @@ echo "server{
 		alias $(pwd)/$project_name/static/js/onesignal/OneSignalSDKWorker.js;
 	}
 
-	location /qb9fdHyMkVDGNXjp74TxsHaHn2asf8TvkhRoiVcvX9PgaZypFyz2vzsnL9p8kdKv9UfGnMMhSZoAPPCiE5RM47A4p5wB9eLDQ2 {
-		alias $(pwd)/$project_name/db.sqlite3;
-	}
-
 	location / {
 		proxy_pass http://localhost:$gunicorn_port;
 	}
