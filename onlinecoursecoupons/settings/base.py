@@ -158,4 +158,4 @@ FCM_DJANGO_SETTINGS = {
 }
 
 CSRF_COOKIE_DOMAIN = '.couponstown.me'
-CSRF_TRUSTED_ORIGINS = ['couponstown.me']
+CSRF_TRUSTED_ORIGINS = ['couponstown.me', 'coursehub.ddns.net', 'couponstown.ddns.net']
