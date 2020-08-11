@@ -22,6 +22,8 @@ class CourseInfo:
 
     def get_name(self):
         try:
+            if self.platform == 'Eduonix':
+                return self.parsed_html.findAll('h1', {'class': 'productTopHeading'})[0].get_text().strip()
             return self.parsed_html.findAll('h1')[0].get_text().strip()
         except:
             return ''

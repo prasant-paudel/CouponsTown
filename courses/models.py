@@ -33,7 +33,9 @@ class Course(models.Model):
     def __str__(self):
         if self.expired:
             return str(self.id) + ' --Expired-- ' + self.name + ' | ' + self.platform
-        return str(self.id) + ' ' + self.name + ' | ' + self.platform
+        if self.name:
+            return str(self.id) + ' ' + self.name + ' | ' + self.platform
+        return str(self.id) + ' | ' + self.platform
     
     class Meta:
         ordering = ['expired' ,'name']
