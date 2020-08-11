@@ -31,7 +31,7 @@ echo "######################################"
 echo 
 pip3 install gunicorn
 # create gunicorn symlink in venv
-ls -s /home/$username/.local/bin/gunicorn venv/bin/gunicorn
+ln -s /home/$username/.local/bin/gunicorn venv/bin/gunicorn
 
 # Create Gunicorn Service
 sudo systemctl stop gunicorn
@@ -77,10 +77,6 @@ echo "server{
 
 	location /sitemap.xml {
 		alias $(pwd)/$project_name/static/sitemap.xml;
-	}
-
-	location /ads.txt {
-		alias $(pwd)/$project_name/static/ads.txt;
 	}
 
 	location /OneSignalSDKUpdaterWorker.js {
