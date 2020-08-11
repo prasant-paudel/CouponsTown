@@ -36,7 +36,7 @@ sudo ufw status
 echo "###########  Nginx Setup Completed ###########"
 echo
 # Create and Enter into Virtual Environment
-sudo apt install -y python virtualenv
+sudo apt install -y python virtualenv python3-pip
 virtualenv venv
 sleep 1
 source venv/bin/activate
@@ -49,7 +49,6 @@ echo "######################################"
 echo 
 
 # install gunicorn
-sudo apt install -y python3-pip
 pip3 install gunicorn
 # Install dependencies
 pip3 install -r requirements.txt
