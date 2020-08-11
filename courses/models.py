@@ -4,7 +4,7 @@ from django.shortcuts import reverse
 
 class Course(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100, blank=True)
+    name = models.CharField(max_length=100, null=True)
     name_base64 = models.CharField(max_length=100, blank=True)
     name_encoded = models.CharField(max_length=100, blank=True)
     url = models.CharField(max_length=200)
