@@ -14,11 +14,11 @@ echo
 # Exit Virtual Environment if any
 deactivate
 
-# Update Debian/Ubuntu
 sudo apt update -y
+sudo apt install -y nginx python virtualenv python3-pip
 
 # Install nginx
-sudo apt install -y nginx
+
 
 # Enable Firewall
 sudo ufw enable
@@ -36,7 +36,6 @@ sudo ufw status
 echo "###########  Nginx Setup Completed ###########"
 echo
 # Create and Enter into Virtual Environment
-sudo apt install -y python virtualenv python3-pip
 virtualenv venv
 sleep 1
 source venv/bin/activate
@@ -87,8 +86,7 @@ echo "####################################################################"
 echo "###########  Configure Nginix to Proxy Pass to Gunicorn  ###########"
 echo "####################################################################"
 echo
-sudo rm -f /etc/nginx/sites-enabled/default
-sudo rm -f /etc/nginx/sites-enabled/$project_name
+sudo rm -f /etc/nginx/sites-enabled/*
 echo "server{
 	listen 443 ssl;
 	server_name $server_name;
@@ -114,19 +112,11 @@ echo "server{
 		alias $(pwd)/$project_name/static/sitemap.xml;
 	}
 
-	location /ads.txt {
-		alias $(pwd)/$project_name/static/ads.txt;
-	}
-
 	location /OneSignalSDKUpdaterWorker.js {
 		alias $(pwd)/$project_name/static/js/onesignal/OneSignalSDKUpdaterWorker.js;
 	}
 	location /OneSignalSDKWorker.js {
 		alias $(pwd)/$project_name/static/js/onesignal/OneSignalSDKWorker.js;
-	}
-
-	location /qb9fdHyMkVDGNXjp74TxsHaHn2asf8TvkhRoiVcvX9PgaZypFyz2vzsnL9p8kdKv9UfGnMMhSZoAPPCiE5RM47A4p5wB9eLDQ2 {
-		alias $(pwd)/$project_name/db.sqlite3;
 	}
 
 	location / {

@@ -55,8 +55,7 @@ echo "####################################################################"
 echo "###########  Configure Nginix to Proxy Pass to Gunicorn  ###########"
 echo "####################################################################"
 echo
-sudo rm -f /etc/nginx/sites-enabled/default
-sudo rm -f /etc/nginx/sites-enabled/$project_name
+sudo rm -f /etc/nginx/sites-enabled/*
 echo "server{
 	listen 80;
 	server_name localhost;
@@ -97,6 +96,8 @@ echo "server{
 }" > temp_site1
 sudo mv temp_site1 /etc/nginx/sites-available/$project_name
 rm -f temp_site1
+echo "##########  Creating Symlink for Nginx Sites  ##########"
+sudo ln -s /etc/nginx/sites-available/$project_name /etc/nginx/sites-enabled/$project_name
 
 sudo systemctl start gunicorn nginx
 sudo systemctl enable gunicorn nginx
