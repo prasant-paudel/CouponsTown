@@ -147,6 +147,9 @@ server {
 }" > temp_site1
 sudo mv temp_site1 /etc/nginx/sites-available/$project_name
 rm -f temp_site1
+echo "##########  Creating Symlink for Nginx Sites  ##########"
+sudo ln -s /etc/nginx/sites-available/$project_name /etc/nginx/sites-enabled/$project_name
+echo
 echo "#############################################################"
 echo "##########  Configuring Certbot and Nginx for SSL  ##########"
 echo "#############################################################"
@@ -155,9 +158,6 @@ sudo add-apt-repository universe
 sudo add-apt-repository ppa:certbot/certbot
 sudo apt-get update
 sudo apt-get install -y certbot python3-certbot-nginx
-echo
-echo "##########  Creating Symlink for Nginx Sites  ##########"
-sudo ln -s /etc/nginx/sites-available/$project_name /etc/nginx/sites-enabled/$project_name
 echo
 echo "##########  Testing Nginx  ##########"
 sudo nginx -t
