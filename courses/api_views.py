@@ -1,4 +1,4 @@
-from django.shortcuts import HttpResponse
+from django.shortcuts import HttpResponse, reverse
 from .models import Course, RealDiscount
 from .my_scripts import CourseInfo
 import wget
@@ -6,7 +6,8 @@ import os
 from .coupon_extractor import CouponExtractor
 # from .tags_scraper import TagScraper
 from base64 import b64encode
-from urllib.parse import quote_plus
+from urllib.parse import quote_plus, urljoin
+import requests
 
 def api(request):
     command = request.GET.get('command')
@@ -303,5 +304,23 @@ def api(request):
         from courses.discudemy_scraper import crawl
         crawl()
         return HttpResponse(f'Crawling Discudemy')
+
+    if command == 'update_images':
+        courses = Course.objects.all()
+        for course in courses:
+            try:
+                url = urljoin('http://localhost:8000/', course.image.url)
+                print(url)
+                status = int(requests.get(url).status_code)
+            except:
+                status = 0
+                continue
+            if status == 404:
+                try:
+                    obj = CourseInfo(course.url)
+                    course.image = obj.get_image()
+                    course.save()
+                except:
+                    pass
 
     return HttpResponse(f'Successful Ineraction!')
