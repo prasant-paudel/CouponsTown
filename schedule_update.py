@@ -61,12 +61,12 @@ if __name__ == '__main__':
             # Every 5 Minutes
             if now.minute % 5 == 0 and now.second == 0:
                 t2.start()  # Update Courses Info
+                t3.start()  # Validate Courses
                 t4.start()  # Filter URLs
                 t5.start()  # Update Ratings
 
             # Every Minute
             if now.second == 0:
-                t3.start()  # Validate Courses
                 t6.start()  # Remove Duplicate Courses
         except (ConnectionError, requests.exceptions.ConnectionError):
             print('[!] Connection Error!')
