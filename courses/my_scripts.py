@@ -60,7 +60,7 @@ class CourseInfo:
 
     def is_expired(self):
         response = requests.get(self.url)
-        parsed_html = BeautifulSoup(response.text, features='lxml')
+        parsed_html = BeautifulSoup(response.text)
 
         # Eduonix Pricing Div
         if 'eduonix.com' in self.url:
