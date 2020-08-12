@@ -96,7 +96,7 @@ DATABASES = {
         'NAME': 'couponstowndb',
         'USER': 'couponstown',
         'PASSWORD': 'Bd$U&Rivzo&L#74ETpD6#^4%!J',
-        'HOST': 'couponstown-db.csgdxvmv2see.us-east-1.rds.amazonaws.com',
+        'HOST': 'couponstowndb-restored.cwl2fnm51fqs.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
