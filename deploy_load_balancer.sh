@@ -29,7 +29,7 @@ do
     [Install]" > temp.txt
     sudo mv temp.txt /etc/systemd/system/load_balancer$port.service
     echo "########### Created Load Balancer ###########"
-	echo --> load_balancer$port.service
+	echo "--> load_balancer$port.service"
 
     sudo systemctl start load_balancer$port.service
     sudo systemctl enable load_balancer$port.service
