@@ -243,10 +243,10 @@ def api(request):
         print('')
         for obj in rd_objs:
             filtered_url = 'https://' + str(obj.coupon).split('//')[-1]
-            obj.coupon = filtered_url
-            if len(list(rd_objs.filter(coupon=filtered_url))) > 1:
-                obj.delete()
+            if rd_objs.filter(coupon=filtered_url).exists():
+                continue
             else:
+                obj.coupon = filtered_url
                 obj.save()
             print(f'[+] URL Filtered for Offer {obj.offer.split("/offer/")[-1]}')
 
