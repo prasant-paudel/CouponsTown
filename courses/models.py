@@ -6,7 +6,7 @@ class Course(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200, null=True)
     name_base64 = models.CharField(max_length=200, blank=True)
-    name_encoded = models.CharField(max_length=200, blank=True)
+    name_encoded = models.CharField(max_length=1000, blank=True)
     url = models.CharField(max_length=200)
     affiliate_url = models.CharField(max_length=256,blank=True)
     image = models.ImageField(upload_to='media/', blank=True)

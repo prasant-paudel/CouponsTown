@@ -1,4 +1,5 @@
 from django.shortcuts import HttpResponse, reverse
+from django.db.models.query_utils import Q
 from .models import Course, RealDiscount
 from .my_scripts import CourseInfo
 import wget
@@ -8,6 +9,7 @@ from .coupon_extractor import CouponExtractor
 from base64 import b64encode
 from urllib.parse import quote_plus, urljoin
 import requests
+
 
 def api(request):
     command = request.GET.get('command')
@@ -146,7 +148,7 @@ def api(request):
 
         # If uploaded by user Remove course with same title if exists
         if coupon:
-            _old = Course.objects.filter(name=obj.get_name())
+            _old = Course.objects.filter(Q(name=obj.get_name()) & Q(expired=True))
             print(obj.get_name())
             if _old.exists():
                 for _course in _old:
