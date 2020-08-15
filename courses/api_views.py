@@ -168,8 +168,7 @@ def api(request):
         course.save()
 
         # Fetch Image
-        print(course)
-        # course.image = obj.get_image()
+        course.image = obj.get_image()
 
         # Fetch Contents / Things You'll Learn
         contents = obj.get_content_list()
