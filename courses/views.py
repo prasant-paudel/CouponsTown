@@ -174,7 +174,7 @@ def coupon_page(request):
     _course = request.GET.get('course')
     filter = request.GET.get('filter')
     try:
-        course = all_courses.filter(Q(name=_course) | Q(name_base64=_course) | Q(name_encoded=_course)).first()
+        course = all_courses.get(Q(name=_course) | Q(name_base64=_course) | Q(name_encoded=_course))
         if not course:
             raise(Http404)
     except:
