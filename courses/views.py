@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse, Http404, reverse
+from django.shortcuts import render, redirect, HttpResponse, Http404, reverse,, get_object_or_404
 from .models import Course, Subscriber, RealDiscount
 from django.db.models import Q
 from .my_scripts import CourseInfo
@@ -202,7 +202,7 @@ def info_page(request):
     _course = request.GET.get('course')
     filter = request.GET.get('filter')
     try:
-        course = all_courses.filter(Q(name=_course) | Q(name_base64=_course) | Q(name_encoded=_course)).first()
+        course = all_courses.get(Q(name=_course) | Q(name_base64=_course) | Q(name_encoded=_course))
         if not course:
             raise(Http404)
     except:
