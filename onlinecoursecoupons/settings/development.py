@@ -13,3 +13,10 @@ FIREBASE_CONFIG = {
     "appId": "1:205056322149:web:a3a72b83a638ff88f0b48c",
     "measurementId": "G-575527J5PG",
 }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
