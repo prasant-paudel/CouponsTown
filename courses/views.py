@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse, Http404, reverse,, get_object_or_404
+from django.shortcuts import render, redirect, HttpResponse, Http404, reverse, get_object_or_404
 from .models import Course, Subscriber, RealDiscount
 from django.db.models import Q
 from .my_scripts import CourseInfo
