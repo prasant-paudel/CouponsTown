@@ -45,7 +45,7 @@ pip3 install gunicorn
 pip3 install -r requirements.txt
 deactivate
 # create gunicorn symlink in venv
-ls -s /home/$username/.local/bin/gunicorn venv/bin/gunicorn
+ln -s /home/$username/.local/bin/gunicorn venv/bin/gunicorn
 
 # Create Gunicorn Service
 sudo systemctl stop gunicorn
