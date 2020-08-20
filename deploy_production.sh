@@ -5,7 +5,6 @@ read -p "Gunicorn Port > " gunicorn_port
 read -p "Server Name (Domain Name) > " server_name
 read -p "Server IP Address > " ip_address
 
-
 echo "############################################"
 echo "#############  Nginx Setup  ################"
 echo "############################################"
@@ -66,14 +65,6 @@ Restart=on-failure
 sudo mv temp.txt /etc/systemd/system/gunicorn.service
 
 echo "###########  Gunicorn Service Created ###########"
-echo 
-echo "###########  Enabling Gunicorn Service ###########"
-echo
-sudo systemctl start gunicorn; 
-sudo systemctl daemon-reload
-sudo systemctl enable gunicorn
-sudo systemctl restart gunicorn
-sudo systemctl status gunicorn
 echo
 echo "####################################################################"
 echo "###########  Configure Nginix to Proxy Pass to Gunicorn  ###########"
@@ -133,44 +124,11 @@ rm -f temp_site1
 echo "##########  Creating Symlink for Nginx Sites  ##########"
 sudo ln -s /etc/nginx/sites-available/$project_name /etc/nginx/sites-enabled/$project_name
 echo
-echo "#############################################################"
-echo "##########  Configuring Certbot and Nginx for SSL  ##########"
-echo "#############################################################"
-sudo apt-get install -y software-properties-common
-sudo add-apt-repository universe
-sudo add-apt-repository ppa:certbot/certbot
-sudo apt-get update
-sudo apt-get install -y certbot python3-certbot-nginx
-echo
-echo "##########  Testing Nginx  ##########"
-sudo nginx -t
-echo
-echo "##########  Restarting Nginx  ##########"
-sudo systemctl restart nginx
-sudo systemctl status nginx
-echo 
 
-echo "#####################################################################"
-echo "##########  Creating CouponsTown Schedule Updater Service  ##########"
-echo "#####################################################################"
-echo "[Unit]
-Description=CouponsTown Schedule Updater Daemon
-After=network.target
-
-[Service]
-User=$username
-Group=www-data
-WorkingDirectory=$(pwd)
-ExecStart=$(pwd)/venv/bin/python3 schedule_update.py
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target" > temp.txt
-sudo mv temp.txt /etc/systemd/system/couponstown_updater.service
-sudo systemctl start couponstown_updater
-sudo systemctl enable couponstown_updater
+sudo systemctl start nginx gunicorn
+sudo systemctl enable nginx gunicorn
 sudo systemctl daemon-reload
-sudo systemctl restart couponstown_updater
-sudo systemctl status couponstown_updater
+sudo systemctl restart nginx gunicorn
+sudo systemctl status nginx gunicorn
 
 
