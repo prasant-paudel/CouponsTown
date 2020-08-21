@@ -39,6 +39,7 @@ do
 done
 
 
+
 sudo rm -f /etc/nginx/sites-enabled/*
 
 echo "upstream backend {" > temp.txt
@@ -94,7 +95,18 @@ echo "	location /media/media/ {
         proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
 		proxy_pass http://backend;
 	}
+}
 
+server {
+	listen 80;
+	server_name $server_name, www.$server_name;
+	return 301 https://\$host\$request_uri;
+}
+
+server {
+	listen 443;
+	server_name www.$server_name;
+	return 301 https://\$host\$request_uri;
 }" >> temp.txt
 sudo mv temp.txt /etc/nginx/sites-available/$project_name
 rm -f temp.txt

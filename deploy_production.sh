@@ -3,7 +3,6 @@ read -p "Username > " username
 read -p "Project name > " project_name
 read -p "Gunicorn Port > " gunicorn_port
 read -p "Server Name (Domain Name) > " server_name
-read -p "Server IP Address > " ip_address
 
 echo "############################################"
 echo "#############  Nginx Setup  ################"
@@ -111,13 +110,13 @@ echo "server{
 server {
 	listen 80;
 	server_name $server_name, www.$server_name;
-	return 301 https://couponstown.me\$request_uri;
+	return 301 https://\$host\$request_uri;
 }
 
 server {
 	listen 443;
 	server_name www.$server_name;
-	return 301 https://couponstown.me\$request_uri;
+	return 301 https://\$host\$request_uri;
 }" > temp_site1
 sudo mv temp_site1 /etc/nginx/sites-available/$project_name
 rm -f temp_site1

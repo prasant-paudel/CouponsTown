@@ -2,18 +2,18 @@
 read -p "Username > " username
 read -p "Project name > " project_name
 read -p "Gunicorn Port > " gunicorn_port
+read -p "Server Name (Domain Name) > " server_name
 
-sudo apt update -y 
-sudo apt install -y python python3-pip virtualenv nginx
+echo "############################################"
+echo "#############  Nginx Setup  ################"
+echo "############################################"
+echo 
 
-virtualenv venv
-sleep 5
-source vnev/bin/activate
-# Create symlink for python3 in venv
-ln -s /usr/bin/python3 $(pwd)/venv/bin/python3
+# Exit Virtual Environment if any
+deactivate
 
-pip3 install -r requirements.txt
-
+sudo apt update -y
+sudo apt install -y nginx python virtualenv python3-pip
 # Enable Firewall
 sudo ufw enable
 sudo ufw app list
@@ -24,12 +24,25 @@ sudo ufw allow 'Nginx HTTPS'
 sudo ufw allow 'OpenSSH'
 sudo ufw allow 8000/tcp
 
-
+echo "###########  Nginx Setup Completed ###########"
+echo
+# Create and Enter into Virtual Environment
+virtualenv venv
+sleep 1
+source venv/bin/activate
+# Create symlink for python3 in venv
+ln -s /usr/bin/python3 $(pwd)/venv/bin/python3
+echo
 echo "######################################"
 echo "##########  Gunicorn Setup  ##########"
 echo "######################################"
 echo 
+
+# install gunicorn
 pip3 install gunicorn
+# Install dependencies
+pip3 install -r requirements.txt
+deactivate
 # create gunicorn symlink in venv
 ln -s /home/$username/.local/bin/gunicorn venv/bin/gunicorn
 
@@ -49,6 +62,7 @@ Restart=on-failure
 
 [Install]" > temp.txt
 sudo mv temp.txt /etc/systemd/system/gunicorn.service
+
 echo "###########  Gunicorn Service Created ###########"
 echo
 echo "####################################################################"
@@ -57,8 +71,11 @@ echo "####################################################################"
 echo
 sudo rm -f /etc/nginx/sites-enabled/*
 echo "server{
-	listen 80;
-	server_name localhost;
+	listen 443 ssl;
+	server_name $server_name;
+	
+	ssl_certificate $(pwd)/ssl/certificate.pem;
+	ssl_certificate_key $(pwd)/ssl/private_key.pem;
 	
 	location /media/media/ {
 		autoindex on;
@@ -88,17 +105,29 @@ echo "server{
 	location / {
 		proxy_pass http://localhost:$gunicorn_port;
 	}
+}
 
+server {
+	listen 80;
+	server_name $server_name, www.$server_name;
+	return 301 http://\$host\$request_uri;
+}
+
+server {
+	listen 443;
+	server_name www.$server_name;
+	return 301 http://\$host\$request_uri;
 }" > temp_site1
 sudo mv temp_site1 /etc/nginx/sites-available/$project_name
 rm -f temp_site1
 echo "##########  Creating Symlink for Nginx Sites  ##########"
 sudo ln -s /etc/nginx/sites-available/$project_name /etc/nginx/sites-enabled/$project_name
+echo
 
-sudo systemctl start gunicorn nginx
-sudo systemctl enable gunicorn nginx
+sudo systemctl start nginx gunicorn
+sudo systemctl enable nginx gunicorn
 sudo systemctl daemon-reload
-sudo systemctl restart gunicorn nginx
-sudo systemctl status gunicorn nginx
+sudo systemctl restart nginx gunicorn
+sudo systemctl status nginx gunicorn
 
 
