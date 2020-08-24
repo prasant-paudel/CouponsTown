@@ -1,0 +1,41 @@
+{% extends 'courses/base.html' %}
+{% load static %}
+
+{% block title %} Coupons Town - {{message}} {% endblock %}
+
+{% block body %}
+    {% include 'courses/navbar1.html' %}
+    <div class="d-flex justify-content flex-wrap" style="width: 100%; " style=" display: flex; flex-wrap: wrap;">
+
+        <!-- ======================================================================================== -->
+       <div class="p-2 flex-fill bd-highlight" style="width: 908px;">
+           <center>
+               {% if message %}
+               <div class="jumbotron bg-danger" style="padding: 5px !important;">
+                   <h3 class="text-white mt-1">{{ message }}<h3>
+               </div>
+               {% endif %}
+           </center>
+   
+            <div class="container d-flex justify-content-center " style="width: 100%;">
+            {% include 'courses/cards.html' %}
+            </div>
+   
+           <!-- ================================================================================================================         -->
+           <div class="p-2 flex-fill bd-highlight mt-3" style="width: 210px;">
+               <div class="card text-center">
+                   <div class="card-header bg-danger text-white" style="font-weight: bolder;">
+                       Trending Topics
+                   </div>
+                   <!-- Trending Course Card Small -->
+                   {% for course in high_rated %}
+                       {% include 'courses/side-card-small.html' %}
+                   {% endfor %}
+                   <!-- / Trending Course Card Small -->
+   
+               </div>
+           </div>
+           
+   </div>
+
+{% endblock %}

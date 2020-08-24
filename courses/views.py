@@ -282,9 +282,12 @@ def category(request, category):
         msg = 'Music & Creativity'
     else:
         raise(Http404)
+    
+    high_rated = valid_courses.order_by('rating')
+    high_rated = list(high_rated)[:10]
 
-    template = 'courses/courses.html'
-    context.update({'courses': results, 'message': msg})
+    template = 'courses/category.html'
+    context.update({'courses': results, 'message': msg, 'high_rated':high_rated})
     return render(request, template, context)
 
 
