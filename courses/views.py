@@ -70,6 +70,11 @@ health_and_fitness_wordlist = ['health', 'fitness', 'yoga', 'meditation', 'cogni
 # Category - Music and Creativity
 music_and_creativity_wordlist = ['guitar', 'piano', 'flute', 'ukulele', 'harmonium', 'drumset', 'drum set', 'music', 'singing', 'poetry',
     'keyboard instrument', 'dj', 'audio production', 'voice training', 'song']
+#category - Teaching and Academics
+teaching_and_academics_wordlist =['engineering','humanities','math', 'science', 'social', 'science', 'biology','algebra','geometry', 'trignometry','calculus','environmental science','education',
+    'socilogy','academic','english language','german language','french language','spanish','grammer','learn english','english language','sign language','psychology',
+    'social science']
+
 #=============================================================================#
 def get_queryset(keywords_list):
     global all_courses
@@ -280,6 +285,9 @@ def category(request, category):
     elif cat=='music-and-creativity':
         results = get_queryset(music_and_creativity_wordlist)
         msg = 'Music & Creativity'
+    elif cat=='teaching-and-academics':
+        results = get_queryset(teaching_and_academics_wordlist)
+        msg = 'Teaching & Academics'
     else:
         raise(Http404)
 
