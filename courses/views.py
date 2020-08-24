@@ -251,10 +251,37 @@ def search(request):
 
 
 def category(request, category):
+    global context
     cat = category.strip("'").strip('"')
     if cat=='web-development':
-        return HttpResponse(cat)
-
+        results = get_queryset(web_development_wordlist)
+        msg = 'Web Development'
+    elif cat=='programming':
+        results = get_queryset(programming_wordlist)
+        msg = 'Programming Language'
+    elif cat=='office-and-productivity':
+        results = get_queryset(office_and_productivity_wordlist)
+        msg = 'Office & Productivity'
+    elif cat=='network-security-and-ethical-hacking':
+        results = get_queryset(network_security_and_ethical_hacking_wordlist)
+        msg = 'Network Security & Ethical Hacking'
+    elif cat=='server-and-cloud-computing':
+        results = get_queryset(server_and_cloud_computing_wordlist)
+        msg = 'Server & Cloud Compting'
+    elif cat=='photography-and-design':
+        results = get_queryset(photography_and_design_wordlist)
+        msg = 'Photography & Design'
+    elif cat=='business-and-marketing':
+        results = get_queryset(business_and_marketing_wordlist)
+        msg = 'Business & Marketing'
+    elif cat=='health-and-fitness':
+        results = get_queryset(health_and_fitness_wordlist)
+        msg = 'Health & Fitness'
+    elif cat=='music-and-creativity':
+        results = get_queryset(music_and_creativity_wordlist)
+        msg = 'Music & Creativity'
+    else:
+        raise(Http404)
 
     template = 'courses/courses.html'
     context.update({'courses': results, 'message': msg})
