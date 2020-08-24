@@ -33,6 +33,44 @@ eduonix_courses = all_courses.filter(url__icontains='Eduonix').filter(expired=Fa
 context = {'all_courses':all_courses, 'valid_courses':valid_courses, 'expired_courses':expired_courses,
     'udemy_courses':udemy_courses, 'eduonix_courses':eduonix_courses}
 #=============================================================================#
+
+# Category - Web Development
+web_development_wordlist = ['web', 'html', 'css', 'js', 'javascript', 'bootstrap', 'react', 'angular', 'vue', 'php']
+# Category - Programming
+programming_wordlist = ['python', 'javascript', 'java', 'programming', 'ruby', 'angular', 'react', 'vue', 
+    'flutter', 'android studio', 'sdk', 'swift', 'php', 'algorithm']
+# Category - Office & Productivity
+office_and_productivity_wordlist = ['office', 'word', 'excel', 'powerpoint', 'ms access', 'microsoft access', 'tally', 
+    'gmail', 'google docs', 'google drive', 'evernote', 'google classroom', 'onedrive', 'youtube',
+    'google sites', 'trello', 'powerapps', 'slack', 'wordpress', 'business analysis', 'gsuite', 'trademark',
+    'blazor', 'blogging', 'animated promo', 'google photos', 'office 365', 'google drawings', 'jamboard', 
+    'sap', 'power bi', 'schedule', 'business', 'communication', 'kubernetes', 'linux']
+# Category - Network Security and Ethical Hacking
+network_security_and_ethical_hacking_wordlist = ['ethical hacking', 'cybersecurity', 'cyber security', 'pentesting', 'penetration testing', 
+    'malware', 'nework security', 'wireshark', 'social engineering', 'deep web', 'dark web', 'kali',
+    'linux', 'operating system', 'debugger', 'bug bounty', 'shell', 'scripting', 'oscp', 'ceh', 'cisco',
+    'ccna', 'ccnp', 'ccie','comptia', 'routing & switching', 'routing and switching', 'subnetting', 'ipv4', 
+    'ipv6', 'python', 'javascript']
+# Category - Server and Cloud Computing
+server_and_cloud_computing_wordlist = ['azure', 'aws' 'google cloud', 'cloud', 'windows server', 'server', 'red hat', 'centos', 'open suse',
+    'oracle', 'vm', 'vmware', 'microservices', 'power bi', 'elastic beanstalk', 'ec2', 'route 53',
+    'powershell', 'system center', 'devops', 'docker', 'big data', 'hadoop', 'kubernetes']
+# Category - Photography & Design
+photography_and_design_wordlist = ['adobe', 'photoshop', 'drawing', 'painting', 'lightroom', 'coreldraw', 'blender', 'movami', 'flimora', 'premire', 
+    'design', 'power director', 'cyberlink', 'gimp', 'inkscape', 'sketch', 'figure', 'infographics', 'ambigram',
+    'sculptris', 'brochure templates', 'how to draw', 'water colors', 'canva', 'figma', 'pixologics', 'cartoon', 'whitepapers',
+    'illustrator', 'autocad', 'flash', 'design', 'photograph', 'photography', 'video editing']
+# Category Business and Marketing
+business_and_marketing_wordlist = ['business', 'marketing', 'market', 'financial analysis', 'finance', 'power bi', 'stock marketing',
+    'stock trading', 'investing', 'pmp', 'project management', 'pmbok', 'tableau', 'forex', 'financial', 'agle', 'scrum', 'nba', 
+    'amazon fba',]
+# Category - Health and Fitness
+health_and_fitness_wordlist = ['health', 'fitness', 'yoga', 'meditation', 'cognitive therapy', 'nutrition', 'therapy', 'herbalism', 'herbs', 
+    'food', 'massage', 'pilates', 'dieting', 'weight loss', 'weight gain']
+# Category - Music and Creativity
+music_and_creativity_wordlist = ['guitar', 'piano', 'flute', 'ukulele', 'harmonium', 'drumset', 'drum set', 'music', 'singing', 'poetry',
+    'keyboard instrument', 'dj', 'audio production', 'voice training', 'song']
+#=============================================================================#
 def get_queryset(keywords_list):
     global all_courses
     _results = []
@@ -49,38 +87,12 @@ def get_queryset(keywords_list):
     return _results
 
 def get_category_context():
-    # Category - Web Development
-    keys = ['web', 'html', 'css', 'js', 'javascript', 'bootstrap', 'react', 'angular', 'vue', 'php']
-    web_development = get_queryset(keys)[:8]
-    # Category - Programming
-    keys = ['python', 'javascript', 'java', 'programming', 'ruby', 'angular', 'react', 'vue', 
-        'flutter', 'android studio', 'sdk', 'swift', 'php', 'algorithm']
-    programming = get_queryset(keys)[:8]
-    # Category - Office & Productivity
-    keys = ['office', 'word', 'excel', 'powerpoint', 'ms access', 'microsoft access', 'tally', 
-        'gmail', 'google docs', 'google drive', 'evernote', 'google classroom', 'onedrive', 'youtube',
-        'google sites', 'trello', 'powerapps', 'slack', 'wordpress', 'business analysis', 'gsuite', 'trademark',
-        'blazor', 'blogging', 'animated promo', 'google photos', 'office 365', 'google drawings', 'jamboard', 
-        'sap', 'power bi', 'schedule', 'business', 'communication', 'kubernetes', 'linux']
-    office = get_queryset(keys)[:8]
-    # Category - Network Security and Ethical Hacking
-    keys = ['ethical hacking', 'cybersecurity', 'cyber security', 'pentesting', 'penetration testing', 
-        'malware', 'nework security', 'wireshark', 'social engineering', 'deep web', 'dark web', 'kali',
-        'linux', 'operating system', 'debugger', 'bug bounty', 'shell', 'scripting', 'oscp', 'ceh', 'cisco',
-        'ccna', 'ccnp', 'ccie','comptia', 'routing & switching', 'routing and switching', 'subnetting', 'ipv4', 
-        'ipv6', 'python', 'javascript']
-    hacking = get_queryset(keys)[:8]
-    # Category - Server and Cloud Computing
-    keys = ['azure', 'aws' 'google cloud', 'cloud', 'windows server', 'server', 'red hat', 'centos', 'open suse',
-        'oracle', 'vm', 'vmware', 'microservices', 'power bi', 'elastic beanstalk', 'ec2', 'route 53',
-        'powershell', 'system center', 'devops', 'docker', 'big data', 'hadoop']
-    cloud = get_queryset(keys)[:8]
-    # Category - Photography & Design
-    keys = ['adobe', 'photoshop', 'drawing', 'painting', 'lightroom', 'coreldraw', 'blender', 'movami', 'flimora', 'premire', 
-        'design', 'power director', 'cyberlink', 'gimp', 'inkscape', 'sketch', 'figure', 'infographics', 'ambigram',
-        'sculptris', 'brochure templates', 'how to draw', 'water colors', 'canva', 'figma', 'pixologics', 'cartoon', 'whitepapers',
-        'illustrator', 'autocad', 'flash', 'design', 'photograph', 'photography', 'video editing']
-    photography_and_design = get_queryset(keys)[:8]
+    web_development = get_queryset(web_development_wordlist)[:8]
+    programming = get_queryset(programming_wordlist)[:8]
+    office = get_queryset(office_and_productivity_wordlist)[:8]
+    hacking = get_queryset(network_security_and_ethical_hacking_wordlist)[:8]
+    cloud = get_queryset(server_and_cloud_computing_wordlist)[:8]
+    photography_and_design = get_queryset(photography_and_design_wordlist)[:8]
     category_context = {
         'photography_and_design': photography_and_design, 'web_development': web_development, 
         'office': office, 'hacking': hacking, 'cloud': cloud, 'programming': programming,}
@@ -238,17 +250,11 @@ def search(request):
     return redirect(redir)
 
 
-def category(request):
-    global context
-    cat = request.GET.get('filter')
-    cat = str(cat).strip("'").strip('"')
-    if cat.lower() == 'udemy' or 'eduonix':
-        results = Course.objects.filter(Q(platform__icontains=cat))
-        results = results.order_by('upload_date').reverse()
-        results = results.order_by('expired').reverse()
-        msg = cat.capitalize() + ' Coupons'
-    else:
-        msg = 'Sorry! Page is under Construction.'
+def category(request, category):
+    cat = category.strip("'").strip('"')
+    if cat=='web-development':
+        return HttpResponse(cat)
+
 
     template = 'courses/courses.html'
     context.update({'courses': results, 'message': msg})
