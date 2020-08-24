@@ -70,7 +70,10 @@
     <div class="col-4">
       <ul class="list-unstyled list-inline text-center py-2" style="float: left;">  
         <li class="list-inline-item">
-          <h5 class="mb-1">We Validate Coupons Instantly.</h5>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#privacymodal">
+            Privacy Policy
+          </button>
+          
         </li>
       </ul>
     </div>
@@ -113,3 +116,30 @@
   <a href="https://couponstown.me/"> CouponsTown.me</a>
 </div>
 <!-- Footer -->
+
+<!-- ==========================modal for privacy policy================= -->
+
+<!-- Full Height Modal Right -->
+<div class="modal fade bottom" id="privacymodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+  <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+  <div class="modal-dialog modal-full-height modal-bottom" role="document" style="height: 90%;">
+
+
+    <div class="modal-content">
+      <div class="modal-header bg-danger fixed-top">
+        <h4 class="modal-title w-100  text-center " id="myModalLabel">Privacy Policy</h4>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-dark ">
+          {% include 'courses/privacy.html' %}
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
