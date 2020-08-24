@@ -2,9 +2,9 @@
 {% load static %}
 
 {% block title %} Coupons Town - {{message}} {% endblock %}
-
+{% include 'courses/navbar1.html' %}
 {% block body %}
-    {% include 'courses/navbar1.html' %}
+    
     <div class="d-flex justify-content flex-wrap" style="width: 100%; " style=" display: flex; flex-wrap: wrap;">
 
         <!-- ======================================================================================== -->
@@ -17,7 +17,7 @@
                {% endif %}
            </center>
    
-            {% includ e 'courses/cards.html' %}
+            {% include 'courses/cards.html' %}
            <!-- ================================================================================================================         -->
            <div class="p-2 flex-fill bd-highlight mt-3" style="width: 210px;">
                <div class="card text-center">
