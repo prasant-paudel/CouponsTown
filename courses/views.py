@@ -340,7 +340,7 @@ def submit_coupons(request):
         if all_courses.filter(url=coupon).exists():
             msg = 'Sorry! Coupon Already Exists'
         else:
-            url = 'http://localhost:8000/api/?command=fetch_single_course_info&coupon=' + coupon
+            url = 'http://localhost/api/?command=fetch_single_course_info&coupon=' + coupon
             try:
                 resp = requests.get(url)
                 msg = 'Thank You For Submitting Coupon <br>' + resp.text.split('] ')[-1]
