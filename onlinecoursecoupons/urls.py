@@ -15,10 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
-from courses import views, api_views
+from courses import views, api_views, rest_api
 from django.conf import settings
 from django.conf.urls.static import static
-from rest_api import rest_api
 
 from django.contrib.sitemaps.views import sitemap
 from courses.sitemaps import CourseSitemap
