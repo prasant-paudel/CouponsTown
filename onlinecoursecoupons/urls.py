@@ -40,7 +40,7 @@ urlpatterns = [
         views.show_coupons, name='show_coupons'),
     path('games-giveaways/', views.games_giveaways, name='games_giveaways'),
     re_path('^submit-coupons/$', views.submit_coupons, name='submit_coupons'),
-    re_path('^rest-api$', rest_api, name='rest_api'),
+    re_path('^rest-api$', rest_api.rest_api, name='rest_api'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
