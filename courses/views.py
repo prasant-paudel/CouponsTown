@@ -233,6 +233,8 @@ def info_page(request):
     except:
         description = ''
     
+    canonical = course.url.split("?")[0]
+    
     print('\n\n')
     print(description)
     print('\n\n')
@@ -245,7 +247,7 @@ def info_page(request):
 
     template = 'courses/info_page.html'
     context.update({'course': course, 'related_courses': related_courses,
-        'contents':contents, 'description': description, 'filter': filter,})
+        'contents':contents, 'description': description, 'filter': filter, 'canonical':canonical})
     return render(request, template, context)
 
 

@@ -21,7 +21,7 @@
 {% else %}
 <meta property="twitter:image" content="{% static 'images/favicon.ico' %}" />
 {% endif %}
-<link rel="cannonical" href="https://couponstown.me/info-page/{{course.name_base64}}" />
+<link rel="cannonical" href="{% url 'canonical' %}" />
 {% endblock %}
 
 {% block title %} Description | {{course.name}} | Free Udemy Coupon {% endblock %}
@@ -96,6 +96,7 @@
 
                             </div>
                             <center>
+                                
                                 <div class="get-coupon mb-3" style="width: 100%; height: 70px; padding-right: 13px;">
                                     <a rel="nofollow"
                                         href="{% url 'coupon_page' %}?course={{course.name_encoded}}&filter={{filter}}"
