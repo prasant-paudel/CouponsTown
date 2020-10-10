@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'courses',
     'multiselectfield',
     'mathfilters',
-    'fcm_django',
     'django.contrib.sites',
     'django.contrib.sitemaps',
     

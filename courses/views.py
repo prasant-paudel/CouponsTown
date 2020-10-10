@@ -5,23 +5,10 @@ from .my_scripts import CourseInfo
 from .tags_scraper import TagScraper
 import pickle
 from django.core.paginator import Paginator, EmptyPage
-import pyrebase
 from requests.exceptions import ConnectionError
-from fcm_django.models import FCMDevice
 from django.views.decorators.csrf import csrf_protect
 import requests
 
-# Production Configuration
-config = {
-    "apiKey": "AIzaSyCvdtPMemkE6RBh8prl4h0P2kAva9PqLV0",
-    "authDomain": "coupons-town.firebaseapp.com",
-    "databaseURL": "https://coupons-town.firebaseio.com",
-    "projectId": "coupons-town",
-    "storageBucket": "coupons-town.appspot.com",
-    "messagingSenderId": "511956827149",
-    "appId": "1:511956827149:web:2c6f55d2030f27bd9d2944",
-    "measurementId": "G-8M4ZXV2J9G",
-}
 
 #=============================================================================#
 all_courses = Course.objects.all()
