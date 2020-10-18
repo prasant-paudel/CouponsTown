@@ -2,7 +2,8 @@
 read -p "Username > " username
 read -p "Project name > " project_name
 read -p "Gunicorn Port > " gunicorn_port
-read -p "Server Name (Domain Name) > " server_name
+# read -p "Server Name (Domain Name) > " server_name
+$server_name="localhost"
 
 echo "############################################"
 echo "#############  Nginx Setup  ################"

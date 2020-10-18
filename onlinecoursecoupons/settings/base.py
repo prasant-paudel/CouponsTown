@@ -49,9 +49,9 @@ INSTALLED_APPS = [
     'multiselectfield',
     'mathfilters',
     'django.contrib.sites',
-    'django.contrib.sitemaps',
-    
+    'django.contrib.sitemaps', 
 ] 
+
 SITE_ID = 1
 
 MIDDLEWARE = [
