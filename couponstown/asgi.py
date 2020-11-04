@@ -1,5 +1,5 @@
 """
-ASGI config for onlinecoursecoupons project.
+ASGI config for couponstown project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'onlinecoursecoupons.settings.production')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'couponstown.settings.production')
 
 application = get_asgi_application()

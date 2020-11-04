@@ -167,7 +167,7 @@ After=network.target
 User=$username
 Group=www-data
 WorkingDirectory=$(pwd)
-ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8000 --settings \"onlinecoursecoupons.settings.development\"
+ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8000 --settings \"couponstown.settings.development\"
 Restart=on-failure
 
 [Install]
@@ -181,7 +181,7 @@ After=network.target
 User=$username
 Group=www-data
 WorkingDirectory=$(pwd)
-ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8006 --settings \"onlinecoursecoupons.settings.development\"
+ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8006 --settings \"couponstown.settings.development\"
 Restart=on-failure
 
 [Install]
@@ -195,7 +195,7 @@ After=network.target
 User=$username
 Group=www-data
 WorkingDirectory=$(pwd)
-ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8007 --settings \"onlinecoursecoupons.settings.development\"
+ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8007 --settings \"couponstown.settings.development\"
 Restart=on-failure
 
 [Install]
@@ -209,7 +209,7 @@ After=network.target
 User=$username
 Group=www-data
 WorkingDirectory=$(pwd)
-ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8008 --settings \"onlinecoursecoupons.settings.development\"
+ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8008 --settings \"couponstown.settings.development\"
 Restart=on-failure
 
 [Install]
@@ -223,7 +223,7 @@ After=network.target
 User=$username
 Group=www-data
 WorkingDirectory=$(pwd)
-ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8009 --settings \"onlinecoursecoupons.settings.development\"
+ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8009 --settings \"couponstown.settings.development\"
 Restart=on-failure
 
 [Install]
@@ -237,7 +237,7 @@ After=network.target
 User=$username
 Group=www-data
 WorkingDirectory=$(pwd)
-ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8010 --settings \"onlinecoursecoupons.settings.development\"
+ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8010 --settings \"couponstown.settings.development\"
 Restart=on-failure
 
 [Install]
@@ -251,7 +251,7 @@ After=network.target
 User=$username
 Group=www-data
 WorkingDirectory=$(pwd)
-ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8011 --settings \"onlinecoursecoupons.settings.development\"
+ExecStart=$(pwd)/venv/bin/python3 manage.py runserver 0.0.0.0:8011 --settings \"couponstown.settings.development\"
 Restart=on-failure
 
 [Install]
