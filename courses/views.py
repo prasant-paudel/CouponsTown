@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, HttpResponse, Http404, reverse, g
 from .models import Course, Subscriber, RealDiscount
 from django.db.models import Q
 from .my_scripts import CourseInfo
-from .tags_scraper import TagScraper
 import pickle
 from django.core.paginator import Paginator, EmptyPage
 from requests.exceptions import ConnectionError

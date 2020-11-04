@@ -14,14 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
-from courses import views, api_views, rest_api
+from django.urls import path, re_path, include
+from courses import views, api_views
 from django.conf import settings
 from django.conf.urls.static import static
 
 from django.contrib.sitemaps.views import sitemap
 from courses.sitemaps import CourseSitemap
 sitemaps = {'courses': CourseSitemap}
+
 
 urlpatterns = [
     path('courses/sitemap.xml', sitemap, {'sitemaps': sitemaps},
@@ -40,7 +41,8 @@ urlpatterns = [
         views.show_coupons, name='show_coupons'),
     path('games-giveaways/', views.games_giveaways, name='games_giveaways'),
     re_path('^submit-coupons/$', views.submit_coupons, name='submit_coupons'),
-    re_path('^rest-api$', rest_api.rest_api, name='rest_api'),
+
+    path('test-api/', include('courses.api.urls')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
