@@ -41,6 +41,10 @@ def submit_coupon(request, course_url_base64):
     
     courseinfo = CourseInfo(course_url)
 
+    # check validity
+    if courseinfo.is_expired():
+        return HttpResponse('[!] Course is invalid or expired')
+
     # Fetch Name
     course.name = courseinfo.get_title()
 
