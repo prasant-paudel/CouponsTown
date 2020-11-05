@@ -92,7 +92,13 @@ def update_info(request, course_url_base64):
     course_url = base64.decodebytes(course_url_base64.encode())
     course = get_object_or_404(course_url)
 
-    
+
+def list_courses_urls(request):
+    courses = ''
+    for course in Course.objects.all():
+        courses += ' ' + course.url.strip()
+    return HttpResponse(courses)
+
 
 
 

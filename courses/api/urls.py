@@ -5,5 +5,5 @@ urlpatterns = [
     path('', views.apiOverview, name='api-overview'),
     path('validate/<id>/', views.validate, name='validate'),
     path('submit-coupon/<course_url_base64>/', views.submit_coupon, name='submit-coupon'),
-
+    path('list-courses/', views.list_courses_urls, name='list-courses'),
 ]
