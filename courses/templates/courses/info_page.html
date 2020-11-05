@@ -21,7 +21,7 @@
 {% else %}
 <meta property="twitter:image" content="{% static 'images/favicon.ico' %}" />
 {% endif %}
-<link rel="cannonical" href="{% url 'canonical' %}" />
+<link rel="cannonical" href="{{canonical}}" />
 {% endblock %}
 
 {% block title %} Description | {{course.name}} | Free Udemy Coupon {% endblock %}

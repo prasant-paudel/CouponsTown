@@ -1,5 +1,6 @@
 media/
 couponstown/.env
+couponstown/db.sqlite3
 couponstown.log
 
 # Byte-compiled / optimized / DLL files

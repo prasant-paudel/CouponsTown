@@ -11,25 +11,33 @@ def apiOverview(request):
         'validate/<pk>/': 'Check validation of course',
         'update-ratings/': 'Update ratings of all courses',
         'fetch-missing-images/': 'Fetch courses missing images',
-        'fetch-course-info/<pk>': 'Fetch a course info and update',
+        'update-course-info/<pk>': 'Fetch a course info and update',
         'remove-duplicate-courses': 'Remove duplicate courses',
         'submit-coupon/<encoded_url>': 'Add course from course url base64 encoded',
     }
+
     return HttpResponse('hello world')
 
 
-def validate(request, id):
-    course = get_object_or_404(Course, id=id)
-    print(course.url)
-    
-    
+def validate(request, course_url_base64):
+    course_url = base64.decodebytes(course_url_base64.encode())
+    course = get_object_or_404(Course, url=course_url)
+
+    courseinfo = CourseInfo(course.url)
+    course.expired = courseinfo.is_expired()
+    course.save()
+  
 
 def submit_coupon(request, course_url_base64):
     course_url = base64.decodebytes(course_url_base64.encode()).decode()
 
-    if not Course.objects.filter(url=course_url):
+    # IF COURSE ALREADY EXISTS
+    if Course.objects.filter(url=course_url).exists():
+        course = get_object_or_404(Course, url=course_url)
+        return HttpResponse(f'[!] Course already exists --> {course.name}')
+    else:
         Course.objects.create(url=course_url, category='not_set')
-    course = Course.objects.get(url=course_url)
+        course = Course.objects.get(url=course_url)
     
     courseinfo = CourseInfo(course_url)
 
@@ -74,4 +82,13 @@ def submit_coupon(request, course_url_base64):
         pass
 
     return HttpResponse('hello')
+
+
+def update_info(request, course_url_base64):
+    course_url = base64.decodebytes(course_url_base64.encode())
+    course = get_object_or_404(course_url)
+
+    
+
+
 
