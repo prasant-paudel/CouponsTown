@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect, HttpResponse, Http404, reverse, get_object_or_404
 from .models import Course, Subscriber, RealDiscount
 from django.db.models import Q
-from .my_scripts import CourseInfo
+# from .my_scripts import CourseInfo
 import pickle
 from django.core.paginator import Paginator, EmptyPage
 from requests.exceptions import ConnectionError
 from django.views.decorators.csrf import csrf_protect
 import requests
-
+import base64
 
 #=============================================================================#
 all_courses = Course.objects.all()
@@ -68,10 +68,6 @@ def get_queryset(keywords_list):
     for q in keywords_list:
         r = valid_courses.filter(Q(name__icontains=q) | Q(category__icontains=q))
         r = r.order_by('expired').reverse()
-        try:
-            r = r.exclude(name=course.name)
-        except:
-            pass
         for i in r:
             if not i in _results:
                 _results.append(i)
@@ -94,7 +90,6 @@ def search_for(query_string):
     results = []
     # Using whole string
     _r = all_courses.filter(Q(name__icontains=query_string))
-    _r = [x for x in _r if x.image]
     for i in _r:
         if not i in results:
             results.append(i)
@@ -112,8 +107,6 @@ def home(request):
     global context
     global valid_courses
     courses = valid_courses.order_by('upload_date').reverse()
-    _r = [x for x in courses if x.image]
-    courses = _r
     carousel2 = ((i,e) for (i,e) in enumerate(courses[:20]))
 
     template = 'courses/home.html'
@@ -146,8 +139,6 @@ def courses(request):
         courses = courses.order_by('upload_date').reverse()
     except:
         pass
-    _r = [x for x in courses if x.image]
-    courses = _r
 
     p = Paginator(courses, 9)  # Total no of items per page = 9
     try:
@@ -227,7 +218,7 @@ def info_page(request):
     
     
     # Related Courses
-    keys = course.name.split()
+    keys = str(course.name).split()
     results = get_queryset(keys)
     related_courses = list(results)[:10]
 
@@ -328,10 +319,11 @@ def submit_coupons(request):
         if all_courses.filter(url=coupon).exists():
             msg = 'Sorry! Coupon Already Exists'
         else:
-            url = 'http://localhost/api/?command=fetch_single_course_info&coupon=' + coupon
+            url = f'http://localhost:8000/api/submit-coupon/{base64.encodebytes(coupon.encode()).decode()}'
             try:
                 resp = requests.get(url)
-                msg = 'Thank You For Submitting Coupon <br>' + resp.text.split('] ')[-1]
+                if resp.status_code == 200:
+                    msg = 'Thank You For Submitting Coupon'
             except:
                 msg = 'Connection Error. Please Try Again'
 

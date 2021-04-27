@@ -9,15 +9,15 @@
 
 <meta property="og:url" content="" />
 
-{% if course.image %}
-<meta property="og:image" content="{{course.image.url}}" />
+{% if course.image_url %}
+<meta property="og:image" content="{{course.image_url}}" />
 {% else %}
 <meta property="og:image" content="{% static 'images/favicon.ico' %}" />
 {% endif %}
 <meta property="twitter:title" content="[100% Off] | {{course.name}}" />
 <meta property="twitter:description" content="CouponsTown - Free Udemy Coupons | Free Online Courses | Certificate of Completion | Free Coupon (Promo) Code." />
-{% if course.image %}
-<meta property="twitter:image" content="{{course.image.url}}" />
+{% if course.image_url %}
+<meta property="twitter:image" content="{{course.image_url}}" />
 {% else %}
 <meta property="twitter:image" content="{% static 'images/favicon.ico' %}" />
 {% endif %}
@@ -45,8 +45,8 @@
                         <div class="card-body ">
                             <div class="d-flex justify-content-md-center flex-wrap">
                                 <div class="p-2 flex-fill bd-highlight" style="width: 100%;">
-                                    {% if course.image %}
-                                    <img src="{{ course.image.url }}" class="card-img-top"
+                                    {% if course.image_url %}
+                                    <img src="{{ course.image_url }}" class="card-img-top"
                                         alt="{{course.name}} | Coupons Town | e-learning free courses online">
                                     {% else %}
                                     <img src="{% static 'images/CouponsTown-background.png' %}" class="card-img-top"

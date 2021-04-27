@@ -3,8 +3,8 @@
     <div class="card" style="max-height: 400px;">
 
       <!-- Card image -->
-      {% if item.image %}
-      <img class="card-img-top" src="{{item.image.url}}" alt="Free Udemy Coupon | Web Development Courses for free | {{course.name}}" >
+      {% if item.image_url %}
+      <img class="card-img-top" src="{{item.image_url}}" alt="Free Udemy Coupon | Web Development Courses for free | {{course.name}}" >
       {% else %}
       <img class="card-img-top" src="{% static 'images/CouponsTown-background.png' %}" alt="Free Udemy Coupon | Web Development Courses for free | {{course.name}}" >
       {% endif %}

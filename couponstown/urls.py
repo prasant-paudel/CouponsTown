@@ -33,7 +33,7 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('category/<slug:category>/', views.category, name='category'),
     path('subscribe/', views.subscribe, name='subscribe'),
-    re_path('^api/$', api_views.api, name='api'),
+    # re_path('^api/$', api_views.api, name='api'),
     path('info-page/', views.info_page, name='info_page'),
     path('coupon_page/', views.coupon_page, name='coupon_page'),
     path('test/', views.test, name='test'),
@@ -43,6 +43,7 @@ urlpatterns = [
     re_path('^submit-coupons/$', views.submit_coupons, name='submit_coupons'),
 
     path('test-api/', include('courses.api.urls')),
+    path('api/', include('courses.api.urls')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

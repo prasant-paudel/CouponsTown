@@ -2,8 +2,8 @@
     <ul class="card container-sm my-1 mb-2">
         <div class="row" style="min-height: 50px;">
             <div class="col-2" style='
-                {% if course.image %}
-                background: url(&#34 {{course.image.url}} &#34);
+                {% if course.image_url %}
+                background: url(&#34 {{course.image_url}} &#34);
                 {% else %}
                 background: url("https://couponstown.me/static/images/course.png");
                 {% endif %}

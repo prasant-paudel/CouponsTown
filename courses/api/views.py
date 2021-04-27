@@ -4,29 +4,35 @@ import pickle
 from urllib.parse import quote_plus
 
 from courses.models import Course
-from courses.scraper.app import CourseInfo
+# from courses.scraper.app import CourseInfo
+from courses.scraper.udemy_info_extractor import UdemyInfoExtractor
+
 
 def apiOverview(request):
-    enepoints = {
+    endpoints = {
+        'fetch-coupons/': 'Fetch coupons from the internet',
         'validate/<pk>/': 'Check validation of course',
         'update-ratings/': 'Update ratings of all courses',
         'fetch-missing-images/': 'Fetch courses missing images',
-        'update-course-info/<pk>': 'Fetch a course info and update',
-        'remove-duplicate-courses': 'Remove duplicate courses',
-        'submit-coupon/<encoded_url>': 'Add course from course url base64 encoded',
+        'update-course-info/<pk>/': 'Fetch a course info and update',
+        'remove-duplicate-courses/': 'Remove duplicate courses',
+        'submit-coupon/<encoded_url>/': 'Add course from course url base64 encoded',
     }
 
     return HttpResponse('hello world')
+
+def fetch_coupons(request):
+    pass
 
 
 def validate(request, course_url_base64):
     course_url = base64.decodebytes(course_url_base64.encode())
     course = get_object_or_404(Course, url=course_url)
 
-    courseinfo = CourseInfo(course.url)
-    course.expired = courseinfo.is_expired()
+    courseinfo = UdemyInfoExtractor(course.url)
+    course.expired = courseinfo.is_free != True
     course.save()
-  
+
 
 def submit_coupon(request, course_url_base64):
     course_url = base64.decodebytes(course_url_base64.encode()).decode()
@@ -38,44 +44,36 @@ def submit_coupon(request, course_url_base64):
     else:
         Course.objects.create(url=course_url, category='not_set')
         course = Course.objects.get(url=course_url)
-    
-    courseinfo = CourseInfo(course_url)
+
+    courseinfo = UdemyInfoExtractor(course_url)
 
     # check validity
-    if courseinfo.is_expired():
+    if not courseinfo.is_free:
         return HttpResponse('[!] Course is invalid or expired')
 
-    # Fetch Name
-    course.name = courseinfo.get_title()
+    course.name = courseinfo.title
+    course.category = courseinfo.category
+    course.image_url = courseinfo.image_url
+    course.description = str(courseinfo.description).encode()
+    course.rating = courseinfo.rating
+    course.duration = courseinfo.duration
+    course.platform = courseinfo.platform
+    course.expired = courseinfo.is_free == False
 
     # Encode name for urls
-    temp_name = base64.b64encode(str(course.name).encode()).decode()
-    course.name_base64 = temp_name
+    course.name_base64 = base64.b64encode(str(course.name).encode()).decode()
+    course.name_encoded = quote_plus(course.name)
     course.save()
-    temp_name = quote_plus(course.name)
-    course.name_encoded = temp_name
-    course.save()
-
-    # Fetch Image
-    course.image = courseinfo.get_image()
-
+    
+    
     # Fetch Contents / Things You'll Learn
-    contents = courseinfo.get_content_list()
+    contents = []
     if contents:
         import pickle
         # print(len(contents))
         course.contents = pickle.dumps(contents)
-
-    # Fetch Description
-    description = courseinfo.get_description()
-    if description:
-        course.description = str(description).encode()
-        # course.save()
-
-    course.rating = courseinfo.get_rating()
-    course.duration = courseinfo.get_duration()
-    course.platform = courseinfo.platform
-    course.expired = False
+    
+    
 
     # Save Info
     try:
@@ -98,7 +96,3 @@ def list_courses_urls(request):
     for course in Course.objects.all():
         courses += ' ' + course.url.strip()
     return HttpResponse(courses)
-
-
-
-
